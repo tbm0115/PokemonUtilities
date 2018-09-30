@@ -1,0 +1,9 @@
+{
+  "name": "pokemon-utilities",
+  "version": "0.0.0",
+  "description": "PokémonUtilities",
+  "main": "server.js",
+  "author": {
+    "name": "Trais McAllister + Kyle Morton"
+  }
+}
