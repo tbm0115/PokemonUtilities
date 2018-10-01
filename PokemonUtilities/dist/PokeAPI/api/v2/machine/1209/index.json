@@ -1,0 +1,15 @@
+{
+    "id": 1209,
+    "item": {
+        "name": "hm06",
+        "url": "/api/v2/item/402/"
+    },
+    "move": {
+        "name": "power-up-punch",
+        "url": "/api/v2/move/612/"
+    },
+    "version_group": {
+        "name": "omega-ruby-alpha-sapphire",
+        "url": "/api/v2/version-group/16/"
+    }
+}

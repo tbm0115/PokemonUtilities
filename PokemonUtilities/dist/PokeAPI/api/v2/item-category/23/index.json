@@ -1,0 +1,99 @@
+{
+    "id": 23,
+    "items": [
+        {
+            "name": "loot-sack",
+            "url": "/api/v2/item/406/"
+        },
+        {
+            "name": "rule-book",
+            "url": "/api/v2/item/407/"
+        },
+        {
+            "name": "seal-bag",
+            "url": "/api/v2/item/413/"
+        },
+        {
+            "name": "red-chain",
+            "url": "/api/v2/item/418/"
+        },
+        {
+            "name": "slowpoke-tail",
+            "url": "/api/v2/item/473/"
+        },
+        {
+            "name": "lock-capsule",
+            "url": "/api/v2/item/513/"
+        },
+        {
+            "name": "photo-album",
+            "url": "/api/v2/item/514/"
+        },
+        {
+            "name": "god-stone",
+            "url": "/api/v2/item/663/"
+        },
+        {
+            "name": "common-stone",
+            "url": "/api/v2/item/762/"
+        },
+        {
+            "name": "travel-trunk",
+            "url": "/api/v2/item/764/"
+        },
+        {
+            "name": "mega-charm",
+            "url": "/api/v2/item/768/"
+        },
+        {
+            "name": "mega-glove",
+            "url": "/api/v2/item/769/"
+        },
+        {
+            "name": "mega-pendant",
+            "url": "/api/v2/item/786/"
+        },
+        {
+            "name": "mega-glasses",
+            "url": "/api/v2/item/787/"
+        },
+        {
+            "name": "mega-anchor",
+            "url": "/api/v2/item/788/"
+        },
+        {
+            "name": "mega-stickpin",
+            "url": "/api/v2/item/789/"
+        },
+        {
+            "name": "mega-tiara",
+            "url": "/api/v2/item/790/"
+        },
+        {
+            "name": "mega-anklet",
+            "url": "/api/v2/item/791/"
+        },
+        {
+            "name": "mega-cuff",
+            "url": "/api/v2/item/807/"
+        },
+        {
+            "name": "ride-pager",
+            "url": "/api/v2/item/886/"
+        }
+    ],
+    "name": "unused",
+    "names": [
+        {
+            "language": {
+                "name": "en",
+                "url": "/api/v2/language/9/"
+            },
+            "name": "Unused"
+        }
+    ],
+    "pocket": {
+        "name": "key",
+        "url": "/api/v2/item-pocket/8/"
+    }
+}

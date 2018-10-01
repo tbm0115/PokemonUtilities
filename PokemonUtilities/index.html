@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="author" content="LightWorks" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#474544" />
+  <meta name="Description" content="Dedicated to providing tools for gameplay." />
+  <meta name="Keywords" content="video game utilities games tools tool utility Pokemon" />
+  <link rel="icon" href="./dist/images/android/android-launchericon-96-96.png">
+  <link rel="manifest" href="./manifest.json">
+  <title>Pokemon - Game Utilities</title>
+  <!-- Styles -->
+  <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="./node_modules/select2/dist/css/select2.min.css" rel="stylesheet" />
+  <link rel="preload" href="./dist/PokeAPI/api/v2/pokedex/1/index.json" as="fetch">
+</head>
+<body>
+  <div class="poke-loader"></div>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="./" class="navbar-brand">PokeTools</a>
+      </div>
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="./">Home</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container body-content">
+    <div id="root">
+      <!-- Remove once we figure out how to replace with separate HTML files as "Pages" -->
+      <link href="./dist/Pokemon/dist/css/Pokemon.min.css" rel="stylesheet" />
+      <style type="text/css">
+        #pokeContainer {
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .select2-results {
+          min-height: 75vh;
+          max-height: 75vh;
+        }
+
+          .select2-results ul.select2-results__options[aria-expanded='true'] {
+            max-height: 75vh;
+          }
+      </style>
+      <div class="panel panel-default">
+        <div class="panel-heading">National Pokedex</div>
+        <div class="panel-body">
+          <div>
+            <input type="text" id="sel2Search" class="form-control" />
+          </div>
+          <!-- Hidden until development can continue on this feature -->
+          <!--<a href="#divCompare" data-toggle="collapse" class="pull-right">compare</a>
+          <div id="divCompare">
+            <input type="text" id="sel2Compare" class="form-control" />
+          </div>-->
+          <div id="pokeContainer">
+            <div id="activePokemon" class="poke-card"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <footer>
+      <p>&copy; 2018 - Pokemon - <a href="https://utilities.games/" title="Game Utilities Home">Game Utilities</a></p>
+    </footer>
+  </main>
+  <!-- Scripts -->
+  <script src="./dist/app-bundle.es5.min.js"></script>
+  <script language="javascript" type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script language="javascript" type="text/javascript" src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="./node_modules/select2/dist/js/select2.full.min.js"></script>
+  <script type="text/javascript">
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.addEventListener("message", function (event) {
+
+        });
+        navigator.serviceWorker.register("./dist/PWA/dist/js/sw.js").then(function (registration) {
+          console.log("[ServiceWorker.Registration] Successful with scope: ", registration.scope);
+        }, function (err) {
+          console.log("[ServiceWorker.Registration] Failed: ", err);
+        });
+      });
+    } else {
+      console.log("[ServiceWorker] Service workers are not supported on this browser!");
+    }
+
+    function showAddToHomeScreen() {
+      if (pwaInstall.ev !== null) {
+        pwaInstall.ev.prompt();
+
+        pwaInstall.ev.userChoice.then(function pwaUserChoice(result) {
+          if (result.outcome === "accepted") {
+            //pwaInstall.li.style.display = "none";
+            console.log("[ServiceWorker.showAddToHomeScreen] User accepted Add To Homescreen");
+          } else {
+            //pwaInstall.li.style.display = "inline-block";
+            console.log("[ServiceWorker.showAddToHomeScreen] User declined Add To Homescreen");
+          }
+          pwaInstall.ev = null;
+        });
+      }
+    }
+    var pwaInstall = {
+      ev: null,
+      li: null,
+      btn: null
+    }
+    //document.querySelector("#liA2HS").style.display = "none";
+    if ("onbeforeinstallprompt" in window) {
+      window.onbeforeinstallprompt = function (ev) {
+        //ev.preventDefault();
+
+        //pwaInstall.ev = ev;
+        //pwaInstall.li = document.querySelector("#liA2HS");
+        //pwaInstall.li.style.display = "inline-block";
+        //pwaInstall.btn = document.querySelector("#btnA2HS");
+      }
+    }
+  </script>
+  <!-- Move to Page and include template -->
+  <script type="text/javascript" src="./dist/Pokemon/dist/js/Pokemon.es5.min.js"></script>
+  <script type="text/javascript">
+    var NationalDex = null;
+    var ActivePokemon = null;
+    $(document).ready(function () {
+      $.getJSON("./dist/PokeAPI/api/v2/pokedex/1/index.json", function (d) {
+        NationalDex = d;
+        var select2Items = new Array();
+        for (var len = NationalDex.pokemon_entries.length, n = 0; n < len; n++) {
+          var name = NationalDex.pokemon_entries[n].pokemon_species.name
+          select2Items.push({
+            id: NationalDex.pokemon_entries[n].entry_number,
+            text: "#" + NationalDex.pokemon_entries[n].entry_number.toString() + " " + name.substr(0, 1).toUpperCase() + name.substr(1)
+          });
+        }
+        $("#sel2Search").select2({
+          data: select2Items,
+          templateResult: function (item) {
+            var res = "";
+            if (item !== null) {
+              if ("id" in item) {
+                res = "<span><img src='./dist/PokeAPI/sprites/pokemon/" + item.id + ".png' class='img-flag' /> " + item.text + "</span>";
+              } else if ("text" in item) {
+                res = "<span>" + item.text + "</span>";
+              }
+            }
+            return $(res);
+          }
+        });
+        $("#sel2Search").on("change", function () {
+          $(".poke-loader").toggleClass("show", true);
+          var val = $("#sel2Search").val();
+
+          $("#activePokemon").pokeCard({
+            pokemon: val,
+            options: {
+              includes: {
+                species: {
+                  includes: {
+                    evolution_chain: {}
+                  }
+                }
+              },
+              callback: function () {
+                $(".poke-loader").toggleClass("show", false);
+                $("#activePokemon")[0].Draw();
+              }
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

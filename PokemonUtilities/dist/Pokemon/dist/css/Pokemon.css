@@ -1,0 +1,113 @@
+.poke-loader {
+  position: fixed;
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 10001;
+  top: 0px;
+  left: 0px;
+}
+.poke-loader::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 72px;
+  height: 72px;
+  top: calc(50% - (72px / 2));
+  left: calc(50% - (72px / 2));
+  background-image: url('../../../PokeAPI/Sprites/items/poke-ball.png');
+  background-size: 72px 72px;
+  /* Chrome, Safari, Opera */
+  animation: poke-ball-shake 1.25s infinite alternate;
+  transform-origin: center;
+}
+.poke-loader.show {
+  display: block;
+}
+/*
+  a = (((3*HPmax - 2*HPcurrent)*pokemonRate*bonusBall)/(3*HPmax)) * (bonusStatus)
+  {a = (((3*100 - 2*100)*255*255)/(3*100))*1 = 21,675 }
+  b = (2^(16) - 1) * (root4(a / (2^(8) - 1)))
+  {b = (2^(16) - 1) * (root4(21,675 / (2^(8) - 1))) = 0.00125544473844901282312232851618 }
+  if (b > Rnd(0,65535)){
+    Shake()
+  }
+*/
+@keyframes poke-ball-shake {
+  0% {
+    transform: translate(0, 0) rotate(0);
+  }
+  20% {
+    transform: translate(0, 0) rotate(-10deg);
+  }
+  30% {
+    transform: translate(0, 0) rotate(10deg);
+  }
+  50% {
+    transform: translate(0, 0) rotate(-10deg);
+  }
+  60% {
+    transform: translate(0, 0) rotate(10deg);
+  }
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+}
+[data-species-color='black'] {
+  --speciesColor: black;
+}
+[data-species-color='blue'] {
+  --speciesColor: blue;
+}
+[data-species-color='brown'] {
+  --speciesColor: brown;
+}
+[data-species-color='gray'] {
+  --speciesColor: gray;
+}
+[data-species-color='green'] {
+  --speciesColor: green;
+}
+[data-species-color='pink'] {
+  --speciesColor: pink;
+}
+[data-species-color='purple'] {
+  --speciesColor: purple;
+}
+[data-species-color='red'] {
+  --speciesColor: red;
+}
+[data-species-color='white'] {
+  --speciesColor: white;
+}
+[data-species-color='yellow'] {
+  --speciesColor: yellow;
+}
+.poke-card {
+  position: relative;
+  display: block;
+}
+.poke-card img.sprite {
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 3px solid var(--speciesColor);
+  border-radius: 5px;
+  box-shadow: 3px 2px 2px var(--speciesColor);
+}
+.poke-card h1 span[aria-label='Name']::first-letter {
+  text-transform: uppercase;
+}
+.poke-card ul.poke-evolutions li {
+  list-style: none;
+}
+.poke-card .poke-stats canvas {
+  position: relative;
+  display: block;
+  width: 50%;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}

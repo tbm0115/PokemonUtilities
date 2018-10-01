@@ -1,9 +1,22 @@
 {
   "name": "pokemon-utilities",
   "version": "0.0.0",
-  "description": "PokémonUtilities",
+  "description": "PokemonUtilities",
   "main": "server.js",
   "author": {
     "name": "Trais McAllister + Kyle Morton"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "express": "~4.16.3",
+    "jquery": "^2.1.4",
+    "path": "~0.12.7",
+    "react": "~16.4.2",
+    "react-dom": "~16.4.2",
+    "select2": "~4.0.6-rc.1",
+    "ts-loader": "~4.5.0",
+    "typescript": "~2.9.2",
+    "webpack": "~4.17.1",
+    "webpack-cli": "~2.1.5"
   }
 }
