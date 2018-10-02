@@ -55,16 +55,16 @@ var EvolveOptions = {
     "label": "Holding Item:"
   },
   "item": {
-    "label": "Holding Item:"
+    "label": "Using the Item:"
   },
   "known_move": {
-    "label": "Knows Move:"
+    "label": "Learning the Move:"
   },
   "known_move_type": {
-    "label": "Knows Move-Type:"
+    "label": "Learning a Move of Type:"
   },
   "location": {
-    "label": "At Location:"
+    "label": "Going to:"
   },
   "min_affection": {
     "label": "Gaining Affection " + gtet
@@ -147,103 +147,142 @@ $.fn.pokeCard = function (data) {
     }).bind(el);
 
     // Build .poke-card with Vanilla JS
-    fncHasProp("elSprite", function () {
-      var e = this.appendChild(document.createElement("img"));
-      e.setAttribute("class", "sprite");
-      e.setAttribute("src", "");
-      e.setAttribute("alt", "Pokemon Image");
-
-      /** @description - Draws this element to the UI.
-       * @returns {any} - This element.
-       */
-      e["Draw"] = (function () {
-        var ap = this["ActivePokemon"];
-        if (typeof ap !== "undefined" && ap !== null) {
-          this.elSprite.src = "./dist/PokeAPI" + ap.sprites.front_default;
-        } else {
-          this.elSprite.src = "./dist/images/404-pokemon.png";
-        }
-        return this.elSprite;
-      }).bind(this);
-
-      return e;
-    });
-    fncHasProp("elName", function () {
-      var e = this.appendChild(document.createElement("h1"));
-      e.innerText = "#";
-      var sDexNum = e.appendChild(document.createElement("span"));
-      sDexNum.setAttribute("title", "National Pokedex #");
-      sDexNum.setAttribute("aria-label", "National Dex Number");
-      sDexNum.setAttribute("name", "{['id']}");
-      e.innerHTML += "&nbsp;";
-      var sName = e.appendChild(document.createElement("span"));
-      sName.setAttribute("title", "Pokemon Name");
-      sName.setAttribute("aria-label", "Name");
-      sName.setAttribute("name", "{['name']}");
-
-      /** @description - Draws this element to the UI.
-       * @returns {any} - This element.
-       */
-      e["Draw"] = (function () {
-        var ap = this["ActivePokemon"];
-        if (typeof ap !== "undefined" && ap !== null) {
-          // Set 'Dex Number
-          this.elName.querySelector("[aria-label='National Dex Number']").innerText = ap.id.toString();
-          // Set Name
-          this.elName.querySelector("[aria-label='Name']").innerText = ap.name.substr(0, 1).toUpperCase() + ap.name.substr(1);
-        } else {
-          // Set 'Dex Number
-          this.elName.querySelector("[aria-label='National Dex Number']").innerHTML = "&mdash;";
-          // Set Name
-          this.elName.querySelector("[aria-label='Name']").innerHTML = "&mdash;";
-        }
-
-        return this.elName;
-      }).bind(this);
-
-      return e;
-    });
-    fncHasProp("elGenus", function () {
-      var e = this.appendChild(document.createElement("h4"));
-      e.setAttribute("title", "Genuse Name");
-      e.setAttribute("aria-label", "Genus Name");
-      e.setAttribute("name", "{['species']['genera'][2]['genus']}");
-
-      /** @description - Draws this element to the UI.
-       * @returns {any} - This element.
-       */
-      e["Draw"] = (function () {
-        var ap = this["ActivePokemon"];
-        if (typeof ap !== "undefined" && ap !== null) {
-          this.elGenus.innerText = ap.species.genera[2].genus;
-        } else {
-          this.elGenus.innerHTML = "&mdash;";
-        }
-        return this.elGenus;
-      }).bind(this);
-
-      return e;
-    });
-    fncHasProp("elPokeEvolutions", function () {
+    fncHasProp("elBasicDetails", function () {
+      // Classify based on microformat: http://buzzword.org.uk/swignition/uf#species
       var e = this.appendChild(document.createElement("div"));
-      e.setAttribute("class", "poke-evolutions");
-      var elLabel = e.appendChild(document.createElement("h6"));
-      elLabel.innerText = "Next Evolutionary Form(s)";
-      var elUL = e.appendChild(document.createElement("ul"));
+      e.setAttribute("class", "chain");
+
+      var dFocused = e.appendChild(document.createElement("div"));
+      dFocused.setAttribute("class", "details biota zoology focused");
+      dFocused.setAttribute("lang", "en");
+
+      var pic = dFocused.appendChild(document.createElement("picture"));
+      pic.setAttribute("class", "sprite");
+      //var allImage = pic.appendChild(document.createElement("source"));
+      //allImage.setAttribute("media", "all");
+      //allImage.setAttribute("srcset", "./dist/images/404-pokemon.png");
+      var img = pic.appendChild(document.createElement("img"));
+      img.setAttribute("src", "./dist/images/404-pokemon.png");
+      img.setAttribute("alt", "Pok&#0232;mon Image");
+      img.setAttribute("name", "sprites.front_default");
+
+      var hFamily = dFocused.appendChild(document.createElement("span"));
+      hFamily.setAttribute("class", "family");
+      hFamily.setAttribute("lang", "en");
+      hFamily.setAttribute("style", "display: none;");
+      hFamily.innerHTML = "Pok&#0232;mon";
+      var sDexNum = dFocused.appendChild(document.createElement("span"));
+      sDexNum.setAttribute("title", "National Pok&#0232;dex #");
+      sDexNum.setAttribute("aria-label", "National 'Dex Number");
+      sDexNum.setAttribute("name", "id");
+      var dBinomial = dFocused.appendChild(document.createElement("div"));
+      dBinomial.setAttribute("class", "binomial");
+      var sName = dBinomial.appendChild(document.createElement("p"));
+      sName.setAttribute("title", "Pok&#0232;mon Name");
+      sName.setAttribute("class", "common-name species");
+      sName.setAttribute("aria-label", "Name");
+      sName.setAttribute("name", "name");
+
+      var sGenus = dBinomial.appendChild(document.createElement("p"));
+      sGenus.setAttribute("title", "Genus Name");
+      sGenus.setAttribute("class", "genus");
+      sGenus.setAttribute("aria-label", "Genus Name");
+      sGenus.setAttribute("name", "species.genera[2].genus");
 
       /** @description - Draws this element to the UI.
        * @returns {any} - This element.
        */
       e["Draw"] = (function () {
         var ap = this["ActivePokemon"];
-        this.elPokeEvolutions.classList.toggle("hidden", true);
+        if (typeof ap !== "undefined" && ap !== null) {
+          // Set Sprite
+          this.elBasicDetails.querySelector("picture img").src = "./dist/PokeAPI" + ap.sprites.front_default;
+          // Set 'Dex Number
+          this.elBasicDetails.querySelector("[name='id']").innerText = ap.id.toString();
+          // Set Name
+          this.elBasicDetails.querySelector(".species").innerText = ap.name.substr(0, 1).toUpperCase() + ap.name.substr(1);
+          // Set Genus
+          this.elBasicDetails.querySelector(".genus").innerText = ap.species.genera[2].genus;
+        } else {
+          // Set Sprite
+          this.elBasicDetails.querySelector("picture img").src = "./dist/images/404-pokemon.png";
+          // Set 'Dex Number
+          this.elBasicDetails.querySelector("[name='id']").innerHTML = "&mdash;";
+          // Set Name
+          this.elBasicDetails.querySelector(".species").innerHTML = "&mdash;";
+          // Set Genus
+          this.elBasicDetails.querySelector(".genus").innerHTML = "&mdash;";
+        }
+
+        return this.elBasicDetails;
+      }).bind(this);
+
+      return e;
+    });
+    fncHasProp("elToolPanel", function () {
+      var e = this.appendChild(document.createElement("div"));
+      e.setAttribute("class", "poke-tools");
+
+      e["tools"] = e.appendChild(document.createElement("div"));
+      e.tools.setAttribute("class", "poke-tools-options");
+
+      e["container"] = e.appendChild(document.createElement("div"));
+      e.container.setAttribute("class", "poke-tools-container");
+
+      e["Draw"] = (function () {
+        var ap = this["ActivePokemon"];
+
+        if (typeof ap !== "undefined" && ap !== null) {
+          var buttons = $(this.elToolPanel).find(".poke-tools-options button");
+          for (var len = buttons.length, n = 0; n < len; n++) {
+            buttons[n].onclick = function (ev) {
+              var _this = $(ev.currentTarget).closest(".poke-card")[0];
+              var strTarget = ev.currentTarget.getAttribute("data-target");
+              $(_this.elToolPanel.tools).find("button").removeClass("active");
+              $(_this.elToolPanel.container).find("div").removeClass("active");
+              $(ev.currentTarget).addClass("active");
+              $(_this.elToolPanel.container).find(strTarget).addClass("active");
+              _this[ev.currentTarget.getAttribute("data-obj")].Draw();
+            };
+            if (n === 0) {
+              buttons[n].click();
+            }
+          }
+        }
+
+        return this.elToolPanel;
+      }).bind(this);
+
+      return e;
+    });
+
+    fncHasProp("elPokeEvolutions", function () {
+      var e = {
+        button: this.elToolPanel.tools.appendChild(document.createElement("button")),
+        panel: this.elToolPanel.container.appendChild(document.createElement("div"))
+      };
+      e.button.innerHTML = "E";
+      e.button.setAttribute("data-target", ".poke-evolutions");
+      e.button.setAttribute("data-obj", "elPokeEvolutions");
+      e.panel.setAttribute("class", "poke-evolutions");
+
+      var elLabel = e.panel.appendChild(document.createElement("h6"));
+      elLabel.innerText = "Next Evolutionary Form(s)";
+      var elUL = e.panel.appendChild(document.createElement("ul"));
+
+      /** @description - Draws this element to the UI.
+       * @returns {any} - This element.
+       */
+      e["Draw"] = (function () {
+        var ap = this["ActivePokemon"];
+        this.elPokeEvolutions.panel.classList.toggle("hidden", true);
         this.removeAttribute("data-evolves-from-id");
         this.removeAttribute("data-evolves-from-name");
         this.removeAttribute("data-evolves-to-id");
         this.removeAttribute("data-evolves-to-name");
         if (typeof ap !== "undefined" && ap !== null) {
           // Focus on next evolutionary form(s)
-          var ul = this.elPokeEvolutions.querySelector("ul");
+          var ul = this.elPokeEvolutions.panel.querySelector("ul");
           ul.innerHTML = "";
           var nextPokemons = ap.Get.Evolution.Next();
           if (nextPokemons !== null && nextPokemons.length > 0) {
@@ -257,10 +296,10 @@ $.fn.pokeCard = function (data) {
                 for (var tlen = tks.length, t = 0; t < tlen; t++) {
                   var trigger = evolution[tks[t]];
                   if (trigger !== null && trigger !== false && trigger !== "") {
-                    arrTriggers.push(EvolveOptions[tks[t]].label + " <strong>" + trigger.toString()) + "</strong>";
+                    arrTriggers.push(EvolveOptions[tks[t]].label + " <strong>" + trigger.toString() + "</strong>");
                   }
                 }
-                li.innerHTML = "<strong>" + nextPokemons[n].species.name.substr(0, 1).toUpperCase() + nextPokemons[n].species.name.substr(1) + "</strong> by " + arrTriggers.join("<br/>&mdash; ");
+                li.innerHTML = "<strong>" + nextPokemons[n].species.name.substr(0, 1).toUpperCase() + nextPokemons[n].species.name.substr(1) + "</strong> by " + arrTriggers.join("<br/>&amp; ");
                 var lia = li.appendChild(document.createElement("a"));
                 lia.setAttribute("class", "btn btn-xs btn-default");
                 lia.innerHTML = "<i class=\"glyphicon glyphicon-circle-arrow-right\"></i>";
@@ -281,8 +320,10 @@ $.fn.pokeCard = function (data) {
                 };
               }
             }
-            this.elPokeEvolutions.classList.toggle("hidden", false);
+            this.elPokeEvolutions.panel.classList.toggle("hidden", false);
           }
+        } else {
+          this.elPokeEvolutions.panel.querySelector("ul").innerHTML = "<li>No Further Evolutionary Form(s)</li>";
         }
         return this.elPokeEvolutions;
       }).bind(this);
@@ -290,9 +331,15 @@ $.fn.pokeCard = function (data) {
       return e;
     });
     fncHasProp("elPokeStats", function () {
-      var e = this.appendChild(document.createElement("div"));
-      e.setAttribute("class", "poke-stats");
-      var elCanv = e.appendChild(document.createElement("canvas"));
+      var e = {
+        button: this.elToolPanel.tools.appendChild(document.createElement("button")),
+        panel: this.elToolPanel.container.appendChild(document.createElement("div"))
+      };
+      e.button.innerHTML = "S";
+      e.button.setAttribute("data-target", ".poke-stats");
+      e.button.setAttribute("data-obj", "elPokeStats");
+      e.panel.setAttribute("class", "poke-stats");
+      var elCanv = e.panel.appendChild(document.createElement("canvas"));
       elCanv.innerText = "This browser does not support HTML5 Canvas!";
 
       /** @description - Draws this element to the UI.
@@ -300,7 +347,7 @@ $.fn.pokeCard = function (data) {
        */
       e["Draw"] = (function () {
         var ap = this["ActivePokemon"];
-        var canv = this.elPokeStats.querySelector("canvas");
+        var canv = this.elPokeStats.panel.querySelector("canvas");
         var ctx;
         var blnCanv = typeof canv !== "undefined" && canv !== null;
         if (typeof ap !== "undefined" && ap !== null && blnCanv) {
@@ -321,7 +368,7 @@ $.fn.pokeCard = function (data) {
               var ba = {
                 x: r.width * 0.5,
                 y: sh * n + sh / 2 - sa / 2,
-                w: sw * (stat.base_stat / 255),
+                w: sw * (Number(stat.base_stat) / 255),
                 h: sa
               };
               var bb = {
@@ -331,12 +378,20 @@ $.fn.pokeCard = function (data) {
                 h: ba.h
               };
               var bt = {
-                x: r.width * 0.45,
+                x: r.width * 0.5,
                 y: sh * n + sh / 2,
                 w: r.width * 0.5,
                 h: fs
               };
-              ctx.fillStyle = ap.species.color ? ap.species.color.name : "black";
+              if (typeof ap.species.color !== "undefined" && ap.species.color !== null) {
+                if (ap.species.color.name === "white") {
+                  ctx.fillStyle = "silver";
+                } else {
+                  ctx.fillStyle = ap.species.color.name;
+                }
+              } else {
+                ctx.fillStyle = "black";
+              }
               ctx.fillRect(ba.x, ba.y, ba.w, ba.h);
               ctx.strokeStyle = "black";
               ctx.strokeRect(bb.x, bb.y, bb.w, bb.h);
@@ -385,14 +440,11 @@ $.fn.pokeCard = function (data) {
           this.removeAttribute("data-species-color");
         }
       }
-      // Set Sprite image(s)
-      this.elSprite.Draw();
-
-      // Set Name Header
-      this.elName.Draw();
-      this.elGenus.Draw();
-      this.elPokeEvolutions.Draw();
-      this.elPokeStats.Draw();
+      // Set Details
+      this.elBasicDetails.Draw();
+      this.elToolPanel.Draw();
+      //this.elPokeEvolutions.Draw();
+      //this.elPokeStats.Draw();
 
       return this;
     }).bind(el);
@@ -430,7 +482,7 @@ var Pokemon = function Pokemon(ndid, options) {
   this._includes = {};
 
   // Perform initial retrieval of core Pokemon information.
-  $.getCachedJSON("./dist/PokeAPI/api/v2/pokemon/" + ndid + "/index.json", (function (d) {
+  $.getCachedJSON("./dist/PokeAPI/api/v2/p/" + ndid + "/index.json", (function (d) {
     /** @description - Fills the applied object with the provided data. Basically the same as a clone.
      * @param {object} data - An object to clone to the applied object.
      * @returns {object} - The applied object.
@@ -474,7 +526,7 @@ var Pokemon = function Pokemon(ndid, options) {
         this.that.origin._includes[this.prop] = "done";
       };
       // Logic tree to determine exactly if and how recursive data is retrieved.
-      var strPrefix = "./dist/PokeAPI"; // "/lib/PokeAPI" in the ASP.NET Core app
+      var strPrefix = "./dist/PokeAPI/api/v2"; // "/lib/PokeAPI" in the ASP.NET Core app
       if (prop in this.item) {
         if ("length" in this.item[prop] && !("url" in this.item[prop])) {
           for (var len = this.item[prop].length, n = 0; n < len; n++) {

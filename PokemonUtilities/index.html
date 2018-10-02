@@ -14,7 +14,12 @@
   <!-- Styles -->
   <link href="./node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="./node_modules/select2/dist/css/select2.min.css" rel="stylesheet" />
-  <link rel="preload" href="./dist/PokeAPI/api/v2/pokedex/1/index.json" as="fetch">
+  <link rel="preload" href="./dist/PokeAPI/api/v2/pd/1/index.json" as="fetch">
+  <style type="text/css">
+    body{
+      padding-top: 65px;
+    }
+  </style>
 </head>
 <body>
   <div class="poke-loader"></div>
@@ -27,11 +32,16 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="./" class="navbar-brand">PokeTools</a>
+        <a href="./" class="navbar-brand">Pok&#0232;Tools</a>
       </div>
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
           <li><a href="./">Home</a></li>
+          <li id="liA2HS">
+            <a id="btnA2HS" href="javascript:showAddToHomeScreen();" style="color: #9fd49e;" title="Add to Homescreen">
+              <i class="fa fa-download"></i> Download
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -55,9 +65,13 @@
           .select2-results ul.select2-results__options[aria-expanded='true'] {
             max-height: 75vh;
           }
+          .select2-results ul.select2-results__options[aria-expanded='true'] li img{
+            position:relative;
+            display: inline-block;
+          }
       </style>
       <div class="panel panel-default">
-        <div class="panel-heading">National Pokedex</div>
+        <div class="panel-heading">National Pok&#0232;dex</div>
         <div class="panel-body">
           <div>
             <input type="text" id="sel2Search" class="form-control" />
@@ -75,7 +89,7 @@
     </div>
     <hr />
     <footer>
-      <p>&copy; 2018 - Pokemon - <a href="https://utilities.games/" title="Game Utilities Home">Game Utilities</a></p>
+      <p class="text-muted">All content is Copyright&copy; of Utilities.Games 2018. | Pok&#0232;mon And All Respective Names are Trademark&trade; &amp; Copyright&copy; of Nintendo 1996-2018</p>
     </footer>
   </main>
   <!-- Scripts -->
@@ -105,10 +119,10 @@
 
         pwaInstall.ev.userChoice.then(function pwaUserChoice(result) {
           if (result.outcome === "accepted") {
-            //pwaInstall.li.style.display = "none";
+            pwaInstall.li.style.display = "none";
             console.log("[ServiceWorker.showAddToHomeScreen] User accepted Add To Homescreen");
           } else {
-            //pwaInstall.li.style.display = "inline-block";
+            pwaInstall.li.style.display = "inline-block";
             console.log("[ServiceWorker.showAddToHomeScreen] User declined Add To Homescreen");
           }
           pwaInstall.ev = null;
@@ -120,15 +134,15 @@
       li: null,
       btn: null
     }
-    //document.querySelector("#liA2HS").style.display = "none";
+    document.querySelector("#liA2HS").style.display = "none";
     if ("onbeforeinstallprompt" in window) {
       window.onbeforeinstallprompt = function (ev) {
-        //ev.preventDefault();
+        ev.preventDefault();
 
-        //pwaInstall.ev = ev;
-        //pwaInstall.li = document.querySelector("#liA2HS");
-        //pwaInstall.li.style.display = "inline-block";
-        //pwaInstall.btn = document.querySelector("#btnA2HS");
+        pwaInstall.ev = ev;
+        pwaInstall.li = document.querySelector("#liA2HS");
+        pwaInstall.li.style.display = "inline-block";
+        pwaInstall.btn = document.querySelector("#btnA2HS");
       }
     }
   </script>
@@ -138,7 +152,7 @@
     var NationalDex = null;
     var ActivePokemon = null;
     $(document).ready(function () {
-      $.getJSON("./dist/PokeAPI/api/v2/pokedex/1/index.json", function (d) {
+      $.getJSON("./dist/PokeAPI/api/v2/pd/1/index.json", function (d) {
         NationalDex = d;
         var select2Items = new Array();
         for (var len = NationalDex.pokemon_entries.length, n = 0; n < len; n++) {
@@ -154,7 +168,7 @@
             var res = "";
             if (item !== null) {
               if ("id" in item) {
-                res = "<span><img src='./dist/PokeAPI/sprites/pokemon/" + item.id + ".png' class='img-flag' /> " + item.text + "</span>";
+                res = "<span><img class='icon-sprite-" + item.id.toString() + "' /> " + item.text + "</span>";
               } else if ("text" in item) {
                 res = "<span>" + item.text + "</span>";
               }

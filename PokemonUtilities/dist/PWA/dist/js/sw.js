@@ -1,10 +1,11 @@
 ﻿//This is the service worker with the Cache-first network
 
-var CACHE = 'pokeutilities-precache-v1.4';
+var CACHE = 'pokeutilities-precache-v1.5';
 var precacheFiles = [
   /* Add an array of files to precache for your app */
   "/dist/Pokemon/dist/js/Pokemon.js",
   "/dist/Pokemon/dist/js/Pokemon.es5.min.js",
+  "/dist/PokeAPI/api/v2/pd/1/index.json",
   "/dist/PokeAPI/Sprites/items/poke-ball.png"
 ];
 

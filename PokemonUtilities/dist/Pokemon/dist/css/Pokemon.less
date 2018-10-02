@@ -65,6 +65,20 @@
   }
 }
 
+@keyframes poke-float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
 [data-species-color='black'] {
   --speciesColor: black;
 }
@@ -98,7 +112,7 @@
 }
 
 [data-species-color='white'] {
-  --speciesColor: white;
+  --speciesColor: silver;
 }
 
 [data-species-color='yellow'] {
@@ -109,25 +123,142 @@
   position: relative;
   display: block;
 
-  img.sprite {
+  .chain {
     position: relative;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    border: 3px solid var(--speciesColor);
-    border-radius: 5px;
-    box-shadow: 3px 2px 2px var(--speciesColor);
+    width: 100%;
+    height: 170px;
+
+    .details.biota.zoology {
+      position: absolute;
+      display: block;
+      width: 144px;
+      height: auto;
+      left: ~"calc(50% - (144px / 2))";
+      border: 3px solid var(--speciesColor);
+      border-radius: 5px;
+      box-shadow: 3px 2px 2px var(--speciesColor);
+
+      picture.sprite {
+        img {
+          position: relative;
+          display: block;
+          width: 96px;
+          height: 96px;
+          object-fit: contain;
+          margin-left: auto;
+          margin-right: auto;
+          animation: poke-float 6s ease-in-out infinite;
+          z-index: 2; /* Put above text */
+        }
+      }
+
+      picture.sprite::before, picture.sprite::after {
+        content: '';
+        position: absolute;
+        display: block;
+        opacity: 0.25;
+        border-radius: 50%;
+      }
+
+      picture.sprite::before {
+        width: ~"calc(96px * 0.85)";
+        height: ~"calc(96px * 0.75)";
+        left: ~"calc(50% - ((96px * 0.85)/2))";
+        top: 5px;
+        background-color: silver;
+      }
+
+      picture.sprite::after {
+        width: 75%;
+        height: 75%;
+        left: 12.5%;
+        top: 12.5%;
+        background-color: var(--speciesColor);
+        transform-origin: center;
+        transform: rotateX(85deg);
+      }
+
+      [name='id'] {
+        position: absolute;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: 500;
+        top: 0.5em;
+        left: 1em;
+        text-shadow: 2px 2px 1px whitesmoke;
+      }
+
+      [name='id']::before {
+        content: '#';
+        position: absolute;
+        display: block;
+        top: 0px;
+        left: -0.75em;
+      }
+
+      .binomial {
+        position: relative;
+        display: block;
+        width: 144px;
+        margin-top: 0px;
+        left: ~"calc(50% - (144px / 2))";
+
+        .species {
+          position: relative;
+          display: inline-block;
+          width: 100%;
+          text-align: center;
+          font-size: 18px;
+          font-weight: 700;
+        }
+
+        .genus {
+          position: relative;
+          display: inline-block;
+          width: 100%;
+          text-align: center;
+        }
+      }
+    }
   }
 
-  h1 {
-    span[aria-label='National Dex Number'] {
+
+  .poke-tools {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+
+    .poke-tools-options {
+      position: relative;
+      display: block;
+      width: 150px;
+      height: 35px;
+      top: 0px;
+      left: ~"calc(50% - (150px / 2))";
+      border: 2px solid var(--speciesColor);
+
+      button {
+        position: relative;
+        display: inline-block;
+        background: silver;
+      }
+
+      button.active {
+        background: #CFF0FB;
+      }
     }
 
-    span[aria-label='Name'] {
-    }
+    .poke-tools-container {
+      div {
+        position: relative;
+        display: none;
+      }
 
-    span[aria-label='Name']::first-letter {
-      text-transform: uppercase;
+      div.active {
+        display: block;
+      }
     }
   }
 
@@ -148,3 +279,19 @@
     }
   }
 }
+
+/* Sprite Sheet Source: https://www.deviantart.com/wesleyfg/art/Pokemon-Sun-and-Moon-All-Icon-644722700 ../../../images/icon_spritesheet.png*/
+.icon-sprite (@url; @cols; @i;) when (@i > 0) {
+  @x: (mod((@i - 1), @cols) * 40) ;
+  @y: (floor((@i - 1) / @cols) * 30);
+
+  .icon-sprite-@{i} {
+    width: 40px;
+    height: 30px;
+    background: @url no-repeat (@x * -1px) (@y * -1px);
+  }
+
+  .icon-sprite(@url;@cols;(@i - 1););
+}
+
+.icon-sprite(url('../../../images/icon_spritesheet.png'), 25, 750);
