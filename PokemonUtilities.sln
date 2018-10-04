@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "PokemonUtilities", "PokemonUtilities\PokemonUtilities.njsproj", "{4E6CEA87-77ED-4E4F-A628-EFF9CBD0B0FD}"
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "-Deprecated-PokemonUtilities", "PokemonUtilities\-Deprecated-PokemonUtilities.njsproj", "{4E6CEA87-77ED-4E4F-A628-EFF9CBD0B0FD}"
 EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "PokeTools", "PokeTools\PokeTools.njsproj", "{F1A1327A-EB6E-4BE5-85FF-C923E39053D4}"
 EndProject

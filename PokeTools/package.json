@@ -1,13 +1,14 @@
 {
   "name": "poke-tools",
-  "version": "0.0.0",
+  "homepage": "https://utilities.games/",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node app"
   },
   "description": "PokeTools",
   "author": {
-    "name": ""
+    "name": "LightWorks"
   },
   "dependencies": {
     "body-parser": "^1.15.0",
