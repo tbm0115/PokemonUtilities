@@ -11,7 +11,7 @@
     <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
     <ToolsVersionPromptShown>0.0</ToolsVersionPromptShown>
     <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
-    <NameOfLastUsedPublishProfile>FTPServer</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>Local</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -78,6 +78,7 @@
     <Content Include="dist\Pokemon\dist\css\Pokemon.less" />
     <Content Include="dist\Pokemon\dist\css\Pokemon.min.css" />
     <Content Include="index.html" />
+    <None Include="Local.pubxml" />
     <Content Include="manifest.json" />
     <Content Include="offline.html" />
     <Content Include="package.json" />

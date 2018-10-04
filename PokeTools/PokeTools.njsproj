@@ -1,0 +1,539 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">14.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Name>PokeTools</Name>
+    <RootNamespace>PokeTools</RootNamespace>
+    <LastActiveSolutionConfig>Debug|Any CPU</LastActiveSolutionConfig>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>f1a1327a-eb6e-4be5-85ff-c923e39053d4</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>app.js</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <NodejsPort>1337</NodejsPort>
+    <StartWebBrowser>true</StartWebBrowser>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="app.js" />
+    <Compile Include="public\bootstrap\dist\js\bootstrap.js" />
+    <Compile Include="public\bootstrap\dist\js\bootstrap.min.js" />
+    <Compile Include="public\bootstrap\dist\js\npm.js" />
+    <Compile Include="public\bootstrap\Gruntfile.js" />
+    <Compile Include="public\bootstrap\grunt\bs-commonjs-generator.js" />
+    <Compile Include="public\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <Compile Include="public\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <Compile Include="public\bootstrap\grunt\bs-raw-files-generator.js" />
+    <Compile Include="public\bootstrap\grunt\change-version.js" />
+    <Compile Include="public\bootstrap\js\affix.js" />
+    <Compile Include="public\bootstrap\js\alert.js" />
+    <Compile Include="public\bootstrap\js\button.js" />
+    <Compile Include="public\bootstrap\js\carousel.js" />
+    <Compile Include="public\bootstrap\js\collapse.js" />
+    <Compile Include="public\bootstrap\js\dropdown.js" />
+    <Compile Include="public\bootstrap\js\modal.js" />
+    <Compile Include="public\bootstrap\js\popover.js" />
+    <Compile Include="public\bootstrap\js\scrollspy.js" />
+    <Compile Include="public\bootstrap\js\tab.js" />
+    <Compile Include="public\bootstrap\js\tooltip.js" />
+    <Compile Include="public\bootstrap\js\transition.js" />
+    <Compile Include="public\Pokemon\js\Comparison.es5.js" />
+    <Compile Include="public\Pokemon\js\Comparison.es5.min.js" />
+    <Compile Include="public\Pokemon\js\Comparison.js" />
+    <Compile Include="public\Pokemon\js\Pokemon.es5.js" />
+    <Compile Include="public\Pokemon\js\Pokemon.es5.min.js" />
+    <Compile Include="public\Pokemon\js\Pokemon.js" />
+    <Compile Include="public\sw.js" />
+    <Compile Include="public\jquery\dist\jquery.js" />
+    <Compile Include="public\jquery\dist\jquery.min.js" />
+    <Compile Include="public\jquery\external\sizzle\dist\sizzle.js" />
+    <Compile Include="public\jquery\external\sizzle\dist\sizzle.min.js" />
+    <Compile Include="public\jquery\src\ajax.js" />
+    <Compile Include="public\jquery\src\ajax\jsonp.js" />
+    <Compile Include="public\jquery\src\ajax\load.js" />
+    <Compile Include="public\jquery\src\ajax\parseJSON.js" />
+    <Compile Include="public\jquery\src\ajax\parseXML.js" />
+    <Compile Include="public\jquery\src\ajax\script.js" />
+    <Compile Include="public\jquery\src\ajax\var\location.js" />
+    <Compile Include="public\jquery\src\ajax\var\nonce.js" />
+    <Compile Include="public\jquery\src\ajax\var\rquery.js" />
+    <Compile Include="public\jquery\src\ajax\xhr.js" />
+    <Compile Include="public\jquery\src\attributes.js" />
+    <Compile Include="public\jquery\src\attributes\attr.js" />
+    <Compile Include="public\jquery\src\attributes\classes.js" />
+    <Compile Include="public\jquery\src\attributes\prop.js" />
+    <Compile Include="public\jquery\src\attributes\support.js" />
+    <Compile Include="public\jquery\src\attributes\val.js" />
+    <Compile Include="public\jquery\src\callbacks.js" />
+    <Compile Include="public\jquery\src\core.js" />
+    <Compile Include="public\jquery\src\core\access.js" />
+    <Compile Include="public\jquery\src\core\init.js" />
+    <Compile Include="public\jquery\src\core\parseHTML.js" />
+    <Compile Include="public\jquery\src\core\ready.js" />
+    <Compile Include="public\jquery\src\core\var\rsingleTag.js" />
+    <Compile Include="public\jquery\src\css.js" />
+    <Compile Include="public\jquery\src\css\addGetHookIf.js" />
+    <Compile Include="public\jquery\src\css\adjustCSS.js" />
+    <Compile Include="public\jquery\src\css\curCSS.js" />
+    <Compile Include="public\jquery\src\css\defaultDisplay.js" />
+    <Compile Include="public\jquery\src\css\hiddenVisibleSelectors.js" />
+    <Compile Include="public\jquery\src\css\showHide.js" />
+    <Compile Include="public\jquery\src\css\support.js" />
+    <Compile Include="public\jquery\src\css\var\cssExpand.js" />
+    <Compile Include="public\jquery\src\css\var\getStyles.js" />
+    <Compile Include="public\jquery\src\css\var\isHidden.js" />
+    <Compile Include="public\jquery\src\css\var\rmargin.js" />
+    <Compile Include="public\jquery\src\css\var\rnumnonpx.js" />
+    <Compile Include="public\jquery\src\css\var\swap.js" />
+    <Compile Include="public\jquery\src\data.js" />
+    <Compile Include="public\jquery\src\data\Data.js" />
+    <Compile Include="public\jquery\src\data\var\acceptData.js" />
+    <Compile Include="public\jquery\src\data\var\dataPriv.js" />
+    <Compile Include="public\jquery\src\data\var\dataUser.js" />
+    <Compile Include="public\jquery\src\deferred.js" />
+    <Compile Include="public\jquery\src\deprecated.js" />
+    <Compile Include="public\jquery\src\dimensions.js" />
+    <Compile Include="public\jquery\src\effects.js" />
+    <Compile Include="public\jquery\src\effects\animatedSelector.js" />
+    <Compile Include="public\jquery\src\effects\Tween.js" />
+    <Compile Include="public\jquery\src\event.js" />
+    <Compile Include="public\jquery\src\event\ajax.js" />
+    <Compile Include="public\jquery\src\event\alias.js" />
+    <Compile Include="public\jquery\src\event\focusin.js" />
+    <Compile Include="public\jquery\src\event\support.js" />
+    <Compile Include="public\jquery\src\event\trigger.js" />
+    <Compile Include="public\jquery\src\exports\amd.js" />
+    <Compile Include="public\jquery\src\exports\global.js" />
+    <Compile Include="public\jquery\src\intro.js" />
+    <Compile Include="public\jquery\src\jquery.js" />
+    <Compile Include="public\jquery\src\manipulation.js" />
+    <Compile Include="public\jquery\src\manipulation\buildFragment.js" />
+    <Compile Include="public\jquery\src\manipulation\getAll.js" />
+    <Compile Include="public\jquery\src\manipulation\setGlobalEval.js" />
+    <Compile Include="public\jquery\src\manipulation\support.js" />
+    <Compile Include="public\jquery\src\manipulation\var\rcheckableType.js" />
+    <Compile Include="public\jquery\src\manipulation\var\rscriptType.js" />
+    <Compile Include="public\jquery\src\manipulation\var\rtagName.js" />
+    <Compile Include="public\jquery\src\manipulation\wrapMap.js" />
+    <Compile Include="public\jquery\src\manipulation\_evalUrl.js" />
+    <Compile Include="public\jquery\src\offset.js" />
+    <Compile Include="public\jquery\src\outro.js" />
+    <Compile Include="public\jquery\src\queue.js" />
+    <Compile Include="public\jquery\src\queue\delay.js" />
+    <Compile Include="public\jquery\src\selector-native.js" />
+    <Compile Include="public\jquery\src\selector-sizzle.js" />
+    <Compile Include="public\jquery\src\selector.js" />
+    <Compile Include="public\jquery\src\serialize.js" />
+    <Compile Include="public\jquery\src\traversing.js" />
+    <Compile Include="public\jquery\src\traversing\findFilter.js" />
+    <Compile Include="public\jquery\src\traversing\var\dir.js" />
+    <Compile Include="public\jquery\src\traversing\var\rneedsContext.js" />
+    <Compile Include="public\jquery\src\traversing\var\siblings.js" />
+    <Compile Include="public\jquery\src\var\arr.js" />
+    <Compile Include="public\jquery\src\var\class2type.js" />
+    <Compile Include="public\jquery\src\var\concat.js" />
+    <Compile Include="public\jquery\src\var\document.js" />
+    <Compile Include="public\jquery\src\var\documentElement.js" />
+    <Compile Include="public\jquery\src\var\hasOwn.js" />
+    <Compile Include="public\jquery\src\var\indexOf.js" />
+    <Compile Include="public\jquery\src\var\pnum.js" />
+    <Compile Include="public\jquery\src\var\push.js" />
+    <Compile Include="public\jquery\src\var\rcssNum.js" />
+    <Compile Include="public\jquery\src\var\rnotwhite.js" />
+    <Compile Include="public\jquery\src\var\slice.js" />
+    <Compile Include="public\jquery\src\var\support.js" />
+    <Compile Include="public\jquery\src\var\toString.js" />
+    <Compile Include="public\jquery\src\wrap.js" />
+    <Compile Include="routes\index.js" />
+    <Compile Include="routes\users.js" />
+    <None Include="compilerconfig.json" />
+    <Content Include="compilerconfig.json.defaults">
+      <SubType>Content</SubType>
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </Content>
+    <Content Include="package.json" />
+    <Content Include="public\bootstrap\CHANGELOG.md" />
+    <Content Include="public\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="public\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <Content Include="public\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="public\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="public\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="public\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="public\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="public\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="public\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="public\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="public\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="public\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="public\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="public\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="public\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="public\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="public\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="public\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="public\bootstrap\grunt\.jshintrc" />
+    <Content Include="public\bootstrap\grunt\configBridge.json" />
+    <Content Include="public\bootstrap\grunt\npm-shrinkwrap.json" />
+    <Content Include="public\bootstrap\grunt\sauce_browsers.yml" />
+    <Content Include="public\bootstrap\less\alerts.less" />
+    <Content Include="public\bootstrap\less\badges.less" />
+    <Content Include="public\bootstrap\less\bootstrap.less" />
+    <Content Include="public\bootstrap\less\breadcrumbs.less" />
+    <Content Include="public\bootstrap\less\button-groups.less" />
+    <Content Include="public\bootstrap\less\buttons.less" />
+    <Content Include="public\bootstrap\less\carousel.less" />
+    <Content Include="public\bootstrap\less\close.less" />
+    <Content Include="public\bootstrap\less\code.less" />
+    <Content Include="public\bootstrap\less\component-animations.less" />
+    <Content Include="public\bootstrap\less\dropdowns.less" />
+    <Content Include="public\bootstrap\less\forms.less" />
+    <Content Include="public\bootstrap\less\glyphicons.less" />
+    <Content Include="public\bootstrap\less\grid.less" />
+    <Content Include="public\bootstrap\less\input-groups.less" />
+    <Content Include="public\bootstrap\less\jumbotron.less" />
+    <Content Include="public\bootstrap\less\labels.less" />
+    <Content Include="public\bootstrap\less\list-group.less" />
+    <Content Include="public\bootstrap\less\media.less" />
+    <Content Include="public\bootstrap\less\mixins.less" />
+    <Content Include="public\bootstrap\less\mixins\alerts.less" />
+    <Content Include="public\bootstrap\less\mixins\background-variant.less" />
+    <Content Include="public\bootstrap\less\mixins\border-radius.less" />
+    <Content Include="public\bootstrap\less\mixins\buttons.less" />
+    <Content Include="public\bootstrap\less\mixins\center-block.less" />
+    <Content Include="public\bootstrap\less\mixins\clearfix.less" />
+    <Content Include="public\bootstrap\less\mixins\forms.less" />
+    <Content Include="public\bootstrap\less\mixins\gradients.less" />
+    <Content Include="public\bootstrap\less\mixins\grid-framework.less" />
+    <Content Include="public\bootstrap\less\mixins\grid.less" />
+    <Content Include="public\bootstrap\less\mixins\hide-text.less" />
+    <Content Include="public\bootstrap\less\mixins\image.less" />
+    <Content Include="public\bootstrap\less\mixins\labels.less" />
+    <Content Include="public\bootstrap\less\mixins\list-group.less" />
+    <Content Include="public\bootstrap\less\mixins\nav-divider.less" />
+    <Content Include="public\bootstrap\less\mixins\nav-vertical-align.less" />
+    <Content Include="public\bootstrap\less\mixins\opacity.less" />
+    <Content Include="public\bootstrap\less\mixins\pagination.less" />
+    <Content Include="public\bootstrap\less\mixins\panels.less" />
+    <Content Include="public\bootstrap\less\mixins\progress-bar.less" />
+    <Content Include="public\bootstrap\less\mixins\reset-filter.less" />
+    <Content Include="public\bootstrap\less\mixins\reset-text.less" />
+    <Content Include="public\bootstrap\less\mixins\resize.less" />
+    <Content Include="public\bootstrap\less\mixins\responsive-visibility.less" />
+    <Content Include="public\bootstrap\less\mixins\size.less" />
+    <Content Include="public\bootstrap\less\mixins\tab-focus.less" />
+    <Content Include="public\bootstrap\less\mixins\table-row.less" />
+    <Content Include="public\bootstrap\less\mixins\text-emphasis.less" />
+    <Content Include="public\bootstrap\less\mixins\text-overflow.less" />
+    <Content Include="public\bootstrap\less\mixins\vendor-prefixes.less" />
+    <Content Include="public\bootstrap\less\modals.less" />
+    <Content Include="public\bootstrap\less\navbar.less" />
+    <Content Include="public\bootstrap\less\navs.less" />
+    <Content Include="public\bootstrap\less\normalize.less" />
+    <Content Include="public\bootstrap\less\pager.less" />
+    <Content Include="public\bootstrap\less\pagination.less" />
+    <Content Include="public\bootstrap\less\panels.less" />
+    <Content Include="public\bootstrap\less\popovers.less" />
+    <Content Include="public\bootstrap\less\print.less" />
+    <Content Include="public\bootstrap\less\progress-bars.less" />
+    <Content Include="public\bootstrap\less\responsive-embed.less" />
+    <Content Include="public\bootstrap\less\responsive-utilities.less" />
+    <Content Include="public\bootstrap\less\scaffolding.less" />
+    <Content Include="public\bootstrap\less\tables.less" />
+    <Content Include="public\bootstrap\less\theme.less" />
+    <Content Include="public\bootstrap\less\thumbnails.less" />
+    <Content Include="public\bootstrap\less\tooltip.less" />
+    <Content Include="public\bootstrap\less\type.less" />
+    <Content Include="public\bootstrap\less\utilities.less" />
+    <Content Include="public\bootstrap\less\variables.less" />
+    <Content Include="public\bootstrap\less\wells.less" />
+    <Content Include="public\bootstrap\LICENSE" />
+    <Content Include="public\bootstrap\package.json" />
+    <Content Include="public\bootstrap\README.md" />
+    <Content Include="public\font-awesome\.npmignore" />
+    <Content Include="public\font-awesome\css\font-awesome.css" />
+    <Content Include="public\font-awesome\css\font-awesome.css.map" />
+    <Content Include="public\font-awesome\css\font-awesome.min.css" />
+    <Content Include="public\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="public\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="public\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="public\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="public\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="public\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="public\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="public\font-awesome\less\animated.less" />
+    <Content Include="public\font-awesome\less\bordered-pulled.less" />
+    <Content Include="public\font-awesome\less\core.less" />
+    <Content Include="public\font-awesome\less\fixed-width.less" />
+    <Content Include="public\font-awesome\less\font-awesome.less" />
+    <Content Include="public\font-awesome\less\icons.less" />
+    <Content Include="public\font-awesome\less\larger.less" />
+    <Content Include="public\font-awesome\less\list.less" />
+    <Content Include="public\font-awesome\less\mixins.less" />
+    <Content Include="public\font-awesome\less\path.less" />
+    <Content Include="public\font-awesome\less\rotated-flipped.less" />
+    <Content Include="public\font-awesome\less\screen-reader.less" />
+    <Content Include="public\font-awesome\less\stacked.less" />
+    <Content Include="public\font-awesome\less\variables.less" />
+    <Content Include="public\font-awesome\package.json" />
+    <Content Include="public\font-awesome\README.md" />
+    <Content Include="public\font-awesome\scss\font-awesome.scss" />
+    <Content Include="public\font-awesome\scss\_animated.scss" />
+    <Content Include="public\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="public\font-awesome\scss\_core.scss" />
+    <Content Include="public\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="public\font-awesome\scss\_icons.scss" />
+    <Content Include="public\font-awesome\scss\_larger.scss" />
+    <Content Include="public\font-awesome\scss\_list.scss" />
+    <Content Include="public\font-awesome\scss\_mixins.scss" />
+    <Content Include="public\font-awesome\scss\_path.scss" />
+    <Content Include="public\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="public\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="public\font-awesome\scss\_stacked.scss" />
+    <Content Include="public\font-awesome\scss\_variables.scss" />
+    <Content Include="public\images\200-pokemon.png" />
+    <Content Include="public\images\404-pokemon.png" />
+    <Content Include="public\images\404-pokemon_1.png" />
+    <Content Include="public\images\404-pokemon_2.png" />
+    <Content Include="public\images\android\android-launchericon-144-144.png" />
+    <Content Include="public\images\android\android-launchericon-192-192.png" />
+    <Content Include="public\images\android\android-launchericon-48-48.png" />
+    <Content Include="public\images\android\android-launchericon-512-512.png" />
+    <Content Include="public\images\android\android-launchericon-72-72.png" />
+    <Content Include="public\images\android\android-launchericon-96-96.png" />
+    <Content Include="public\images\chrome\chrome-extensionmanagementpage-48-48.png" />
+    <Content Include="public\images\chrome\chrome-favicon-16-16.png" />
+    <Content Include="public\images\chrome\chrome-installprocess-128-128.png" />
+    <Content Include="public\images\firefox\firefox-general-128-128.png" />
+    <Content Include="public\images\firefox\firefox-general-16-16.png" />
+    <Content Include="public\images\firefox\firefox-general-256-256.png" />
+    <Content Include="public\images\firefox\firefox-general-32-32.png" />
+    <Content Include="public\images\firefox\firefox-general-48-48.png" />
+    <Content Include="public\images\firefox\firefox-general-64-64.png" />
+    <Content Include="public\images\firefox\firefox-general-90-90.png" />
+    <Content Include="public\images\firefox\firefox-marketplace-128-128.png" />
+    <Content Include="public\images\firefox\firefox-marketplace-512-512.png" />
+    <Content Include="public\images\icon_spritesheet.png" />
+    <Content Include="public\images\ios\ios-appicon-1024-1024.png" />
+    <Content Include="public\images\ios\ios-appicon-120-120.png" />
+    <Content Include="public\images\ios\ios-appicon-152-152.png" />
+    <Content Include="public\images\ios\ios-appicon-180-180.png" />
+    <Content Include="public\images\ios\ios-appicon-76-76.png" />
+    <Content Include="public\images\ios\ios-launchimage-1024-768.png" />
+    <Content Include="public\images\ios\ios-launchimage-1242-2208.png" />
+    <Content Include="public\images\ios\ios-launchimage-1334-750.png" />
+    <Content Include="public\images\ios\ios-launchimage-1536-2048.png" />
+    <Content Include="public\images\ios\ios-launchimage-2048-1536.png" />
+    <Content Include="public\images\ios\ios-launchimage-2208-1242.png" />
+    <Content Include="public\images\ios\ios-launchimage-640-1136.png" />
+    <Content Include="public\images\ios\ios-launchimage-640-960.png" />
+    <Content Include="public\images\ios\ios-launchimage-750-1334.png" />
+    <Content Include="public\images\ios\ios-launchimage-768-1024.png" />
+    <Content Include="public\images\windows10\SplashScreen.scale-100.png" />
+    <Content Include="public\images\windows10\SplashScreen.scale-125.png" />
+    <Content Include="public\images\windows10\SplashScreen.scale-150.png" />
+    <Content Include="public\images\windows10\SplashScreen.scale-200.png" />
+    <Content Include="public\images\windows10\SplashScreen.scale-400.png" />
+    <Content Include="public\images\windows10\Square150x150Logo.scale-100.png" />
+    <Content Include="public\images\windows10\Square150x150Logo.scale-125.png" />
+    <Content Include="public\images\windows10\Square150x150Logo.scale-150.png" />
+    <Content Include="public\images\windows10\Square150x150Logo.scale-200.png" />
+    <Content Include="public\images\windows10\Square150x150Logo.scale-400.png" />
+    <Content Include="public\images\windows10\Square310x310Logo.scale-100.png" />
+    <Content Include="public\images\windows10\Square310x310Logo.scale-125.png" />
+    <Content Include="public\images\windows10\Square310x310Logo.scale-150.png" />
+    <Content Include="public\images\windows10\Square310x310Logo.scale-200.png" />
+    <Content Include="public\images\windows10\Square310x310Logo.scale-400.png" />
+    <Content Include="public\images\windows10\Square44x44Logo.scale-100.png" />
+    <Content Include="public\images\windows10\Square44x44Logo.scale-125.png" />
+    <Content Include="public\images\windows10\Square44x44Logo.scale-150.png" />
+    <Content Include="public\images\windows10\Square44x44Logo.scale-200.png" />
+    <Content Include="public\images\windows10\Square44x44Logo.scale-400.png" />
+    <Content Include="public\images\windows10\Square44x44Logo.targetsize-16.png" />
+    <Content Include="public\images\windows10\Square44x44Logo.targetsize-16_altform-unplated.png" />
+    <Content Include="public\images\windows10\Square44x44Logo.targetsize-24.png" />
+    <Content Include="public\images\windows10\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="public\images\windows10\Square44x44Logo.targetsize-256.png" />
+    <Content Include="public\images\windows10\Square44x44Logo.targetsize-256_altform-unplated.png" />
+    <Content Include="public\images\windows10\Square44x44Logo.targetsize-48.png" />
+    <Content Include="public\images\windows10\Square44x44Logo.targetsize-48_altform-unplated.png" />
+    <Content Include="public\images\windows10\Square71x71Logo.scale-100.png" />
+    <Content Include="public\images\windows10\Square71x71Logo.scale-125.png" />
+    <Content Include="public\images\windows10\Square71x71Logo.scale-150.png" />
+    <Content Include="public\images\windows10\Square71x71Logo.scale-200.png" />
+    <Content Include="public\images\windows10\Square71x71Logo.scale-400.png" />
+    <Content Include="public\images\windows10\StoreLogo.png" />
+    <Content Include="public\images\windows10\StoreLogo.scale-100.png" />
+    <Content Include="public\images\windows10\StoreLogo.scale-125.png" />
+    <Content Include="public\images\windows10\StoreLogo.scale-150.png" />
+    <Content Include="public\images\windows10\StoreLogo.scale-200.png" />
+    <Content Include="public\images\windows10\StoreLogo.scale-400.png" />
+    <Content Include="public\images\windows10\Wide310x150Logo.scale-100.png" />
+    <Content Include="public\images\windows10\Wide310x150Logo.scale-125.png" />
+    <Content Include="public\images\windows10\Wide310x150Logo.scale-150.png" />
+    <Content Include="public\images\windows10\Wide310x150Logo.scale-200.png" />
+    <Content Include="public\images\windows10\Wide310x150Logo.scale-400.png" />
+    <Content Include="public\images\windows\windows-smallsquare-24-24.png" />
+    <Content Include="public\images\windows\windows-smallsquare-30-30.png" />
+    <Content Include="public\images\windows\windows-smallsquare-42-42.png" />
+    <Content Include="public\images\windows\windows-smallsquare-54-54.png" />
+    <Content Include="public\images\windows\windows-splashscreen-1116-540.png" />
+    <Content Include="public\images\windows\windows-splashscreen-620-300.png" />
+    <Content Include="public\images\windows\windows-splashscreen-868-420.png" />
+    <Content Include="public\images\windows\windows-squarelogo-120-120.png" />
+    <Content Include="public\images\windows\windows-squarelogo-150-150.png" />
+    <Content Include="public\images\windows\windows-squarelogo-210-210.png" />
+    <Content Include="public\images\windows\windows-squarelogo-270-270.png" />
+    <Content Include="public\images\windows\windows-storelogo-50-50.png" />
+    <Content Include="public\images\windows\windows-storelogo-70-70.png" />
+    <Content Include="public\images\windows\windows-storelogo-90-90.png" />
+    <Content Include="public\images\windows\windowsphone-appicon-106-106.png" />
+    <Content Include="public\images\windows\windowsphone-appicon-44-44.png" />
+    <Content Include="public\images\windows\windowsphone-appicon-62-62.png" />
+    <Content Include="public\images\windows\windowsphone-mediumtile-150-150.png" />
+    <Content Include="public\images\windows\windowsphone-mediumtile-210-210.png" />
+    <Content Include="public\images\windows\windowsphone-mediumtile-360-360.png" />
+    <Content Include="public\images\windows\windowsphone-smalltile-170-170.png" />
+    <Content Include="public\images\windows\windowsphone-smalltile-71-71.png" />
+    <Content Include="public\images\windows\windowsphone-smalltile-99-99.png" />
+    <Content Include="public\images\windows\windowsphone-storelogo-120-120.png" />
+    <Content Include="public\images\windows\windowsphone-storelogo-50-50.png" />
+    <Content Include="public\images\windows\windowsphone-storelogo-70-70.png" />
+    <Content Include="public\jquery\AUTHORS.txt" />
+    <Content Include="public\jquery\bower.json" />
+    <Content Include="public\jquery\dist\jquery.min.map" />
+    <Content Include="public\jquery\external\sizzle\dist\sizzle.min.map" />
+    <Content Include="public\jquery\external\sizzle\LICENSE.txt" />
+    <Content Include="public\jquery\LICENSE.txt" />
+    <Content Include="public\jquery\package.json" />
+    <Content Include="public\jquery\README.md" />
+    <Content Include="public\jquery\src\.jshintrc" />
+    <Content Include="public\stylesheets\Layout.css" />
+    <Content Include="public\stylesheets\Layout.less" />
+    <Content Include="public\stylesheets\Layout.min.css" />
+    <Content Include="public\stylesheets\main.css" />
+    <Content Include="public\Pokemon\css\Pokemon.css" />
+    <Content Include="public\Pokemon\css\Pokemon.less" />
+    <Content Include="public\Pokemon\css\Pokemon.min.css" />
+    <Content Include="README.md" />
+    <Content Include="views\index.pug" />
+    <Content Include="views\layout.pug" />
+    <Content Include="views\error.pug" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="public\" />
+    <Folder Include="public\bootstrap\" />
+    <Folder Include="public\bootstrap\dist\" />
+    <Folder Include="public\bootstrap\dist\css\" />
+    <Folder Include="public\bootstrap\dist\fonts\" />
+    <Folder Include="public\bootstrap\dist\js\" />
+    <Folder Include="public\bootstrap\fonts\" />
+    <Folder Include="public\bootstrap\grunt\" />
+    <Folder Include="public\bootstrap\js\" />
+    <Folder Include="public\bootstrap\less\" />
+    <Folder Include="public\bootstrap\less\mixins\" />
+    <Folder Include="public\font-awesome\" />
+    <Folder Include="public\font-awesome\css\" />
+    <Folder Include="public\font-awesome\fonts\" />
+    <Folder Include="public\font-awesome\less\" />
+    <Folder Include="public\font-awesome\scss\" />
+    <Folder Include="public\images\" />
+    <Folder Include="public\images\android\" />
+    <Folder Include="public\images\chrome\" />
+    <Folder Include="public\images\firefox\" />
+    <Folder Include="public\images\ios\" />
+    <Folder Include="public\images\windows10\" />
+    <Folder Include="public\images\windows\" />
+    <Folder Include="public\javascripts\" />
+    <Folder Include="public\javascripts\PWA\" />
+    <Folder Include="public\Pokemon\" />
+    <Folder Include="public\jquery\" />
+    <Folder Include="public\jquery\dist\" />
+    <Folder Include="public\jquery\external\" />
+    <Folder Include="public\jquery\external\sizzle\" />
+    <Folder Include="public\jquery\external\sizzle\dist\" />
+    <Folder Include="public\jquery\src\" />
+    <Folder Include="public\jquery\src\ajax\" />
+    <Folder Include="public\jquery\src\ajax\var\" />
+    <Folder Include="public\jquery\src\attributes\" />
+    <Folder Include="public\jquery\src\core\" />
+    <Folder Include="public\jquery\src\core\var\" />
+    <Folder Include="public\jquery\src\css\" />
+    <Folder Include="public\jquery\src\css\var\" />
+    <Folder Include="public\jquery\src\data\" />
+    <Folder Include="public\jquery\src\data\var\" />
+    <Folder Include="public\jquery\src\effects\" />
+    <Folder Include="public\jquery\src\event\" />
+    <Folder Include="public\jquery\src\exports\" />
+    <Folder Include="public\jquery\src\manipulation\" />
+    <Folder Include="public\jquery\src\manipulation\var\" />
+    <Folder Include="public\jquery\src\queue\" />
+    <Folder Include="public\jquery\src\traversing\" />
+    <Folder Include="public\jquery\src\traversing\var\" />
+    <Folder Include="public\jquery\src\var\" />
+    <Folder Include="public\Pokemon\js\" />
+    <Folder Include="public\Pokemon\css\" />
+    <Folder Include="public\stylesheets\" />
+    <Folder Include="routes\" />
+    <Folder Include="views\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config" />
+  </ItemGroup>
+  <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,24 @@
+﻿body {
+  padding: 0px;
+  padding-top: 65px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+
+#pokeContainer {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#pokeComparison {
+  position: relative;
+  display: block;
+  width: 85vmin;
+  height: 85vmin;
+  border: 5px outset slategrey;
+  margin-left: auto;
+  margin-right: auto;
+}

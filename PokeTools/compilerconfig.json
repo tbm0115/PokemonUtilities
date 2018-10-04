@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "public/Pokemon/js/Pokemon.es5.js",
+    "inputFile": "public/Pokemon/js/Pokemon.js"
+  },
+  {
+    "outputFile": "public/Pokemon/css/Pokemon.css",
+    "inputFile": "public/Pokemon/css/Pokemon.less"
+  }
+]

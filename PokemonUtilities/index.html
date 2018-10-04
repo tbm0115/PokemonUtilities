@@ -28,9 +28,9 @@
       padding-top: 65px;
     }
   </style>
-  <link href="./dist/Pokemon/dist/css/Layout.min.css" rel="stylesheet" />
+  <link href="./dist/Pokemon/dist/css/Layout.min.css?v=0.1" rel="stylesheet" />
   <!-- Remove once we figure out how to replace with separate HTML files as "Pages" -->
-  <link href="./dist/Pokemon/dist/css/Pokemon.min.css" rel="stylesheet" />
+  <link href="./dist/Pokemon/dist/css/Pokemon.min.css?v=0.2" rel="stylesheet" />
   <style type="text/css">
     #pokeContainer {
       margin-left: auto;
@@ -201,8 +201,8 @@
     }
   </script>
   <!-- Move to Page and include template -->
-  <script type="text/javascript" src="./dist/Pokemon/dist/js/Pokemon.js"></script>
-  <script type="text/javascript" src="./dist/Pokemon/dist/js/Comparison.js"></script>
+  <script type="text/javascript" src="./dist/Pokemon/dist/js/Pokemon.js?v=0.2"></script>
+  <script type="text/javascript" src="./dist/Pokemon/dist/js/Comparison.js?v=0.1"></script>
   <script type="text/javascript">
     var Dexs = {};
     var ActivePokemon = null;
@@ -214,7 +214,7 @@
         }
       }
       divResults.innerHTML = "";
-      var strSearch = document.querySelector("#txtSearchDex").value;
+      var strSearch = document.querySelector("#txtSearchDex").value.toLowerCase();
       if (typeof (Dexs[dexName]) !== "undefined" && Dexs[dexName] !== null) {
         var entries = Dexs[dexName].pokemon_entries;
         if (strSearch !== null && strSearch !== "") {

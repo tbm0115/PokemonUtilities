@@ -1,0 +1,246 @@
+﻿doctype html
+html(lang="en")
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='author', content='LightWorks')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='theme-color', content='#474544')
+    meta(name='description', content='Dedicated to providing tools for gameplay.')
+    meta(name='Keywords', content='video game utilities games tools tool utility Pokemon')
+    link(rel='icon' href='./images/android/android-launchericon-96-96.png')
+    link(rel='manifest', href='./manifest.json')
+    title= title
+    link(rel='stylesheet', href='./bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='./font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/stylesheets/main.css')
+    link(rel='preload', href='./PokeAPI/api/v2/pd/1/index.json', as='fetch')
+    link(rel='stylesheet', href='./stylesheets/Layout.min.css')
+    link(rel='stylesheet', href='./Pokemon/css/Pokemon.min.css')
+    // Global site tag (gtag.js) - Google Analytics
+    script(async='', src="https://www.googletagmanager.com/gtag/js?id=UA-126967798-1")
+
+    script(type='text/javascript', language='javascript').
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-126967798-1');
+
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+        div.container
+            div.navbar-header
+                button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+                    span.sr-only Toggle Navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                a.navbar-brand(href='./') Pok&#0232;monTools
+            div.navbar-collapse.collapse
+                ul.nav.navbar-nav
+                    li
+                        a(href='./') Home
+                    li#liA2HS
+                        a#btnA2HS(href='javascript:showAddToHomeScreen();', style='color: #9fd49e;', title='Add to Homescreen')
+                            i.fa.fa-download Download
+
+    block content
+
+    footer
+        p.text-muted All content is Copyright&copy; of Utilities.Games 2018 | Pok&#0232;mon And All Respective Names are Trademark&trade; &amp; Copyright&copy; of Nintendo 1996-2018 | 
+            a(href='./Privacy Policy.html') Privacy Policy
+
+    script(language='javascript', type='text/javascript', src='./jquery/dist/jquery.min.js')
+
+    script(language='javascript', type='text/javascript', src='./bootstrap/dist/js/bootstrap.min.js')
+
+    script(language='javascript', type='text/javascript', src='./Pokemon/js/Pokemon.js')
+
+    script(language='javascript', type='text/javascript', src='./Pokemon/js/Comparison.js')
+    
+    script(language='javascript', type='text/javascript').    
+        if ("serviceWorker" in navigator) {
+          window.addEventListener("load", function () {
+            navigator.serviceWorker.addEventListener("message", function (event) {
+
+            });
+            navigator.serviceWorker.register("./sw.js").then(function (registration) {
+              console.log("[ServiceWorker.Registration] Successful with scope: ", registration.scope);
+            }, function (err) {
+              console.log("[ServiceWorker.Registration] Failed: ", err);
+            });
+          });
+        } else {
+          console.log("[ServiceWorker] Service workers are not supported on this browser!");
+        }
+
+        function showAddToHomeScreen() {
+          if (pwaInstall.ev !== null) {
+            pwaInstall.ev.prompt();
+
+            pwaInstall.ev.userChoice.then(function pwaUserChoice(result) {
+              if (result.outcome === "accepted") {
+                pwaInstall.li.style.display = "none";
+                console.log("[ServiceWorker.showAddToHomeScreen] User accepted Add To Homescreen");
+              } else {
+                pwaInstall.li.style.display = "inline-block";
+                console.log("[ServiceWorker.showAddToHomeScreen] User declined Add To Homescreen");
+              }
+              pwaInstall.ev = null;
+            });
+          }
+        }
+        var pwaInstall = {
+          ev: null,
+          li: null,
+          btn: null
+        }
+        document.querySelector("#liA2HS").style.display = "none";
+        if ("onbeforeinstallprompt" in window) {
+          window.onbeforeinstallprompt = function (ev) {
+            ev.preventDefault();
+
+            pwaInstall.ev = ev;
+            pwaInstall.li = document.querySelector("#liA2HS");
+            pwaInstall.li.style.display = "inline-block";
+            pwaInstall.btn = document.querySelector("#btnA2HS");
+          }
+        }
+
+    script(type='text/javascript',language='javascript').
+        var Dexs = {};
+        var ActivePokemon = null;
+        function filterDex(dexName) {
+          var divResults = document.querySelector("#searchResults");
+          if (typeof (dexName) === "undefined" || dexName === null || dexName === "" || typeof (Dexs[dexName]) === "undefined") {
+            if (divResults.hasAttribute("data-dex-name")) {
+              dexName = divResults.getAttribute("data-dex-name");
+            }
+          }
+          divResults.innerHTML = "";
+          var strSearch = document.querySelector("#txtSearchDex").value.toLowerCase();
+          if (typeof (Dexs[dexName]) !== "undefined" && Dexs[dexName] !== null) {
+            var entries = Dexs[dexName].pokemon_entries;
+            if (strSearch !== null && strSearch !== "") {
+              entries = entries.filter(function (i, e) {
+                return i.entry_number.toString().indexOf(strSearch) >= 0 || i.pokemon_species.name.indexOf(strSearch) >= 0;
+              });
+            }
+            if (entries.length > 0) {
+              for (var len = entries.length, n = 0; n < len; n++) {
+                var entry = entries[n]
+                var divResult = divResults.appendChild(document.createElement("div"));
+                //divResult.setAttribute("data-dex-name", dexName);
+                divResult.setAttribute("class", "poke-dex-result");
+                divResult.setAttribute("data-id", entry.entry_number);
+                divResult.setAttribute("data-name", entry.pokemon_species.name);
+                var img = divResult.appendChild(document.createElement("img"));
+                img.setAttribute("class", "icon-sprite-" + entry.entry_number.toString());
+                var txt = divResult.appendChild(document.createElement("span"));
+                txt.innerText = entry.pokemon_species.name;
+                txt.setAttribute("data-id", entry.entry_number);
+
+                divResult.onclick = dexResult_Clicked;
+              }
+            } else {
+              divResults.innerHTML = "<p class=\"alert alert-warning\">No results</p>";
+            }
+          } else {
+            divResults.innerHTML = "<p class=\"alert alert-danger\">Invalid 'Dex name provided!</p>";
+          }
+        }
+        function dexResult_Clicked(ev) {
+          $(".poke-loader").toggleClass("show", true);
+          var div = ev.currentTarget;
+          var id = div.getAttribute("data-id");
+          var name = div.getAttribute("data-name");
+
+          $("#activePokemon").pokeCard({
+            pokemon: id,
+            options: {
+              includes: {
+                species: {
+                  includes: {
+                    evolution_chain: {}
+                  }
+                }
+              },
+              callback: function () {
+                $(".poke-loader").toggleClass("show", false);
+                if ($("#pnlSearch").hasClass("active")) {
+                  $("#pnlSearch").removeClass("active");
+                }
+                $("#txtSearchDex").val("");
+                filterDex();
+                var ape = $("#activePokemon")[0];
+                ape.Draw();
+                var ap = ape["ActivePokemon"];
+                // Find index of current pokemon
+                var sr = $("#searchResults");
+                var el = sr.find("[data-id='" + ap.id + "']");
+                setTimeout(function () {
+                  sr.animate({
+                    scrollTop: sr.scrollTop() + el.position().top// el.offset().top - (61 + 50)
+                  }, 600);
+                }, 100);
+
+              }
+            }
+          });
+        }
+        $(document).ready(function () {
+          $.getJSON("./PokeAPI/api/v2/pd/1/index.json", function (d) {
+            Dexs["NationalDex"] = d;
+            document.querySelector("#searchResults").setAttribute("data-dex-name", "NationalDex");
+            filterDex("NationalDex");
+          });
+
+          $(window).on("resize", function () {
+            var ape = $("#activePokemon")[0];
+            if (typeof ape !== "undefined" && ape !== null) {
+              ape.Draw();
+            }
+          });
+          // Initialize Compare Button Event
+          $("#btnCompare").on("click", function () {
+            console.log("Compare Clicked!");
+            var divs = $("#pnlCompares").find("div[data-poke-id]");
+            var pdto = new Array();
+            var data = {
+              items: null,
+              properties: [
+                "speed",
+                "special-defense",
+                "special-attack",
+                "defense",
+                "attack",
+                "hp"
+              ]
+            }
+            for (var len = divs.length, n = 0; n < len; n++) {
+              var pokemon = $(divs[n]).data("pokemon");
+              if (typeof (pokemon) !== "undefined" && pokemon !== null) {
+                var stats = {
+                  "speed": 0,
+                  "special-defense": 0,
+                  "special-attack": 0,
+                  "defense": 0,
+                  "attack": 0,
+                  "hp": 0
+                };
+                for (var slen = pokemon.stats.length, s = 0; s < slen; s++) {
+                  stats[pokemon.stats[s].stat.name] = pokemon.stats[s].base_stat;
+                }
+                var dto = new ComparisonDTO(pokemon.name, pokemon.id, pokemon.species.color.name, stats, "./PokeApi" + pokemon.sprites.front_default);
+                pdto.push(dto);
+              }
+            }
+            data.items = pdto;
+            console.log("\tCompare DTO: ", data);
+            $("#pokeComparison").Comparison(data)[0].Draw();
+            $("#modCompareChart").modal("show");
+          });
+          $("#modCompareChart").on("shown.bs.modal", function () {
+            document.querySelector("#pokeComparison").Draw();
+          })
+        });
