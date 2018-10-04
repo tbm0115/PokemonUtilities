@@ -16,10 +16,50 @@
   <link href="./node_modules/select2/dist/css/select2.min.css" rel="stylesheet" />
   <link rel="preload" href="./dist/PokeAPI/api/v2/pd/1/index.json" as="fetch">
   <style type="text/css">
-    body{
+    body {
       padding-top: 65px;
     }
   </style>
+  <link href="./dist/Pokemon/dist/css/Layout.min.css" rel="stylesheet" />
+  <!-- Remove once we figure out how to replace with separate HTML files as "Pages" -->
+  <link href="./dist/Pokemon/dist/css/Pokemon.min.css" rel="stylesheet" />
+  <style type="text/css">
+    #pokeContainer {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #pokeComparison {
+      position: relative;
+      display: block;
+      width: 90vmin;
+      height: 90vmin;
+      border: 5px outset slategrey;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    /*.select2-results {
+          min-height: 75vh;
+          max-height: 75vh;
+        }
+
+          .select2-results ul.select2-results__options[aria-expanded='true'] {
+            max-height: 75vh;
+          }
+          .select2-results ul.select2-results__options[aria-expanded='true'] li img{
+            position:relative;
+            display: inline-block;
+          }*/
+  </style>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126967798-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-126967798-1');
+  </script>
+
 </head>
 <body>
   <div class="poke-loader"></div>
@@ -46,40 +86,19 @@
       </div>
     </div>
   </nav>
-
-  <main class="container body-content">
+  <aside id="pnlSearch">
+    <div class="input-group">
+      <input role="search" placeholder="Search National 'Dex" type="search" id="txtSearchDex" class="form-control" onkeyup="filterDex();" onblur="filterDex();" />
+    </div>
+    <div id="searchResults"></div>
+  </aside>
+  <main class="">
     <div id="root">
-      <!-- Remove once we figure out how to replace with separate HTML files as "Pages" -->
-      <link href="./dist/Pokemon/dist/css/Pokemon.min.css" rel="stylesheet" />
-      <style type="text/css">
-        #pokeContainer {
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        .select2-results {
-          min-height: 75vh;
-          max-height: 75vh;
-        }
-
-          .select2-results ul.select2-results__options[aria-expanded='true'] {
-            max-height: 75vh;
-          }
-          .select2-results ul.select2-results__options[aria-expanded='true'] li img{
-            position:relative;
-            display: inline-block;
-          }
-      </style>
       <div class="panel panel-default">
         <div class="panel-heading">National Pok&#0232;dex</div>
         <div class="panel-body">
-          <div>
+          <!--<div>
             <input type="text" id="sel2Search" class="form-control" />
-          </div>
-          <!-- Hidden until development can continue on this feature -->
-          <!--<a href="#divCompare" data-toggle="collapse" class="pull-right">compare</a>
-          <div id="divCompare">
-            <input type="text" id="sel2Compare" class="form-control" />
           </div>-->
           <div id="pokeContainer">
             <div id="activePokemon" class="poke-card"></div>
@@ -87,11 +106,34 @@
         </div>
       </div>
     </div>
-    <hr />
-    <footer>
-      <p class="text-muted">All content is Copyright&copy; of Utilities.Games 2018. | Pok&#0232;mon And All Respective Names are Trademark&trade; &amp; Copyright&copy; of Nintendo 1996-2018</p>
-    </footer>
+    <div class="modal fade" id="modCompareChart" tabindex="-1" role="dialog" aria-labelledby="modCompareChart-label">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="modCompareChart-label">Comparison Chart</h4>
+          </div>
+          <div class="modal-body">
+            <canvas id="pokeComparison">This Browser does not support HTML5 Canvas!</canvas>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
+  <aside id="pnlSelections">
+    <div id="pnlFavorites">
+
+    </div>
+    <div id="pnlCompares">
+      <button id="btnCompare" type="button" class="btn btn-default">Compare</button>
+    </div>
+  </aside>
+  <footer>
+    <p class="text-muted">All content is Copyright&copy; of Utilities.Games 2018. | Pok&#0232;mon And All Respective Names are Trademark&trade; &amp; Copyright&copy; of Nintendo 1996-2018 | <a href="./Privacy Policy.html">Privacy Policy</a></p>
+  </footer>
   <!-- Scripts -->
   <script src="./dist/app-bundle.es5.min.js"></script>
   <script language="javascript" type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
@@ -147,57 +189,195 @@
     }
   </script>
   <!-- Move to Page and include template -->
-  <script type="text/javascript" src="./dist/Pokemon/dist/js/Pokemon.es5.min.js"></script>
+  <script type="text/javascript" src="./dist/Pokemon/dist/js/Pokemon.js"></script>
+  <script type="text/javascript" src="./dist/Pokemon/dist/js/Comparison.js"></script>
   <script type="text/javascript">
-    var NationalDex = null;
+    var Dexs = {};
     var ActivePokemon = null;
-    $(document).ready(function () {
-      $.getJSON("./dist/PokeAPI/api/v2/pd/1/index.json", function (d) {
-        NationalDex = d;
-        var select2Items = new Array();
-        for (var len = NationalDex.pokemon_entries.length, n = 0; n < len; n++) {
-          var name = NationalDex.pokemon_entries[n].pokemon_species.name
-          select2Items.push({
-            id: NationalDex.pokemon_entries[n].entry_number,
-            text: "#" + NationalDex.pokemon_entries[n].entry_number.toString() + " " + name.substr(0, 1).toUpperCase() + name.substr(1)
+    function filterDex(dexName) {
+      var divResults = document.querySelector("#searchResults");
+      if (typeof (dexName) === "undefined" || dexName === null || dexName === "" || typeof (Dexs[dexName]) === "undefined") {
+        if (divResults.hasAttribute("data-dex-name")) {
+          dexName = divResults.getAttribute("data-dex-name");
+        }
+      }
+      divResults.innerHTML = "";
+      var strSearch = document.querySelector("#txtSearchDex").value;
+      if (typeof (Dexs[dexName]) !== "undefined" && Dexs[dexName] !== null) {
+        var entries = Dexs[dexName].pokemon_entries;
+        if (strSearch !== null && strSearch !== "") {
+          entries = entries.filter(function (i, e) {
+            return i.entry_number.toString().indexOf(strSearch) >= 0 || i.pokemon_species.name.indexOf(strSearch) >= 0;
           });
         }
-        $("#sel2Search").select2({
-          data: select2Items,
-          templateResult: function (item) {
-            var res = "";
-            if (item !== null) {
-              if ("id" in item) {
-                res = "<span><img class='icon-sprite-" + item.id.toString() + "' /> " + item.text + "</span>";
-              } else if ("text" in item) {
-                res = "<span>" + item.text + "</span>";
-              }
-            }
-            return $(res);
-          }
-        });
-        $("#sel2Search").on("change", function () {
-          $(".poke-loader").toggleClass("show", true);
-          var val = $("#sel2Search").val();
+        if (entries.length > 0) {
+          for (var len = entries.length, n = 0; n < len; n++) {
+            var entry = entries[n]
+            var divResult = divResults.appendChild(document.createElement("div"));
+            divResult.setAttribute("data-dex-name", dexName);
+            divResult.setAttribute("class", "poke-dex-result");
+            divResult.setAttribute("data-id", entry.entry_number);
+            divResult.setAttribute("data-name", entry.pokemon_species.name);
+            var img = divResult.appendChild(document.createElement("img"));
+            img.setAttribute("class", "icon-sprite-" + entry.entry_number.toString());
+            var txt = divResult.appendChild(document.createElement("span"));
+            txt.innerText = entry.pokemon_species.name;
+            txt.setAttribute("data-id", entry.entry_number);
 
-          $("#activePokemon").pokeCard({
-            pokemon: val,
-            options: {
+            divResult.onclick = dexResult_Clicked;
+          }
+        } else {
+          divResults.innerHTML = "<p class=\"alert alert-warning\">No results</p>";
+        }
+      } else {
+        divResults.innerHTML = "<p class=\"alert alert-danger\">Invalid 'Dex name provided!</p>";
+      }
+    }
+    function dexResult_Clicked(ev) {
+      $(".poke-loader").toggleClass("show", true);
+      var div = ev.currentTarget;
+      var id = div.getAttribute("data-id");
+      var name = div.getAttribute("data-name");
+
+      $("#activePokemon").pokeCard({
+        pokemon: id,
+        options: {
+          includes: {
+            species: {
               includes: {
-                species: {
-                  includes: {
-                    evolution_chain: {}
-                  }
-                }
-              },
-              callback: function () {
-                $(".poke-loader").toggleClass("show", false);
-                $("#activePokemon")[0].Draw();
+                evolution_chain: {}
               }
             }
-          });
-        });
+          },
+          callback: function () {
+            $(".poke-loader").toggleClass("show", false);
+            $("#activePokemon")[0].Draw();
+          }
+        }
       });
+    }
+    $(document).ready(function () {
+      $.getJSON("./dist/PokeAPI/api/v2/pd/1/index.json", function (d) {
+        Dexs["NationalDex"] = d;
+        document.querySelector("#searchResults").setAttribute("data-dex-name", "NationalDex");
+        //NationalDex = d;
+        filterDex("NationalDex");
+        //var divResults = document.querySelector("#searchResults");
+        //divResults.innerHTML = "";
+        //for (var len = NationalDex.pokemon_entries.length, n = 0; n < len; n++) {
+        //  var entry = NationalDex.pokemon_entries[n]
+        //  var divResult = divResults.appendChild(document.createElement("div"));
+        //  divResult.setAttribute("class", "poke-dex-result");
+        //  divResult.setAttribute("data-id", entry.entry_number);
+        //  divResult.setAttribute("data-name", entry.pokemon_species.name);
+        //  var img = divResult.appendChild(document.createElement("img"));
+        //  img.setAttribute("class", "icon-sprite-" + entry.entry_number.toString());
+        //  var txt = divResult.appendChild(document.createElement("span"));
+        //  txt.innerText = entry.pokemon_species.name;
+
+        //  divResult.onclick = (function (ev) {
+        //    document.querySelector("#txtSearchDex").innerText = this.entry.pokemon_species.name;
+
+
+        //  }).bind({ element: divResult, entry: entry });
+        //  select2Items.push({
+        //    id: NationalDex.pokemon_entries[n].entry_number,
+        //    text: "#" + NationalDex.pokemon_entries[n].entry_number.toString() + " " + name.substr(0, 1).toUpperCase() + name.substr(1)
+        //  });
+        //}
+
+
+
+
+
+        //var select2Items = new Array();
+        //for (var len = NationalDex.pokemon_entries.length, n = 0; n < len; n++) {
+        //  var entry = NationalDex.pokemon_entries[n]
+        //  select2Items.push({
+        //    id: entry.entry_number,
+        //    text: "#" + entry.entry_number.toString() + " " + entry.pokemon_species.name.substr(0, 1).toUpperCase() + entry.pokemon_species.name.substr(1)
+        //  });
+        //}
+        // ---- Deprecating Select2 in favor of custom navigation list
+        //$("#sel2Search").select2({
+        //  data: select2Items,
+        //  templateResult: function (item) {
+        //    var res = "";
+        //    if (item !== null) {
+        //      if ("id" in item) {
+        //        res = "<span><img class='icon-sprite-" + item.id.toString() + "' /> " + item.text + "</span>";
+        //      } else if ("text" in item) {
+        //        res = "<span>" + item.text + "</span>";
+        //      }
+        //    }
+        //    return $(res);
+        //  }
+        //});
+        //$("#sel2Search").on("change", function () {
+        //  $(".poke-loader").toggleClass("show", true);
+        //  var val = $("#sel2Search").val();
+
+        //  $("#activePokemon").pokeCard({
+        //    pokemon: val,
+        //    options: {
+        //      includes: {
+        //        species: {
+        //          includes: {
+        //            evolution_chain: {}
+        //          }
+        //        }
+        //      },
+        //      callback: function () {
+        //        $(".poke-loader").toggleClass("show", false);
+        //        $("#activePokemon")[0].Draw();
+        //      }
+        //    }
+        //  });
+        //});
+      });
+
+      // Initialize Compare Button Event
+      $("#btnCompare").on("click", function () {
+        console.log("Compare Clicked!");
+        var divs = $("#pnlCompares").find("div[data-poke-id]");
+        var pdto = new Array();
+        var data = {
+          items: null,
+          properties: [
+            "speed",
+            "special-defense",
+            "special-attack",
+            "defense",
+            "attack",
+            "hp"
+          ]
+        }
+        for (var len = divs.length, n = 0; n < len; n++) {
+          var pokemon = $(divs[n]).data("pokemon");
+          if (typeof (pokemon) !== "undefined" && pokemon !== null) {
+            var stats = {
+              "speed": 0,
+              "special-defense": 0,
+              "special-attack": 0,
+              "defense": 0,
+              "attack": 0,
+              "hp": 0
+            };
+            for (var slen = pokemon.stats.length, s = 0; s < slen; s++) {
+              stats[pokemon.stats[s].stat.name] = pokemon.stats[s].base_stat;
+            }
+            var dto = new ComparisonDTO(pokemon.name, pokemon.id, pokemon.species.color.name, stats, "./dist/PokeApi" + pokemon.sprites.front_default);
+            pdto.push(dto);
+          }
+        }
+        data.items = pdto;
+        console.log("\tCompare DTO: ", data);
+        $("#pokeComparison").Comparison(data)[0].Draw();
+        $("#modCompareChart").modal("show");
+      });
+      $("#modCompareChart").on("shown.bs.modal", function () {
+        document.querySelector("#pokeComparison").Draw();
+      })
     });
   </script>
 </body>

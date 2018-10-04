@@ -158,13 +158,20 @@ $.fn.pokeCard = function (data) {
 
       var pic = dFocused.appendChild(document.createElement("picture"));
       pic.setAttribute("class", "sprite");
-      //var allImage = pic.appendChild(document.createElement("source"));
-      //allImage.setAttribute("media", "all");
-      //allImage.setAttribute("srcset", "./dist/images/404-pokemon.png");
       var img = pic.appendChild(document.createElement("img"));
       img.setAttribute("src", "./dist/images/404-pokemon.png");
       img.setAttribute("alt", "Pok&#0232;mon Image");
       img.setAttribute("name", "sprites.front_default");
+
+      //var btnFavorite = e.appendChild(document.createElement("button"));
+      //btnFavorite.setAttribute("class", "poke-favorite");
+      //btnFavorite.onclick = (function (ev) {
+      //  var btn = ev.currentTarget;
+
+      //  // Add to local-storage
+
+      //  ev.preventDefault();
+      //}).bind(this);
 
       var hFamily = dFocused.appendChild(document.createElement("span"));
       hFamily.setAttribute("class", "family");
@@ -420,6 +427,46 @@ $.fn.pokeCard = function (data) {
               this.Draw();
             }).bind(this.elPokeStats), 100);
           }
+        }
+        return this.elPokeStats;
+      }).bind(this);
+
+      return e;
+    });
+    fncHasProp("elCompare", function () {
+      var e = {
+        button: this.elToolPanel.tools.appendChild(document.createElement("button")),
+        panel: this.elToolPanel.container.appendChild(document.createElement("div"))
+      };
+      e.button.setAttribute("title", "Compare with another Pok&#0232;mon");
+      e.button.innerHTML = "->";
+      e.button.setAttribute("data-target", ".poke-compare");
+      e.button.setAttribute("data-obj", "elCompare");
+      e.panel.setAttribute("class", "poke-compare");
+      var elMsg = e.panel.appendChild(document.createElement("p"));
+      elMsg.innerText = "Checking if this Pok&#0232;mon has been added to the comparison chart.";
+      var elMsg2 = e.panel.appendChild(document.createElement("p"));
+      elMsg2.innerText = "Click 'Compare' in the Comparison List Panel to display the Comparison Chart.";
+
+      /** @description - Draws this element to the UI.
+       * @returns {any} - This element.
+       */
+      e["Draw"] = (function () {
+        var ap = this["ActivePokemon"];
+        var elMsg = this.elPokeStats.panel.querySelector("p");
+        if (typeof ap !== "undefined" && ap !== null) {
+          if (document.querySelector("#pnlCompares") !== null) {
+            var elCompareDiv = document.querySelector("#pnlCompares").querySelector("[data-poke-id='" + ap.id + "']");
+            if (elCompareDiv !== null) {
+              elMsg.innerText = "Pok&#0232;mon has already been added to the comparison list.";
+            } else {
+              elMsg.innerText = "Pok&#0232;mon has not been added to the comparison list yet.";
+            }
+          } else {
+            elMsg.innerText = "Comparisons not supported on this page!";
+          }
+        } else {
+          elMsg.innerText = "Pok&#0232;mon not identified!";
         }
         return this.elPokeStats;
       }).bind(this);

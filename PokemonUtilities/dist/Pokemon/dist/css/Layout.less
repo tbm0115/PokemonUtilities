@@ -1,0 +1,158 @@
+﻿/*
++----------+---------+----------+
+|          |         |          |
+|          |         |          |
+| aside #1 | section | aside #2 |
+|   ml     |   mc    |   mr     |
+|          |         |          |
++          +---------+          +
+|          | footer  |          |
+|          |   fc    |          |
++-------------------------------+
+*/
+body {
+  position: relative;
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-areas: "ml mc mr" "ml f mr";
+  grid-template-columns:  300px calc(100vw - (300px * 2))  300px ;
+  grid-template-rows: calc(100vh - 65px - 65px) 65px;
+  grid-gap: 0px;
+
+  > *{
+    position: relative;
+    overflow-y: auto;
+    padding: 5px;
+  }
+
+  aside:first-of-type {
+    grid-area: ml;
+  }
+
+  main {
+    grid-area: mc;
+  }
+
+  aside:last-of-type:not(:first-of-type) {
+    grid-area: mr;
+  }
+  aside{
+    max-width: 20vw; /* Don't get too  big! */
+  }
+  footer {
+    grid-area: f;
+  }
+}
+
+#pnlSearch {
+  div.input-group {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 50px;
+  }
+
+  #searchResults {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: calc(100% - 50px);
+    overflow-y: auto;
+
+    div.poke-dex-result {
+      position: relative;
+      display: block;
+      height: 50px;
+      font-size: 14px;
+
+      img {
+        position: relative;
+        display: inline-block;
+      }
+
+      span {
+        position: relative;
+        display: inline-block;
+        height: 50px;
+        line-height: 50px;
+        vertical-align: middle;
+        font-weight: 600;
+        margin-left: 36px;
+      }
+
+      span::first-letter {
+        text-transform: uppercase;
+      }
+
+      span[data-id]::after {
+        content: '#' attr(data-id);
+        position: absolute;
+        display: block;
+        top: 0px;
+        left: -36px;
+        text-align: right;
+      }
+    }
+
+    div.poke-dex-result:hover {
+      background-color: #A45ACD;
+      cursor: pointer;
+    }
+  }
+}
+
+#pnlCompares {
+  div {
+    position: relative;
+    display: block;
+    height: 50px;
+    font-size: 14px;
+
+    img {
+      position: relative;
+      display: inline-block;
+    }
+
+    span {
+      position: relative;
+      display: inline-block;
+      height: 50px;
+      line-height: 50px;
+      vertical-align: middle;
+      font-weight: 600;
+      margin-left: 36px;
+    }
+
+    span::first-letter {
+      text-transform: uppercase;
+    }
+
+    span[data-id]::after {
+      content: '#' attr(data-id);
+      position: absolute;
+      display: block;
+      top: 0px;
+      left: -36px;
+      text-align: right;
+    }
+
+    a.close {
+      position: absolute;
+      display: block;
+      top: 0px;
+      right: 0px;
+      width: 16px;
+      height: 16px;
+    }
+
+    a.close::after {
+      content: 'X';
+      color: silver;
+    }
+
+    a.close:hover::after {
+      color: black;
+    }
+  }
+}

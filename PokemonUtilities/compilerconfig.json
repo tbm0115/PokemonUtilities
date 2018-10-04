@@ -13,5 +13,9 @@
   {
     "outputFile": "dist/app-bundle.es5.js",
     "inputFile": "dist/app-bundle.js"
+  },
+  {
+    "outputFile": "dist/Pokemon/dist/css/Layout.css",
+    "inputFile": "dist/Pokemon/dist/css/Layout.less"
   }
 ]

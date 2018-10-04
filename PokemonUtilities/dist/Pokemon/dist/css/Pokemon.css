@@ -231,6 +231,266 @@
   margin-right: auto;
 }
 /* Sprite Sheet Source: https://www.deviantart.com/wesleyfg/art/Pokemon-Sun-and-Moon-All-Icon-644722700 ../../../images/icon_spritesheet.png*/
+.icon-sprite-802 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -40px -960px;
+}
+.icon-sprite-801 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat 0px -960px;
+}
+.icon-sprite-800 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -960px -930px;
+}
+.icon-sprite-799 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -920px -930px;
+}
+.icon-sprite-798 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -880px -930px;
+}
+.icon-sprite-797 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -840px -930px;
+}
+.icon-sprite-796 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -800px -930px;
+}
+.icon-sprite-795 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -760px -930px;
+}
+.icon-sprite-794 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -720px -930px;
+}
+.icon-sprite-793 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -680px -930px;
+}
+.icon-sprite-792 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -640px -930px;
+}
+.icon-sprite-791 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -600px -930px;
+}
+.icon-sprite-790 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -560px -930px;
+}
+.icon-sprite-789 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -520px -930px;
+}
+.icon-sprite-788 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -480px -930px;
+}
+.icon-sprite-787 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -440px -930px;
+}
+.icon-sprite-786 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -400px -930px;
+}
+.icon-sprite-785 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -360px -930px;
+}
+.icon-sprite-784 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -320px -930px;
+}
+.icon-sprite-783 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -280px -930px;
+}
+.icon-sprite-782 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -240px -930px;
+}
+.icon-sprite-781 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -200px -930px;
+}
+.icon-sprite-780 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -160px -930px;
+}
+.icon-sprite-779 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -120px -930px;
+}
+.icon-sprite-778 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -80px -930px;
+}
+.icon-sprite-777 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -40px -930px;
+}
+.icon-sprite-776 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat 0px -930px;
+}
+.icon-sprite-775 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -960px -900px;
+}
+.icon-sprite-774 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -920px -900px;
+}
+.icon-sprite-773 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -880px -900px;
+}
+.icon-sprite-772 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -840px -900px;
+}
+.icon-sprite-771 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -800px -900px;
+}
+.icon-sprite-770 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -760px -900px;
+}
+.icon-sprite-769 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -720px -900px;
+}
+.icon-sprite-768 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -680px -900px;
+}
+.icon-sprite-767 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -640px -900px;
+}
+.icon-sprite-766 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -600px -900px;
+}
+.icon-sprite-765 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -560px -900px;
+}
+.icon-sprite-764 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -520px -900px;
+}
+.icon-sprite-763 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -480px -900px;
+}
+.icon-sprite-762 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -440px -900px;
+}
+.icon-sprite-761 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -400px -900px;
+}
+.icon-sprite-760 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -360px -900px;
+}
+.icon-sprite-759 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -320px -900px;
+}
+.icon-sprite-758 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -280px -900px;
+}
+.icon-sprite-757 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -240px -900px;
+}
+.icon-sprite-756 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -200px -900px;
+}
+.icon-sprite-755 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -160px -900px;
+}
+.icon-sprite-754 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -120px -900px;
+}
+.icon-sprite-753 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -80px -900px;
+}
+.icon-sprite-752 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat -40px -900px;
+}
+.icon-sprite-751 {
+  width: 40px;
+  height: 30px;
+  background: url('../../../images/icon_spritesheet.png') no-repeat 0px -900px;
+}
 .icon-sprite-750 {
   width: 40px;
   height: 30px;

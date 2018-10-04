@@ -43,6 +43,9 @@
       <DependentUpon>dist\app-bundle.es5.js</DependentUpon>
     </Compile>
     <Compile Include="dist\app-bundle.js" />
+    <Compile Include="dist\Pokemon\dist\js\Comparison.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="dist\Pokemon\dist\js\Pokemon.js" />
     <Compile Include="dist\PWA\dist\js\sw.js">
       <SubType>Code</SubType>
@@ -52,6 +55,17 @@
     <Content Include="app.js.map" />
     <Content Include="compilerconfig.json" />
     <Content Include="dist\images\icon_spritesheet.png" />
+    <Content Include="dist\Pokemon\dist\css\Layout.css">
+      <SubType>Content</SubType>
+      <DependentUpon>dist\Pokemon\dist\css\Layout.less</DependentUpon>
+    </Content>
+    <Content Include="dist\Pokemon\dist\css\Layout.less">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="dist\Pokemon\dist\css\Layout.min.css">
+      <SubType>Content</SubType>
+      <DependentUpon>dist\Pokemon\dist\css\Layout.css</DependentUpon>
+    </Content>
     <Content Include="dist\Pokemon\dist\css\Pokemon.css" />
     <Content Include="dist\Pokemon\dist\css\Pokemon.less" />
     <Content Include="dist\Pokemon\dist\css\Pokemon.min.css" />
@@ -59,6 +73,9 @@
     <Content Include="manifest.json" />
     <Content Include="offline.html" />
     <Content Include="package.json" />
+    <Content Include="Privacy Policy.html">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="tsconfig.json" />
     <None Include="compilerconfig.json.defaults" />
     <Folder Include="dist\" />

@@ -1,0 +1,135 @@
+﻿/*
++----------+---------+----------+
+|          |         |          |
+|          |         |          |
+| aside #1 | section | aside #2 |
+|   ml     |   mc    |   mr     |
+|          |         |          |
++          +---------+          +
+|          | footer  |          |
+|          |   fc    |          |
++-------------------------------+
+*/
+body {
+  position: relative;
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-areas: "ml mc mr" "ml f mr";
+  grid-template-columns: 300px calc(100vw - (300px * 2)) 300px;
+  grid-template-rows: calc(100vh - 65px - 65px) 65px;
+  grid-gap: 0px;
+}
+body > * {
+  position: relative;
+  overflow-y: auto;
+  padding: 5px;
+}
+body aside:first-of-type {
+  grid-area: ml;
+}
+body main {
+  grid-area: mc;
+}
+body aside:last-of-type:not(:first-of-type) {
+  grid-area: mr;
+}
+body aside {
+  max-width: 20vw;
+  /* Don't get too  big! */
+}
+body footer {
+  grid-area: f;
+}
+#pnlSearch div.input-group {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 50px;
+}
+#pnlSearch #searchResults {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: calc(100% - 50px);
+  overflow-y: auto;
+}
+#pnlSearch #searchResults div.poke-dex-result {
+  position: relative;
+  display: block;
+  height: 50px;
+  font-size: 14px;
+}
+#pnlSearch #searchResults div.poke-dex-result img {
+  position: relative;
+  display: inline-block;
+}
+#pnlSearch #searchResults div.poke-dex-result span {
+  position: relative;
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+  font-weight: 600;
+  margin-left: 36px;
+}
+#pnlSearch #searchResults div.poke-dex-result span::first-letter {
+  text-transform: uppercase;
+}
+#pnlSearch #searchResults div.poke-dex-result span[data-id]::after {
+  content: '#' attr(data-id);
+  position: absolute;
+  display: block;
+  top: 0px;
+  left: -36px;
+  text-align: right;
+}
+#pnlSearch #searchResults div.poke-dex-result:hover {
+  background-color: #A45ACD;
+  cursor: pointer;
+}
+#pnlCompares div {
+  position: relative;
+  display: block;
+  height: 50px;
+  font-size: 14px;
+}
+#pnlCompares div img {
+  position: relative;
+  display: inline-block;
+}
+#pnlCompares div span {
+  position: relative;
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+  font-weight: 600;
+  margin-left: 36px;
+}
+#pnlCompares div span::first-letter {
+  text-transform: uppercase;
+}
+#pnlCompares div span[data-id]::after {
+  content: '#' attr(data-id);
+  position: absolute;
+  display: block;
+  top: 0px;
+  left: -36px;
+  text-align: right;
+}
+#pnlCompares div a.close {
+  position: absolute;
+  display: block;
+  top: 0px;
+  right: 0px;
+  width: 16px;
+  height: 16px;
+}
+#pnlCompares div a.close::after {
+  content: 'X';
+  color: silver;
+}
+#pnlCompares div a.close:hover::after {
+  color: black;
+}
