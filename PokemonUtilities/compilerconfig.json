@@ -17,5 +17,9 @@
   {
     "outputFile": "dist/Pokemon/dist/css/Layout.css",
     "inputFile": "dist/Pokemon/dist/css/Layout.less"
+  },
+  {
+    "outputFile": "dist/Pokemon/dist/js/Comparison.es5.js",
+    "inputFile": "dist/Pokemon/dist/js/Comparison.js"
   }
 ]

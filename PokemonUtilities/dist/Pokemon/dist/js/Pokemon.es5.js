@@ -32,7 +32,7 @@ jQuery.extend({
       cache.data = data;
       cache.timestamp = new Date().getTime();
 
-      window.localStorage[url] = JSON.stringify(cache);
+      //window.localStorage[url] = JSON.stringify(cache);
 
       callback(cache.data);
     });
@@ -238,22 +238,29 @@ $.fn.pokeCard = function (data) {
 
       e["Draw"] = (function () {
         var ap = this["ActivePokemon"];
-
+        var preTarget = this.getAttribute("data-target");
         if (typeof ap !== "undefined" && ap !== null) {
+          var blnClicked = false;
           var buttons = $(this.elToolPanel).find(".poke-tools-options button");
           for (var len = buttons.length, n = 0; n < len; n++) {
             buttons[n].onclick = function (ev) {
               var _this = $(ev.currentTarget).closest(".poke-card")[0];
               var strTarget = ev.currentTarget.getAttribute("data-target");
+              var strObj = ev.currentTarget.getAttribute("data-obj");
+              _this.setAttribute("data-target", strObj);
               $(_this.elToolPanel.tools).find("button").removeClass("active");
               $(_this.elToolPanel.container).find("div").removeClass("active");
               $(ev.currentTarget).addClass("active");
               $(_this.elToolPanel.container).find(strTarget).addClass("active");
-              _this[ev.currentTarget.getAttribute("data-obj")].Draw();
+              _this[strObj].Draw();
             };
-            if (n === 0) {
+            if (buttons[n].getAttribute("data-obj") === preTarget) {
+              blnClicked = true;
               buttons[n].click();
             }
+          }
+          if (!blnClicked && buttons.length > 0) {
+            buttons[0].click();
           }
         }
 
@@ -268,7 +275,8 @@ $.fn.pokeCard = function (data) {
         button: this.elToolPanel.tools.appendChild(document.createElement("button")),
         panel: this.elToolPanel.container.appendChild(document.createElement("div"))
       };
-      e.button.innerHTML = "E";
+      e.button.setAttribute("title", "View Evolution Conditions");
+      e.button.innerHTML = "<i class=\"fa fa-bolt\"></i>";
       e.button.setAttribute("data-target", ".poke-evolutions");
       e.button.setAttribute("data-obj", "elPokeEvolutions");
       e.panel.setAttribute("class", "poke-evolutions");
@@ -342,7 +350,8 @@ $.fn.pokeCard = function (data) {
         button: this.elToolPanel.tools.appendChild(document.createElement("button")),
         panel: this.elToolPanel.container.appendChild(document.createElement("div"))
       };
-      e.button.innerHTML = "S";
+      e.button.setAttribute("title", "View Base Stats");
+      e.button.innerHTML = "<i class=\"fa fa-bar-chart\"></i>";
       e.button.setAttribute("data-target", ".poke-stats");
       e.button.setAttribute("data-obj", "elPokeStats");
       e.panel.setAttribute("class", "poke-stats");
@@ -438,14 +447,20 @@ $.fn.pokeCard = function (data) {
         button: this.elToolPanel.tools.appendChild(document.createElement("button")),
         panel: this.elToolPanel.container.appendChild(document.createElement("div"))
       };
-      e.button.setAttribute("title", "Compare with another Pok&#0232;mon");
-      e.button.innerHTML = "->";
+      e.button.setAttribute("title", "Compare with another Pokemon");
+      e.button.innerHTML = "<i class=\"fa fa-universal-access\"></i>";
       e.button.setAttribute("data-target", ".poke-compare");
       e.button.setAttribute("data-obj", "elCompare");
       e.panel.setAttribute("class", "poke-compare");
+      var btnAddToList = e.panel.appendChild(document.createElement("button"));
+      btnAddToList.setAttribute("data-target", "#pnlCompares");
+      btnAddToList.setAttribute("class", "pull-left btn btn-block btn-success");
+      btnAddToList.innerHTML = "<i class=\"fa fa-plus\"></i> Compare";
       var elMsg = e.panel.appendChild(document.createElement("p"));
-      elMsg.innerText = "Checking if this Pok&#0232;mon has been added to the comparison chart.";
+      elMsg.setAttribute("class", "alert alert-info");
+      elMsg.innerHTML = "Checking if this Pok&#0232;mon has been added to the comparison chart.";
       var elMsg2 = e.panel.appendChild(document.createElement("p"));
+      //elMsg2.setAttribute("class", "alert alert-info");
       elMsg2.innerText = "Click 'Compare' in the Comparison List Panel to display the Comparison Chart.";
 
       /** @description - Draws this element to the UI.
@@ -453,20 +468,52 @@ $.fn.pokeCard = function (data) {
        */
       e["Draw"] = (function () {
         var ap = this["ActivePokemon"];
-        var elMsg = this.elPokeStats.panel.querySelector("p");
+        var elMsg = this.elCompare.panel.querySelector("p");
+        var btn = this.elCompare.panel.querySelector("button[data-target='#pnlCompares']");
+
         if (typeof ap !== "undefined" && ap !== null) {
+          btn.setAttribute("data-poke-id", ap.id);
+          btn.setAttribute("data-poke-name", ap.name);
+          btn.onclick = null;
+          btn.classList.toggle("hidden", true);
           if (document.querySelector("#pnlCompares") !== null) {
             var elCompareDiv = document.querySelector("#pnlCompares").querySelector("[data-poke-id='" + ap.id + "']");
             if (elCompareDiv !== null) {
-              elMsg.innerText = "Pok&#0232;mon has already been added to the comparison list.";
+              elMsg.innerHTML = "Pok&#0232;mon has already been added to the comparison list.";
             } else {
-              elMsg.innerText = "Pok&#0232;mon has not been added to the comparison list yet.";
+              btn.classList.toggle("hidden", false);
+              btn.onclick = (function (ev) {
+                var pnl = document.querySelector("#pnlCompares");
+
+                var d = pnl.appendChild(document.createElement("div"));
+                d.setAttribute("data-poke-id", ev.currentTarget.getAttribute("data-poke-id"));
+                d.setAttribute("data-poke-name", ev.currentTarget.getAttribute("data-poke-name"));
+                $(d).data("pokemon", this.pokemon);
+                var i = d.appendChild(document.createElement("img"));
+                i.setAttribute("class", "icon-sprite-" + this.pokemon.id.toString());
+                var s = d.appendChild(document.createElement("span"));
+                s.innerText = this.pokemon.name;
+                var c = d.appendChild(document.createElement("a"));
+                c.setAttribute("role", "close");
+                c.setAttribute("class", "close");
+                c.onclick = function (ev) {
+                  var div = ev.currentTarget.parentElement;
+                  var compares = div.parentElement;
+                  compares.removeChild(div);
+                };
+                this.item.elCompare.Draw();
+                ev.preventDefault();
+              }).bind({ pokemon: ap, item: this });
+              elMsg.innerHTML = "Pok&#0232;mon has not been added to the comparison list yet.";
             }
+            elMsg.setAttribute("class", "alert alert-info");
           } else {
-            elMsg.innerText = "Comparisons not supported on this page!";
+            elMsg.innerHTML = "Comparisons not supported on this page!";
+            elMsg.setAttribute("class", "alert alert-warning");
           }
         } else {
-          elMsg.innerText = "Pok&#0232;mon not identified!";
+          elMsg.innerHTML = "Pok&#0232;mon not identified!";
+          elMsg.setAttribute("class", "alert alert-danger");
         }
         return this.elPokeStats;
       }).bind(this);

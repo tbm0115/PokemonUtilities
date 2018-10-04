@@ -1,4 +1,6 @@
-﻿var ComparisonDTO = function (name, id, clr, stats, iconURL) {
+﻿"use strict";
+
+var ComparisonDTO = function ComparisonDTO(name, id, clr, stats, iconURL) {
   this.name = name;
   this.id = id;
   this.color = clr;
@@ -37,14 +39,14 @@ $.fn.Comparison = function (options) {
       this.height = r.height;
       var strMessage = "";
       var stats = this.Options.properties;
-      var md = (r.width / 2) * 0.75;
+      var md = r.width / 2 * 0.75;
       var thickness = md / (stats.length - 1);
-      var segmentWidth = 360 / (arr.length);
+      var segmentWidth = 360 / arr.length;
       var ctx = this.getContext("2d");
       ctx.translate(r.width / 2, r.height / 2);
       var origin = ctx.save();
 
-      var polarPoint = function (r, t) {
+      var polarPoint = function polarPoint(r, t) {
         this.Radius = r;
         this.Theta = t;
         this.toCartesian = (function () {
@@ -61,7 +63,7 @@ $.fn.Comparison = function (options) {
       for (var plen = arr.length, p = 0; p < plen; p++) {
         //console.log("Drawing '" + arr[p].name + "'");
         //ctx.restore(origin);
-        ctx.rotate((2 * (p + 1 / plen)) * Math.PI);
+        ctx.rotate(2 * (p + 1 / plen) * Math.PI);
 
         for (var slen = stats.length, s = 0; s < slen; s++) {
           ctx.strokeStyle = "silver";
@@ -77,10 +79,10 @@ $.fn.Comparison = function (options) {
           };
           var segmentWidth2 = segmentWidth / 2;
           var rStart = s * thickness;
-          var rEnd = (s * thickness) + thickness;
+          var rEnd = s * thickness + thickness;
           var aCenter = segmentWidth2;
-          var aLeft = (aCenter - (segmentWidth * prcnt.left));
-          var aRight = (aCenter + (segmentWidth * prcnt.right));
+          var aLeft = aCenter - segmentWidth * prcnt.left;
+          var aRight = aCenter + segmentWidth * prcnt.right;
           var sp1 = new polarPoint(rStart, aLeft * Math.PI / 180); // Lower Left
           var sp2 = new polarPoint(rEnd, aLeft * Math.PI / 180); // Upper Left
           // This is where we Arc Over
@@ -108,24 +110,24 @@ $.fn.Comparison = function (options) {
         ctx.beginPath();
         ctx.moveTo(0, 0);
         ctx.lineTo(p1.Cartesian.x, p1.Cartesian.y);
-        ctx.arc(0, 0, md + thickness, 0, (segmentWidth) * Math.PI / 180);
+        ctx.arc(0, 0, md + thickness, 0, segmentWidth * Math.PI / 180);
         ctx.lineTo(0, 0);
         ctx.stroke();
         ctx.closePath();
       }
       ctx.restore();
       for (var alen = arr.length, a = 0; a < alen; a++) {
-        var imgPoint = new polarPoint((this.width * 0.9) / 2, ((segmentWidth / 2) + (segmentWidth * (a + 1))) * Math.PI / 180);
+        var imgPoint = new polarPoint(this.width * 0.9 / 2, (segmentWidth / 2 + segmentWidth * (a + 1)) * Math.PI / 180);
         var size = 96;
         var img = new Image(size, size);
         img.onload = (function (ev) {
-          ctx.drawImage(ev.currentTarget, this.x - (size / 2), this.y - (size / 2), size, size);
+          ctx.drawImage(ev.currentTarget, this.x - size / 2, this.y - size / 2, size, size);
         }).bind(imgPoint.Cartesian);
         img.src = arr[a].icon;
       }
       if (strMessage !== "") {
         ctx.fillStyle = "black";
-        ctx.font = (this.height * 0.25) + "px Arial";
+        ctx.font = this.height * 0.25 + "px Arial";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(strMessage, 0, 0, this.width * 0.75);
@@ -137,4 +139,5 @@ $.fn.Comparison = function (options) {
 
     return $this;
   });
-}
+};
+

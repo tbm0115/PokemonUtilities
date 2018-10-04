@@ -30,7 +30,7 @@
       cache.data = data;
       cache.timestamp = new Date().getTime();
 
-      window.localStorage[url] = JSON.stringify(cache);
+      //window.localStorage[url] = JSON.stringify(cache);
 
       callback(cache.data);
     });
@@ -237,22 +237,29 @@ $.fn.pokeCard = function (data) {
 
       e["Draw"] = (function () {
         var ap = this["ActivePokemon"];
-
+        var preTarget = this.getAttribute("data-target");
         if (typeof ap !== "undefined" && ap !== null) {
+          var blnClicked = false;
           var buttons = $(this.elToolPanel).find(".poke-tools-options button");
           for (var len = buttons.length, n = 0; n < len; n++) {
             buttons[n].onclick = function (ev) {
               var _this = $(ev.currentTarget).closest(".poke-card")[0];
               var strTarget = ev.currentTarget.getAttribute("data-target");
+              var strObj = ev.currentTarget.getAttribute("data-obj");
+              _this.setAttribute("data-target", strObj);
               $(_this.elToolPanel.tools).find("button").removeClass("active");
               $(_this.elToolPanel.container).find("div").removeClass("active");
               $(ev.currentTarget).addClass("active");
               $(_this.elToolPanel.container).find(strTarget).addClass("active");
-              _this[ev.currentTarget.getAttribute("data-obj")].Draw();
+              _this[strObj].Draw();
             };
-            if (n === 0) {
+            if (buttons[n].getAttribute("data-obj") === preTarget) {
+              blnClicked = true;
               buttons[n].click();
             }
+          }
+          if (!blnClicked && buttons.length > 0) {
+            buttons[0].click();
           }
         }
 
@@ -268,7 +275,7 @@ $.fn.pokeCard = function (data) {
         panel: this.elToolPanel.container.appendChild(document.createElement("div"))
       };
       e.button.setAttribute("title", "View Evolution Conditions");
-      e.button.innerHTML = "E";
+      e.button.innerHTML = "<i class=\"fa fa-bolt\"></i>";
       e.button.setAttribute("data-target", ".poke-evolutions");
       e.button.setAttribute("data-obj", "elPokeEvolutions");
       e.panel.setAttribute("class", "poke-evolutions");
@@ -343,7 +350,7 @@ $.fn.pokeCard = function (data) {
         panel: this.elToolPanel.container.appendChild(document.createElement("div"))
       };
       e.button.setAttribute("title", "View Base Stats");
-      e.button.innerHTML = "S";
+      e.button.innerHTML = "<i class=\"fa fa-bar-chart\"></i>";
       e.button.setAttribute("data-target", ".poke-stats");
       e.button.setAttribute("data-obj", "elPokeStats");
       e.panel.setAttribute("class", "poke-stats");
@@ -440,20 +447,20 @@ $.fn.pokeCard = function (data) {
         panel: this.elToolPanel.container.appendChild(document.createElement("div"))
       };
       e.button.setAttribute("title", "Compare with another Pokemon");
-      e.button.innerHTML = "->";
+      e.button.innerHTML = "<i class=\"fa fa-universal-access\"></i>";
       e.button.setAttribute("data-target", ".poke-compare");
       e.button.setAttribute("data-obj", "elCompare");
       e.panel.setAttribute("class", "poke-compare");
+      var btnAddToList = e.panel.appendChild(document.createElement("button"));
+      btnAddToList.setAttribute("data-target", "#pnlCompares");
+      btnAddToList.setAttribute("class", "pull-left btn btn-block btn-success");
+      btnAddToList.innerHTML = "<i class=\"fa fa-plus\"></i> Compare";
       var elMsg = e.panel.appendChild(document.createElement("p"));
       elMsg.setAttribute("class", "alert alert-info");
       elMsg.innerHTML = "Checking if this Pok&#0232;mon has been added to the comparison chart.";
       var elMsg2 = e.panel.appendChild(document.createElement("p"));
       //elMsg2.setAttribute("class", "alert alert-info");
       elMsg2.innerText = "Click 'Compare' in the Comparison List Panel to display the Comparison Chart.";
-      var btnAddToList = e.panel.appendChild(document.createElement("button"));
-      btnAddToList.setAttribute("data-target", "#pnlCompares");
-      btnAddToList.setAttribute("class", "pull-right btn btn-success");
-      btnAddToList.innerText = "Add";
 
       /** @description - Draws this element to the UI.
        * @returns {any} - This element.

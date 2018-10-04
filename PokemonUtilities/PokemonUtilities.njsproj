@@ -43,6 +43,14 @@
       <DependentUpon>dist\app-bundle.es5.js</DependentUpon>
     </Compile>
     <Compile Include="dist\app-bundle.js" />
+    <Compile Include="dist\Pokemon\dist\js\Comparison.es5.js">
+      <SubType>Code</SubType>
+      <DependentUpon>dist\Pokemon\dist\js\Comparison.js</DependentUpon>
+    </Compile>
+    <Compile Include="dist\Pokemon\dist\js\Comparison.es5.min.js">
+      <SubType>Code</SubType>
+      <DependentUpon>dist\Pokemon\dist\js\Comparison.es5.js</DependentUpon>
+    </Compile>
     <Compile Include="dist\Pokemon\dist\js\Comparison.js">
       <SubType>Code</SubType>
     </Compile>

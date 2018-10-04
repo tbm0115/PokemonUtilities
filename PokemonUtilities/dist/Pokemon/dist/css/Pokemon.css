@@ -225,7 +225,8 @@
 .poke-card .poke-stats canvas {
   position: relative;
   display: block;
-  width: 50%;
+  width: 100%;
+  max-width: 600px;
   height: 200px;
   margin-left: auto;
   margin-right: auto;
