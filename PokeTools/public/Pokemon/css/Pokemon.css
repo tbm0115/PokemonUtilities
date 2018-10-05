@@ -116,6 +116,33 @@
   border-radius: 5px;
   box-shadow: 3px 2px 2px var(--speciesColor);
 }
+.poke-card .chain .details.biota.zoology button.poke-favorite {
+  position: absolute;
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  top: 0.25em;
+  right: 0.25em;
+  cursor: pointer;
+  background: none;
+  border: none;
+  z-index: 3;
+}
+.poke-card .chain .details.biota.zoology button.poke-favorite:hover {
+  text-shadow: 2px 2px 2px slategrey;
+}
+.poke-card .chain .details.biota.zoology button.poke-favorite::before,
+.poke-card .chain .details.biota.zoology button.poke-favorite.saved:hover::before {
+  content: "\f097";
+  /*\f02e*/
+  font-family: "FontAwesome";
+}
+.poke-card .chain .details.biota.zoology button.poke-favorite.saved::before,
+.poke-card .chain .details.biota.zoology button.poke-favorite:not(.saved):hover::before {
+  content: "\f02e";
+  color: lightgreen;
+  color: var(--speciesColor);
+}
 .poke-card .chain .details.biota.zoology picture.sprite img {
   position: relative;
   display: block;

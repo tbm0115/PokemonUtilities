@@ -10,5 +10,9 @@
   {
     "outputFile": "public/Pokemon/js/Comparison.es5.js",
     "inputFile": "public/Pokemon/js/Comparison.js"
+  },
+  {
+    "outputFile": "public/stylesheets/Layout.css",
+    "inputFile": "public/stylesheets/Layout.less"
   }
 ]

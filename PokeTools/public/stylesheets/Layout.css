@@ -106,9 +106,45 @@ body footer {
 }
 #pnlFavorites {
   grid-area: ul;
+  border: 2px inset slategrey;
+}
+#pnlFavorites div {
+  position: relative;
+  display: block;
+  height: 50px;
+  font-size: 14px;
+}
+#pnlFavorites div img {
+  position: relative;
+  display: inline-block;
+}
+#pnlFavorites div span {
+  position: relative;
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+  font-weight: 600;
+  margin-left: 36px;
+}
+#pnlFavorites div span::first-letter {
+  text-transform: uppercase;
+}
+#pnlFavorites div span[data-id]::after {
+  content: '#' attr(data-id);
+  position: absolute;
+  display: block;
+  top: 0px;
+  left: -36px;
+  text-align: right;
+}
+#pnlFavorites div:hover {
+  background-color: #A45ACD;
+  cursor: pointer;
 }
 #pnlCompares {
   grid-area: ml;
+  border: 2px inset slategrey;
 }
 #pnlCompares div {
   position: relative;

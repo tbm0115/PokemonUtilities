@@ -10,10 +10,10 @@
     //var cacheTimeInMs = 3600000; // Part of deprecation
     //var currentTimeInMs = new Date().getTime(); // Part of deprecation
     url = url.replace("//index.json", "/index.json");
-    var cache = {
-      data: null,
-      timestamp: null
-    };
+    //var cache = {
+    //  data: null,
+    //  timestamp: null
+    //};
 
     //if (typeof window.localStorage[url] !== "undefined") {
     //  cache = JSON.parse(window.localStorage[url]);
@@ -27,12 +27,10 @@
     //}
 
     $.getJSON(url, function (data) {
-      cache.data = data;
-      cache.timestamp = new Date().getTime();
-
+      //cache.data = data;
+      //cache.timestamp = new Date().getTime();
       //window.localStorage[url] = JSON.stringify(cache);
-
-      callback(cache.data);
+      callback(data);//cache.data);
     });
   }
 });
@@ -161,16 +159,48 @@ $.fn.pokeCard = function (data) {
       img.setAttribute("alt", "Pok&#0232;mon Image");
       img.setAttribute("name", "sprites.front_default");
 
-      //var btnFavorite = e.appendChild(document.createElement("button"));
-      //btnFavorite.setAttribute("class", "poke-favorite");
-      //btnFavorite.onclick = (function (ev) {
-      //  var btn = ev.currentTarget;
-
-      //  // Add to local-storage
-
-
-      //  ev.preventDefault();
-      //}).bind(this);
+      var btnFavorite = dFocused.appendChild(document.createElement("button"));
+      btnFavorite.setAttribute("class", "poke-favorite");
+      btnFavorite.onclick = (function (ev) {
+        var btn = ev.currentTarget;
+        var ape = $(btn).closest(".poke-card")[0];
+        if (typeof (ape) !== "undefined" && ape !== null) {
+          var ap = ape["ActivePokemon"];
+          if (typeof (ap) !== "undefined" && ap !== null) {
+            var cache = {
+              data: null,
+              timestamp: null
+            };
+            if (typeof window.localStorage["favoritePokemon"] !== "undefined") {
+              cache = JSON.parse(window.localStorage["favoritePokemon"]);
+            } else {
+              cache.data = new Array();
+            }
+            if (cache.data.filter(function (e, i) {
+              return e.id === ap.id;
+            }).length > 0) {
+              for (var len = cache.data.length, n = 0; n < len; n++) {
+                if (cache.data[n].id === ap.id) {
+                  cache.data.splice(n, 1);
+                  break;
+                }
+              }
+              console.log("Removed " + ap.name + " from favorites!");
+            } else {
+              cache.data.push(ap);// Add Pokemon to favorites
+              console.log("Saved " + ap.name + " to favorites!");
+            }
+            window.localStorage["favoritePokemon"] = JSON.stringify(cache);
+            ape.elBasicDetails.Draw();
+            drawFavoritePokemonPanel();
+          } else {
+            console.error("[Pokemon.Favorite] Couldn't find Active Pokemon in .poke-card!");
+          }
+        } else {
+          console.error("[Pokemon.Favorite] Couldn't find .poke-card!");
+        }
+        ev.preventDefault();
+      }).bind(this);
 
       var hFamily = dFocused.appendChild(document.createElement("span"));
       hFamily.setAttribute("class", "family");
@@ -209,6 +239,23 @@ $.fn.pokeCard = function (data) {
           this.elBasicDetails.querySelector(".species").innerText = ap.name.substr(0, 1).toUpperCase() + ap.name.substr(1);
           // Set Genus
           this.elBasicDetails.querySelector(".genus").innerText = ap.species.genera[2].genus;
+          // Set status of Favorite
+          if (window.localStorage.length > 0) {
+            if ("favoritePokemon" in window.localStorage) {
+              var cache = JSON.parse(window.localStorage["favoritePokemon"]);
+              if (cache.data.filter(function (e, i) {
+                return e.id === ap.id;
+              }).length > 0) {
+                btnFavorite.classList.add("saved");
+              } else {
+                btnFavorite.classList.remove("saved");
+              }
+            } else {
+              console.error("[Pokemon.BasicDetails.Draw] No Favorite Pokemon cache to refer to.");
+            }
+          } else {
+            console.error("[Pokemon.BasicDetails.Draw] No cache to refer to.");
+          }
         } else {
           // Set Sprite
           this.elBasicDetails.querySelector("picture img").src = "./images/404-pokemon.png";
@@ -218,6 +265,8 @@ $.fn.pokeCard = function (data) {
           this.elBasicDetails.querySelector(".species").innerHTML = "&mdash;";
           // Set Genus
           this.elBasicDetails.querySelector(".genus").innerHTML = "&mdash;";
+          // Disable Favorite button
+          this.elBasicDetails.querySelector(".poke-favorite").setAttribute("disabled");
         }
 
         return this.elBasicDetails;
@@ -298,45 +347,50 @@ $.fn.pokeCard = function (data) {
           // Focus on next evolutionary form(s)
           var ul = this.elPokeEvolutions.panel.querySelector("ul");
           ul.innerHTML = "";
-          var nextPokemons = ap.Get.Evolution.Next();
-          if (nextPokemons !== null && nextPokemons.length > 0) {
-            var tks = Object.getOwnPropertyNames(EvolveOptions);
-            for (var len = nextPokemons.length, n = 0; n < len; n++) {
-              if (nextPokemons[n].evolution_details.length > 0) {
-                var evolution = nextPokemons[n].evolution_details[0];
-                var li = ul.appendChild(document.createElement("li"));
-                li.setAttribute("data-evolves-to", nextPokemons[n].species.name);
-                var arrTriggers = new Array();
-                for (var tlen = tks.length, t = 0; t < tlen; t++) {
-                  var trigger = evolution[tks[t]];
-                  if (trigger !== null && trigger !== false && trigger !== "") {
-                    arrTriggers.push(EvolveOptions[tks[t]].label + " <strong>" + trigger.toString() + "</strong>");
+          var nextPokemons;
+          if ("Get" in ap && "Evolution" in ap.Get && "Next" in ap.Get.Evolution) {
+            nextPokemons = ap.Get.Evolution.Next();
+            if (nextPokemons !== null && nextPokemons.length > 0) {
+              var tks = Object.getOwnPropertyNames(EvolveOptions);
+              for (var len = nextPokemons.length, n = 0; n < len; n++) {
+                if (nextPokemons[n].evolution_details.length > 0) {
+                  var evolution = nextPokemons[n].evolution_details[0];
+                  var li = ul.appendChild(document.createElement("li"));
+                  li.setAttribute("data-evolves-to", nextPokemons[n].species.name);
+                  var arrTriggers = new Array();
+                  for (var tlen = tks.length, t = 0; t < tlen; t++) {
+                    var trigger = evolution[tks[t]];
+                    if (trigger !== null && trigger !== false && trigger !== "") {
+                      arrTriggers.push(EvolveOptions[tks[t]].label + " <strong>" + trigger.toString() + "</strong>");
+                    }
                   }
-                }
-                li.innerHTML = "<strong>" + nextPokemons[n].species.name.substr(0, 1).toUpperCase() + nextPokemons[n].species.name.substr(1) + "</strong> by " + arrTriggers.join("<br/>&amp; ");
-                var lia = li.appendChild(document.createElement("a"));
-                lia.setAttribute("class", "btn btn-xs btn-default");
-                lia.innerHTML = "<i class=\"glyphicon glyphicon-circle-arrow-right\"></i>";
-                var nwid = nextPokemons[n].species.url;
-                if (nwid[nwid.length - 1] === "/") {
-                  nwid = nwid.substr(0, nwid.length - 1);
-                }
-                nwid = nwid.substr(nwid.lastIndexOf("/") + 1);
+                  li.innerHTML = "<strong>" + nextPokemons[n].species.name.substr(0, 1).toUpperCase() + nextPokemons[n].species.name.substr(1) + "</strong> by " + arrTriggers.join("<br/>&amp; ");
+                  var lia = li.appendChild(document.createElement("a"));
+                  lia.setAttribute("class", "btn btn-xs btn-default");
+                  lia.innerHTML = "<i class=\"glyphicon glyphicon-circle-arrow-right\"></i>";
+                  var nwid = nextPokemons[n].species.url;
+                  if (nwid[nwid.length - 1] === "/") {
+                    nwid = nwid.substr(0, nwid.length - 1);
+                  }
+                  nwid = nwid.substr(nwid.lastIndexOf("/") + 1);
 
-                lia.setAttribute("data-evolves-to-id", nwid);
-                // Add functionality to button to select this Pokemon
-                lia["data"] = data;
-                lia.onclick = function (ev) {
-                  var el = ev.currentTarget;
-                  $(".poke-loader").toggleClass("show", true);
-                  el.data.pokemon = el.getAttribute("data-evolves-to-id");
-                  $(el).closest(".poke-card").pokeCard(el.data);
-                };
+                  lia.setAttribute("data-evolves-to-id", nwid);
+                  // Add functionality to button to select this Pokemon
+                  lia["data"] = data;
+                  lia.onclick = function (ev) {
+                    var el = ev.currentTarget;
+                    $(".poke-loader").toggleClass("show", true);
+                    el.data.pokemon = el.getAttribute("data-evolves-to-id");
+                    $(el).closest(".poke-card").pokeCard(el.data);
+                  };
+                }
               }
+              //this.elPokeEvolutions.panel.classList.toggle("hidden", false);
+            } else {
+              this.elPokeEvolutions.panel.querySelector("ul").innerHTML = "<li>No Further Evolutionary Form(s)</li>";
             }
-            //this.elPokeEvolutions.panel.classList.toggle("hidden", false);
           } else {
-            this.elPokeEvolutions.panel.querySelector("ul").innerHTML = "<li>No Further Evolutionary Form(s)</li>";
+            this.elPokeEvolutions.panel.querySelector("ul").innerHTML = "<li>Favorited Pok&#0232;mon do not have Evolution data saved locally.</li>";
           }
         } else {
           this.elPokeEvolutions.panel.querySelector("ul").innerHTML = "<li>No Further Evolutionary Form(s)</li>";
@@ -526,6 +580,7 @@ $.fn.pokeCard = function (data) {
       * @returns {any} - This element.
       */
     el["Draw"] = (function () {
+      $(this).trigger("draw.pokemon", [this.ActivePokemon]);
       var ap = this["ActivePokemon"];
       if (typeof ap !== "undefined" && ap !== null) {
         // Set Species Color
@@ -542,6 +597,7 @@ $.fn.pokeCard = function (data) {
       //this.elPokeEvolutions.Draw();
       //this.elPokeStats.Draw();
 
+      $(this).trigger("drawn.pokemon", [this.ActivePokemon]);
       return this;
     }).bind(el);
 
@@ -562,6 +618,7 @@ $.fn.pokeCard = function (data) {
       this.Draw();
     }).bind(el);
     if (typeof pid !== "undefined" && pid !== null) {
+      $(this).trigger("pokemon.requesting", [pid]);
       this["ActivePokemon"] = new Pokemon(pid, data.options);
     }
 
@@ -655,7 +712,12 @@ var Pokemon = function (ndid, options) {
             fncFillProperties.apply({ origin: this, item: this }, [iks[n]]);
           }
         }
+        this._includesCount = 0;
         this._includes["_interval"] = setInterval((function () {
+          this._includesCount++;
+          if (this._includesCount > 10) {
+            console.warn("[Pokemon.FillProperties] This is taking a while...");
+          }
           var ik = Object.getOwnPropertyNames(this._includes);
           var blnGood = true;
           for (var len = ik.length, n = 0; n < len; n++) {
@@ -664,11 +726,26 @@ var Pokemon = function (ndid, options) {
             }
           }
           if (blnGood) {
+            this._includesCount = 0;
             clearInterval(this._includes._interval);
-            this._options.callback.apply(this);
+            if (typeof options !== "undefined" && options !== null) {
+              // Callback to internal UI update routines. The front-end callback is available within here.
+              if ("jqueryPokeCardCallback" in options) {
+                options.jqueryPokeCardCallback.apply(this);
+              }
+            }
+            if ("callback" in this._options) {
+              this._options.callback.apply(this);
+            }
           }
         }).bind(this), 100);
       } else if ("callback" in options) {
+        if (typeof options !== "undefined" && options !== null) {
+          // Callback to internal UI update routines. The front-end callback is available within here.
+          if ("jqueryPokeCardCallback" in options) {
+            options.jqueryPokeCardCallback.apply(this);
+          }
+        }
         options.callback.apply(this);
       }
     }
@@ -733,12 +810,66 @@ var Pokemon = function (ndid, options) {
     }
   };
 
-  if (typeof options !== "undefined" && options !== null) {
-    // Callback to internal UI update routines. The front-end callback is available within here.
-    if ("jqueryPokeCardCallback" in options) {
-      options.jqueryPokeCardCallback.apply(this);
-    }
-  }
+  //if (typeof options !== "undefined" && options !== null) {
+  //  // Callback to internal UI update routines. The front-end callback is available within here.
+  //  if ("jqueryPokeCardCallback" in options) {
+  //    options.jqueryPokeCardCallback.apply(this);
+  //  }
+  //}
 
   return this;
 };
+
+// Handle Favorite Pokemon
+function drawFavoritePokemonPanel() {
+  var pnl = document.querySelector("#pnlFavorites");
+  if (typeof (pnl) !== "undefined" && pnl !== null) {
+    pnl.innerHTML = "";
+    if (typeof window.localStorage["favoritePokemon"] !== "undefined") {
+      var cache = JSON.parse(window.localStorage["favoritePokemon"]);
+      if (cache.data !== null && cache.data.length > 0) {
+        for (var len = cache.data.length, n = 0; n < len; n++) {
+          var cp = cache.data[n];
+          var d = pnl.appendChild(document.createElement("div"));
+          d.setAttribute("data-poke-id", cp.id);
+          d.setAttribute("data-poke-name", cp.name);
+          var img = d.appendChild(document.createElement("img"));
+          img.src = "./PokeAPI" + cp.sprites.front_default;
+          img.style = "width: 40px; height: 30px;object-fit: contain;";
+          var spn = d.appendChild(document.createElement("span"));
+          spn.setAttribute("data-id", cp.id);
+          spn.innerText = cp.name;
+          d.onclick = (function (ev) {
+            var d = ev.currentTarget;
+            var ap = document.querySelector("#activePokemon.poke-card");
+            if (typeof (ap) !== "undefined" & ap !== null) {
+              if (typeof (ap["ActivePokemon"]) !== "undefined" && ap.ActivePokemon !== null) {
+                ap.ActivePokemon = this;
+                ap.Draw();
+              } else {
+                $(ap).pokeCard({
+                  pokemon: d.getAttribute("data-poke-id"),
+                  options: {
+                    includes: {
+                      species: {
+                        includes: {
+                          evolution_chain: {}
+                        }
+                      }
+                    }
+                  }
+                });
+              }
+            }
+          }).bind(cp);
+        }
+      } else {
+        consol.log("No cached data for Favorite Pokemon.");
+      }
+    } else {
+      console.log("No favorite Pokemon have been saved to this device.");
+    }
+  } else {
+    console.error("No use setting up favorites panel if the panel doesn't exist! Please add #pnlFavorites.");
+  }
+}

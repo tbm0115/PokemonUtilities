@@ -488,6 +488,9 @@
     <Content Include="public\stylesheets\Layout.less" />
     <Content Include="public\stylesheets\Layout.min.css" />
     <Content Include="public\stylesheets\main.css" />
+    <Content Include="views\error.pug" />
+    <Content Include="views\index.pug" />
+    <Content Include="views\layout.pug" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config" />
   </ItemGroup>

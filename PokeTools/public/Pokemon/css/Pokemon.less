@@ -139,6 +139,32 @@
       border-radius: 5px;
       box-shadow: 3px 2px 2px var(--speciesColor);
 
+      button.poke-favorite {
+        position: absolute;
+        display: block;
+        font-size: 16px;
+        font-weight: 500;
+        top: 0.25em;
+        right: 0.25em;
+        cursor: pointer;
+        background: none;
+        border: none;
+        z-index: 3;
+      }
+      button.poke-favorite:hover{
+        text-shadow: 2px 2px 2px slategrey;
+      }
+      button.poke-favorite::before, button.poke-favorite.saved:hover::before {
+        content: "\f097"; /*\f02e*/
+        font-family: "FontAwesome";
+      }
+
+      button.poke-favorite.saved::before, button.poke-favorite:not(.saved):hover::before {
+        content: "\f02e";
+        color: lightgreen;
+        color: var(--speciesColor);
+      }
+
       picture.sprite {
         img {
           position: relative;
