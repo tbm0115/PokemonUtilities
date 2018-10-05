@@ -275,7 +275,7 @@ $.fn.pokeCard = function (data) {
         panel: this.elToolPanel.container.appendChild(document.createElement("div"))
       };
       e.button.setAttribute("title", "View Evolution Conditions");
-      e.button.innerHTML = "<i class=\"fa fa-bolt\"></i>";
+      e.button.innerHTML = "<i class=\"fa fa-level-up\"></i>";
       e.button.setAttribute("data-target", ".poke-evolutions");
       e.button.setAttribute("data-obj", "elPokeEvolutions");
       e.panel.setAttribute("class", "poke-evolutions");
@@ -289,7 +289,7 @@ $.fn.pokeCard = function (data) {
        */
       e["Draw"] = (function () {
         var ap = this["ActivePokemon"];
-        this.elPokeEvolutions.panel.classList.toggle("hidden", true);
+        //this.elPokeEvolutions.panel.classList.toggle("hidden", true);
         this.removeAttribute("data-evolves-from-id");
         this.removeAttribute("data-evolves-from-name");
         this.removeAttribute("data-evolves-to-id");
@@ -334,7 +334,9 @@ $.fn.pokeCard = function (data) {
                 };
               }
             }
-            this.elPokeEvolutions.panel.classList.toggle("hidden", false);
+            //this.elPokeEvolutions.panel.classList.toggle("hidden", false);
+          } else {
+            this.elPokeEvolutions.panel.querySelector("ul").innerHTML = "<li>No Further Evolutionary Form(s)</li>";
           }
         } else {
           this.elPokeEvolutions.panel.querySelector("ul").innerHTML = "<li>No Further Evolutionary Form(s)</li>";

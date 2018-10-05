@@ -30,6 +30,8 @@ $.fn.Comparison = function (options) {
       }).bind(el);
       el.onmousemove = el.fncOnMouseMove;
     }
+    el["elImageContainer"] = {};
+
     el["Draw"] = (function (mouseCoords) {
       var arr = this.Options.items;
       var r = this.getBoundingClientRect();
@@ -49,8 +51,8 @@ $.fn.Comparison = function (options) {
         this.Theta = t;
         this.toCartesian = (function () {
           return {
-            x: this.Radius * Math.cos(this.Theta),
-            y: this.Radius * Math.sin(this.Theta)
+            x: Math.floor(this.Radius * Math.cos(this.Theta)),
+            y: Math.floor(this.Radius * Math.sin(this.Theta))
           };
         }).bind(this);
         this.Cartesian = this.toCartesian();
@@ -117,11 +119,36 @@ $.fn.Comparison = function (options) {
       for (var alen = arr.length, a = 0; a < alen; a++) {
         var imgPoint = new polarPoint((this.width * 0.9) / 2, ((segmentWidth / 2) + (segmentWidth * (a + 1))) * Math.PI / 180);
         var size = 96;
-        var img = new Image(size, size);
-        img.onload = (function (ev) {
-          ctx.drawImage(ev.currentTarget, this.x - (size / 2), this.y - (size / 2), size, size);
-        }).bind(imgPoint.Cartesian);
-        img.src = arr[a].icon;
+        var imgItem = this.elImageContainer[arr[a].id];//.querySelector("img[src='" + arr[a].icon + "']");
+        var pt = {
+          x: Math.floor(imgPoint.Cartesian.x - (size / 2)),
+          y: Math.floor(imgPoint.Cartesian.y - (size / 2))
+        };
+        if (typeof (imgItem) === "undefined" || imgItem === null || imgItem.data === null) {
+          this.elImageContainer[arr[a].id] = {
+            img: new Image(size, size),
+            data: null,
+            canv: document.createElement("canvas")
+          };
+          imgItem = this.elImageContainer[arr[a].id];
+          imgItem.canv.width = size;
+          imgItem.canv.height = size;
+          imgItem.img.onload = (function (ev) {
+            console.log("\tReceived new image data!", this);
+            var ctx2 = this.data.canv.getContext("2d");
+            ctx2.drawImage(this.data.img, 0, 0, size, size);
+            this.data.data = this.data.canv.toDataURL();
+            ctx.drawImage(this.data.img, this.point.x, this.point.y, size, size);
+          }).bind({ point: pt, data: this.elImageContainer[arr[a].id] });
+          console.log("Requesting new image data...");
+          imgItem.img.src = arr[a].icon;
+        } else {
+          //imgItem.img.onload = (function (ev) {
+          //  ctx.drawImage(ev.currentTarget, this.point.x, this.point.y, size, size);
+          //}).bind({ point: pt, data: imgItem });
+          //imgItem.img.src = imgItem.data;
+          ctx.drawImage(imgItem.img, pt.x, pt.y, size, size);
+        }
       }
       if (strMessage !== "") {
         ctx.fillStyle = "black";

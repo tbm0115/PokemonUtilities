@@ -6,5 +6,9 @@
   {
     "outputFile": "public/Pokemon/css/Pokemon.css",
     "inputFile": "public/Pokemon/css/Pokemon.less"
+  },
+  {
+    "outputFile": "public/Pokemon/js/Comparison.es5.js",
+    "inputFile": "public/Pokemon/js/Comparison.js"
   }
 ]
