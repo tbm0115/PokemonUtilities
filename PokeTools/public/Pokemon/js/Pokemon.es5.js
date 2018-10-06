@@ -89,7 +89,7 @@ var EvolveOptions = {
     "label": "Stats:"
   },
   "time_of_day": {
-    "label": "Time of Day:"
+    "label": "Gaining a level at "
   },
   "trade_species": {
     "label": "When Traded"
@@ -362,11 +362,26 @@ $.fn.pokeCard = function (data) {
                   var arrTriggers = new Array();
                   for (var tlen = tks.length, t = 0; t < tlen; t++) {
                     var trigger = evolution[tks[t]];
-                    if (trigger !== null && trigger !== false && trigger !== "") {
-                      arrTriggers.push(EvolveOptions[tks[t]].label + " <strong>" + trigger.toString() + "</strong>");
+                    if (trigger !== null && trigger !== false) {
+                      if (typeof trigger === "object") {
+                        var triggerName = trigger.name;
+                        var triggerNameSplit = triggerName.split("-");
+                        triggerName = "";
+                        for (var tnslen = triggerNameSplit.length, tns = 0; tns < tnslen; tns++) {
+                          triggerName += triggerNameSplit[tns].substr(0, 1).toUpperCase() + triggerNameSplit[tns].substr(1) + " ";
+                        }
+                        triggerName = triggerName.trim();
+                        arrTriggers.push(EvolveOptions[tks[t]].label + " <strong>" + triggerName.toString() + "</strong>");
+                      } else if (trigger.toString() !== "") {
+                        arrTriggers.push(EvolveOptions[tks[t]].label + " <strong>" + trigger.toString().substr(0, 1).toUpperCase() + trigger.toString().substr(1) + "</strong>");
+                      }
                     }
                   }
-                  li.innerHTML = "<strong>" + nextPokemons[n].species.name.substr(0, 1).toUpperCase() + nextPokemons[n].species.name.substr(1) + "</strong> by " + arrTriggers.join("<br/>&amp; ");
+                  if (arrTriggers.length > 0) {
+                    li.innerHTML = "<strong>" + nextPokemons[n].species.name.substr(0, 1).toUpperCase() + nextPokemons[n].species.name.substr(1) + "</strong> by " + arrTriggers.join("<br/>&amp; ");
+                  } else {
+                    li.innerHTML = "<strong>" + nextPokemons[n].species.name.substr(0, 1).toUpperCase() + nextPokemons[n].species.name.substr(1) + "</strong> by <span title=\"Couldn't find the lookup for the evolution type\">some unknown manner</span>";
+                  }
                   var lia = li.appendChild(document.createElement("a"));
                   lia.setAttribute("class", "btn btn-xs btn-default");
                   lia.innerHTML = "<i class=\"glyphicon glyphicon-circle-arrow-right\"></i>";

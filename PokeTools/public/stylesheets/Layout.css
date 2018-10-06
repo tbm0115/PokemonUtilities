@@ -63,6 +63,8 @@ body footer {
   width: 100%;
   height: calc(100% - 50px);
   overflow-y: auto;
+  border-top: 2px inset slategrey;
+  border-left: 2px inset slategrey;
 }
 #pnlSearch #searchResults div.poke-dex-result {
   position: relative;
@@ -106,7 +108,9 @@ body footer {
 }
 #pnlFavorites {
   grid-area: ul;
-  border: 2px inset slategrey;
+  border-top: 2px inset slategrey;
+  border-right: 2px inset slategrey;
+  border-bottom: 2px inset slategrey;
 }
 #pnlFavorites div {
   position: relative;
@@ -144,7 +148,8 @@ body footer {
 }
 #pnlCompares {
   grid-area: ml;
-  border: 2px inset slategrey;
+  border-right: 2px inset slategrey;
+  border-top: 2px inset slategrey;
 }
 #pnlCompares div {
   position: relative;
@@ -240,6 +245,9 @@ body footer {
   }
   body #pnlSearch.active button[data-target='#pnlSearch'] i::before {
     content: '\f138';
+  }
+  body #pnlFavorites div span {
+    display: none;
   }
   body footer {
     background-color: #222;

@@ -70,6 +70,8 @@ body {
     width: 100%;
     height: calc(100% - 50px);
     overflow-y: auto;
+    border-top: 2px inset slategrey;
+    border-left: 2px inset slategrey;
 
     div.poke-dex-result {
       position: relative;
@@ -112,7 +114,7 @@ body {
     }
   }
 
-  button[data-target='#pnlSearch']{
+  button[data-target='#pnlSearch'] {
     position: relative;
     display: none;
     width: 100%;
@@ -121,7 +123,9 @@ body {
 }
 #pnlFavorites {
   grid-area: ul;
-  border: 2px inset slategrey;
+  border-top: 2px inset slategrey;
+  border-right: 2px inset slategrey;
+  border-bottom: 2px inset slategrey;
 
   div {
     position: relative;
@@ -165,7 +169,8 @@ body {
 }
 #pnlCompares {
   grid-area: ml;
-  border: 2px inset slategrey;
+  border-right: 2px inset slategrey;
+  border-top: 2px inset slategrey;
 
   div {
     position: relative;
@@ -295,6 +300,16 @@ body {
       button[data-target='#pnlSearch'] i::before {
         content: '\f138'
       }
+    }
+
+    #pnlFavorites {
+
+      div {
+        span {
+          display: none;
+        }
+      }
+
     }
 
     footer {
