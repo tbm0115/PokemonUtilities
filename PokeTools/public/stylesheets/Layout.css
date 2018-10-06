@@ -72,7 +72,7 @@ body footer {
   height: 50px;
   font-size: 14px;
 }
-#pnlSearch #searchResults div.poke-dex-result img {
+#pnlSearch #searchResults div.poke-dex-result [class*='icon-sprite'] {
   position: relative;
   display: inline-block;
 }
@@ -157,7 +157,7 @@ body footer {
   height: 50px;
   font-size: 14px;
 }
-#pnlCompares div img {
+#pnlCompares div [class*='icon-sprite'] {
   position: relative;
   display: inline-block;
 }

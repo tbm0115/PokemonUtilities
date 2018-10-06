@@ -1,0 +1,164 @@
+﻿@keyframes poke-float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+[data-species-color='black'] {
+  --speciesColor: black;
+}
+[data-species-color='blue'] {
+  --speciesColor: blue;
+}
+[data-species-color='brown'] {
+  --speciesColor: brown;
+}
+[data-species-color='gray'] {
+  --speciesColor: gray;
+}
+[data-species-color='green'] {
+  --speciesColor: green;
+}
+[data-species-color='pink'] {
+  --speciesColor: pink;
+}
+[data-species-color='purple'] {
+  --speciesColor: purple;
+}
+[data-species-color='red'] {
+  --speciesColor: red;
+}
+[data-species-color='white'] {
+  --speciesColor: silver;
+}
+[data-species-color='yellow'] {
+  --speciesColor: yellow;
+}
+.poke-card {
+  position: relative;
+  display: block;
+}
+.poke-card .chain {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 170px;
+}
+.poke-card .chain .details.biota.zoology {
+  position: absolute;
+  display: block;
+  width: 144px;
+  height: auto;
+  left: calc(50% - (144px / 2));
+  border: 3px solid var(--speciesColor);
+  border-radius: 5px;
+  box-shadow: 3px 2px 2px var(--speciesColor);
+}
+.poke-card .chain .details.biota.zoology .family {
+  display: none;
+}
+.poke-card .chain .details.biota.zoology .poke-favorite {
+  position: absolute;
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  top: 0.25em;
+  right: 0.25em;
+  cursor: pointer;
+  background: none;
+  border: none;
+  z-index: 3;
+}
+.poke-card .chain .details.biota.zoology .poke-favorite:hover {
+  text-shadow: 2px 2px 2px slategrey;
+}
+.poke-card .chain .details.biota.zoology .poke-favorite::before,
+.poke-card .chain .details.biota.zoology .poke-favorite.saved:hover::before {
+  content: "\f097";
+  /*\f02e*/
+  font-family: "FontAwesome";
+}
+.poke-card .chain .details.biota.zoology .poke-favorite.saved::before,
+.poke-card .chain .details.biota.zoology .poke-favorite:not(.saved):hover::before {
+  content: "\f02e";
+  color: lightgreen;
+  color: var(--speciesColor);
+}
+.poke-card .chain .details.biota.zoology .sprite {
+  position: relative;
+  display: block;
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  margin-left: auto;
+  margin-right: auto;
+  animation: poke-float 6s ease-in-out infinite;
+  z-index: 2;
+  /* Put above text */
+}
+.poke-card .chain .details.biota.zoology .sprite::before,
+.poke-card .chain .details.biota.zoology .sprite::after {
+  content: '';
+  position: absolute;
+  display: block;
+  opacity: 0.25;
+  border-radius: 50%;
+}
+.poke-card .chain .details.biota.zoology .sprite img::before {
+  width: calc(96px * 0.85);
+  height: calc(96px * 0.75);
+  left: calc(50% - ((96px * 0.85)/2));
+  top: 5px;
+  background-color: silver;
+}
+.poke-card .chain .details.biota.zoology .sprite img::after {
+  width: 75%;
+  height: 75%;
+  left: 12.5%;
+  top: 12.5%;
+  background-color: var(--speciesColor);
+  transform-origin: center;
+  transform: rotateX(85deg);
+}
+.poke-card .chain .details.biota.zoology [name='id'] {
+  position: absolute;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 500;
+  top: 0.5em;
+  left: 1em;
+  text-shadow: 2px 2px 1px whitesmoke;
+}
+.poke-card .chain .details.biota.zoology [name='id']::before {
+  content: '#';
+  position: absolute;
+  display: block;
+  top: 0px;
+  left: -0.75em;
+}
+.poke-card .chain .details.biota.zoology .binomial {
+  position: relative;
+  display: block;
+  width: 144px;
+  margin-top: 0px;
+  left: calc(50% - (144px / 2));
+}
+.poke-card .chain .details.biota.zoology .binomial .species {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+.poke-card .chain .details.biota.zoology .binomial .genus {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}

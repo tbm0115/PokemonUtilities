@@ -16,7 +16,7 @@
   height: 72px;
   top: calc(50% - (72px / 2));
   left: calc(50% - (72px / 2));
-  background-image: url('../../PokeAPI/sprites/items/poke-ball.png');
+  background-image: url('../../PokeApi/sprites/items/poke-ball.png');
   background-size: 72px 72px;
   -webkit-animation: poke-ball-shake 1.25s infinite alternate;
   /* Chrome, Safari, Opera */
@@ -54,47 +54,6 @@
   100% {
     transform: translate(0, 0) rotate(0);
   }
-}
-@keyframes poke-float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-5px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-[data-species-color='black'] {
-  --speciesColor: black;
-}
-[data-species-color='blue'] {
-  --speciesColor: blue;
-}
-[data-species-color='brown'] {
-  --speciesColor: brown;
-}
-[data-species-color='gray'] {
-  --speciesColor: gray;
-}
-[data-species-color='green'] {
-  --speciesColor: green;
-}
-[data-species-color='pink'] {
-  --speciesColor: pink;
-}
-[data-species-color='purple'] {
-  --speciesColor: purple;
-}
-[data-species-color='red'] {
-  --speciesColor: red;
-}
-[data-species-color='white'] {
-  --speciesColor: silver;
-}
-[data-species-color='yellow'] {
-  --speciesColor: yellow;
 }
 .poke-card {
   position: relative;

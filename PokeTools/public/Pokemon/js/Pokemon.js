@@ -232,7 +232,7 @@ $.fn.pokeCard = function (data) {
         var ap = this["ActivePokemon"];
         if (typeof ap !== "undefined" && ap !== null) {
           // Set Sprite
-          this.elBasicDetails.querySelector("picture img").src = "./PokeAPI" + ap.sprites.front_default;
+          this.elBasicDetails.querySelector("picture img").src = "./PokeApi" + ap.sprites.front_default;
           // Update image alt
           this.elBasicDetails.querySelector("picture img").setAttribute("alt", ap.name);
           // Set 'Dex Number
@@ -563,9 +563,9 @@ $.fn.pokeCard = function (data) {
                 d.setAttribute("data-poke-id", ev.currentTarget.getAttribute("data-poke-id"));
                 d.setAttribute("data-poke-name", ev.currentTarget.getAttribute("data-poke-name"));
                 $(d).data("pokemon", this.pokemon);
-                var i = d.appendChild(document.createElement("img"));
+                var i = d.appendChild(document.createElement("i"));
                 i.setAttribute("class", "icon-sprite-" + this.pokemon.id.toString());
-                i.setAttribute("alt", this.pokemon.name);
+                //i.setAttribute("alt", this.pokemon.name);
                 var s = d.appendChild(document.createElement("span"));
                 s.innerText = this.pokemon.name;
                 var c = d.appendChild(document.createElement("a"));
@@ -655,7 +655,7 @@ var Pokemon = function (ndid, options) {
   this._includes = {};
 
   // Perform initial retrieval of core Pokemon information.
-  $.getCachedJSON("./PokeAPI/api/v2/p/" + ndid + "/index.json", (function (d) {
+  $.getCachedJSON("./PokeApi/api/v2/p/" + ndid + "/index.json", (function (d) {
     /** @description - Fills the applied object with the provided data. Basically the same as a clone.
      * @param {object} data - An object to clone to the applied object.
      * @returns {object} - The applied object.
@@ -699,7 +699,7 @@ var Pokemon = function (ndid, options) {
         this.that.origin._includes[this.prop] = "done";
       });
       // Logic tree to determine exactly if and how recursive data is retrieved.
-      var strPrefix = "./PokeAPI/api/v2";// "/lib/PokeAPI" in the ASP.NET Core app
+      var strPrefix = "./PokeApi/api/v2";// "/lib/PokeAPI" in the ASP.NET Core app
       if (prop in this.item) {
         if ("length" in this.item[prop] && !("url" in this.item[prop])) {
           for (var len = this.item[prop].length, n = 0; n < len; n++) {
@@ -854,7 +854,7 @@ function drawFavoritePokemonPanel() {
           d.setAttribute("data-poke-id", cp.id);
           d.setAttribute("data-poke-name", cp.name);
           var img = d.appendChild(document.createElement("img"));
-          img.src = "./PokeAPI" + cp.sprites.front_default;
+          img.src = "./PokeApi" + cp.sprites.front_default;
           img.style = "width: 40px; height: 30px;object-fit: contain;";
           img.setAttribute("alt", cp.name);
           var spn = d.appendChild(document.createElement("span"));
@@ -885,7 +885,7 @@ function drawFavoritePokemonPanel() {
           }).bind(cp);
         }
       } else {
-        consol.log("No cached data for Favorite Pokemon.");
+        console.log("No cached data for Favorite Pokemon.");
       }
     } else {
       console.log("No favorite Pokemon have been saved to this device.");
