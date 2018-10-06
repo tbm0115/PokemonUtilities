@@ -1,0 +1,18 @@
+﻿extends ../_sitelayout
+
+block append styles
+    link(rel='stylesheet', href='/Pokemon/css/PokeCardLight.min.css')
+    link(rel='stylesheet', href='/Pokemon/css/Pokemon.min.css?v=1.2')
+
+block append content
+    div.poke-card(data-species-color='green', data-poke-id=pokemon.id)
+        div.chain
+            div.details.biota.zoology
+                span.sprite
+                    img(src='/PokeApi' + pokemon.sprites.front_default, alt=pokemon.nameUpper)
+                button.poke-favorite
+                span.family(lang='en') Pok&#0232;mon
+                span(title='National \'Dex #', aria-label='National \'Dex Number', name='id')= pokemon.id
+                div.binomial
+                    p.common-name.species(title='Pok&#0232;mon Name', aria-label='Name', name='name')= pokemon.nameUpper
+                    p.genus(title='Genus Name', aria-label='Genus Name', name='species.genera[2].genus')= 'species' in pokemon && 'genera' in pokemon.species ? pokemon.species.genera[2].genus : '&mdash;'

@@ -6,7 +6,7 @@ _______________________________________
 
 +----------+---------------+----------+  --
 |          |               |          |   |
-|   ur     |               |          |   |
+|   ul     |               |          |   |
 |          |               |          |   | ~"calc((100vh - (65px * 2)) / 2)
 |          |               |          |   |
 +----------+               +          |  --
@@ -15,20 +15,20 @@ _______________________________________
 |   ml     |      mc       |   mr     |   | ~"calc((100vh - (65px * 2)) / 2)
 |          |               |          |   |
 +----------+---------------+          +  --
-|   ll     | footer        |          |   |
+|   ll     | footer        |   lr     |   |
 |          |   fc          |          |   | 65px
 +-------------------------------------+----------+  --
 */
 @asideWidth: 300px;
-@navbarHeight: 61px;
-body {
+@navbarHeight: 0px;
+main {
   position: relative;
   display: grid;
-  width: 100vw;
-  height: 100vh;
-  grid-template-areas: "ul mc mr" "ml mc mr" "ll lc mr";
-  grid-template-columns: @asideWidth ~"calc(100vw - (@{asideWidth} * 2))" @asideWidth;
-  grid-template-rows: ~"calc((100vh - (@{navbarHeight} * 2)) / 2)" ~"calc((100vh - (@{navbarHeight} * 2)) / 2)" 50px;
+  width: 100%;
+  height: 100%;
+  grid-template-areas: "ul mc" "ml mc" "ll lcr";
+  grid-template-columns: @asideWidth ~"calc(100% - @{asideWidth})";
+  grid-template-rows: 1fr 1fr 50px;
   grid-gap: 0px;
 
   > * {
@@ -36,27 +36,25 @@ body {
     overflow-y: auto;
     padding: 5px;
   }
-  /*aside:first-of-type {
-    grid-area: ml;
-  }*/
-  main {
+  section {
     grid-area: mc;
-  }
-
-  aside:last-of-type:not(:first-of-type) {
-    grid-area: mr;
-    background: whitesmoke;
-  }
-
-  footer {
-    grid-area: lc;
   }
 }
 
 #pnlSearch {
-  grid-area: mr;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  /*grid-area: mr;*/
   background: whitesmoke;
-
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
   div.input-group {
     position: relative;
     display: block;
@@ -69,7 +67,7 @@ body {
     display: block;
     width: 100%;
     height: calc(100% - 50px);
-    overflow-y: auto;
+    /*overflow-y: auto;*/
     border-top: 2px inset slategrey;
     border-left: 2px inset slategrey;
 
@@ -109,7 +107,7 @@ body {
     }
 
     div.poke-dex-result:hover {
-      background-color: #A45ACD;
+      background-color: #A45ACD !important;
       cursor: pointer;
     }
   }
@@ -241,7 +239,12 @@ body {
   height: 50px;
   bottom: 0px;
 }
-
+#pokeComparison {
+  width: 60vmin;
+  height: 60vmin;
+  margin-left: auto;
+  margin-right: auto;
+}
 // Medium devices (tablets, 768px and up)
 // Extra small devices (portrait phones, less than 576px)
 // No media query since this is the default in Bootstrap
@@ -249,8 +252,8 @@ body {
 @media (max-width: 768px) { /* 576px) {*/
   @asideWidth: 50px;
 
-  body {
-    grid-template-columns: @asideWidth ~"calc(100vw - (@{asideWidth} * 2))" @asideWidth;
+  main {
+    grid-template-columns: @asideWidth ~"calc(100% - @{asideWidth})";
 
     #pnlCompares {
       div[data-poke-id] {
@@ -260,26 +263,8 @@ body {
       }
     }
 
-    #pnlSearch {
-      .input-group {
-        display: none;
-      }
 
-      #searchResults {
-        div.poke-dex-result {
-          span {
-            display: none;
-          }
-        }
-      }
-
-      button[data-target='#pnlSearch'] {
-        display: block;
-        bottom: 0px;
-      }
-    }
-
-    #pnlSearch.active {
+    /*#pnlSearch.active {
       grid-area: mc;
       z-index: 5;
 
@@ -300,7 +285,7 @@ body {
       button[data-target='#pnlSearch'] i::before {
         content: '\f138'
       }
-    }
+    }*/
 
     #pnlFavorites {
 
@@ -312,10 +297,82 @@ body {
 
     }
 
-    footer {
+    /*footer {
       background-color: #222;
       color: whitesmoke;
       font-size: 7px;
+    }*/
+  }
+  #pnlSearch {
+    height: 100%;
+
+    .input-group {
+      display: none !important;
     }
+
+    #searchResults {
+      height: ~"calc(100% - 50px)";
+      overflow: auto;
+
+      div.poke-dex-result {
+        span {
+          display: none;
+        }
+      }
+    }
+
+    button[data-target='#pnlSearch'] {
+      display: block;
+      bottom: 0px;
+    }
+  }
+
+  #pnlSearch.active {
+    grid-area: initial;
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    z-index: 10000;
+    overflow: auto;
+
+    .input-group {
+      display: block !important;
+      z-index: 10000;
+    }
+
+    #searchResults {
+      height: ~"calc(100% - 100px)";
+      z-index: 10000;
+
+      div.poke-dex-result {
+        z-index: 10000;
+        background: whitesmoke;
+
+        span {
+          display: inline-block;
+        }
+      }
+    }
+
+    button[data-target='#pnlSearch'] {
+      z-index: 10000;
+    }
+
+    button[data-target='#pnlSearch'] i::before {
+      content: '\f138'
+    }
+  }
+  #pnlSearch.active::before{
+    content: '';
+    position: fixed;
+    display: block;
+    z-index: 9000;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0, 0.65);
   }
 }

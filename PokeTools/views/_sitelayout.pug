@@ -1,0 +1,122 @@
+﻿doctype html
+html(lang="en")
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='author', content='LightWorks')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='theme-color', content='#474544')
+    meta(name='description', content='Dedicated to providing tools for gameplay.')
+    meta(name='Keywords', content='video game, utilities, games, tools, tool, utility, Pokemon')
+    link(rel='icon' href='/images/android/android-launchericon-96-96.png')
+    link(rel='manifest', href='/manifest.json')
+    title= title + ' - Utilities.Games'
+    link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/stylesheets/main.css')
+
+    block styles
+
+    // Global site tag (gtag.js) - Google Analytics
+    script(async='', src="https://www.googletagmanager.com/gtag/js?id=UA-126967798-1")
+
+    script(type='text/javascript', language='javascript').
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-126967798-1');
+
+    script(async='', src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
+
+    script.
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3568656413005000",
+        enable_page_level_ads: true
+      });
+
+  body
+    nav.navbar.navbar-inverse
+        div.container
+            div.navbar-header
+                button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+                    span.sr-only Toggle Navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                a.navbar-brand(href='./') Utilties.Games
+            div.navbar-collapse.collapse
+                ul.nav.navbar-nav
+                    li
+                        a(href='/') Home
+                    li
+                        a(href='/pokemon') Pok&#0232;Tools
+                    li#liA2HS
+                        a#btnA2HS(href='javascript:showAddToHomeScreen();', style='color: #9fd49e;', title='Add to Homescreen')
+                            i.fa.fa-download Download
+                            
+    aside
+        block ads
+
+    main
+        block content
+    
+    nav
+        block subNav
+
+    footer
+        block footer
+
+    script(language='javascript', type='text/javascript', src='/jquery/dist/jquery.min.js')
+
+    script(language='javascript', type='text/javascript', src='/bootstrap/dist/js/bootstrap.min.js')
+
+    script(language='javascript', type='text/javascript').    
+        if ("serviceWorker" in navigator) {
+          window.addEventListener("load", function () {
+            navigator.serviceWorker.addEventListener("message", function (event) {
+
+            });
+            navigator.serviceWorker.register("./sw.js").then(function (registration) {
+              console.log("[ServiceWorker.Registration] Successful with scope: ", registration.scope);
+            }, function (err) {
+              console.log("[ServiceWorker.Registration] Failed: ", err);
+            });
+          });
+        } else {
+          console.log("[ServiceWorker] Service workers are not supported on this browser!");
+        }
+
+        function showAddToHomeScreen() {
+          if (pwaInstall.ev !== null) {
+            pwaInstall.ev.prompt();
+
+            pwaInstall.ev.userChoice.then(function pwaUserChoice(result) {
+              if (result.outcome === "accepted") {
+                pwaInstall.li.style.display = "none";
+                console.log("[ServiceWorker.showAddToHomeScreen] User accepted Add To Homescreen");
+              } else {
+                pwaInstall.li.style.display = "inline-block";
+                console.log("[ServiceWorker.showAddToHomeScreen] User declined Add To Homescreen");
+              }
+              pwaInstall.ev = null;
+            });
+          }
+        }
+        var pwaInstall = {
+          ev: null,
+          li: null,
+          btn: null
+        }
+        document.querySelector("#liA2HS").style.display = "none";
+        if ("onbeforeinstallprompt" in window) {
+          window.onbeforeinstallprompt = function (ev) {
+            ev.preventDefault();
+
+            pwaInstall.ev = ev;
+            pwaInstall.li = document.querySelector("#liA2HS");
+            pwaInstall.li.style.display = "inline-block";
+            pwaInstall.btn = document.querySelector("#btnA2HS");
+          }
+        }
+
+    block scripts

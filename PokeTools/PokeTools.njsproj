@@ -166,6 +166,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="routes\users.js" />
+    <Folder Include="views\pokemon\" />
     <None Include="compilerconfig.json" />
     <Content Include="compilerconfig.json.defaults">
       <SubType>Content</SubType>
@@ -497,14 +498,20 @@
     <Content Include="public\Pokemon\css\Pokemon.css" />
     <Content Include="public\Pokemon\css\Pokemon.less" />
     <Content Include="public\Pokemon\css\Pokemon.min.css" />
-    <Content Include="public\stylesheets\Layout.css" />
-    <Content Include="public\stylesheets\Layout.less" />
-    <Content Include="public\stylesheets\Layout.min.css" />
+    <Content Include="public\Pokemon\css\Layout.css" />
+    <Content Include="public\Pokemon\css\Layout.less" />
+    <Content Include="public\Pokemon\css\Layout.min.css" />
     <Content Include="public\stylesheets\main.css" />
     <Content Include="views\error.pug" />
-    <Content Include="views\index.pug" />
+    <Content Include="views\index.pug">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="views\pokemon\index.pug" />
     <Content Include="views\layout.pug" />
-    <Content Include="views\pokemon.pug">
+    <Content Include="views\pokemon\pokemon.pug">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="views\_sitelayout.pug">
       <SubType>Code</SubType>
     </Content>
     <Content Include="Web.config" />

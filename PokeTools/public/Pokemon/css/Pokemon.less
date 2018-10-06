@@ -19,7 +19,7 @@
   height: @loaderSize;
   top: ~"calc(50% - (@{loaderSize} / 2))";
   left: ~"calc(50% - (@{loaderSize} / 2))";
-  background-image: ~"url('../../PokeApi/sprites/items/poke-ball.png')";
+  background-image: ~"url('/PokeApi/sprites/items/poke-ball.png')";
   background-size: @loaderSize @loaderSize;
   -webkit-animation: poke-ball-shake 1.25s infinite alternate;
   /* Chrome, Safari, Opera */
@@ -267,7 +267,7 @@
   .icon-sprite(@url;@cols;(@i - 1););
 }
 
-.icon-sprite(url('../../images/icon_spritesheet.png'), 25, 802);
+.icon-sprite(url('/images/icon_spritesheet.png'), 25, 802);
 
 .icon-not-found(@url; @i;) when(@i > 0){
   .icon-sprite-202-{

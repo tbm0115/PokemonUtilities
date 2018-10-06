@@ -18,5 +18,9 @@
   {
     "outputFile": "public/Pokemon/css/PokeCardLight.css",
     "inputFile": "public/Pokemon/css/PokeCardLight.less"
+  },
+  {
+    "outputFile": "public/Pokemon/css/Layout.css",
+    "inputFile": "public/Pokemon/css/Layout.less"
   }
 ]

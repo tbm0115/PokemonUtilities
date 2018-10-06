@@ -6,7 +6,7 @@ _______________________________________
 
 +----------+---------------+----------+  --
 |          |               |          |   |
-|   ur     |               |          |   |
+|   ul     |               |          |   |
 |          |               |          |   | ~"calc((100vh - (65px * 2)) / 2)
 |          |               |          |   |
 +----------+               +          |  --
@@ -15,41 +15,48 @@ _______________________________________
 |   ml     |      mc       |   mr     |   | ~"calc((100vh - (65px * 2)) / 2)
 |          |               |          |   |
 +----------+---------------+          +  --
-|   ll     | footer        |          |   |
+|   ll     | footer        |   lr     |   |
 |          |   fc          |          |   | 65px
 +-------------------------------------+----------+  --
 */
-body {
+main {
   position: relative;
   display: grid;
-  width: 100vw;
-  height: 100vh;
-  grid-template-areas: "ul mc mr" "ml mc mr" "ll lc mr";
-  grid-template-columns: 300px calc(100vw - (300px * 2)) 300px;
-  grid-template-rows: calc((100vh - (61px * 2)) / 2) calc((100vh - (61px * 2)) / 2) 50px;
+  width: 100%;
+  height: 100%;
+  grid-template-areas: "ul mc" "ml mc" "ll lcr";
+  grid-template-columns: 300px calc(100% - 300px);
+  grid-template-rows: 1fr 1fr 50px;
   grid-gap: 0px;
-  /*aside:first-of-type {
-    grid-area: ml;
-  }*/
 }
-body > * {
+main > * {
   position: relative;
   overflow-y: auto;
   padding: 5px;
 }
-body main {
+main section {
   grid-area: mc;
 }
-body aside:last-of-type:not(:first-of-type) {
-  grid-area: mr;
-  background: whitesmoke;
-}
-body footer {
-  grid-area: lc;
-}
 #pnlSearch {
-  grid-area: mr;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  /*grid-area: mr;*/
   background: whitesmoke;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 #pnlSearch div.input-group {
   position: relative;
@@ -62,7 +69,7 @@ body footer {
   display: block;
   width: 100%;
   height: calc(100% - 50px);
-  overflow-y: auto;
+  /*overflow-y: auto;*/
   border-top: 2px inset slategrey;
   border-left: 2px inset slategrey;
 }
@@ -97,7 +104,7 @@ body footer {
   text-align: right;
 }
 #pnlSearch #searchResults div.poke-dex-result:hover {
-  background-color: #A45ACD;
+  background-color: #A45ACD !important;
   cursor: pointer;
 }
 #pnlSearch button[data-target='#pnlSearch'] {
@@ -212,46 +219,107 @@ body footer {
   height: 50px;
   bottom: 0px;
 }
+#pokeComparison {
+  width: 60vmin;
+  height: 60vmin;
+  margin-left: auto;
+  margin-right: auto;
+}
 @media (max-width: 768px) {
   /* 576px) {*/
-  body {
-    grid-template-columns: 50px calc(100vw - (50px * 2)) 50px;
+  main {
+    grid-template-columns: 50px calc(100% - 50px);
+    /*#pnlSearch.active {
+      grid-area: mc;
+      z-index: 5;
+
+      .input-group {
+        display: block;
+      }
+
+      #searchResults {
+        height: ~"calc(100% - 100px)";
+
+        div.poke-dex-result {
+          span {
+            display: inline-block;
+          }
+        }
+      }
+
+      button[data-target='#pnlSearch'] i::before {
+        content: '\f138'
+      }
+    }*/
+    /*footer {
+      background-color: #222;
+      color: whitesmoke;
+      font-size: 7px;
+    }*/
   }
-  body #pnlCompares div[data-poke-id] span {
+  main #pnlCompares div[data-poke-id] span {
     display: none;
   }
-  body #pnlSearch .input-group {
+  main #pnlFavorites div span {
     display: none;
   }
-  body #pnlSearch #searchResults div.poke-dex-result span {
+  #pnlSearch {
+    height: 100%;
+  }
+  #pnlSearch .input-group {
+    display: none !important;
+  }
+  #pnlSearch #searchResults {
+    height: calc(100% - 50px);
+    overflow: auto;
+  }
+  #pnlSearch #searchResults div.poke-dex-result span {
     display: none;
   }
-  body #pnlSearch button[data-target='#pnlSearch'] {
+  #pnlSearch button[data-target='#pnlSearch'] {
     display: block;
     bottom: 0px;
   }
-  body #pnlSearch.active {
-    grid-area: mc;
-    z-index: 5;
+  #pnlSearch.active {
+    grid-area: initial;
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    z-index: 10000;
+    overflow: auto;
   }
-  body #pnlSearch.active .input-group {
-    display: block;
+  #pnlSearch.active .input-group {
+    display: block !important;
+    z-index: 10000;
   }
-  body #pnlSearch.active #searchResults {
+  #pnlSearch.active #searchResults {
     height: calc(100% - 100px);
+    z-index: 10000;
   }
-  body #pnlSearch.active #searchResults div.poke-dex-result span {
+  #pnlSearch.active #searchResults div.poke-dex-result {
+    z-index: 10000;
+    background: whitesmoke;
+  }
+  #pnlSearch.active #searchResults div.poke-dex-result span {
     display: inline-block;
   }
-  body #pnlSearch.active button[data-target='#pnlSearch'] i::before {
+  #pnlSearch.active button[data-target='#pnlSearch'] {
+    z-index: 10000;
+  }
+  #pnlSearch.active button[data-target='#pnlSearch'] i::before {
     content: '\f138';
   }
-  body #pnlFavorites div span {
-    display: none;
-  }
-  body footer {
-    background-color: #222;
-    color: whitesmoke;
-    font-size: 7px;
+  #pnlSearch.active::before {
+    content: '';
+    position: fixed;
+    display: block;
+    z-index: 9000;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.65);
   }
 }

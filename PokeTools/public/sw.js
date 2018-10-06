@@ -4,12 +4,12 @@ var CACHE = 'pokeutilities-precache-v1.7';
 var precacheFiles = [
   /* Add an array of files to precache for your app */
   "./offline.html",
+  "./stylesheets/main.css",
   "./jquery/dist/jquery.min.js",
   "./Pokemon/js/Pokemon.es5.min.js",
   "./Pokemon/js/Comparison.es5.min.js",
   "./Pokemon/css/Pokemon.min.css",
-  "./stylesheets/Layout.min.css",
-  "./stylesheets/main.css",
+  "./Pokemon/css/Layout.min.css",
   "./PokeApi/api/v2/pd/1/index.json",
   "./PokeApi/sprites/items/poke-ball.png",
   "./images/404-pokemon.png",

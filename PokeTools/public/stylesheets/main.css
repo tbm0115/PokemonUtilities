@@ -1,24 +1,46 @@
 ﻿body {
   padding: 0px;
-  padding-top: 65px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  display: grid;
+  grid-template-areas: "siteNav siteNav siteNav" "asideAd main sideNav" "footer footer footer";
+  grid-template-columns: 300px calc(100vw - (300px * 2)) 300px;
+  grid-template-rows: 65px calc(100vh - (65px + 50px)) 50px;
+  grid-gap: 0px;
 }
-
+@media (max-width: 768px) {
+  body {
+    grid-template-columns: 0px calc(100vw - 50px) 50px;
+    grid-template-rows: 65px calc(100vh - (65px + 50px)) 50px;
+  }
+}
 a {
-    color: #00B7FF;
+  color: #00B7FF;
 }
 
-#pokeContainer {
-  margin-left: auto;
-  margin-right: auto;
+body > nav:first-of-type:not(:last-of-type) {
+  grid-area: siteNav;
 }
 
-#pokeComparison {
-  position: relative;
-  display: block;
-  width: 85vmin;
-  height: 85vmin;
-  border: 5px outset slategrey;
-  margin-left: auto;
-  margin-right: auto;
+body > main {
+  grid-area: main;
+  overflow: auto;
+}
+
+body > aside {
+  grid-area: asideAd;
+}
+
+body > nav:last-of-type:not(:first-of-type) {
+  grid-area: sideNav;
+  overflow: auto;
+}
+/*@media (max-width: 768px) {
+  body > nav:last-of-type:not(:first-of-type):focus-within{
+    grid-area: main;
+    grid-column-start: main;
+    grid-column-end: sideNav;
+  }
+}*/
+body > footer {
+  grid-area: footer;
 }
