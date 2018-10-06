@@ -169,8 +169,8 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </Content>
     <None Include="Local.pubxml" />
-    <Content Include="manifest.json" />
-    <Content Include="offline.html" />
+    <Content Include="public\manifest.json" />
+    <Content Include="public\offline.html" />
     <Content Include="package.json" />
     <Content Include="public\bootstrap\CHANGELOG.md" />
     <Content Include="public\bootstrap\dist\css\bootstrap-theme.css" />
