@@ -156,8 +156,8 @@ $.fn.pokeCard = function (data) {
       pic.setAttribute("class", "sprite");
       var img = pic.appendChild(document.createElement("img"));
       img.setAttribute("src", "./images/404-pokemon.png");
-      img.setAttribute("alt", "Pok&#0232;mon Image");
       img.setAttribute("name", "sprites.front_default");
+      img.setAttribute("alt", "Searching for Pokemon");
 
       var btnFavorite = dFocused.appendChild(document.createElement("button"));
       btnFavorite.setAttribute("class", "poke-favorite");
@@ -233,6 +233,8 @@ $.fn.pokeCard = function (data) {
         if (typeof ap !== "undefined" && ap !== null) {
           // Set Sprite
           this.elBasicDetails.querySelector("picture img").src = "./PokeAPI" + ap.sprites.front_default;
+          // Update image alt
+          this.elBasicDetails.querySelector("picture img").setAttribute("alt", ap.name);
           // Set 'Dex Number
           this.elBasicDetails.querySelector("[name='id']").innerText = ap.id.toString();
           // Set Name
@@ -259,6 +261,8 @@ $.fn.pokeCard = function (data) {
         } else {
           // Set Sprite
           this.elBasicDetails.querySelector("picture img").src = "./images/404-pokemon.png";
+          // Update image alt
+          this.elBasicDetails.querySelector("picture img").setAttribute("alt", "Pokemon Not Found");
           // Set 'Dex Number
           this.elBasicDetails.querySelector("[name='id']").innerHTML = "&mdash;";
           // Set Name
@@ -561,6 +565,7 @@ $.fn.pokeCard = function (data) {
                 $(d).data("pokemon", this.pokemon);
                 var i = d.appendChild(document.createElement("img"));
                 i.setAttribute("class", "icon-sprite-" + this.pokemon.id.toString());
+                i.setAttribute("alt", this.pokemon.name);
                 var s = d.appendChild(document.createElement("span"));
                 s.innerText = this.pokemon.name;
                 var c = d.appendChild(document.createElement("a"));
@@ -851,6 +856,7 @@ function drawFavoritePokemonPanel() {
           var img = d.appendChild(document.createElement("img"));
           img.src = "./PokeAPI" + cp.sprites.front_default;
           img.style = "width: 40px; height: 30px;object-fit: contain;";
+          img.setAttribute("alt", cp.name);
           var spn = d.appendChild(document.createElement("span"));
           spn.setAttribute("data-id", cp.id);
           spn.innerText = cp.name;

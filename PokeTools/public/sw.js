@@ -1,12 +1,19 @@
 ﻿//This is the service worker with the Cache-first network
 
-var CACHE = 'pokeutilities-precache-v1.5';
+var CACHE = 'pokeutilities-precache-v1.6';
 var precacheFiles = [
   /* Add an array of files to precache for your app */
-  "./Pokemon/js/Pokemon.js",
+  "./offline.html",
+  "./jquery/dist/jquery.min.js",
   "./Pokemon/js/Pokemon.es5.min.js",
+  "./Pokemon/js/Comparison.es5.min.js",
+  "./Pokemon/css/Pokemon.min.css",
+  "./stylesheets/Layout.min.css",
+  "./stylesheets/main.css",
   "./PokeAPI/api/v2/pd/1/index.json",
-  "./PokeAPI/sprites/items/poke-ball.png"
+  "./PokeAPI/sprites/items/poke-ball.png",
+  "./images/404-pokemon.png",
+  "./images/icon_spritesheet.png"
 ];
 
 //Install stage sets up the cache-array to configure pre-cache content
