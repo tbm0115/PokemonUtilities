@@ -65,22 +65,158 @@
   }
 }
 
+@keyframes poke-float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+[data-species-color='black'] {
+  --speciesColor: black;
+}
+
+[data-species-color='blue'] {
+  --speciesColor: blue;
+}
+
+[data-species-color='brown'] {
+  --speciesColor: brown;
+}
+
+[data-species-color='gray'] {
+  --speciesColor: gray;
+}
+
+[data-species-color='green'] {
+  --speciesColor: green;
+}
+
+[data-species-color='pink'] {
+  --speciesColor: pink;
+}
+
+[data-species-color='purple'] {
+  --speciesColor: purple;
+}
+
+[data-species-color='red'] {
+  --speciesColor: red;
+}
+
+[data-species-color='white'] {
+  --speciesColor: silver;
+}
+
+[data-species-color='yellow'] {
+  --speciesColor: yellow;
+}
+
+@imgSize: 96px;
+@cardWidth: calc(@imgSize + (@imgSize / 2));
+
 .poke-card {
   position: relative;
   display: block;
 
   .chain {
     position: relative;
-    display: block;
+    display: grid;
+    grid-template-areas: "chainFrom chain chainTo";
+    grid-auto-columns: 1fr;
     width: 100%;
-    height: 170px;
+    height: 175px;
+
+    @chain-branch: {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      height: 175px;
+      overflow: auto;
+    }
+    @chain-item: {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: @imgSize;
+      margin-top: 5px;
+
+      .chain-target{
+        position: relative;
+        display: inline-block;
+        width: 96px;
+        height: 96px;
+        float: left;
+
+        &::before {
+          content: '';
+          position:absolute;
+          display: block;
+          top: 0px;
+          left: 0px;
+          width: 100%;
+          height: 100%;
+          background: silver;
+          border: none;
+          border-radius: 50%;
+          opacity: 0.65;
+        }
+        &::after{
+          content: attr(data-poke-name);
+          position: relative;
+          display: block;
+          text-align: center;
+          top: 30%;
+
+          &:first-letter{
+            text-transform: uppercase;
+          }
+        }
+
+        [class*='icon-sprite-']{
+          position: relative;
+          display: block;
+          top: ~"calc(50% - 30px)";
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+      .chain-reason{
+        position: relative;
+        display: inline-block;
+        top: 0px;
+        width: ~"calc(100% - @{imgSize})";
+        height: @imgSize;
+        font-size: 14px;
+        overflow: auto;
+      }
+    }
+    .chain-from {
+      grid-area: chainFrom;
+
+      @chain-branch();
+
+      .chain-item{
+        @chain-item();
+      }
+    }
 
     .details.biota.zoology {
-      position: absolute;
+      position:relative;
       display: block;
-      width: 144px;
-      height: auto;
-      left: ~"calc(50% - (144px / 2))";
+      width: calc(@imgSize + (@imgSize / 2));
+      height: 160px;
+      /*left: ~"calc(50% - (@{cardWidth} / 2))";*/
+      margin-left:auto;
+      margin-right:auto;
+      grid-area: chain;
       border: 3px solid var(--speciesColor);
       border-radius: 5px;
       box-shadow: 3px 2px 2px var(--speciesColor);
@@ -97,9 +233,11 @@
         border: none;
         z-index: 3;
       }
-      button.poke-favorite:hover{
+
+      button.poke-favorite:hover {
         text-shadow: 2px 2px 2px slategrey;
       }
+
       button.poke-favorite::before, button.poke-favorite.saved:hover::before {
         content: "\f097"; /*\f02e*/
         font-family: "FontAwesome";
@@ -111,12 +249,16 @@
         color: var(--speciesColor);
       }
 
-      picture.sprite {
+      .family {
+        display: none;
+      }
+
+      .sprite {
         img {
           position: relative;
           display: block;
-          width: 96px;
-          height: 96px;
+          width: @imgSize;
+          height: @imgSize;
           object-fit: contain;
           margin-left: auto;
           margin-right: auto;
@@ -125,7 +267,7 @@
         }
       }
 
-      picture.sprite::before, picture.sprite::after {
+      .sprite::before, .sprite::after {
         content: '';
         position: absolute;
         display: block;
@@ -133,15 +275,15 @@
         border-radius: 50%;
       }
 
-      picture.sprite::before {
-        width: ~"calc(96px * 0.85)";
-        height: ~"calc(96px * 0.75)";
-        left: ~"calc(50% - ((96px * 0.85)/2))";
+      .sprite::before {
+        width: ~"calc(@{imgSize} * 0.85)";
+        height: ~"calc(@{imgSize} * 0.75)";
+        left: ~"calc(50% - ((@{imgSize} * 0.85)/2))";
         top: 5px;
         background-color: silver;
       }
 
-      picture.sprite::after {
+      .sprite::after {
         width: 75%;
         height: 75%;
         left: 12.5%;
@@ -172,9 +314,9 @@
       .binomial {
         position: relative;
         display: block;
-        width: 144px;
+        width: @cardWidth;
         margin-top: 0px;
-        left: ~"calc(50% - (144px / 2))";
+        left: ~"calc(50% - (@{cardWidth} / 2))";
 
         .species {
           position: relative;
@@ -192,6 +334,15 @@
           text-align: center;
         }
       }
+    }
+
+    .chain-to {
+      grid-area: chainTo;
+      @chain-branch();
+      .chain-item{
+        @chain-item();
+      }
+      /*right: ~"calc(25% - (@{imgSize} / 2))";*/
     }
   }
 

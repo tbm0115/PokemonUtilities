@@ -508,6 +508,9 @@
     </Content>
     <Content Include="views\pokemon\index.pug" />
     <Content Include="views\layout.pug" />
+    <Content Include="views\pokemon\liteCard.pug">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="views\pokemon\pokemon.pug">
       <SubType>Code</SubType>
     </Content>

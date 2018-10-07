@@ -55,22 +55,129 @@
     transform: translate(0, 0) rotate(0);
   }
 }
+@keyframes poke-float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+[data-species-color='black'] {
+  --speciesColor: black;
+}
+[data-species-color='blue'] {
+  --speciesColor: blue;
+}
+[data-species-color='brown'] {
+  --speciesColor: brown;
+}
+[data-species-color='gray'] {
+  --speciesColor: gray;
+}
+[data-species-color='green'] {
+  --speciesColor: green;
+}
+[data-species-color='pink'] {
+  --speciesColor: pink;
+}
+[data-species-color='purple'] {
+  --speciesColor: purple;
+}
+[data-species-color='red'] {
+  --speciesColor: red;
+}
+[data-species-color='white'] {
+  --speciesColor: silver;
+}
+[data-species-color='yellow'] {
+  --speciesColor: yellow;
+}
 .poke-card {
   position: relative;
   display: block;
 }
 .poke-card .chain {
   position: relative;
+  display: grid;
+  grid-template-areas: "chainFrom chain chainTo";
+  grid-auto-columns: 1fr;
+  width: 100%;
+  height: 175px;
+}
+.poke-card .chain .chain-from {
+  grid-area: chainFrom;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 175px;
+  overflow: auto;
+}
+.poke-card .chain .chain-from .chain-item {
+  position: relative;
   display: block;
   width: 100%;
-  height: 170px;
+  height: 96px;
+  margin-top: 5px;
 }
-.poke-card .chain .details.biota.zoology {
+.poke-card .chain .chain-from .chain-item .chain-target {
+  position: relative;
+  display: inline-block;
+  width: 96px;
+  height: 96px;
+  float: left;
+}
+.poke-card .chain .chain-from .chain-item .chain-target::before {
+  content: '';
   position: absolute;
   display: block;
-  width: 144px;
-  height: auto;
-  left: calc(50% - (144px / 2));
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: silver;
+  border: none;
+  border-radius: 50%;
+  opacity: 0.65;
+}
+.poke-card .chain .chain-from .chain-item .chain-target::after {
+  content: attr(data-poke-name);
+  position: relative;
+  display: block;
+  text-align: center;
+  top: 30%;
+}
+.poke-card .chain .chain-from .chain-item .chain-target::after:first-letter {
+  text-transform: uppercase;
+}
+.poke-card .chain .chain-from .chain-item .chain-target [class*='icon-sprite-'] {
+  position: relative;
+  display: block;
+  top: calc(50% - 30px);
+  margin-left: auto;
+  margin-right: auto;
+}
+.poke-card .chain .chain-from .chain-item .chain-reason {
+  position: relative;
+  display: inline-block;
+  top: 0px;
+  width: calc(100% - 96px);
+  height: 96px;
+  font-size: 14px;
+  overflow: auto;
+}
+.poke-card .chain .details.biota.zoology {
+  position: relative;
+  display: block;
+  width: calc(96px + (96px / 2));
+  height: 160px;
+  /*left: ~"calc(50% - (@{cardWidth} / 2))";*/
+  margin-left: auto;
+  margin-right: auto;
+  grid-area: chain;
   border: 3px solid var(--speciesColor);
   border-radius: 5px;
   box-shadow: 3px 2px 2px var(--speciesColor);
@@ -102,7 +209,10 @@
   color: lightgreen;
   color: var(--speciesColor);
 }
-.poke-card .chain .details.biota.zoology picture.sprite img {
+.poke-card .chain .details.biota.zoology .family {
+  display: none;
+}
+.poke-card .chain .details.biota.zoology .sprite img {
   position: relative;
   display: block;
   width: 96px;
@@ -114,22 +224,22 @@
   z-index: 2;
   /* Put above text */
 }
-.poke-card .chain .details.biota.zoology picture.sprite::before,
-.poke-card .chain .details.biota.zoology picture.sprite::after {
+.poke-card .chain .details.biota.zoology .sprite::before,
+.poke-card .chain .details.biota.zoology .sprite::after {
   content: '';
   position: absolute;
   display: block;
   opacity: 0.25;
   border-radius: 50%;
 }
-.poke-card .chain .details.biota.zoology picture.sprite::before {
+.poke-card .chain .details.biota.zoology .sprite::before {
   width: calc(96px * 0.85);
   height: calc(96px * 0.75);
   left: calc(50% - ((96px * 0.85)/2));
   top: 5px;
   background-color: silver;
 }
-.poke-card .chain .details.biota.zoology picture.sprite::after {
+.poke-card .chain .details.biota.zoology .sprite::after {
   width: 75%;
   height: 75%;
   left: 12.5%;
@@ -157,9 +267,9 @@
 .poke-card .chain .details.biota.zoology .binomial {
   position: relative;
   display: block;
-  width: 144px;
+  width: calc(96px + (96px / 2));
   margin-top: 0px;
-  left: calc(50% - (144px / 2));
+  left: calc(50% - (calc(96px + (96px / 2)) / 2));
 }
 .poke-card .chain .details.biota.zoology .binomial .species {
   position: relative;
@@ -174,6 +284,68 @@
   display: inline-block;
   width: 100%;
   text-align: center;
+}
+.poke-card .chain .chain-to {
+  grid-area: chainTo;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 175px;
+  overflow: auto;
+  /*right: ~"calc(25% - (@{imgSize} / 2))";*/
+}
+.poke-card .chain .chain-to .chain-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 96px;
+  margin-top: 5px;
+}
+.poke-card .chain .chain-to .chain-item .chain-target {
+  position: relative;
+  display: inline-block;
+  width: 96px;
+  height: 96px;
+  float: left;
+}
+.poke-card .chain .chain-to .chain-item .chain-target::before {
+  content: '';
+  position: absolute;
+  display: block;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: silver;
+  border: none;
+  border-radius: 50%;
+  opacity: 0.65;
+}
+.poke-card .chain .chain-to .chain-item .chain-target::after {
+  content: attr(data-poke-name);
+  position: relative;
+  display: block;
+  text-align: center;
+  top: 30%;
+}
+.poke-card .chain .chain-to .chain-item .chain-target::after:first-letter {
+  text-transform: uppercase;
+}
+.poke-card .chain .chain-to .chain-item .chain-target [class*='icon-sprite-'] {
+  position: relative;
+  display: block;
+  top: calc(50% - 30px);
+  margin-left: auto;
+  margin-right: auto;
+}
+.poke-card .chain .chain-to .chain-item .chain-reason {
+  position: relative;
+  display: inline-block;
+  top: 0px;
+  width: calc(100% - 96px);
+  height: 96px;
+  font-size: 14px;
+  overflow: auto;
 }
 .poke-card .poke-tools {
   position: relative;
