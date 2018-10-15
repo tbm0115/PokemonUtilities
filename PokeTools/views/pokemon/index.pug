@@ -4,6 +4,16 @@ block append styles
     link(rel='preload', href='/PokeApi/api/v2/pd/1/index.json', as='fetch')
     link(rel='stylesheet', href='/Pokemon/css/Pokemon.min.css?v=1.6')
     link(rel='stylesheet', href='/Pokemon/css/Layout.min.css')
+    style(type='text/css').
+        .poke-dex-result a[href]{
+            position: absolute;
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            font-size: 16px;
+            right: 0px;
+            top: calc(50% - 8px);
+        }
 
 block append content
     div.poke-loader
@@ -77,6 +87,11 @@ block append scripts
                 var txt = divResult.appendChild(document.createElement("span"));
                 txt.innerText = entry.pokemon_species.name;
                 txt.setAttribute("data-id", entry.entry_number);
+
+                var nw = divResult.appendChild(document.createElement("a"));
+                nw.setAttribute("href", "/pokemon/" + entry.pokemon_species.name);
+                nw.appendChild(document.createElement("i")).setAttribute("class", "fa fa-link");
+                
 
                 divResult.onclick = dexResult_Clicked;
               }

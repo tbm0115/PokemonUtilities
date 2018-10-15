@@ -166,6 +166,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="routes\users.js" />
+    <Folder Include="public\images\Game Covers\" />
+    <Folder Include="public\images\Game Covers\Pokemon\" />
     <Folder Include="views\pokemon\" />
     <None Include="compilerconfig.json" />
     <Content Include="compilerconfig.json.defaults">
@@ -173,6 +175,38 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </Content>
     <None Include="Local.pubxml" />
+    <Content Include="public\images\Game Covers\Pokemon\alpha-saphire.png" />
+    <Content Include="public\images\Game Covers\Pokemon\black-2.png" />
+    <Content Include="public\images\Game Covers\Pokemon\black.png" />
+    <Content Include="public\images\Game Covers\Pokemon\blue.png" />
+    <Content Include="public\images\Game Covers\Pokemon\Cover Sheet_256.png" />
+    <Content Include="public\images\Game Covers\Pokemon\Cover Sheet_32.png" />
+    <Content Include="public\images\Game Covers\Pokemon\Cover Sheet_48.png" />
+    <Content Include="public\images\Game Covers\Pokemon\Cover Sheet_96.png" />
+    <Content Include="public\images\Game Covers\Pokemon\crystal.png" />
+    <Content Include="public\images\Game Covers\Pokemon\diamond.png" />
+    <Content Include="public\images\Game Covers\Pokemon\emerald.png" />
+    <Content Include="public\images\Game Covers\Pokemon\fire-red.png" />
+    <Content Include="public\images\Game Covers\Pokemon\gold.png" />
+    <Content Include="public\images\Game Covers\Pokemon\heart-gold.png" />
+    <Content Include="public\images\Game Covers\Pokemon\leaf-green.png" />
+    <Content Include="public\images\Game Covers\Pokemon\moon.png" />
+    <Content Include="public\images\Game Covers\Pokemon\omega-ruby.png" />
+    <Content Include="public\images\Game Covers\Pokemon\pearl.png" />
+    <Content Include="public\images\Game Covers\Pokemon\platinum.png" />
+    <Content Include="public\images\Game Covers\Pokemon\red.png" />
+    <Content Include="public\images\Game Covers\Pokemon\ruby.png" />
+    <Content Include="public\images\Game Covers\Pokemon\saphire.png" />
+    <Content Include="public\images\Game Covers\Pokemon\silver.png" />
+    <Content Include="public\images\Game Covers\Pokemon\soul-silver.png" />
+    <Content Include="public\images\Game Covers\Pokemon\sun.png" />
+    <Content Include="public\images\Game Covers\Pokemon\ultra-moon.png" />
+    <Content Include="public\images\Game Covers\Pokemon\ultra-sun.png" />
+    <Content Include="public\images\Game Covers\Pokemon\white-2.png" />
+    <Content Include="public\images\Game Covers\Pokemon\white.png" />
+    <Content Include="public\images\Game Covers\Pokemon\x.png" />
+    <Content Include="public\images\Game Covers\Pokemon\y.png" />
+    <Content Include="public\images\Game Covers\Pokemon\yellow.png" />
     <Content Include="public\manifest.json" />
     <Content Include="public\offline.html" />
     <Content Include="package.json" />
@@ -511,6 +545,7 @@
     <Content Include="views\pokemon\liteCard.pug">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="views\pokemon\pokemon-lite.pug" />
     <Content Include="views\pokemon\pokemon.pug">
       <SubType>Code</SubType>
     </Content>

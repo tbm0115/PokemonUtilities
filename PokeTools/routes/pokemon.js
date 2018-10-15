@@ -197,6 +197,47 @@ class Pokemon {
     strOut += arrTriggers.join(" and ");
     return strOut;
   }
+  getLevelMoveSet() {
+    var fncFilterMethod = function (e, i) {
+      return e.move_learn_method.name === "level-up" && e.level_learned_at > 1;
+    };
+    var tmp = this.moves.filter(function (e, i) {
+      return e.version_group_details.filter(fncFilterMethod).length > 0;
+    });
+    //var rtnMoves = new Array();
+    var rtnMoves = {};
+    for (var len = tmp.length, n = 0; n < len; n++) {
+      var tmpNew = {
+        name: tmp[n].move.name,
+        url: tmp[n].move.url,
+        levels: {}
+      };
+      var vgd = tmp[n].version_group_details.filter(fncFilterMethod);
+      for (var llen = vgd.length, l = 0; l < llen; l++) {
+        var level = vgd[l].level_learned_at;
+        //if (typeof (tmpNew.levels[level]) === "undefined") {
+        //  tmpNew.levels[level] = new Array();
+        //}
+        //tmpNew.levels[level].push(vgd[l].version_group.name);
+        if (typeof (rtnMoves[level]) === "undefined") {
+          rtnMoves[level] = new Array();
+        }
+        if (rtnMoves[level].filter(function (e) { return e.name === tmp[n].move.name; }).length <= 0) {
+          rtnMoves[level].push({
+            name: tmp[n].move.name,
+            versions: new Array()
+          });
+        }
+        if (rtnMoves[level].filter(function (e) { return e.versions.indexOf(vgd[l].version_group.name) > 0; }).length <= 0) {
+          rtnMoves[level].filter(function (e) { return e.name === tmp[n].move.name; })[0].versions.push(vgd[l].version_group.name);
+        }
+      }
+      //rtnMoves.push(tmpNew);
+    }
+
+
+    return rtnMoves;
+  }
 }
 module.exports = Pokemon;
 
@@ -210,6 +251,15 @@ router.get('/', function (req, res){
 router.get('/:entry', function (req, res) {
   var pokemon = new Pokemon(req.params['entry']);
   res.render('pokemon/pokemon', {
+    title: '#' + pokemon.id + ' ' + pokemon.nameUpper,
+    pokemon: pokemon,
+    nationalDex: nationalDex
+  });
+
+});
+router.get('/lite/:entry', function (req, res) {
+  var pokemon = new Pokemon(req.params['entry']);
+  res.render('pokemon/pokemon-lite', {
     title: '#' + pokemon.id + ' ' + pokemon.nameUpper,
     pokemon: pokemon,
     nationalDex: nationalDex

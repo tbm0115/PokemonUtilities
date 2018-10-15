@@ -1,0 +1,54 @@
+﻿doctype html
+html(lang="en")
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='author', content='LightWorks')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='theme-color', content=pokemon.species.color.name)
+    meta(name='description', content=pokemon.species.genera[2].genus)
+    meta(name='Keywords', content=[pokemon.nameUpper, '#' + pokemon.id, pokemon.species.genera[2].genus, 'Pokemon'].join(','))
+    meta(name='robots',content='noindex')
+    link(rel='icon' href='/images/android/android-launchericon-96-96.png')
+    link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
+    link(rel='manifest', href='/manifest.json')
+    title= title + ' - Utilities.Games'
+    link(rel='stylesheet', href='/Pokemon/css/Pokemon.min.css?v=1.6')
+    // Global site tag (gtag.js) - Google Analytics
+    script(async='', src="https://www.googletagmanager.com/gtag/js?id=UA-126967798-1")
+
+    script(type='text/javascript', language='javascript').
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-126967798-1');
+
+    script(async='', src='//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js')
+    
+  body
+    .poke-card(data-species-color=pokemon.species.color.name, data-poke-id=pokemon.id)
+        .chain
+            - var prevEvos = pokemon.getPreviousEvolutions()
+            if (prevEvos !== null)
+                .chain-from
+                    .chain-item
+                        a.chain-target(href='/pokemon/lite/' + prevEvos.species.name, data-poke-name=prevEvos.species.name, aria-label='Go to ' + prevEvos.species.name)
+                            div(class='icon-sprite-' + nationalDex.findByName(prevEvos.species.name).id)
+                        .chain-reason= pokemon.buildEvolutionTerm(pokemon.getCurrentEvolutionChain())
+            .details.biota.zoology(lang='en')
+                span.sprite
+                    img(src='/PokeApi' + pokemon.sprites.front_default, alt=pokemon.nameUpper)
+                button.poke-favorite(aria-label='Favorite this Pokemon', type='button')
+                span.family(lang='en') Pok&#0232;mon
+                span(title='National \'Dex #', aria-label='National \'Dex Number', name='id')= pokemon.id
+                .binomial
+                    p.common-name.species(title='Pok&#0232;mon Name', aria-label='Name', name='name')= pokemon.nameUpper
+                    p.genus(title='Genus Name', aria-label='Genus Name', )= pokemon.species.genera[2].genus
+            - var nextEvos = pokemon.getNextEvolutions()
+            if (nextEvos !== null && nextEvos.length > 0)
+                div.chain-to(data-count=nextEvos.length)
+                    -for (var x = 0;x < nextEvos.length; x++)
+                        .chain-item
+                            a.chain-target(href='/pokemon/lite/' + nextEvos[x].species.name, data-poke-name=nextEvos[x].species.name, aria-label='Go to ' + nextEvos[x].species.name)
+                                div(class='icon-sprite-' + nationalDex.findByName(nextEvos[x].species.name).id)
+                            .chain-reason= pokemon.buildEvolutionTerm(nextEvos[x])
