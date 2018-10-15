@@ -19,7 +19,7 @@ block append content
     div.poke-loader
     div#pnlFavorites
     div#pnlCompares
-    button#btnCompare(type='button')
+    button#btnCompare(type='button', aria-label='Compare Pokemon')
 
         i.fa.fa-pie-chart
 
@@ -40,14 +40,14 @@ block append content
                     div.modal-body
                         canvas#pokeComparison This Browser does not support HTML5 Canvas!
                     div.modal-footer
-                        button.btn.btn-default(type='button', data-dismiss='modal') Close
+                        button.btn.btn-default(type='button',aria-label='Close', data-dismiss='modal') Close
 
 block append subNav
     #pnlSearch
         div.input-group
             input.form-control#txtSearchDex(role='search', placeholder='Search National \'Dex', type='search', onkeyup='filterDex();', onblur='filterDex();')
         div#searchResults
-        button(type='button', data-target='#pnlSearch', onclick='document.querySelector("#pnlSearch").classList.toggle("active");')
+        button(type='button',aria-label='Open Search Panel', data-target='#pnlSearch', onclick='document.querySelector("#pnlSearch").classList.toggle("active");')
             i.fa.fa-chevron-circle-left
 
 block append scripts
@@ -90,8 +90,9 @@ block append scripts
 
                 var nw = divResult.appendChild(document.createElement("a"));
                 nw.setAttribute("href", "/pokemon/" + entry.pokemon_species.name);
+                nw.setAttribute("role", "link");
+                nw.setAttribute("aria-label", "View " + entry.pokemon_species.name);
                 nw.appendChild(document.createElement("i")).setAttribute("class", "fa fa-link");
-                
 
                 divResult.onclick = dexResult_Clicked;
               }
