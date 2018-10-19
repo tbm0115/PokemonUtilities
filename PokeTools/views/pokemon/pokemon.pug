@@ -2,6 +2,7 @@
 
 block append styles
     link(rel='stylesheet', href='/Pokemon/css/Pokemon.min.css?v=1.6')
+    link(rel='icon', href='/PokeApi/sprites/pokemon/' + pokemon.id.toString() + '.png')
     meta(name='theme-color', content=pokemon.species.color.name)
     meta(name='description', content=pokemon.species.genera[2].genus)
     meta(name='Keywords', content=[pokemon.nameUpper, '#' + pokemon.id, pokemon.species.genera[2].genus, 'Pokemon'].join(','))
