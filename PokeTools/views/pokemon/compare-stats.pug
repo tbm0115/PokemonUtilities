@@ -85,10 +85,9 @@ block append scripts
         var pokemon = ComparePokemon[n];
         var li = container.appendChild(document.createElement("li"));
         li.setAttribute("data-id", pokemon.id.toString());
-        var img = li.appendChild(document.createElement("img"));
-        img.setAttribute("class", "icon-sprite-" + pokemon.id.toString());
-        img.setAttribute("alt", "#" + pokemon.id.toString());
-        img.style.display = "inline-block";
+        var i = li.appendChild(document.createElement("i"));
+        i.setAttribute("class", "icon-sprite-" + pokemon.id.toString());
+        i.style.display = "inline-block";
         var spn = li.appendChild(document.createElement("span"));
         spn.innerText = pokemon.name.substr(0, 1).toUpperCase() + pokemon.name.substr(1);
         var aClose = li.appendChild(document.createElement("a"));
