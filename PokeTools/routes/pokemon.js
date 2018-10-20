@@ -28,7 +28,7 @@ class Pokedex {
   }
 }
 var nationalDex = new Pokedex();
-
+var gameTitles = { "red-blue": { games: ["red", "blue"], generation: "i", console: "gameboy" }, "yellow": { games: ["yellow"], generation: "i", console: "gameboy" }, "stadium": { games: ["stadium"], generation: "i", console: "nintendo 64" }, "snap": { games: ["snap"], generation: "i", console: "nintendo 64" }, "gold-silver": { games: ["gold", "silver"], generation: "ii", console: "gameboy-color" }, "crystal": { games: ["crystal"], generation: "ii", console: "gameboy-color" }, "stadium-2": { games: ["stadium-2"], generation: "ii", console: "nintendo 64" }, "ruby-sapphire": { games: ["ruby", "sapphire"], generation: "iii", console: "gameboy-advance" }, "emerald": { games: ["emerald"], generation: "iii", console: "gameboy-advance" }, "firered-leafgreen": { games: ["fire-red", "leaf-green"], generation: "iii", console: "gameboy-advance" }, "diamond-pearl": { games: ["diamond", "pearl"], generation: "iv", console: "ds" }, "platinum": { games: ["platinum"], generation: "iv", console: "ds" }, "heartgold-soulsilver": { games: ["heart-gold", "soul-silver"], generation: "iv", console: "ds" }, "black-white": { games: ["black", "white"], generation: "v", console: "ds" }, "colosseum": { games: ["colosseum"], generation: "iii", console: "game-cube" }, "xd": { games: ["xd"], generation: "iii", console: "game-cube" }, "black-2-white-2": { games: ["black-2", "white-2"], generation: "v", console: "ds" }, "x-y": { games: ["x", "y"], generation: "vi", console: "3ds" }, "omega-ruby-alpha-sapphire": { games: ["omega-ruby", "alpha-sapphire"], generation: "vi", console: "3ds" }, "sun-moon": { games: ["sun", "moon"], generation: "vii", console: "3ds" }, "ultra-sun-ultra-moon": { games: ["ultra-sun", "ultra-moon"], generation: "vii", console: "3ds" } };
 class Pokemon {
   constructor(id) {
     if (!isFinite(id)) {
@@ -248,23 +248,39 @@ router.get('/', function (req, res){
   });
 });
 
+router.get('/compare/stats', function (req, res) {
+  res.render('pokemon/compare-stats', {
+    title: 'Compare Base Stats',
+  });
+});
+
 router.get('/:entry', function (req, res) {
   var pokemon = new Pokemon(req.params['entry']);
-  res.render('pokemon/pokemon', {
-    title: '#' + pokemon.id + ' ' + pokemon.nameUpper,
-    pokemon: pokemon,
-    nationalDex: nationalDex
-  });
-
+  if (typeof (pokemon) !== "undefined" && pokemon !== null && typeof (pokemon.nameUpper) !== "undefined" && pokemon.nameUpper !== null) {
+    res.render('pokemon/pokemon', {
+      title: '#' + pokemon.id + ' ' + pokemon.nameUpper,
+      pokemon: pokemon,
+      nationalDex: nationalDex,
+      gameTitles: gameTitles
+    });
+  } else {
+    res.status(400);
+    res.render('error', { error: new Error("Pokemon '" + req.params["entry"] + "' not found!") });
+  }
 });
 router.get('/lite/:entry', function (req, res) {
   var pokemon = new Pokemon(req.params['entry']);
-  res.render('pokemon/pokemon-lite', {
-    title: '#' + pokemon.id + ' ' + pokemon.nameUpper,
-    pokemon: pokemon,
-    nationalDex: nationalDex
-  });
-
+  if (typeof (pokemon) !== "undefined" && pokemon !== null && typeof (pokemon.nameUpper) !== "undefined" && pokemon.nameUpper !== null) {
+    res.render('pokemon/pokemon-lite', {
+      title: '#' + pokemon.id + ' ' + pokemon.nameUpper,
+      pokemon: pokemon,
+      nationalDex: nationalDex,
+      gameTitles: gameTitles
+    });
+  } else {
+    res.status(400);
+    res.render('error', { error: new Error("Pokemon '" + req.params["entry"] + "' not found!") });
+  }
 });
 
 module.exports = router;

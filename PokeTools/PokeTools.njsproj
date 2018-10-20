@@ -57,6 +57,9 @@
     <Compile Include="public\Pokemon\js\Comparison.es5.js" />
     <Compile Include="public\Pokemon\js\Comparison.es5.min.js" />
     <Compile Include="public\Pokemon\js\Comparison.js" />
+    <Compile Include="public\Pokemon\js\jquery.pokedexresult.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="public\Pokemon\js\Pokemon.es5.js" />
     <Compile Include="public\Pokemon\js\Pokemon.es5.min.js" />
     <Compile Include="public\Pokemon\js\Pokemon.js" />
@@ -168,6 +171,8 @@
     <Compile Include="routes\users.js" />
     <Folder Include="public\images\Game Covers\" />
     <Folder Include="public\images\Game Covers\Pokemon\" />
+    <Folder Include="public\fonts\" />
+    <Folder Include="public\Pokemon\images\" />
     <Folder Include="views\pokemon\" />
     <None Include="compilerconfig.json" />
     <Content Include="compilerconfig.json.defaults">
@@ -175,6 +180,78 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </Content>
     <None Include="Local.pubxml" />
+    <Content Include="public\fonts\Lato-Black.eot" />
+    <Content Include="public\fonts\Lato-Black.ttf" />
+    <Content Include="public\fonts\Lato-Black.woff" />
+    <Content Include="public\fonts\Lato-Black.woff2" />
+    <Content Include="public\fonts\Lato-BlackItalic.eot" />
+    <Content Include="public\fonts\Lato-BlackItalic.ttf" />
+    <Content Include="public\fonts\Lato-BlackItalic.woff" />
+    <Content Include="public\fonts\Lato-BlackItalic.woff2" />
+    <Content Include="public\fonts\Lato-Bold.eot" />
+    <Content Include="public\fonts\Lato-Bold.ttf" />
+    <Content Include="public\fonts\Lato-Bold.woff" />
+    <Content Include="public\fonts\Lato-Bold.woff2" />
+    <Content Include="public\fonts\Lato-BoldItalic.eot" />
+    <Content Include="public\fonts\Lato-BoldItalic.ttf" />
+    <Content Include="public\fonts\Lato-BoldItalic.woff" />
+    <Content Include="public\fonts\Lato-BoldItalic.woff2" />
+    <Content Include="public\fonts\Lato-Hairline.eot" />
+    <Content Include="public\fonts\Lato-Hairline.ttf" />
+    <Content Include="public\fonts\Lato-Hairline.woff" />
+    <Content Include="public\fonts\Lato-Hairline.woff2" />
+    <Content Include="public\fonts\Lato-HairlineItalic.eot" />
+    <Content Include="public\fonts\Lato-HairlineItalic.ttf" />
+    <Content Include="public\fonts\Lato-HairlineItalic.woff" />
+    <Content Include="public\fonts\Lato-HairlineItalic.woff2" />
+    <Content Include="public\fonts\Lato-Heavy.eot" />
+    <Content Include="public\fonts\Lato-Heavy.ttf" />
+    <Content Include="public\fonts\Lato-Heavy.woff" />
+    <Content Include="public\fonts\Lato-Heavy.woff2" />
+    <Content Include="public\fonts\Lato-HeavyItalic.eot" />
+    <Content Include="public\fonts\Lato-HeavyItalic.ttf" />
+    <Content Include="public\fonts\Lato-HeavyItalic.woff" />
+    <Content Include="public\fonts\Lato-HeavyItalic.woff2" />
+    <Content Include="public\fonts\Lato-Italic.eot" />
+    <Content Include="public\fonts\Lato-Italic.ttf" />
+    <Content Include="public\fonts\Lato-Italic.woff" />
+    <Content Include="public\fonts\Lato-Italic.woff2" />
+    <Content Include="public\fonts\Lato-Light.eot" />
+    <Content Include="public\fonts\Lato-Light.ttf" />
+    <Content Include="public\fonts\Lato-Light.woff" />
+    <Content Include="public\fonts\Lato-Light.woff2" />
+    <Content Include="public\fonts\Lato-LightItalic.eot" />
+    <Content Include="public\fonts\Lato-LightItalic.ttf" />
+    <Content Include="public\fonts\Lato-LightItalic.woff" />
+    <Content Include="public\fonts\Lato-LightItalic.woff2" />
+    <Content Include="public\fonts\Lato-Medium.eot" />
+    <Content Include="public\fonts\Lato-Medium.ttf" />
+    <Content Include="public\fonts\Lato-Medium.woff" />
+    <Content Include="public\fonts\Lato-Medium.woff2" />
+    <Content Include="public\fonts\Lato-MediumItalic.eot" />
+    <Content Include="public\fonts\Lato-MediumItalic.ttf" />
+    <Content Include="public\fonts\Lato-MediumItalic.woff" />
+    <Content Include="public\fonts\Lato-MediumItalic.woff2" />
+    <Content Include="public\fonts\Lato-Regular.eot" />
+    <Content Include="public\fonts\Lato-Regular.ttf" />
+    <Content Include="public\fonts\Lato-Regular.woff" />
+    <Content Include="public\fonts\Lato-Regular.woff2" />
+    <Content Include="public\fonts\Lato-Semibold.eot" />
+    <Content Include="public\fonts\Lato-Semibold.ttf" />
+    <Content Include="public\fonts\Lato-Semibold.woff" />
+    <Content Include="public\fonts\Lato-Semibold.woff2" />
+    <Content Include="public\fonts\Lato-SemiboldItalic.eot" />
+    <Content Include="public\fonts\Lato-SemiboldItalic.ttf" />
+    <Content Include="public\fonts\Lato-SemiboldItalic.woff" />
+    <Content Include="public\fonts\Lato-SemiboldItalic.woff2" />
+    <Content Include="public\fonts\Lato-Thin.eot" />
+    <Content Include="public\fonts\Lato-Thin.ttf" />
+    <Content Include="public\fonts\Lato-Thin.woff" />
+    <Content Include="public\fonts\Lato-Thin.woff2" />
+    <Content Include="public\fonts\Lato-ThinItalic.eot" />
+    <Content Include="public\fonts\Lato-ThinItalic.ttf" />
+    <Content Include="public\fonts\Lato-ThinItalic.woff" />
+    <Content Include="public\fonts\Lato-ThinItalic.woff2" />
     <Content Include="public\images\Game Covers\Pokemon\alpha-saphire.png" />
     <Content Include="public\images\Game Covers\Pokemon\black-2.png" />
     <Content Include="public\images\Game Covers\Pokemon\black.png" />
@@ -535,9 +612,14 @@
     <Content Include="public\Pokemon\css\Layout.css" />
     <Content Include="public\Pokemon\css\Layout.less" />
     <Content Include="public\Pokemon\css\Layout.min.css" />
+    <Content Include="public\Pokemon\images\ComparisonChart.png" />
+    <Content Include="public\stylesheets\latofonts.css" />
     <Content Include="public\stylesheets\main.css" />
     <Content Include="views\error.pug" />
     <Content Include="views\index.pug">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="views\pokemon\compare-stats.pug">
       <SubType>Code</SubType>
     </Content>
     <Content Include="views\pokemon\index.pug" />
@@ -547,6 +629,9 @@
     </Content>
     <Content Include="views\pokemon\pokemon-lite.pug" />
     <Content Include="views\pokemon\pokemon.pug">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="views\pokemon\_pokemonlayout.pug">
       <SubType>Code</SubType>
     </Content>
     <Content Include="views\_sitelayout.pug">

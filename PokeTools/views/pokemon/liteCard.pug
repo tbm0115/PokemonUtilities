@@ -2,8 +2,8 @@
 html
   head
     meta(name='theme-color', content='#474544')
-    meta(name='description', content=pokemon.species.data.genera[2].genus)
-    meta(name='Keywords', content=[pokemon.nameUpper, '#' + pokemon.id, pokemon.species.data.genera[2].genus, 'Pokemon'].join(','))
+    meta(name='description', content=pokemon.species.data.genera.genus)
+    meta(name='Keywords', content=[pokemon.nameUpper, '#' + pokemon.id, pokemon.species.data.genera.genus, 'Pokemon'].join(','))
     title= '#' + pokemon.id + ' ' + pokemon.nameUpper
     link(rel='stylesheet', href='/Pokemon/css/Pokemon.min.css?v=1.2')
   body
@@ -17,4 +17,4 @@ html
                 span(title='National \'Dex #', aria-label='National \'Dex Number', name='id')= pokemon.id
                 div.binomial
                     p.common-name.species(title='Pokémon Name', aria-label='Name', name='name')= pokemon.nameUpper
-                    p.genus(title='Genus Name', aria-label='Genus Name', )= pokemon.species.data.genera[2].genus
+                    p.genus(title='Genus Name', aria-label='Genus Name', )= pokemon.species.data.genera.genus

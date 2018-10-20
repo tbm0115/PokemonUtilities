@@ -1,4 +1,17 @@
-﻿.poke-loader {
+﻿body {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f6f6f6+47,ededed+100;White+3D+%231 */
+  background: #ffffff;
+  /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed', GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
+}
+.poke-loader {
   position: fixed;
   display: none;
   width: 100vw;
@@ -99,6 +112,13 @@
 .poke-card {
   position: relative;
   display: block;
+  width: 100%;
+  height: auto;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 .poke-card .chain {
   position: relative;
@@ -232,6 +252,7 @@
   animation: poke-float 6s ease-in-out infinite;
   z-index: 2;
   /* Put above text */
+  pointer-events: none;
 }
 .poke-card .chain .details.biota.zoology .sprite::before,
 .poke-card .chain .details.biota.zoology .sprite::after {
@@ -406,6 +427,134 @@
   height: 200px;
   margin-left: auto;
   margin-right: auto;
+}
+#pnlSearch {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+  /*grid-area: mr;*/
+  background: whitesmoke;
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+#pnlSearch div.input-group {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 50px;
+}
+#pnlSearch #searchResults {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: calc(100% - 50px);
+  /*overflow-y: auto;*/
+  border-top: 2px inset slategrey;
+  border-left: 2px inset slategrey;
+}
+#pnlSearch #searchResults .pokedex-result {
+  position: relative;
+  display: block;
+  height: 50px;
+  font-size: 14px;
+  color: #2E60AB;
+}
+#pnlSearch #searchResults .pokedex-result [class*='icon-sprite'] {
+  position: relative;
+  display: inline-block;
+}
+#pnlSearch #searchResults .pokedex-result::after {
+  content: '#' attr(data-id) ' ' attr(data-name);
+  position: relative;
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+  font-weight: 600;
+}
+#pnlSearch #searchResults .pokedex-result:hover {
+  background-color: #2E60AB !important;
+  color: #F7C406 !important;
+  cursor: pointer;
+}
+#pnlSearch button[data-target='#pnlSearch'] {
+  position: relative;
+  display: none;
+  width: 100%;
+  height: 50px;
+}
+@media (max-width: 768px) {
+  #pnlSearch {
+    height: 100%;
+  }
+  #pnlSearch .input-group {
+    display: none !important;
+  }
+  #pnlSearch #searchResults {
+    height: calc(100% - 50px);
+    overflow: auto;
+  }
+  #pnlSearch #searchResults .pokedex-result::after {
+    display: none;
+  }
+  #pnlSearch button[data-target='#pnlSearch'] {
+    display: block;
+    bottom: 0px;
+  }
+  #pnlSearch.active {
+    grid-area: initial;
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 80%;
+    z-index: 10000;
+    overflow: auto;
+  }
+  #pnlSearch.active .input-group {
+    display: block !important;
+    z-index: 10000;
+  }
+  #pnlSearch.active #searchResults {
+    height: calc(100% - 100px);
+    z-index: 10000;
+  }
+  #pnlSearch.active #searchResults .pokedex-result {
+    z-index: 10000;
+    background: whitesmoke;
+  }
+  #pnlSearch.active #searchResults .pokedex-result::after {
+    display: inline-block;
+  }
+  #pnlSearch.active button[data-target='#pnlSearch'] {
+    z-index: 10000;
+  }
+  #pnlSearch.active button[data-target='#pnlSearch'] i::before {
+    content: '\f138';
+  }
+  #pnlSearch.active::before {
+    content: '';
+    position: fixed;
+    display: block;
+    z-index: 9000;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.65);
+  }
 }
 /* Sprite Sheet Source: https://www.deviantart.com/wesleyfg/art/Pokemon-Sun-and-Moon-All-Icon-644722700 ../../../images/icon_spritesheet.png*/
 [class*='icon-sprite-'] {

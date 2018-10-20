@@ -1,0 +1,150 @@
+﻿extends _pokemonlayout
+
+block append styles
+  link(rel='stylesheet', href='/Pokemon/css/Layout.min.css?v=1.0')
+  meta(name='description', content='Compare the base stats of multiple Pokemon at once!')
+
+block append content
+  div#pnlFavorites
+  div#pnlCompares
+  button#btnCompare(type='button', aria-label='Compare Pokemon')
+    i.fa.fa-pie-chart
+      
+  section
+    div#root
+      div.panel.panel-default
+        div.panel-heading National Pok&#0232;dex
+        div.panel-body
+          div#pokeContainer
+            div.poke-card#activePokemon
+    div.modal.fade#modCompareChart(tabindex='-1', role='dialog', aria-labelledby='modCompareChart-label')
+      div.modal-dialog.modal-lg(role='document')
+        div.modal-content
+          div.modal-header
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') &times;
+            h4.modal-title#modCompareChart-label Comparison Chart
+          div.modal-body
+            canvas#pokeComparison This Browser does not support HTML5 Canvas!
+          div.modal-footer
+            button.btn.btn-default(type='button',aria-label='Close', data-dismiss='modal') Close
+
+
+block append scripts
+  script(language='javascript', type='text/javascript', src='/Pokemon/js/Pokemon.es5.min.js?v=1.2')
+
+  script(language='javascript', type='text/javascript', src='/Pokemon/js/Comparison.es5.min.js?v=1.2')
+    
+  script(type='text/javascript',language='javascript').
+      $(document).ready(function(){
+        $("#searchResults").on("pokemon.clicked", function(e, result){
+          console.log("\t[compare-stats] Pokemon Clicked: ", result);
+          $(".poke-loader").toggleClass("show", true);
+          var div = result;
+          var id = div.getAttribute("data-id");
+          var name = div.getAttribute("data-name");
+
+          $("#activePokemon").pokeCard({
+            pokemon: id,
+            options: {
+              includes: {
+                species: {
+                  includes: {
+                    evolution_chain: {}
+                  }
+                }
+              },
+              callback: function () {
+
+              }
+            }
+          });
+        });
+      });
+  script(type='text/javascript').
+    var ActivePokemon = null;
+    var Dexs = {};
+    $(document).ready(function () {
+        drawFavoritePokemonPanel();
+
+      $(window).on("resize", function () {
+        var ape = $("#activePokemon")[0];
+        if (typeof ape !== "undefined" && ape !== null) {
+          ape.Draw();
+        }
+      });
+      // Initialize Compare Button Event
+      $("#btnCompare").on("click", function () {
+        console.log("Compare Clicked!");
+        var divs = $("#pnlCompares").find("div[data-poke-id]");
+        var pdto = new Array();
+        var data = {
+          items: null,
+          properties: [
+            "speed",
+            "special-defense",
+            "special-attack",
+            "defense",
+            "attack",
+            "hp"
+          ]
+        }
+        for (var len = divs.length, n = 0; n < len; n++) {
+          var pokemon = $(divs[n]).data("pokemon");
+          if (typeof (pokemon) !== "undefined" && pokemon !== null) {
+            var stats = {
+              "speed": 0,
+              "special-defense": 0,
+              "special-attack": 0,
+              "defense": 0,
+              "attack": 0,
+              "hp": 0
+            };
+            for (var slen = pokemon.stats.length, s = 0; s < slen; s++) {
+              stats[pokemon.stats[s].stat.name] = pokemon.stats[s].base_stat;
+            }
+            var dto = new ComparisonDTO(pokemon.name, pokemon.id, pokemon.species.color.name, stats, "/PokeApi" + pokemon.sprites.front_default);
+            pdto.push(dto);
+          }
+        }
+        data.items = pdto;
+        console.log("\tCompare DTO: ", data);
+        $("#pokeComparison").Comparison(data)[0].Draw();
+        $("#modCompareChart").modal("show");
+      });
+      $("#modCompareChart").on("shown.bs.modal", function () {
+        document.querySelector("#pokeComparison").Draw();
+      });
+
+      // Attach handler to catch changes to ActivePokemon.poke-card
+      $("#activePokemon").on("drawn.pokemon", function(ev, pokemon){
+        $(".poke-loader").toggleClass("show", false);
+        if ($("#pnlSearch").hasClass("active")) {
+            $("#pnlSearch").removeClass("active");
+        }
+        $("#txtSearchDex").val("");
+        $pokedex.reset();
+        //filterDex();
+        var ape = $("#activePokemon")[0];
+        //ape.Draw();
+        //$(this)[0].Draw();
+        var ap = ape["ActivePokemon"];
+        if (typeof(pokemon) === "undefined" || pokemon === null){
+            console.log("Pokemon parameter was null");
+            pokemon = ap;
+        }
+        // Find index of current pokemon
+        var sr = $("#searchResults");
+        var el = sr.find("[data-id='" + pokemon.id + "']");
+        if (typeof (el) !== "undefined" && el !== null && el.length > 0){
+            setTimeout(function () {
+                sr.animate({
+                scrollTop: sr.scrollTop() + el.position().top// el.offset().top - (61 + 50)
+                }, 600);
+            }, 100);
+        }else{
+            console.warn("Could not find the search result for Pokemon # '" + pokemon.id + "': ", pokemon);
+        }
+      });
+
+    });

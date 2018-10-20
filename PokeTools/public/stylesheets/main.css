@@ -1,6 +1,9 @@
 ﻿body {
   padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "LatosWeb";
+  font-size: 14px;
+  font-style: normal;
   display: grid;
   grid-template-areas: "siteNav siteNav siteNav" "asideAd main sideNav" "footer footer footer";
   grid-template-columns: 300px calc(100vw - (300px * 2)) 300px;

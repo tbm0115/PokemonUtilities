@@ -37,82 +37,6 @@ main > * {
 main section {
   grid-area: mc;
 }
-#pnlSearch {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: auto;
-  /*grid-area: mr;*/
-  background: whitesmoke;
-  -webkit-touch-callout: none;
-  /* iOS Safari */
-  -webkit-user-select: none;
-  /* Safari */
-  -khtml-user-select: none;
-  /* Konqueror HTML */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* Internet Explorer/Edge */
-  user-select: none;
-  /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
-}
-#pnlSearch div.input-group {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: 50px;
-}
-#pnlSearch #searchResults {
-  position: relative;
-  display: block;
-  width: 100%;
-  height: calc(100% - 50px);
-  /*overflow-y: auto;*/
-  border-top: 2px inset slategrey;
-  border-left: 2px inset slategrey;
-}
-#pnlSearch #searchResults div.poke-dex-result {
-  position: relative;
-  display: block;
-  height: 50px;
-  font-size: 14px;
-}
-#pnlSearch #searchResults div.poke-dex-result [class*='icon-sprite'] {
-  position: relative;
-  display: inline-block;
-}
-#pnlSearch #searchResults div.poke-dex-result span {
-  position: relative;
-  display: inline-block;
-  height: 50px;
-  line-height: 50px;
-  vertical-align: middle;
-  font-weight: 600;
-  margin-left: 36px;
-}
-#pnlSearch #searchResults div.poke-dex-result span::first-letter {
-  text-transform: uppercase;
-}
-#pnlSearch #searchResults div.poke-dex-result span[data-id]::after {
-  content: '#' attr(data-id);
-  position: absolute;
-  display: block;
-  top: 0px;
-  left: -36px;
-  text-align: right;
-}
-#pnlSearch #searchResults div.poke-dex-result:hover {
-  background-color: #A45ACD !important;
-  cursor: pointer;
-}
-#pnlSearch button[data-target='#pnlSearch'] {
-  position: relative;
-  display: none;
-  width: 100%;
-  height: 50px;
-}
 #pnlFavorites {
   grid-area: ul;
   border-top: 2px inset slategrey;
@@ -229,97 +153,11 @@ main section {
   /* 576px) {*/
   main {
     grid-template-columns: 50px calc(100% - 50px);
-    /*#pnlSearch.active {
-      grid-area: mc;
-      z-index: 5;
-
-      .input-group {
-        display: block;
-      }
-
-      #searchResults {
-        height: ~"calc(100% - 100px)";
-
-        div.poke-dex-result {
-          span {
-            display: inline-block;
-          }
-        }
-      }
-
-      button[data-target='#pnlSearch'] i::before {
-        content: '\f138'
-      }
-    }*/
-    /*footer {
-      background-color: #222;
-      color: whitesmoke;
-      font-size: 7px;
-    }*/
   }
   main #pnlCompares div[data-poke-id] span {
     display: none;
   }
   main #pnlFavorites div span {
     display: none;
-  }
-  #pnlSearch {
-    height: 100%;
-  }
-  #pnlSearch .input-group {
-    display: none !important;
-  }
-  #pnlSearch #searchResults {
-    height: calc(100% - 50px);
-    overflow: auto;
-  }
-  #pnlSearch #searchResults div.poke-dex-result span {
-    display: none;
-  }
-  #pnlSearch button[data-target='#pnlSearch'] {
-    display: block;
-    bottom: 0px;
-  }
-  #pnlSearch.active {
-    grid-area: initial;
-    position: fixed;
-    top: 10%;
-    left: 10%;
-    width: 80%;
-    height: 80%;
-    z-index: 10000;
-    overflow: auto;
-  }
-  #pnlSearch.active .input-group {
-    display: block !important;
-    z-index: 10000;
-  }
-  #pnlSearch.active #searchResults {
-    height: calc(100% - 100px);
-    z-index: 10000;
-  }
-  #pnlSearch.active #searchResults div.poke-dex-result {
-    z-index: 10000;
-    background: whitesmoke;
-  }
-  #pnlSearch.active #searchResults div.poke-dex-result span {
-    display: inline-block;
-  }
-  #pnlSearch.active button[data-target='#pnlSearch'] {
-    z-index: 10000;
-  }
-  #pnlSearch.active button[data-target='#pnlSearch'] i::before {
-    content: '\f138';
-  }
-  #pnlSearch.active::before {
-    content: '';
-    position: fixed;
-    display: block;
-    z-index: 9000;
-    top: 0px;
-    left: 0px;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.65);
   }
 }

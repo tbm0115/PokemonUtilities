@@ -1,7 +1,6 @@
-﻿extends ../_sitelayout
+﻿extends _pokemonlayout
 
 block append styles
-    link(rel='stylesheet', href='/Pokemon/css/Pokemon.min.css?v=1.6')
     link(rel='icon', href='/PokeApi/sprites/pokemon/' + pokemon.id.toString() + '.png')
     meta(name='theme-color', content=pokemon.species.color.name)
     meta(name='description', content=pokemon.species.genera[2].genus)
@@ -20,363 +19,288 @@ block append styles
         }
 
 block append content
-    .poke-card(data-species-color=pokemon.species.color.name, data-poke-id=pokemon.id)
-        .chain
-            - var prevEvos = pokemon.getPreviousEvolutions()
-            if (prevEvos !== null)
-                .chain-from
-                    .chain-item
-                        a.chain-target(href='/pokemon/' + prevEvos.species.name, data-poke-name=prevEvos.species.name, aria-label='Go to ' + prevEvos.species.name)
-                            div(class='icon-sprite-' + nationalDex.findByName(prevEvos.species.name).id)
-                        .chain-reason= pokemon.buildEvolutionTerm(pokemon.getCurrentEvolutionChain())
-            .details.biota.zoology(lang='en')
-                span.sprite
-                    img(src='/PokeApi' + pokemon.sprites.front_default, alt=pokemon.nameUpper)
-                button.poke-favorite(aria-label='Favorite this Pokemon', type='button')
-                span.family(lang='en') Pok&#0232;mon
-                span(title='National \'Dex #', aria-label='National \'Dex Number', name='id')= pokemon.id
-                .binomial
-                    p.common-name.species(title='Pok&#0232;mon Name', aria-label='Name', name='name')= pokemon.nameUpper
-                    p.genus(title='Genus Name', aria-label='Genus Name', )= pokemon.species.genera[2].genus
-            - var nextEvos = pokemon.getNextEvolutions()
-            if (nextEvos !== null && nextEvos.length > 0)
-                div.chain-to(data-count=nextEvos.length)
-                    -for (var x = 0;x < nextEvos.length; x++)
-                        .chain-item
-                            a.chain-target(href='/pokemon/' + nextEvos[x].species.name, data-poke-name=nextEvos[x].species.name, aria-label='Go to ' + nextEvos[x].species.name)
-                                div(class='icon-sprite-' + nationalDex.findByName(nextEvos[x].species.name).id)
-                            .chain-reason= pokemon.buildEvolutionTerm(nextEvos[x])
-    h3 Moves
-    div.input-group
-        label
-            i.fa.fa-window-maximize
-            text &nbsp;Full View&nbsp;
-            input(type='checkbox',title='Maximize Level View',onchange='drawLearnMoves({pokemon: Pokemon})')#chkViewAllLevels
+  .poke-card(data-species-color=pokemon.species.color.name, data-poke-id=pokemon.id)
+    .chain
+      - var prevEvos = pokemon.getPreviousEvolutions()
+      if (prevEvos !== null)
+        .chain-from
+          .chain-item
+            a.chain-target(href='/pokemon/' + prevEvos.species.name, data-poke-name=prevEvos.species.name, aria-label='Go to ' + prevEvos.species.name)
+              div(class='icon-sprite-' + nationalDex.findByName(prevEvos.species.name).id)
+            .chain-reason= pokemon.buildEvolutionTerm(pokemon.getCurrentEvolutionChain())
+      .details.biota.zoology(lang='en')
+        span.sprite
+          img(src='/PokeApi' + pokemon.sprites.front_default, alt=pokemon.nameUpper)
+        button.poke-favorite(aria-label='Favorite this Pokemon', type='button')
+        span.family(lang='en') Pok&#0232;mon
+        span(title='National \'Dex #', aria-label='National \'Dex Number', name='id')= pokemon.id
+        .binomial
+          p.common-name.species(title='Pokemon Name', aria-label='Name', name='name')= pokemon.nameUpper
+          p.genus(title='Genus Name', aria-label='Genus Name', )= pokemon.species.genera[2].genus
+      - var nextEvos = pokemon.getNextEvolutions()
+      if (nextEvos !== null && nextEvos.length > 0)
+        div.chain-to(data-count=nextEvos.length)
+          -for (var x = 0;x < nextEvos.length; x++)
+            .chain-item
+              a.chain-target(href='/pokemon/' + nextEvos[x].species.name, data-poke-name=nextEvos[x].species.name, aria-label='Go to ' + nextEvos[x].species.name)
+                div(class='icon-sprite-' + nationalDex.findByName(nextEvos[x].species.name).id)
+              .chain-reason= pokemon.buildEvolutionTerm(nextEvos[x])
+  h3 Moves
+  div.input-group
+    label
+      i.fa.fa-window-maximize
+      text &nbsp;Full View&nbsp;
+      input(type='checkbox',title='Maximize Level View',onchange='drawLearnMoves({pokemon: Pokemon})')#chkViewAllLevels
+  a.pull-right(data-toggle='collapse',data-target='#pnlVersionHides') Show/Hide Version Filters
+  div.collapse#pnlVersionHides
+    each val, index in gameTitles
+      label
+        input(type='checkbox',name='chk' + index, data-version=index, checked='checked',style='display: none;')
+        a(onclick="$(this).toggleClass('wash-out');")
+          each game, idx in gameTitles[index].games
+            span(class='icon-cart-sm-' + game)
 
-    canvas#canvLevelTree
+  canvas#canvLevelTree
 
-    table.table.table-responsive.table-hover#tblDetails
-        thead
-            tr
-                th Level
-                th Name
-                th Game Versions
-        tbody
+  table.table.table-responsive.table-hover#tblDetails
+    thead
+      tr
+        th Level
+        th Name
+        th Game Versions
+    tbody
 
 block append scripts
-    script#jsonMoveData(type='text/javascript').
-        function NormalizeText(str){
-            str = str.split("-");
-            for(var len = str.length,n=0;n<len;n++){
-                str[n] = str[n].substr(0,1).toUpperCase() + str[n].substr(1);
-            }
-            return str.join(" ");
+  script(type='text/javascript').
+    $(document).ready(function(){
+      $("#searchResults").on("pokemon.clicked", function(e, result){
+        console.log("\t[index] Pokemon Clicked: ", result);
+        window.location = "/pokemon/" + result.getAttribute("data-name");
+      });
+    });
+  script#jsonMoveData(type='text/javascript').
+    function NormalizeText(str){
+        str = str.split("-");
+        for(var len = str.length,n=0;n<len;n++){
+            str[n] = str[n].substr(0,1).toUpperCase() + str[n].substr(1);
         }
+        return str.join(" ");
+    }
 
-        var GameTitles = {
-            "red-blue": {
-                games: ["red", "blue"],
-                generation: "i",
-                console: "gameboy"
-            },
-            "yellow": {
-                games: ["yellow"],
-                generation: "i",
-                console: "gameboy"
-            },
-            "gold-silver": {
-                games: ["gold", "silver"],
-                generation: "",
-                console: "gameboy-color"
-            },
-            "crystal": {
-                games: ["crystal"],
-                generation: "",
-                console: "gameboy-color"
-            },
-            "ruby-sapphire": {
-                games: ["ruby", "sapphire"],
-                generation: "",
-                console: "gameboy-advance"
-            },
-            "emerald": {
-                games: ["emerald"],
-                generation: "",
-                console: "gameboy-advance"
-            },
-            "firered-leafgreen": {
-                games: ["fire-red", "leaf-green"],
-                generation: "",
-                console: "gameboy-advance"
-            },
-            "diamond-pearl": {
-                games: ["diamond", "pearl"],
-                generation: "",
-                console: "ds"
-            },
-            "platinum": {
-                games: ["platinum"],
-                generation: "",
-                console: "ds"
-            },
-            "heartgold-soulsilver": {
-                games: ["heart-gold", "soul-silver"],
-                generation: "",
-                console: "ds"
-            },
-            "black-white": {
-                games: ["black", "white"],
-                generation: "",
-                console: "ds"
-            },
-            "colosseum": {
-                games: ["colosseum"],
-                generation: "",
-                console: "game-cube"
-            },
-            "xd": {
-                games: ["xd"],
-                generation: "",
-                console: "game-cube"
-            },
-            "black-2-white-2": {
-                games: ["black-2", "white-2"],
-                generation: "",
-                console: "ds"
-            },
-            "x-y": {
-                games: ["x", "y"],
-                generation: "",
-                console: "3ds"
-            },
-            "omega-ruby-alpha-sapphire": {
-                games: ["omega-ruby", "alpha-sapphire"],
-                generation: "",
-                console: "3ds"
-            },
-            "sun-moon": {
-                games: ["sun", "moon"],
-                generation: "",
-                console: "3ds"
-            },
-            "ultra-sun-ultra-moon": {
-                games: ["ultra-sun", "ultra-moon"],
-                generation: "",
-                console: "3ds"
-            }
-        };
+    var GameTitles = !{JSON.stringify(gameTitles)};
         
-        var Pokemon = !{JSON.stringify(pokemon)};
-        Pokemon["learnMoves"] = !{JSON.stringify(pokemon.getLevelMoveSet())};
-        Pokemon["nextEvolutions"] = !{JSON.stringify(nextEvos)};
-        function drawLearnMoves(data, mouseCoords){
-            var moveSet = data.pokemon.learnMoves;
-            var lvls = Object.getOwnPropertyNames(moveSet);
-            var canv = document.querySelector("#canvLevelTree");
-            var rect = canv.getBoundingClientRect();
-            canv.width = rect.width;
-            canv.height = rect.height;
-            var ctx = canv.getContext("2d");
+    var Pokemon = !{JSON.stringify(pokemon)};
+    Pokemon["learnMoves"] = !{JSON.stringify(pokemon.getLevelMoveSet())};
+    Pokemon["nextEvolutions"] = !{JSON.stringify(nextEvos)};
+    function drawLearnMoves(data, mouseCoords){
+        var moveSet = data.pokemon.learnMoves;
+        var lvls = Object.getOwnPropertyNames(moveSet);
+        var canv = document.querySelector("#canvLevelTree");
+        var rect = canv.getBoundingClientRect();
+        canv.width = rect.width;
+        canv.height = rect.height;
+        var ctx = canv.getContext("2d");
             
-            var blnViewAllLevels = document.querySelector("#chkViewAllLevels").checked;
-            if (typeof(blnViewAllLevels) === "undefined" || blnViewAllLevels === null){
-                blnViewAllLevels = true;
-            }
-
-            var margVertical = 0.25;
-            var margHorizontal = 0.015;
-            var nomSpanBox = {
-                width: Math.floor(rect.width * (1 - (margHorizontal * 2))),
-                height: Math.floor(rect.height * (1 - (margVertical * 2))),
-                x: Math.floor(rect.width * margHorizontal),
-                y: Math.floor(rect.height * margVertical)
-            };
-            var nomLevelBox = {
-                width: nomSpanBox.width / (blnViewAllLevels ? 100 : lvls.length),
-                height: nomSpanBox.height
-            };
-
-            var fncGetLevelPosition = function(lv){
-                if (!blnViewAllLevels){
-                    //console.log("[fncGetLevelPosition] Changing lv from '" + lv.toString() + "' to '" + lvls.indexOf(lv.toString()).toString() + "'", lvls);
-                    lv = lvls.indexOf(lv.toString()) + 1;
-                }
-                return {
-                    x: Math.floor(nomSpanBox.x + (nomLevelBox.width * (lv - 1))),
-                    y: Math.floor(nomSpanBox.y),
-                    center: {
-                        x: Math.floor(nomSpanBox.x + (nomLevelBox.width * (lv - 1)) + (nomLevelBox.width / 2)),
-                        y: Math.floor(nomSpanBox.y + (nomLevelBox.height / 2))
-                    }
-                };
-            };
-            ctx.fillStyle = "black";
-            ctx.font = "8px Arial";
-            ctx.textAlign = "left";
-            ctx.textBaseline = "middle";
-            ctx.fillText("Lv 0", 0, rect.height / 2, rect.width * margHorizontal);
-            ctx.textAlign = "right";
-            ctx.fillText("Lv 100", rect.width, rect.height / 2, rect.width * margHorizontal);
-            ctx.textAlign = "center";
-            
-
-            // Draw Move Data
-            var hoverMove = null;
-            var clicked = canv["clicked"];
-            for(var llen = 100,l=1;l<=llen;l++){
-                var level = l;
-                var pt = fncGetLevelPosition(level);
-                if (!(l in moveSet) && blnViewAllLevels){
-                    ctx.fillStyle = "grey";
-                    ctx.beginPath();
-                    ctx.fillText(level, pt.x + (nomLevelBox.width / 2), pt.y, nomLevelBox.width); // Draw Current Level
-                    ctx.closePath();
-                }else if(l in moveSet){
-                    ctx.fillStyle = "black";
-                    ctx.fillText(level, pt.x + (nomLevelBox.width / 2), pt.y, nomLevelBox.width); // Draw Current Level
-                    for(var len = moveSet[level].length,n=0;n<len;n++){
-                        ctx.strokeStyle = "black";
-                        ctx.fillStyle = "black";
-                        var move = moveSet[level][n];
-                        var cpt = {
-                            x: pt.center.x,
-                            y: Math.floor(pt.y + (nomLevelBox.height * ((n + 1) / (len + 1)))),
-                            d: Math.floor(Math.min(nomLevelBox.width, (nomLevelBox.height/(len+1)))/2)
-                        };
-
-                        ctx.beginPath();
-                        ctx.arc(cpt.x, cpt.y, cpt.d, 0, 2*Math.PI); // Draw Circle
-                        if (typeof mouseCoords !== "undefined" && mouseCoords !== null) {
-                            if (ctx.isPointInPath(mouseCoords.x, mouseCoords.y)) {
-                                hoverMove = {
-                                    move: move.name,
-                                    level: level,
-                                    versions: move.versions
-                                };
-                                ctx.strokeStyle = Pokemon.species.color.name;// "green";
-                            }
-                        }
-                        if (typeof (clicked) !== "undefined" && clicked.move === move.name){
-                            ctx.fillStyle = Pokemon.species.color.name;//"green";
-                            if (clicked.level === level){
-                                ctx.strokeStyle = "lightgreen";
-                            }
-                            ctx.fill();
-                        }
-                        ctx.closePath();
-                        ctx.stroke();
-                    }
-                }
-            }
-            var tblDetails = document.querySelector("#tblDetails");
-            if (typeof(mouseCoords) === "undefined" || mouseCoords === null){
-                tblDetails.style.display = "none";
-            }
-            if (hoverMove === null){
-                canv.style.cursor = "default";
-            }else{
-                canv.style.cursor = "pointer";
-                if (mouseCoords.clicked){
-                    canv["clicked"] = hoverMove;
-                    tblDetails.style.display = "table";
-                    var tbody = tblDetails.querySelector("tbody");
-                    tbody.innerHTML = "";
-                    var tr = tbody.appendChild(document.createElement("tr"));
-                    tr.appendChild(document.createElement("td")).innerText = hoverMove.level;
-                    tr.appendChild(document.createElement("td")).innerText = NormalizeText(hoverMove.move);
-                    var vtd = tr.appendChild(document.createElement("td"));
-                    for(var len = hoverMove.versions.length,n=0;n<len;n++){
-                        var spanClass = hoverMove.versions[n];
-                        var gameTitleClass = GameTitles[spanClass];
-                        if (typeof (gameTitleClass) !== "undefined" && gameTitleClass !== null){
-                            for(var glen = gameTitleClass.games.length,g=0;g<glen;g++){
-                                spanClass = gameTitleClass.games[g];
-                                if (vtd.querySelector(".icon-cart-sm-" + spanClass) === null){
-                                    var spn = vtd.appendChild(document.createElement("span"));
-                                    spn.setAttribute("title", NormalizeText(spanClass));
-                                    spn.setAttribute("class", "icon-cart-sm-" + spanClass);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Draw Evolutionary Data
-            if (blnViewAllLevels){
-                ctx.strokeStyle = "black";
-                var fncRecursiveDrawLevelEvolutions = function(chainItem){
-                    var lvlUpDetails = chainItem.evolution_details.filter(function(e){return e.min_level > 0;});
-                    if (lvlUpDetails.length > 0){
-                        lvlUpDetails = lvlUpDetails[0];
-                        var lvl = lvlUpDetails.min_level;
-                        var id = chainItem.species.url;
-                        id = id.substr(0, id.length - 1);
-                        id = id.substr(id.lastIndexOf("/")+1);
-                        var pt = fncGetLevelPosition(lvl);
-                        var ipt = {
-                            ix: (((id - 1) % 25) * 40),
-                            iy: (Math.floor((id - 1) / 25) * 30),
-                            iw: 40,
-                            ih: 30,
-                            x: pt.center.x - 20,
-                            y: Math.floor(pt.y + nomLevelBox.height + ((rect.height * margVertical)/2)) - 15
-                        }
-                        var img = canv["img-" + id];
-                        if (typeof(img) === "undefined" || img === null){
-                            canv["img-" + id] = new Image(40, 30);
-                            img = canv["img-" + id];
-                            img.onload = (function(){
-                                this.ctx.drawImage(img, this.pt.ix, this.pt.iy, this.pt.iw, this.pt.ih, this.pt.x, this.pt.y, this.pt.iw, this.pt.ih);
-                            }).bind({pt: ipt, ctx: ctx});
-                            img.src = "/images/icon_spritesheet.png";
-                        }else{
-                            ctx.drawImage(img, ipt.ix, ipt.iy, ipt.iw, ipt.ih, ipt.x, ipt.y, ipt.iw, ipt.ih);
-                        }
-                    }
-                    if (chainItem.evolves_to.length > 0){
-                        for(var len = chainItem.evolves_to.length,n=0;n<len;n++){
-                            fncRecursiveDrawLevelEvolutions(chainItem.evolves_to[n]);
-                        }
-                    }
-                }
-                for(var len = data.pokemon.nextEvolutions.length,n=0;n<len;n++){
-                    var chainItem = data.pokemon.nextEvolutions[n];
-                    fncRecursiveDrawLevelEvolutions(chainItem);
-                }
-            }
-
-            return canv;
+        var blnViewAllLevels = document.querySelector("#chkViewAllLevels").checked;
+        if (typeof(blnViewAllLevels) === "undefined" || blnViewAllLevels === null){
+            blnViewAllLevels = true;
         }
+
+        var margVertical = 0.25;
+        var margHorizontal = 0.015;
+        var nomSpanBox = {
+            width: Math.floor(rect.width * (1 - (margHorizontal * 2))),
+            height: Math.floor(rect.height * (1 - (margVertical * 2))),
+            x: Math.floor(rect.width * margHorizontal),
+            y: Math.floor(rect.height * margVertical)
+        };
+        var nomLevelBox = {
+            width: nomSpanBox.width / (blnViewAllLevels ? 100 : lvls.length),
+            height: nomSpanBox.height
+        };
+
+        var fncGetLevelPosition = function(lv){
+            if (!blnViewAllLevels){
+                //console.log("[fncGetLevelPosition] Changing lv from '" + lv.toString() + "' to '" + lvls.indexOf(lv.toString()).toString() + "'", lvls);
+                lv = lvls.indexOf(lv.toString()) + 1;
+            }
+            return {
+                x: Math.floor(nomSpanBox.x + (nomLevelBox.width * (lv - 1))),
+                y: Math.floor(nomSpanBox.y),
+                center: {
+                    x: Math.floor(nomSpanBox.x + (nomLevelBox.width * (lv - 1)) + (nomLevelBox.width / 2)),
+                    y: Math.floor(nomSpanBox.y + (nomLevelBox.height / 2))
+                }
+            };
+        };
+        ctx.fillStyle = "black";
+        ctx.font = "8px Arial";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "middle";
+        ctx.fillText("Lv 0", 0, rect.height / 2, rect.width * margHorizontal);
+        ctx.textAlign = "right";
+        ctx.fillText("Lv 100", rect.width, rect.height / 2, rect.width * margHorizontal);
+        ctx.textAlign = "center";
+            
+
+        // Draw Move Data
+        var hoverMove = null;
+        var clicked = canv["clicked"];
+        for(var llen = 100,l=1;l<=llen;l++){
+            var level = l;
+            var pt = fncGetLevelPosition(level);
+            if (!(l in moveSet) && blnViewAllLevels){
+                ctx.fillStyle = "grey";
+                ctx.beginPath();
+                ctx.fillText(level, pt.x + (nomLevelBox.width / 2), pt.y, nomLevelBox.width); // Draw Current Level
+                ctx.closePath();
+            }else if(l in moveSet && moveSet[l].filter(function(e1,i1){return e1.versions.filter(function(e,i){return $("input[type='checkbox'][data-version='" + e + "']")[0].checked;}).length > 0;}).length > 0){
+                ctx.fillStyle = "black";
+                ctx.fillText(level, pt.x + (nomLevelBox.width / 2), pt.y, nomLevelBox.width); // Draw Current Level
+                for(var len = moveSet[level].length,n=0;n<len;n++){
+                    ctx.strokeStyle = "black";
+                    ctx.fillStyle = "black";
+                    var move = moveSet[level][n];
+
+                    var cpt = {
+                        x: pt.center.x,
+                        y: Math.floor(pt.y + (nomLevelBox.height * ((n + 1) / (len + 1)))),
+                        d: Math.floor(Math.min(nomLevelBox.width, (nomLevelBox.height/(len+1)))/2)
+                    };
+
+                    ctx.beginPath();
+                    ctx.arc(cpt.x, cpt.y, cpt.d, 0, 2*Math.PI); // Draw Circle
+                    if (typeof mouseCoords !== "undefined" && mouseCoords !== null) {
+                        if (ctx.isPointInPath(mouseCoords.x, mouseCoords.y)) {
+                            hoverMove = {
+                                move: move.name,
+                                level: level,
+                                versions: move.versions
+                            };
+                            ctx.strokeStyle = Pokemon.species.color.name;// "green";
+                        }
+                    }
+                    if (typeof (clicked) !== "undefined" && clicked.move === move.name){
+                        ctx.fillStyle = Pokemon.species.color.name;//"green";
+                        if (clicked.level === level){
+                            ctx.strokeStyle = "lightgreen";
+                        }
+                        ctx.fill();
+                    }
+                    ctx.closePath();
+                    ctx.stroke();
+                }
+            }
+        }
+        var tblDetails = document.querySelector("#tblDetails");
+        if (typeof(mouseCoords) === "undefined" || mouseCoords === null){
+            tblDetails.style.display = "none";
+        }
+        if (hoverMove === null){
+            canv.style.cursor = "default";
+        }else{
+            canv.style.cursor = "pointer";
+            if (mouseCoords.clicked){
+                canv["clicked"] = hoverMove;
+                tblDetails.style.display = "table";
+                var tbody = tblDetails.querySelector("tbody");
+                tbody.innerHTML = "";
+                var tr = tbody.appendChild(document.createElement("tr"));
+                tr.appendChild(document.createElement("td")).innerText = hoverMove.level;
+                tr.appendChild(document.createElement("td")).innerText = NormalizeText(hoverMove.move);
+                var vtd = tr.appendChild(document.createElement("td"));
+                for(var len = hoverMove.versions.length,n=0;n<len;n++){
+                    var spanClass = hoverMove.versions[n];
+                    var gameTitleClass = GameTitles[spanClass];
+                    if (typeof (gameTitleClass) !== "undefined" && gameTitleClass !== null){
+                        for(var glen = gameTitleClass.games.length,g=0;g<glen;g++){
+                            spanClass = gameTitleClass.games[g];
+                            if (vtd.querySelector(".icon-cart-sm-" + spanClass) === null){
+                                var spn = vtd.appendChild(document.createElement("span"));
+                                spn.setAttribute("title", NormalizeText(spanClass));
+                                spn.setAttribute("class", "icon-cart-sm-" + spanClass);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Draw Evolutionary Data
+        if (blnViewAllLevels){
+            ctx.strokeStyle = "black";
+            var fncRecursiveDrawLevelEvolutions = function(chainItem){
+                var lvlUpDetails = chainItem.evolution_details.filter(function(e){return e.min_level > 0;});
+                if (lvlUpDetails.length > 0){
+                    lvlUpDetails = lvlUpDetails[0];
+                    var lvl = lvlUpDetails.min_level;
+                    var id = chainItem.species.url;
+                    id = id.substr(0, id.length - 1);
+                    id = id.substr(id.lastIndexOf("/")+1);
+                    var pt = fncGetLevelPosition(lvl);
+                    var ipt = {
+                        ix: (((id - 1) % 25) * 40),
+                        iy: (Math.floor((id - 1) / 25) * 30),
+                        iw: 40,
+                        ih: 30,
+                        x: pt.center.x - 20,
+                        y: Math.floor(pt.y + nomLevelBox.height + ((rect.height * margVertical)/2)) - 15
+                    }
+                    var img = canv["img-" + id];
+                    if (typeof(img) === "undefined" || img === null){
+                        canv["img-" + id] = new Image(40, 30);
+                        img = canv["img-" + id];
+                        img.onload = (function(){
+                            this.ctx.drawImage(img, this.pt.ix, this.pt.iy, this.pt.iw, this.pt.ih, this.pt.x, this.pt.y, this.pt.iw, this.pt.ih);
+                        }).bind({pt: ipt, ctx: ctx});
+                        img.src = "/images/icon_spritesheet.png";
+                    }else{
+                        ctx.drawImage(img, ipt.ix, ipt.iy, ipt.iw, ipt.ih, ipt.x, ipt.y, ipt.iw, ipt.ih);
+                    }
+                }
+                if (chainItem.evolves_to.length > 0){
+                    for(var len = chainItem.evolves_to.length,n=0;n<len;n++){
+                        fncRecursiveDrawLevelEvolutions(chainItem.evolves_to[n]);
+                    }
+                }
+            }
+            for(var len = data.pokemon.nextEvolutions.length,n=0;n<len;n++){
+                var chainItem = data.pokemon.nextEvolutions[n];
+                fncRecursiveDrawLevelEvolutions(chainItem);
+            }
+        }
+
+        return canv;
+    }
+    drawLearnMoves({
+        pokemon: Pokemon
+    });
+        
+    document.querySelector("#canvLevelTree")["fncGetMousePos"] = function (ev) {
+        var rect = ev.currentTarget.getBoundingClientRect();
+        return {
+            x: ev.clientX - rect.left,
+            y: ev.clientY - rect.top
+        };
+    };
+    document.querySelector("#canvLevelTree").onmousemove = function (ev) {
+        var mousePos = ev.currentTarget.fncGetMousePos(ev);
+        mousePos["clicked"] = false;
+        //console.log("Canvas mousemove: ", mousePos);
         drawLearnMoves({
             pokemon: Pokemon
-        });
-        
-        document.querySelector("#canvLevelTree")["fncGetMousePos"] = function (ev) {
-            var rect = ev.currentTarget.getBoundingClientRect();
-            return {
-                x: ev.clientX - rect.left,
-                y: ev.clientY - rect.top
-            };
-        };
-        document.querySelector("#canvLevelTree").onmousemove = function (ev) {
-            var mousePos = ev.currentTarget.fncGetMousePos(ev);
-            mousePos["clicked"] = false;
-            //console.log("Canvas mousemove: ", mousePos);
-            drawLearnMoves({
-                pokemon: Pokemon
-                }, mousePos);
-        };
-        document.querySelector("#canvLevelTree").onclick = function(ev){
-            var mousePos = ev.currentTarget.fncGetMousePos(ev);
-            mousePos["clicked"] = true;
-            //console.log("Canvas mousemove: ", mousePos);
-            drawLearnMoves({
-                pokemon: Pokemon
-                }, mousePos);
-        };
-        window.onresize = function(){
-            drawLearnMoves({
-                pokemon: Pokemon
-                });
-        }
+            }, mousePos);
+    };
+    document.querySelector("#canvLevelTree").onclick = function(ev){
+        var mousePos = ev.currentTarget.fncGetMousePos(ev);
+        mousePos["clicked"] = true;
+        //console.log("Canvas mousemove: ", mousePos);
+        drawLearnMoves({
+            pokemon: Pokemon
+            }, mousePos);
+    };
+    window.onresize = function(){
+        drawLearnMoves({
+            pokemon: Pokemon
+            });
+    }
