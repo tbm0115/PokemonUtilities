@@ -1,0 +1,121 @@
+﻿body {
+  padding: 0px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "LatosWeb";
+  font-size: 14px;
+  font-style: normal;
+  display: grid;
+  grid-template-areas: "siteNav siteNav siteNav" "asideAd main sideNav" "footer footer footer";
+  grid-template-columns: 300px calc(100vw - (300px * 2)) 300px;
+  grid-template-rows: 50px calc(100vh - (50px + 50px)) 50px;
+  grid-gap: 0px;
+  background: url('/images/background.png') no-repeat fixed;
+  background-position: center top;
+  background-size: cover;
+  color: initial;
+  /*#e1e1e1;*/
+}
+body > nav:first-of-type:not(:last-of-type) {
+  grid-area: siteNav;
+}
+body > main {
+  grid-area: main;
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.85);
+  padding: 3px;
+}
+body > main .jumbotron {
+  background: none;
+  background: linear-gradient(transparent, rgba(255, 255, 255, 0.6));
+  margin-bottom: 0px;
+}
+body > main .jumbotron h1 {
+  text-align: center;
+}
+body > main .jumbotron p {
+  position: relative;
+  display: block;
+  max-width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.25em;
+}
+body > aside {
+  grid-area: asideAd;
+  background: rgba(255, 255, 255, 0.85);
+}
+body > nav:last-of-type:not(:first-of-type) {
+  grid-area: sideNav;
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.85);
+}
+body > footer {
+  grid-area: footer;
+  background: rgba(255, 255, 255, 0.85);
+}
+@media (max-width: 768px) {
+  body {
+    grid-template-columns: 0px calc(100vw - 50px) 50px;
+    grid-template-rows: 50px calc(100vh - (50px + 25px)) 25px;
+  }
+}
+a {
+  color: #00B7FF;
+}
+ul.tiles {
+  position: relative;
+  display: ms-flexbox;
+  display: flex;
+  display: -webkit-flexbox;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: warp;
+  list-style: none;
+  margin: 0px;
+  padding: 10px;
+}
+ul.tiles > li {
+  position: relative;
+  display: block;
+  width: 20%;
+  min-width: 225px;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#eeeeee+0,cccccc+100;Gren+3D */
+  background: #eeeeee;
+  /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #eeeeee 0%, #cccccc 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #eeeeee 0%, #cccccc 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #eeeeee 0%, #cccccc 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc', GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
+  background: none;
+  /*margin-left: 10px;*/
+  margin-top: 10px;
+  padding: 5px;
+}
+ul.tiles > li:hover {
+  box-shadow: 4px 4px 3px rgba(0, 0, 0, 0.3);
+}
+ul.tiles > li > a > picture {
+  position: relative;
+  display: block;
+}
+ul.tiles > li > a > picture > img {
+  position: relative;
+  display: block;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+ul.tiles > li > a > span {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  text-decoration: none;
+  font-weight: 600;
+  text-align: center;
+  line-height: 1em;
+  vertical-align: middle;
+  color: #192851;
+}

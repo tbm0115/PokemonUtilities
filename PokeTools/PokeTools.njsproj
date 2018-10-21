@@ -285,6 +285,7 @@
     <Content Include="public\images\Game Covers\Pokemon\x.png" />
     <Content Include="public\images\Game Covers\Pokemon\y.png" />
     <Content Include="public\images\Game Covers\Pokemon\yellow.png" />
+    <Content Include="public\images\background.png" />
     <Content Include="public\manifest.json" />
     <Content Include="public\offline.html" />
     <Content Include="package.json" />
@@ -617,6 +618,23 @@
     <Content Include="public\Pokemon\images\PokeTools.png" />
     <Content Include="public\stylesheets\latofonts.css" />
     <Content Include="public\stylesheets\main.css" />
+    <Content Include="public\stylesheets\site.css">
+      <SubType>Content</SubType>
+      <DependentUpon>public\stylesheets\site.less</DependentUpon>
+    </Content>
+    <Content Include="public\stylesheets\site.less">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="public\stylesheets\site.min.css">
+      <SubType>Content</SubType>
+      <DependentUpon>public\stylesheets\site.css</DependentUpon>
+    </Content>
+    <Content Include="views\about.pug">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="views\contact.pug">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="views\error.pug" />
     <Content Include="views\index.pug">
       <SubType>Code</SubType>
@@ -634,6 +652,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="views\pokemon\_pokemonlayout.pug">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="views\privacy.pug">
       <SubType>Code</SubType>
     </Content>
     <Content Include="views\_sitelayout.pug">

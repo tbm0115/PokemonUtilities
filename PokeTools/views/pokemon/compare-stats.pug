@@ -13,19 +13,21 @@ block append styles
       border: 3px outset slategrey;
       border-radius: 5px;
     }
+    #workSpace{
+      background: linear-gradient(rgba(255,255,255, 0.6), transparent);
+    }
 block append content
   section
-    div#root
-      div.panel.panel-default
-        div.panel-heading
-          h1 Compare Base Stats
-        div.panel-body
-          div.row(style='margin: 0px;')
-            div.col-md-6
-              canvas#pokeComparison This Browser does not support HTML5 Canvas!
-              p#compareMessage
-            div.col-md-6
-              ul#pokeContainer
+    .jumbotron
+      h1 Compare Base Stats
+      p Compare the base stats of multiple Pok&#0232;mon at once. See how each stat stacks up against the collective average of the selected Pok&#0232;mon. Hover over each stat to view the actual value.
+      p.alert.alert-info Use the navigation menu to the right to add Pok&#0232;mon to the comparison chart.
+    div.row(style='margin: 0px;')#workSpace
+      div.col-md-6
+        canvas#pokeComparison This Browser does not support HTML5 Canvas!
+        p#compareMessage
+      div.col-md-6
+        ul#pokeContainer
             
 block append scripts
   script(language='javascript', type='text/javascript', src='/Pokemon/js/Pokemon.es5.min.js?v=1.2')
@@ -90,6 +92,14 @@ block append scripts
         i.style.display = "inline-block";
         var spn = li.appendChild(document.createElement("span"));
         spn.innerText = pokemon.name.substr(0, 1).toUpperCase() + pokemon.name.substr(1);
+        var aView = li.appendChild(document.createElement("a"));
+        aView.setAttribute("href", "/pokemon/" + pokemon.name);
+        aView.setAttribute("target", "_blank");
+        aView.style.marginLeft = "5px";
+        aView.setAttribute("title", "View Entry");
+        aView.setAttribute("role", "link");
+        aView.setAttribute("aria-label", "View Entry");
+        aView.innerHTML = "<i class='fa fa-external-link'></i>";
         var aClose = li.appendChild(document.createElement("a"));
         aClose.setAttribute("class", "close");
         aClose.innerHTML = "&times;";

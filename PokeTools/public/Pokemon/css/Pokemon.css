@@ -1,17 +1,4 @@
-﻿body {
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,f6f6f6+47,ededed+100;White+3D+%231 */
-  background: #ffffff;
-  /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #ffffff 0%, #f6f6f6 47%, #ededed 100%);
-  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed', GradientType=1);
-  /* IE6-9 fallback on horizontal gradient */
-}
-.poke-loader {
+﻿.poke-loader {
   position: fixed;
   display: none;
   width: 100vw;
@@ -434,7 +421,7 @@
   width: 100%;
   height: auto;
   /*grid-area: mr;*/
-  background: whitesmoke;
+  /*background: whitesmoke;*/
   -webkit-touch-callout: none;
   /* iOS Safari */
   -webkit-user-select: none;
@@ -469,7 +456,7 @@
   display: block;
   height: 50px;
   font-size: 14px;
-  color: #2E60AB;
+  /*color: #2E60AB;*/
 }
 #pnlSearch #searchResults .pokedex-result [class*='icon-sprite'] {
   position: relative;
@@ -486,7 +473,7 @@
 }
 #pnlSearch #searchResults .pokedex-result:hover {
   background-color: #2E60AB !important;
-  color: #F7C406 !important;
+  /*color: #F7C406 !important;*/
   cursor: pointer;
 }
 #pnlSearch button[data-target='#pnlSearch'] {

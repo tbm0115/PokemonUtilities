@@ -22,5 +22,9 @@
   {
     "outputFile": "public/Pokemon/css/Layout.css",
     "inputFile": "public/Pokemon/css/Layout.less"
+  },
+  {
+    "outputFile": "public/stylesheets/site.css",
+    "inputFile": "public/stylesheets/site.less"
   }
 ]

@@ -1,15 +1,43 @@
 ﻿extends _sitelayout
 
+block append styles
+  style(type='text/css').
+    #subSites{
+      background: linear-gradient(rgba(255,255,255, 0.6), transparent);
+    }
+
 block append content
-  h1 Welcome to Utilities.Games!
-  p Look to this network for any video game tools you need. Check back frequently for included games and tools. Here's a look at our existing games and tools:
-  .row(style='margin: 0px;')
-    figure.col-lg-4.col-md-6.col-sm-6.col-xs-12
+  .jumbotron
+    h1 Welcome to Utilities.Games!
+    p Utilities.Games is a network dedicated to providing gamers with tools to maximize their skills. Check out our existing sites and tools. If you don't see one, please let us know on our Facebook page.
+  ul.tiles#subSites
+    li
       a(href='/pokemon')
-        img(src='/Pokemon/images/PokeTools.png').img-fluid
-      figcaption Pok&#0232;Tools
-    figure.col-lg-4.col-md-6.col-sm-6.col-xs-12
+        picture
+          source(srcset='/Pokemon/images/PokeTools.webp', type='image/webp')
+          source(srcset='/Pokemon/images/PokeTools.png', type='image/png')
+          img(src='/Pokemon/images/PokeTools.png', alt='PokeTools').img-fluid
+        span Pok&#0232;Tools
+    li
       a(href='#')
-        img(src='/images/compiling.png').img-fluid
-      figcaption More Coming Soon
-      
+        picture
+          source(srcset='/images/compiling.webp', type='image/webp')
+          source(srcset='/images/compiling.png', type='image/png')
+          img(src='/images/compiling.png', alt='More Coming Soon')
+        span More Coming Soon
+
+block append subNav
+  h4 News
+  #newsContainer
+    .text-muted No New Articles
+  hr
+  h4 Latest Tools
+  #newToolsContainer
+    ul.tiles
+      li
+        a(href='/pokemon/compare/stats')
+          picture
+            source(srcset='/Pokemon/images/ComparisonChart.png', type='image/webp')
+            source(srcset='/Pokemon/images/ComparisonChart.png', type='image/png')
+            img(src='/Pokemon/images/ComparisonChart.png', alt='Pokemon Comparison Chart').img-fluid
+          span Pok&#0232;mon Base Stat Comparison

@@ -1,18 +1,30 @@
 ﻿extends _pokemonlayout
 
 block append styles
-
+  style(type='text/css').
+    #tools{
+      background: linear-gradient(rgba(255,255,255, 0.6), transparent);
+    }
 block append content
-  p.alert.alert-info Choose from the tools below or click a Pokemon to the right to view its details.
-  .row(style='margin: 0px;')
-    figure.col-lg-4.col-md-6.col-sm-6.col-xs-12
+  .jumbotron
+    h1 Welcome to Pok&#0232;Tools!
+    p The Pok&#0232;mon&trade; gameplay utility site.
+    p.alert.alert-info Choose from the tools below or click a Pokemon to the right to view its details.
+  ul.tiles#tools
+    li
       a(href='/pokemon/compare/stats')
-        img(src='/Pokemon/images/ComparisonChart.png').img-fluid
-      figcaption Base Stats Comparison
-    figure.col-lg-4.col-md-6.col-sm-6.col-xs-12
+        picture
+          source(srcset='/Pokemon/images/ComparisonChart.webp', type='image/webp')
+          source(srcset='/Pokemon/images/ComparisonChart.png', type='image/png')
+          img(src='/Pokemon/images/ComparisonChart.png', alt='Compare Stats').img-fluid
+        span Base Stats Comparison
+    li
       a(href='/pokemon')
-        img(src='/images/compiling.png').img-fluid
-      figcaption More Coming Soon
+        picture
+          source(srcset='/images/compiling.webp', type='image/webp')
+          source(srcset='/images/compiling.png', type='image/png')
+          img(src='/images/compiling.png', alt='Coming Soon').img-fluid
+        span More Coming Soon
 
 block append scripts
   script(type='text/javascript').
