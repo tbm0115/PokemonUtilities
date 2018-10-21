@@ -1,12 +1,15 @@
 ﻿extends _sitelayout
 
 block append content
-    h1 Welcome to Utilities.Games!
-    p Look to this network for any video game tools you need. Check back frequently for included games and tools. Here's a look at our existing games and tools:
-    ul
-        li
-            a(href='/pokemon',title='PokeTools') Pok&#0232;Tools
-            span : Tools for classic Pok&#0232mon games.
-            ul
-                li Reference information on Evolutions and Base Statistics
-                li Compare Base Stats of multiple Pok&#0232;mon!
+  h1 Welcome to Utilities.Games!
+  p Look to this network for any video game tools you need. Check back frequently for included games and tools. Here's a look at our existing games and tools:
+  .row(style='margin: 0px;')
+    figure.col-lg-4.col-md-6.col-sm-6.col-xs-12
+      a(href='/pokemon')
+        img(src='/Pokemon/images/PokeTools.png').img-fluid
+      figcaption Pok&#0232;Tools
+    figure.col-lg-4.col-md-6.col-sm-6.col-xs-12
+      a(href='#')
+        img(src='/images/compiling.png').img-fluid
+      figcaption More Coming Soon
+      

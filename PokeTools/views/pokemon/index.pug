@@ -1,35 +1,18 @@
 ﻿extends _pokemonlayout
 
 block append styles
-  style(type='text/css').
-    figure{
-      width: 220px;
-      height: 200px;
-    }
-    figure figcaption{
-      bottom: 0px;
-      margin-top: 5px;
-      text-align: center;
-      color: slategrey;
-    }
-    figure:hover{
-      background: #2e60ab;
-      border-radius: 10px;
-    }
-    figure:hover figcaption{
-      color: #f7c406 !important;
-    }
+
 block append content
   p.alert.alert-info Choose from the tools below or click a Pokemon to the right to view its details.
   .row(style='margin: 0px;')
-    figure.col-md-2
+    figure.col-lg-4.col-md-6.col-sm-6.col-xs-12
       a(href='/pokemon/compare/stats')
-        img(src='/Pokemon/images/ComparisonChart.png').img-responsive
+        img(src='/Pokemon/images/ComparisonChart.png').img-fluid
       figcaption Base Stats Comparison
-    figure.col-md-2
-      a(href='/pokemon/compare/moves')
-        img(src='/Pokemon/images/CompareMoves.png').img-responsive
-      figcaption Move Set Comparison
+    figure.col-lg-4.col-md-6.col-sm-6.col-xs-12
+      a(href='/pokemon')
+        img(src='/images/compiling.png').img-fluid
+      figcaption More Coming Soon
 
 block append scripts
   script(type='text/javascript').

@@ -1,7 +1,7 @@
 ﻿extends ../_sitelayout
 
 block append styles
-    link(rel='stylesheet', href='/Pokemon/css/Pokemon.min.css?v=1.7')
+    link(rel='stylesheet', href='/Pokemon/css/Pokemon.min.css?v=1.8')
     link(rel='preload', href='/PokeApi/api/v2/pd/1/index.json', as='fetch')
     style(type='text/css').
         .wash-out{
@@ -10,7 +10,7 @@ block append styles
         
 block append subNav
     #pnlSearch
-        div.input-group
+        div.form-group
             input.form-control#txtSearchDex(role='search', placeholder='Search National \'Dex', type='search')
         div#searchResults.pokedex
         button(type='button',aria-label='Open Search Panel', data-target='#pnlSearch', onclick='document.querySelector("#pnlSearch").classList.toggle("active");')

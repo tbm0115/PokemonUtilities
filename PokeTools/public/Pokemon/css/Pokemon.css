@@ -449,7 +449,7 @@
   /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
-#pnlSearch div.input-group {
+#pnlSearch div.form-group {
   position: relative;
   display: block;
   width: 100%;
@@ -499,7 +499,7 @@
   #pnlSearch {
     height: 100%;
   }
-  #pnlSearch .input-group {
+  #pnlSearch .form-group {
     display: none !important;
   }
   #pnlSearch #searchResults {
@@ -523,7 +523,7 @@
     z-index: 10000;
     overflow: auto;
   }
-  #pnlSearch.active .input-group {
+  #pnlSearch.active .form-group {
     display: block !important;
     z-index: 10000;
   }
