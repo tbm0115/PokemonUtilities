@@ -16,6 +16,10 @@ block append styles
     #workSpace{
       background: linear-gradient(rgba(255,255,255, 0.6), transparent);
     }
+block append breadcrumb
+  li.breadcrumb-item 
+    a(href='/pokemon') Pok&#0232;Tools
+  li.breadcrumb-item.active(aria-current='page') Compare Base Stats
 block append content
   section
     .jumbotron

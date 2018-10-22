@@ -17,6 +17,9 @@ block append subNav
             i.fa.fa-chevron-circle-left
 
 block append content
+  nav(aria-label='breadcrumb')
+    ol.breadcrumb
+      block breadcrumb
   div.poke-loader
 
 block append scripts
