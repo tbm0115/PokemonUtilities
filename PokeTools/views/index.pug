@@ -2,42 +2,88 @@
 
 block append styles
   style(type='text/css').
-    #subSites{
+    #divSections{
       background: linear-gradient(rgba(255,255,255, 0.6), transparent);
+    }
+    #quickLink{
+      list-style: none;
+      padding: 3px;
+      margin: 0px;
+    }
+    #quickLink li{
+      position: relative;
+      display: block;
+    }
+    #quickLink li:hover{
+      border: 1px solid rgba(100, 100, 100);
+      border-radius: 3px;
+      background: whitesmoke;
+    }
+    #quickLink li a{
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      vertical-align: middle;
+      text-decoration: none;
+      color: #1d2129;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    #quickLink li a::before{
+      content: attr(href);
+
     }
 
 block append content
   .jumbotron
     h1 Welcome to Utilities.Games!
-    p Utilities.Games is a network dedicated to providing gamers with tools to maximize their skills. Check out our existing sites and tools. If you don't see one, please let us know on our Facebook page.
-  ul.tiles#subSites
-    li
-      a(href='/pokemon')
-        picture
-          source(srcset='/Pokemon/images/PokeTools.webp', type='image/webp')
-          source(srcset='/Pokemon/images/PokeTools.png', type='image/png')
-          img(src='/Pokemon/images/PokeTools.png', alt='PokeTools').img-fluid
-        span Pok&#0232;Tools
-    li
-      a(href='#')
-        picture
-          source(srcset='/images/compiling.webp', type='image/webp')
-          source(srcset='/images/compiling.png', type='image/png')
-          img(src='/images/compiling.png', alt='More Coming Soon')
-        span More Coming Soon
-
+    p Utilities.Games is a network dedicated to providing gamers with tools to maximize their skills. Check out our existing sites and tools. If you don't see one, please let us know on our <a href='https://www.facebook.com/utilities.games/' target='_blank'>Facebook page</a>.
+  #divSections
+    section
+      h2
+        a(name='Sites') Sites
+      ul.tiles#subSites
+        li
+          a(href='/pokemon')
+            picture
+              source(srcset='/Pokemon/images/PokeTools.webp', type='image/webp')
+              source(srcset='/Pokemon/images/PokeTools.png', type='image/png')
+              img(src='/Pokemon/images/PokeTools.png', alt='PokeTools').img-fluid
+            span Pok&#0232;Tools
+        li
+          a(href='#')
+            picture
+              source(srcset='/images/compiling.webp', type='image/webp')
+              source(srcset='/images/compiling.png', type='image/png')
+              img(src='/images/compiling.png', alt='More Coming Soon')
+            span More Coming Soon
+    hr
+    section
+      h2 
+        a(name='News') News
+      #newsContainer
+        .text-muted No new articles
+    hr
+    section
+      h2 
+        a(name='Latest News') Latest Tools
+      #newToolsContainer
+        ul.tiles
+          li
+            a(href='/pokemon/compare/stats')
+              picture
+                source(srcset='/Pokemon/images/ComparisonChart.png', type='image/webp')
+                source(srcset='/Pokemon/images/ComparisonChart.png', type='image/png')
+                img(src='/Pokemon/images/ComparisonChart.png', alt='Pokemon Comparison Chart').img-fluid
+              span Pok&#0232;mon Base Stat Comparison
 block append subNav
-  h4 News
-  #newsContainer
-    .text-muted No New Articles
-  hr
-  h4 Latest Tools
-  #newToolsContainer
-    ul.tiles
-      li
-        a(href='/pokemon/compare/stats')
-          picture
-            source(srcset='/Pokemon/images/ComparisonChart.png', type='image/webp')
-            source(srcset='/Pokemon/images/ComparisonChart.png', type='image/png')
-            img(src='/Pokemon/images/ComparisonChart.png', alt='Pokemon Comparison Chart').img-fluid
-          span Pok&#0232;mon Base Stat Comparison
+  ul#quickLink
+    li
+      a(href='#Sites')
+    li
+      a(href='#News')
+    li
+      a(href='#Latest Tools')

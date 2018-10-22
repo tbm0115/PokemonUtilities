@@ -56,7 +56,7 @@ body > footer {
 @media (max-width: 768px) {
   body {
     grid-template-columns: 0px calc(100vw - 50px) 50px;
-    grid-template-rows: 50px calc(100vh - (50px + 25px)) 25px;
+    grid-template-rows: 54px calc(100vh - (54px + 25px)) 25px;
   }
 }
 a {
