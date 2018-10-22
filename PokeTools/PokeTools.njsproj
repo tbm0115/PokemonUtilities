@@ -254,6 +254,8 @@
     <Content Include="public\fonts\Lato-ThinItalic.woff2" />
     <Content Include="public\images\compiling.png" />
     <Content Include="public\images\compiling.webp" />
+    <Content Include="public\images\compiling_100.png" />
+    <Content Include="public\images\compiling_100.webp" />
     <Content Include="public\images\Game Covers\Pokemon\alpha-saphire.png" />
     <Content Include="public\images\Game Covers\Pokemon\black-2.png" />
     <Content Include="public\images\Game Covers\Pokemon\black.png" />
@@ -617,8 +619,12 @@
     <Content Include="public\Pokemon\css\Layout.min.css" />
     <Content Include="public\Pokemon\images\ComparisonChart.png" />
     <Content Include="public\Pokemon\images\ComparisonChart.webp" />
+    <Content Include="public\Pokemon\images\ComparisonChart_100.png" />
+    <Content Include="public\Pokemon\images\ComparisonChart_100.webp" />
     <Content Include="public\Pokemon\images\PokeTools.webp" />
     <Content Include="public\Pokemon\images\PokeTools.png" />
+    <Content Include="public\Pokemon\images\PokeTools_100.png" />
+    <Content Include="public\Pokemon\images\PokeTools_100.webp" />
     <Content Include="public\stylesheets\latofonts.css" />
     <Content Include="public\stylesheets\main.css" />
     <Content Include="public\stylesheets\site.css">
