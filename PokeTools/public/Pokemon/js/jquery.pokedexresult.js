@@ -4,8 +4,11 @@
   }).each(function (e, i) {
     var $this = $(this);
     var el = $this[0];
+    if (typeof (options) === "undefined" || options === null) {
+      options = {};
+    }
 
-    if (typeof (options) !== "undefined" && options !== null && "data" in options) {
+    if ("data" in options) {
       el["pokedex"] = options.data;
       delete options.data;
       el["options"] = options;
@@ -45,7 +48,10 @@
       }).bind(el);
       el.draw();
     } else {
-      $.getJSON("/PokeApi/api/v2/pd/1/index.json", (function (d) {
+      if (!('pokedex' in options)) {
+        options['pokedex'] = "/pd/1/";
+      }
+      $.getJSON("/PokeApi/api/v2" + options.pokedex + "index.json", (function (d) {
         if (typeof (this["options"]) !== "undefined" || this.options !== null) {
           this.options = {};
         }

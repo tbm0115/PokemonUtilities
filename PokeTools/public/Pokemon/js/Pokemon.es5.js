@@ -839,59 +839,267 @@ var Pokemon = function Pokemon(ndid, options) {
 
   return this;
 };
+var dbPromise = idb.open('user-dex', 1, function (upgradeDB) {
+  var games, pokemon;
+  switch (upgradeDB.oldVersion) {
+    case 0:
+      games = upgradeDB.createObjectStore('games', { autoIncrement: true }); // List of games
+      pokemon = upgradeDB.createObjectStore('caught-pokemon', { autoIncrement: true }); // National 'Dex of entries
+  }
+});
+var Game = function Game(db) {
+  this.name = db.name;
+  this.pokemon = new Array();
 
-// Handle Favorite Pokemon
-function drawFavoritePokemonPanel() {
-  var pnl = document.querySelector("#pnlFavorites");
-  if (typeof pnl !== "undefined" && pnl !== null) {
-    pnl.innerHTML = "";
-    if (typeof window.localStorage["favoritePokemon"] !== "undefined") {
-      var cache = JSON.parse(window.localStorage["favoritePokemon"]);
-      if (cache.data !== null && cache.data.length > 0) {
-        for (var len = cache.data.length, n = 0; n < len; n++) {
-          var cp = cache.data[n];
-          var d = pnl.appendChild(document.createElement("div"));
-          d.setAttribute("data-poke-id", cp.id);
-          d.setAttribute("data-poke-name", cp.name);
-          var img = d.appendChild(document.createElement("img"));
-          img.src = "/PokeApi" + cp.sprites.front_default;
-          img.style = "width: 40px; height: 30px;object-fit: contain;";
-          img.setAttribute("alt", cp.name);
-          var spn = d.appendChild(document.createElement("span"));
-          spn.setAttribute("data-id", cp.id);
-          spn.innerText = cp.name;
-          d.onclick = (function (ev) {
-            var d = ev.currentTarget;
-            var ap = document.querySelector("#activePokemon.poke-card");
-            if (typeof ap !== "undefined" & ap !== null) {
-              if (typeof ap["ActivePokemon"] !== "undefined" && ap.ActivePokemon !== null) {
-                ap.ActivePokemon = this;
-                ap.Draw();
-              } else {
-                $(ap).pokeCard({
-                  pokemon: d.getAttribute("data-poke-id"),
-                  options: {
-                    includes: {
-                      species: {
-                        includes: {
-                          evolution_chain: {}
-                        }
-                      }
-                    }
-                  }
-                });
-              }
-            }
-          }).bind(cp);
+  var $game = this;
+  // Connect to IndexedDB
+  dbPromise.then(function (db) {
+    // Open connection to list of caught-pokemon
+    var tx = db.transaction('caught-pokemon', 'readonly');
+    var store = tx.objectStore('caught-pokemon');
+    return store.openCursor();
+  }).then(function addPokemon(cursor) {
+    if (!cursor) {
+      return;
+    }
+    console.log('[Pokemon.js.Game.addPokemon] Cursor @', cursor.key);
+    var obj = JSON.parse(cursor.value);
+    for (var field in obj) {
+      console.log("\t", obj[field]);
+    }
+    // Add cursored Pokedex Entry to list
+    if (obj.game.toString().toLowerCase() === $game.name) {
+      console.log("Adding this item:", obj);
+      $game.pokemon.push(new PokedexEntry(obj));
+    }
+    return cursor["continue"]().then(addPokemon);
+  }).then(function () {
+    console.log("\tDone!");
+  });
+  this.Add = (function (nid) {
+    var $this = this;
+    // Make sure the Pokedex Entry hasn't been added already
+    if (this.pokemon.filter(function (e, i) {
+      return e.nid === nid;
+    }).length <= 0) {
+      console.log("Adding Pokemon '" + nid + "'!");
+      // Create Pokedex Entry
+      var pde = new PokedexEntry({
+        nid: nid,
+        game: $this.name,
+        callback: function callback(pde) {
+          console.log("Game.Add.PokedexEntry.callback");
+          // Update IndexedDb
+          dbPromise.then(function (db) {
+            var tx = db.transaction('caught-pokemon', 'readwrite');
+            var store = tx.objectStore('caught-pokemon');
+            store.add(JSON.stringify(pde))["catch"](function (e) {
+              console.log("Error: ", e);
+              tx.abort();
+            }).then(function () {
+              console.log("Store.then: ", pde);
+              // Add User game list
+              $this.pokemon.push(pde);
+            });
+            return tx.complete;
+          });
         }
-      } else {
-        console.log("No cached data for Favorite Pokemon.");
-      }
+      });
     } else {
-      console.log("No favorite Pokemon have been saved to this device.");
+      console.log("Pokemon '" + nid + "' already added!");
+    }
+  }).bind(this);
+
+  return this;
+};
+var PokedexEntry = function PokedexEntry(db) {
+  console.log("Data: ", db);
+  if (typeof db === "undefined" || db === null) {
+    db = {};
+  }
+  this.nid = db.nid;
+  this.name = 'name' in db ? db.name : null;
+  this.game = 'game' in db ? db.game : null;
+  this.shiny = 'shiny' in db ? db.shiny : false;
+  this.stats = {
+    hp: {
+      base: -1,
+      effort: -1,
+      value: -1
+    },
+    defense: {
+      base: -1,
+      effort: -1,
+      value: -1
+    },
+    specialdefense: {
+      base: -1,
+      effort: -1,
+      value: -1
+    },
+    specialattack: {
+      base: -1,
+      effort: -1,
+      value: -1
+    },
+    attack: {
+      base: -1,
+      effort: -1,
+      value: -1
+    },
+    speed: {
+      base: -1,
+      effort: -1,
+      value: -1
+    }
+  };
+
+  if ('stats' in db) {
+    this.stats = db.stats;
+    if ('callback' in db) {
+      db.callback($this);
     }
   } else {
-    console.error("No use setting up favorites panel if the panel doesn't exist! Please add #pnlFavorites.");
+    console.log("Loading Pokemon Data: ", this);
+    var $this = this;
+    var p = new Pokemon($this.nid, {
+      includes: {
+        species: {
+          includes: {
+            evolution_chain: {}
+          }
+        }
+      },
+      callback: function callback() {
+        console.log("PokedexEntry.Pokemon.callback");
+        $this.name = this.name;
+        for (var len = this.stats.length, n = 0; n < len; n++) {
+          var name = this.stats[n].stat.name.replace('_', '').replace('-', '');
+          var $stat = $this.stats[name];
+          if (typeof $stat !== "undefined") {
+            $stat.base = this.stats[n].base_stat;
+            $stat.effort = this.stats[n].effort;
+            $stat.value = 0;
+          } else {
+            console.error("Couldn't find Stat '" + name + "' in: ", $this.stats);
+          }
+        }
+        if ('callback' in db) {
+          db.callback($this);
+        }
+      }
+    });
   }
-}
+
+  return this;
+};
+var UserDex = {
+  Games: {
+    Items: new Array(),
+    Add: function Add(name) {
+      if (UserDex.Games.Items.filter(function (e, i) {
+        return e.name.toLowerCase() === name.toLowerCase();
+      }).length <= 0) {
+        var nwGame = new Game({
+          name: name
+        });
+        // Update IndexedDb
+        dbPromise.then(function (db) {
+          var tx = db.transaction('games', 'readwrite');
+          var store = tx.objectStore('games');
+          store.add(JSON.stringify(nwGame))["catch"](function (e) {
+            console.log("Error: ", e);
+            tx.abort();
+          }).then(function () {
+            console.log("Store.then: ", nwGame);
+            // Add User game list
+            UserDex.Games.Items.push(nwGame);
+          });
+          return tx.complete;
+        });
+      }
+    },
+    Search: function Search(q, cb) {
+      $.getJSON('/PokeApi/api/v2/v/index.json', function (d) {
+        var res = d.results.map(function (e, i) {
+          return e.name;
+        });
+        if (q !== null && q !== '') {
+          q = q.toLowerCase();
+          res = res.filter(function (e, i) {
+            return e === q;
+          });
+        }
+        cb(res);
+      });
+    },
+    Initialize: function Initialize() {
+      // Update IndexedDb
+      dbPromise.then(function (db) {
+        return db.transaction('games', 'readwrite').objectStore('games').getAll();
+      }).then(function (games) {
+        UserDex.Games.Items = new Array();
+        for (var len = games.length, n = 0; n < len; n++) {
+          UserDex.Games.Items.push(new Game(JSON.parse(games[n])));
+        }
+      });
+    }
+  }
+};
+UserDex.Games.Initialize();
+
+// Handle Favorite Pokemon
+//function drawFavoritePokemonPanel() {
+//  var pnl = document.querySelector("#pnlFavorites");
+//  if (typeof (pnl) !== "undefined" && pnl !== null) {
+//    pnl.innerHTML = "";
+//    if (typeof window.localStorage["favoritePokemon"] !== "undefined") {
+//      var cache = JSON.parse(window.localStorage["favoritePokemon"]);
+//      if (cache.data !== null && cache.data.length > 0) {
+//        for (var len = cache.data.length, n = 0; n < len; n++) {
+//          var cp = cache.data[n];
+//          var d = pnl.appendChild(document.createElement("div"));
+//          d.setAttribute("data-poke-id", cp.id);
+//          d.setAttribute("data-poke-name", cp.name);
+//          var img = d.appendChild(document.createElement("img"));
+//          img.src = "/PokeApi" + cp.sprites.front_default;
+//          img.style = "width: 40px; height: 30px;object-fit: contain;";
+//          img.setAttribute("alt", cp.name);
+//          var spn = d.appendChild(document.createElement("span"));
+//          spn.setAttribute("data-id", cp.id);
+//          spn.innerText = cp.name;
+//          d.onclick = (function (ev) {
+//            var d = ev.currentTarget;
+//            var ap = document.querySelector("#activePokemon.poke-card");
+//            if (typeof (ap) !== "undefined" & ap !== null) {
+//              if (typeof (ap["ActivePokemon"]) !== "undefined" && ap.ActivePokemon !== null) {
+//                ap.ActivePokemon = this;
+//                ap.Draw();
+//              } else {
+//                $(ap).pokeCard({
+//                  pokemon: d.getAttribute("data-poke-id"),
+//                  options: {
+//                    includes: {
+//                      species: {
+//                        includes: {
+//                          evolution_chain: {}
+//                        }
+//                      }
+//                    }
+//                  }
+//                });
+//              }
+//            }
+//          }).bind(cp);
+//        }
+//      } else {
+//        console.log("No cached data for Favorite Pokemon.");
+//      }
+//    } else {
+//      console.log("No favorite Pokemon have been saved to this device.");
+//    }
+//  } else {
+//    console.error("No use setting up favorites panel if the panel doesn't exist! Please add #pnlFavorites.");
+//  }
+//}
 

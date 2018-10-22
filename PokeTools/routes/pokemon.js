@@ -250,7 +250,13 @@ router.get('/', function (req, res){
 
 router.get('/compare/stats', function (req, res) {
   res.render('pokemon/compare-stats', {
-    title: 'Compare Base Stats',
+    title: 'Compare Base Stats'
+  });
+});
+
+router.get('/progress', function (req, res) {
+  res.render('pokemon/progress', {
+    title: 'Progress Tracker'
   });
 });
 

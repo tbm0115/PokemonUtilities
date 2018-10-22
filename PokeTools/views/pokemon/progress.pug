@@ -1,0 +1,46 @@
+﻿extends _pokemonlayout
+
+block append content
+  table.table.table-responsive.table-hover.table-striped#tblCaught
+    thead
+      tr
+        th National 'Dex #
+        th Name
+        th Games
+        th Details
+    tbody
+      
+block append scripts
+  script(type='text/javascript').
+    $(document).ready(function(){
+      // Handle when the pokedex is filled
+      $("#searchResults").on("pokemon.added", function(e, result){
+        console.log("\t[index] Pokemon Clicked: ", result);
+        var id = result.getAttribute('data-id');
+        if (UserDex.Games.Items.filter(function(e,i){
+          return e.pokemon.filter(function(e,i){
+            return e.nid.toString() === id.toString();
+          }).length > 0;
+        }).length > 0){
+          var iCaught = result.appendChild(document.createElement("i"));
+          iCaught.setAttribute("class", "icon-caught");
+        }
+      });
+
+      var tbl = $("#tblCaught");
+      var tb = tbl.find("tbody")[0];
+      tb.innerHTML = "";
+      for(var glen=UserDex.Games.Items.length,g=0;g<glen;g++){
+        var game = UserDex.Games.Items[g];
+        for(var plen=game.pokemon.length,p=0;p<plen;p++){
+          var pokemon = game.pokemon[p];
+          var tr = tb.appendChild(document.createElement("tr"));
+          var a = tr.appendChild(document.createElement("td")).appendChild(document.createElement("a"));// = pokemon.nid.toString();
+          a.innerText = pokemon.nid.toString();
+          a.setAttribute("href", "/pokemon/" + nid.toString());
+          tr.appendChild(document.createElement("td")).innerText = pokemon.name.substr(0,1).toUpperCase() + pokemon.name.substr(1);
+          tr.appendChild(document.createElement("td")).innerText = game.name;
+          tr.appendChild(document.createElement("td")).innerHTML = "&mdash;";
+        }
+      }
+    });
