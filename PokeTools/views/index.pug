@@ -73,6 +73,14 @@ block append content
       #newToolsContainer
         ul.tiles
           li
+            a(href='/pokemon/progress')
+              picture
+                source(data-attribution='http://getdrawings.com/pokemon-ball-drawing#pokemon-ball-drawing-61.png')
+                source(srcset='/Pokemon/images/Pokeball Progression_100.webp', type='image/webp')
+                source(srcset='/Pokemon/images/Pokeball Progression_100.png', type='image/png')
+                img(src='/Pokemon/images/Pokeball Progression_100.png', alt='Compare Stats').img-fluid
+              span Pok&#0232;mon Game Progress Tracker
+          li
             a(href='/pokemon/compare/stats')
               picture
                 source(srcset='/Pokemon/images/ComparisonChart_100.webp', type='image/webp')

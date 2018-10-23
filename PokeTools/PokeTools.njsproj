@@ -629,6 +629,8 @@
     <Content Include="public\Pokemon\images\ComparisonChart.webp" />
     <Content Include="public\Pokemon\images\ComparisonChart_100.png" />
     <Content Include="public\Pokemon\images\ComparisonChart_100.webp" />
+    <Content Include="public\Pokemon\images\Pokeball Progression_100.png" />
+    <Content Include="public\Pokemon\images\Pokeball Progression_100.webp" />
     <Content Include="public\Pokemon\images\PokeTools.webp" />
     <Content Include="public\Pokemon\images\PokeTools.png" />
     <Content Include="public\Pokemon\images\PokeTools_100.png" />

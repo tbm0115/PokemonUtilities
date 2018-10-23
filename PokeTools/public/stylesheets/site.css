@@ -119,3 +119,15 @@ ul.tiles > li > a > span {
   vertical-align: middle;
   color: #192851;
 }
+ul.tiles.md > li {
+  min-width: 75px;
+}
+ul.tiles.md > li img {
+  height: 75px;
+}
+ul.tiles.sm > li {
+  min-width: 50px;
+}
+ul.tiles.sm > li img {
+  height: 50px;
+}

@@ -847,8 +847,16 @@ var dbPromise = idb.open('user-dex', 1, function (upgradeDB) {
       pokemon = upgradeDB.createObjectStore('caught-pokemon', { autoIncrement: true }); // National 'Dex of entries
   }
 });
-var Game = function Game(db) {
+var Game = function Game(db, cb) {
+  this.id = 'id' in db ? db.id : -1;
   this.name = db.name;
+  this.versionGroup = {
+    name: "",
+    url: ""
+  };
+  if ('versionGroup' in db) {
+    this.versionGroup = db.versionGroup;
+  }
   this.pokemon = new Array();
 
   var $game = this;
@@ -862,58 +870,62 @@ var Game = function Game(db) {
     if (!cursor) {
       return;
     }
-    console.log('[Pokemon.js.Game.addPokemon] Cursor @', cursor.key);
+    //console.log('[Pokemon.js.Game.addPokemon] Cursor @', cursor.key);
     var obj = JSON.parse(cursor.value);
-    for (var field in obj) {
-      console.log("\t", obj[field]);
-    }
     // Add cursored Pokedex Entry to list
     if (obj.game.toString().toLowerCase() === $game.name) {
-      console.log("Adding this item:", obj);
+      //console.log("Adding this item:", obj);
       $game.pokemon.push(new PokedexEntry(obj));
     }
     return cursor["continue"]().then(addPokemon);
   }).then(function () {
-    console.log("\tDone!");
+    if (typeof cb !== "undefined" && cb !== null) {
+      cb(this);
+    }
   });
-  this.Add = (function (nid) {
+  this.Add = (function (nid, cb) {
     var $this = this;
+    var idx = this.pokemon.map(function (e) {
+      return e.nid;
+    }).indexOf(nid);
     // Make sure the Pokedex Entry hasn't been added already
-    if (this.pokemon.filter(function (e, i) {
-      return e.nid === nid;
-    }).length <= 0) {
-      console.log("Adding Pokemon '" + nid + "'!");
+    if (idx < 0) {
+      //console.log("Adding Pokemon '" + nid + "'!");
       // Create Pokedex Entry
       var pde = new PokedexEntry({
         nid: nid,
         game: $this.name,
         callback: function callback(pde) {
-          console.log("Game.Add.PokedexEntry.callback");
+          //console.log("Game.Add.PokedexEntry.callback");
           // Update IndexedDb
           dbPromise.then(function (db) {
             var tx = db.transaction('caught-pokemon', 'readwrite');
             var store = tx.objectStore('caught-pokemon');
             store.add(JSON.stringify(pde))["catch"](function (e) {
-              console.log("Error: ", e);
+              console.error("Error: ", e);
               tx.abort();
             }).then(function () {
-              console.log("Store.then: ", pde);
+              //console.log("Store.then: ", pde);
               // Add User game list
               $this.pokemon.push(pde);
+              if (typeof cb !== "undefined" && cb !== null) {
+                cb($this.pokemon[$this.pokemon.length - 1]);
+              }
             });
             return tx.complete;
           });
         }
       });
-    } else {
-      console.log("Pokemon '" + nid + "' already added!");
+    } else if (typeof cb !== "undefined" && cb !== null) {
+      //console.log("Pokemon '" + nid + "' already added!");
+      cb($this.pokemon[idx]);
     }
   }).bind(this);
 
   return this;
 };
 var PokedexEntry = function PokedexEntry(db) {
-  console.log("Data: ", db);
+  //console.log("Data: ", db);
   if (typeof db === "undefined" || db === null) {
     db = {};
   }
@@ -960,7 +972,7 @@ var PokedexEntry = function PokedexEntry(db) {
       db.callback($this);
     }
   } else {
-    console.log("Loading Pokemon Data: ", this);
+    //console.log("Loading Pokemon Data: ", this);
     var $this = this;
     var p = new Pokemon($this.nid, {
       includes: {
@@ -996,27 +1008,35 @@ var PokedexEntry = function PokedexEntry(db) {
 var UserDex = {
   Games: {
     Items: new Array(),
-    Add: function Add(name) {
-      if (UserDex.Games.Items.filter(function (e, i) {
-        return e.name.toLowerCase() === name.toLowerCase();
-      }).length <= 0) {
+    Add: function Add(name, cb) {
+      var idx = UserDex.Games.Items.map(function (e) {
+        return e.name;
+      }).indexOf(name);
+      if (idx < 0) {
+        // Doesn't exist
         var nwGame = new Game({
           name: name
-        });
-        // Update IndexedDb
-        dbPromise.then(function (db) {
-          var tx = db.transaction('games', 'readwrite');
-          var store = tx.objectStore('games');
-          store.add(JSON.stringify(nwGame))["catch"](function (e) {
-            console.log("Error: ", e);
-            tx.abort();
-          }).then(function () {
-            console.log("Store.then: ", nwGame);
-            // Add User game list
-            UserDex.Games.Items.push(nwGame);
+        }, function (g) {
+          // Update IndexedDb
+          dbPromise.then(function (db) {
+            var tx = db.transaction('games', 'readwrite');
+            var store = tx.objectStore('games');
+            store.add(JSON.stringify(g))["catch"](function (e) {
+              console.error("Error: ", e);
+              tx.abort();
+            }).then(function () {
+              //console.log("Store.then: ", nwGame);
+              // Add User game list
+              UserDex.Games.Items.push(g);
+              if (typeof cb !== "undefined" && cb !== null) {
+                cb(UserDex.Games.Items[UserDex.Games.Items.length - 1]);
+              }
+            });
+            return tx.complete;
           });
-          return tx.complete;
         });
+      } else if (typeof cb !== "undefined" && cb !== null) {
+        cb(UserDex.Games.Items[idx]);
       }
     },
     Search: function Search(q, cb) {
@@ -1039,10 +1059,78 @@ var UserDex = {
         return db.transaction('games', 'readwrite').objectStore('games').getAll();
       }).then(function (games) {
         UserDex.Games.Items = new Array();
+        UserDex["_initialization"] = {};
         for (var len = games.length, n = 0; n < len; n++) {
-          UserDex.Games.Items.push(new Game(JSON.parse(games[n])));
+          UserDex._initialization[n] = false;
+          UserDex.Games.Items.push(new Game(JSON.parse(games[n]), (function (g) {
+            UserDex._initialization[this] = true;
+          }).bind(n)));
         }
+        UserDex._initialization["intervalCount"] = 0;
+        UserDex._initialization["interval"] = setInterval(function () {
+          UserDex._initialization.intervalCount++;
+          var blnAllGood = true;
+          var keys = Object.getOwnPropertyNames(UserDex._initialization);
+          for (var len = keys.length, n = 0; n < len; n++) {
+            var str = UserDex._initialization[keys[n]].toString();
+            if (str === "false") {
+              blnAllGood = false;
+              break;
+            }
+          }
+          if (blnAllGood) {
+            clearInterval(UserDex._initialization.interval);
+            $(document).trigger("userdex.initialized", [UserDex.Games.Items]);
+          } else if (UserDex._initialization.intervalCount > 20) {
+            console.warn("[UserDex.Initialization] Timed out!");
+            clearInterval(UserDex._initialization.interval);
+          }
+        }, 50);
       });
+    },
+    Contains: {
+      Pokemon: function Pokemon(id) {
+        id = id.toString();
+        var blnFound = false;
+        for (var glen = UserDex.Games.Items.length, g = 0; g < glen; g++) {
+          var game = UserDex.Games.Items[g];
+          if (game.pokemon.length > 0) {
+            for (var plen = game.pokemon.length, p = 0; p < plen; p++) {
+              if (game.pokemon[p].nid.toString() === id) {
+                blnFound = true;
+                break;
+              }
+            }
+            if (blnFound) {
+              break;
+            }
+          }
+        }
+        return blnFound;
+      }
+    },
+    Get: {
+      Pokemon: function Pokemon() {
+        var pokemon = {};
+        for (var glen = UserDex.Games.Items.length, g = 0; g < glen; g++) {
+          var game = UserDex.Games.Items[g];
+          if (game.pokemon.length > 0) {
+            for (var plen = game.pokemon.length, p = 0; p < plen; p++) {
+              var pokeId = game.pokemon[p].nid;
+              if (!(pokeId in pokemon)) {
+                pokemon[pokeId] = game.pokemon[p];
+              }
+              if (!('games' in pokemon[pokeId])) {
+                pokemon[pokeId].games = new Array();
+              }
+              if (pokemon[pokeId].games.indexOf(game.name) < 0) {
+                pokemon[pokeId].games.push(game.name);
+              }
+            }
+          }
+        }
+        return pokemon;
+      }
     }
   }
 };

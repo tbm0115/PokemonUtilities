@@ -1,46 +1,141 @@
 ﻿extends _pokemonlayout
 
+block append styles
+  style(type='text/css').
+    #listGames li{
+      cursor: pointer;
+      text-align: center;
+    }
+    #listGames li a{
+      position: relative;
+      display: block;
+    }
+    #listGames li a i{
+      position: relative;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #tblCaught [class*='icon-sprite-']{
+      position:relative;
+      display: block;
+    }
+block append breadcrumb
+  li.breadcrumb-item 
+    a(href='/pokemon') Pok&#0232;Tools
+  li.breadcrumb-item.active(aria-current='page') Game Progression
+
 block append content
-  table.table.table-responsive.table-hover.table-striped#tblCaught
+  .jumbotron
+    h1 Game Progression Manager
+    p Manage the progression in your games using the tools below. Please note that this information is stored on this device only and will not carry over to other devices you use such as desktops or smart phones.
+  table.table.table-hover.table-striped#tblCaught
     thead
       tr
+        th Sprite
         th National 'Dex #
         th Name
         th Games
-        th Details
     tbody
-      
+  
+  
+  #modSelectGame.modal.fade
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close(type="button", data-dismiss="modal", aria-hidden="true") &times;
+          h4.modal-title Select a Game
+        .modal-body(style="overflow: auto; max-height: 400px;")
+          input#hdnSelectedPokemon(type="hidden")
+          ul#listGames.tiles.md
+        .modal-footer
+          button.btn.btn-default(type="button", data-dismiss="modal") Close
+          button#btnAddGamePokemon.btn.btn-primary(type="button") Submit
+
 block append scripts
   script(type='text/javascript').
-    $(document).ready(function(){
-      // Handle when the pokedex is filled
-      $("#searchResults").on("pokemon.added", function(e, result){
-        console.log("\t[index] Pokemon Clicked: ", result);
-        var id = result.getAttribute('data-id');
-        if (UserDex.Games.Items.filter(function(e,i){
-          return e.pokemon.filter(function(e,i){
-            return e.nid.toString() === id.toString();
-          }).length > 0;
-        }).length > 0){
-          var iCaught = result.appendChild(document.createElement("i"));
-          iCaught.setAttribute("class", "icon-caught");
-        }
-      });
-
+    function BuildCaughtList(){
+      console.log("Building Caught List");
       var tbl = $("#tblCaught");
       var tb = tbl.find("tbody")[0];
-      tb.innerHTML = "";
-      for(var glen=UserDex.Games.Items.length,g=0;g<glen;g++){
-        var game = UserDex.Games.Items[g];
-        for(var plen=game.pokemon.length,p=0;p<plen;p++){
-          var pokemon = game.pokemon[p];
-          var tr = tb.appendChild(document.createElement("tr"));
-          var a = tr.appendChild(document.createElement("td")).appendChild(document.createElement("a"));// = pokemon.nid.toString();
-          a.innerText = pokemon.nid.toString();
-          a.setAttribute("href", "/pokemon/" + nid.toString());
-          tr.appendChild(document.createElement("td")).innerText = pokemon.name.substr(0,1).toUpperCase() + pokemon.name.substr(1);
-          tr.appendChild(document.createElement("td")).innerText = game.name;
-          tr.appendChild(document.createElement("td")).innerHTML = "&mdash;";
+      tb.innerHTML = "<tr class='table-warning'><td colspan='4'>No Saved Pok&#0232;mon!</td></tr>";
+      if (typeof (UserDex) !== "undefined" && UserDex !== null){
+        var caughtPokemon = UserDex.Games.Get.Pokemon();
+        if (typeof(caughtPokemon) !== "undefined" && caughtPokemon !== null){
+          var nids = Object.getOwnPropertyNames(caughtPokemon);
+          if (nids.length > 0){
+            tb.innerHTML = "";
+            for(var len = nids.length,n=0;n<len;n++){
+              var pokemon = caughtPokemon[nids[n]];
+              var tr = tb.appendChild(document.createElement("tr"));
+              tr.appendChild(document.createElement("td")).appendChild(document.createElement("i")).setAttribute("class", "icon-sprite-" + pokemon.nid.toString());
+              var a = tr.appendChild(document.createElement("td")).appendChild(document.createElement("a"));
+              a.innerText = pokemon.nid.toString();
+              a.setAttribute("href", "/pokemon/" + pokemon.nid.toString());
+              tr.appendChild(document.createElement("td")).innerText = pokemon.name.substr(0,1).toUpperCase() + pokemon.name.substr(1);
+              tr.appendChild(document.createElement("td")).innerHTML = pokemon.games.map(function(e, i){return "<i class=\"icon-cart-sm-" + e + "\"></i>";}).join("");
+            }
+          }
         }
       }
+    }
+    var _games = null;
+    function BuildGameList(){
+      var ul = $("#listGames")[0];
+      ul.innerHTML = "";
+      if (_games !== null && _games.length > 0){
+        for(var len = _games.length,n=0;n<len;n++){
+          var li = ul.appendChild(document.createElement("li"));
+          li.setAttribute("data-id", _games[n]);
+          var a = li.appendChild(document.createElement("a"));
+          a.appendChild(document.createElement("i")).setAttribute("class", "icon-cart-md-" + _games[n]);
+          li.appendChild(document.createElement("span")).innerText = _games[n].substr(0,1).toUpperCase() + _games[n].substr(1);
+          li.onclick = function(ev){
+            var li = ev.currentTarget;
+            var $ul = $(li).closest("ul");
+            $ul.find("[checked]").removeAttr("checked");
+            $ul.find(".wash-out").removeClass("wash-out");
+            $(li).attr("checked", "checked");
+            $ul.find("li:not([checked])").addClass("wash-out");
+          }
+        }
+      }else{
+        ul.appendChild(document.createElement("li")).innerText = "No Games Found!";
+      }
+    }
+    $(document).ready(function(){
+      if (typeof(UserDex) !== "undefined" && UserDex !== null && UserDex.Games.Items.length > 0){
+        $(document).on("userdex.initialized", function(){
+          BuildCaughtList();
+        });
+      }else{
+        BuildCaughtList();
+      }
+      if (typeof(UserDex) !== "undefined" && UserDex !== null){
+        UserDex.Games.Search("", function(data){
+          _games = data;
+          BuildGameList();
+        });
+      }
+      // Handle when Selected Pokemon and Game is submitted from Modal
+      $("#btnAddGamePokemon").on("click", function(){
+        var pokeId = $("#hdnSelectedPokemon").val();
+        var gameId = $("#listGames").find("li[checked]").attr("data-id");
+        UserDex.Games.Add(gameId, function(game){
+          game.Add(pokeId, function(pokemon){
+            BuildCaughtList();
+            $("#modSelectGame").modal("hide");
+          });
+        });
+      });
+      // Handle when the pokedex entry is clicked
+      $("#searchResults").on("pokemon.clicked", function(e, result){
+        var id = result.getAttribute("data-id");
+        var $trs = $("#tblCaught tbody tr[data-id='" + id + "']")
+        if ($trs.length === 0){
+          BuildGameList();
+          $("#hdnSelectedPokemon").val(id);
+          $("#modSelectGame").modal("show");
+        }
+      });
     });

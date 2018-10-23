@@ -15,6 +15,7 @@ body {
   background-position: center top;
   background-size: cover;
   color: initial; /*#e1e1e1;*/
+
   > nav:first-of-type:not(:last-of-type) {
     grid-area: siteNav;
   }
@@ -128,6 +129,24 @@ ul.tiles {
         line-height: 1em;
         vertical-align: middle;
         color: #192851;
+      }
+    }
+  }
+  &.md{
+    > li{
+      min-width: 75px;
+
+      img{
+        height: 75px;
+      }
+    }
+  }
+  &.sm{
+    > li{
+      min-width: 50px;
+
+      img{
+        height: 50px;
       }
     }
   }

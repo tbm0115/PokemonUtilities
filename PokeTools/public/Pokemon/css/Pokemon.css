@@ -568,6 +568,11 @@
   font-size: 14px;
   /*color: #2E60AB;*/
 }
+#pnlSearch #searchResults .pokedex-result .icon-caught {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
 #pnlSearch #searchResults .pokedex-result [class*='icon-sprite'] {
   position: relative;
   display: inline-block;
@@ -652,6 +657,13 @@
     height: 100vh;
     background: rgba(0, 0, 0, 0.65);
   }
+}
+/* Caught Icon */
+.icon-caught {
+  width: 15px;
+  height: 15px;
+  background: url('/PokeApi/sprites/items/poke-ball.png') no-repeat center;
+  background-size: cover;
 }
 /* Sprite Sheet Source: https://www.deviantart.com/wesleyfg/art/Pokemon-Sun-and-Moon-All-Icon-644722700 ../../../images/icon_spritesheet.png*/
 [class*='icon-sprite-'] {
@@ -3095,16 +3107,16 @@
 .icon-cart-xl-emerald {
   background-position: -256px -256px;
 }
-.icon-cart-xl-fire-red {
+.icon-cart-xl-firered {
   background-position: -512px -256px;
 }
 .icon-cart-xl-gold {
   background-position: -768px -256px;
 }
-.icon-cart-xl-heart-gold {
+.icon-cart-xl-heartgold {
   background-position: -1024px -256px;
 }
-.icon-cart-xl-leaf-green {
+.icon-cart-xl-leafgreen {
   background-position: 0px -512px;
 }
 .icon-cart-xl-moon {
@@ -3131,7 +3143,7 @@
 .icon-cart-xl-silver {
   background-position: -768px -768px;
 }
-.icon-cart-xl-soul-silver {
+.icon-cart-xl-soulsilver {
   background-position: -1024px -768px;
 }
 .icon-cart-xl-sun {
@@ -3189,16 +3201,16 @@
 .icon-cart-lg-emerald {
   background-position: -96px -96px;
 }
-.icon-cart-lg-fire-red {
+.icon-cart-lg-firered {
   background-position: -192px -96px;
 }
 .icon-cart-lg-gold {
   background-position: -288px -96px;
 }
-.icon-cart-lg-heart-gold {
+.icon-cart-lg-heartgold {
   background-position: -384px -96px;
 }
-.icon-cart-lg-leaf-green {
+.icon-cart-lg-leafgreen {
   background-position: 0px -192px;
 }
 .icon-cart-lg-moon {
@@ -3225,7 +3237,7 @@
 .icon-cart-lg-silver {
   background-position: -288px -288px;
 }
-.icon-cart-lg-soul-silver {
+.icon-cart-lg-soulsilver {
   background-position: -384px -288px;
 }
 .icon-cart-lg-sun {
@@ -3283,16 +3295,16 @@
 .icon-cart-md-emerald {
   background-position: -48px -48px;
 }
-.icon-cart-md-fire-red {
+.icon-cart-md-firered {
   background-position: -96px -48px;
 }
 .icon-cart-md-gold {
   background-position: -144px -48px;
 }
-.icon-cart-md-heart-gold {
+.icon-cart-md-heartgold {
   background-position: -192px -48px;
 }
-.icon-cart-md-leaf-green {
+.icon-cart-md-leafgreen {
   background-position: 0px -96px;
 }
 .icon-cart-md-moon {
@@ -3319,7 +3331,7 @@
 .icon-cart-md-silver {
   background-position: -144px -144px;
 }
-.icon-cart-md-soul-silver {
+.icon-cart-md-soulsilver {
   background-position: -192px -144px;
 }
 .icon-cart-md-sun {
@@ -3377,16 +3389,16 @@
 .icon-cart-sm-emerald {
   background-position: -32px -32px;
 }
-.icon-cart-sm-fire-red {
+.icon-cart-sm-firered {
   background-position: -64px -32px;
 }
 .icon-cart-sm-gold {
   background-position: -96px -32px;
 }
-.icon-cart-sm-heart-gold {
+.icon-cart-sm-heartgold {
   background-position: -128px -32px;
 }
-.icon-cart-sm-leaf-green {
+.icon-cart-sm-leafgreen {
   background-position: 0px -64px;
 }
 .icon-cart-sm-moon {
@@ -3413,7 +3425,7 @@
 .icon-cart-sm-silver {
   background-position: -96px -96px;
 }
-.icon-cart-sm-soul-silver {
+.icon-cart-sm-soulsilver {
   background-position: -128px -96px;
 }
 .icon-cart-sm-sun {
