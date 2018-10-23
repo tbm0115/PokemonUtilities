@@ -58,8 +58,8 @@ block append scripts
       console.log("Building Caught List");
       var tbl = $("#tblCaught");
       var tb = tbl.find("tbody")[0];
-      tb.innerHTML = "<tr class='table-warning'><td colspan='4'>No Saved Pok&#0232;mon!</td></tr>";
       if (typeof (UserDex) !== "undefined" && UserDex !== null){
+        tb.innerHTML = "<tr class='table-warning'><td colspan='4'>No Saved Pok&#0232;mon! Try <a href='javascript:BuildCaughtList();'>refreshing</a> this table.</tr>";
         var caughtPokemon = UserDex.Games.Get.Pokemon();
         if (typeof(caughtPokemon) !== "undefined" && caughtPokemon !== null){
           var nids = Object.getOwnPropertyNames(caughtPokemon);
@@ -77,6 +77,8 @@ block append scripts
             }
           }
         }
+      }else{
+        tb.innerHTML = "<tr class='table-warning'><td colspan='4'>This browser is unsupported!</td></tr>";
       }
     }
     var _games = null;
@@ -104,28 +106,25 @@ block append scripts
       }
     }
     $(document).ready(function(){
-      if (typeof(UserDex) !== "undefined" && UserDex !== null && UserDex.Games.Items.length > 0){
-        $(document).on("userdex.initialized", function(){
-          BuildCaughtList();
-        });
-      }else{
+      $(document).on("userdex.initialized", function(){
         BuildCaughtList();
-      }
-      if (typeof(UserDex) !== "undefined" && UserDex !== null){
-        UserDex.Games.Search("", function(data){
-          _games = data;
-          BuildGameList();
-        });
-      }
+      });
       // Handle when Selected Pokemon and Game is submitted from Modal
       $("#btnAddGamePokemon").on("click", function(){
         var pokeId = $("#hdnSelectedPokemon").val();
         var gameId = $("#listGames").find("li[checked]").attr("data-id");
+        $("#tblCaught tbody").html("<tr class='table-info'><td colspan='4'>Adding #" + pokeId.toString() + " to " + gameId + "...</td></tr>");
         UserDex.Games.Add(gameId, function(game){
           game.Add(pokeId, function(pokemon){
             BuildCaughtList();
             $("#modSelectGame").modal("hide");
+          }, function(error){
+            $("#tblCaught tbody").html("<tr class='table-danger'><td colspan='4'>Couldn't add Pokemon #" + pokeId + " due to error.</td></tr>");
+            $("#modSelectGame").modal("hide");
           });
+        }, function(error){
+            $("#tblCaught tbody").html("<tr class='table-danger'><td colspan='4'>Couldn't add Pokemon version " + gameId + " due to error.</td></tr>");
+          $("#modSelectGame").modal("hide");
         });
       });
       // Handle when the pokedex entry is clicked
@@ -137,5 +136,10 @@ block append scripts
           $("#hdnSelectedPokemon").val(id);
           $("#modSelectGame").modal("show");
         }
+      });
+      BuildCaughtList();
+      UserDex.Games.Search("", function(data){
+        _games = data;
+        BuildGameList();
       });
     });

@@ -77,11 +77,24 @@ block append content
 
 block append scripts
   script(type='text/javascript').
+    function addCaughtIcon(){
+      if (typeof(UserDex) !== "undefined" && UserDex !== null){
+        if (UserDex.Games.Contains.Pokemon(Pokemon.id)){
+          if ($(".details.biota.zoology").find(".icon-caught").length === 0){
+            var i = $(".details.biota.zoology")[0].appendChild(document.createElement("i"));
+            i.setAttribute("class", "icon-caught");
+            i.setAttribute("title", "You've caught this Pokemon!");
+          }
+        }
+      }
+    }
+    $(document).on("userdex.initialized", addCaughtIcon);
     $(document).ready(function(){
       $("#searchResults").on("pokemon.clicked", function(e, result){
         console.log("\t[index] Pokemon Clicked: ", result);
         window.location = "/pokemon/" + result.getAttribute("data-name");
       });
+      addCaughtIcon();
     });
   script#jsonMoveData(type='text/javascript').
     function NormalizeText(str){

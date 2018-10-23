@@ -860,31 +860,11 @@ var Game = function Game(db, cb) {
   this.pokemon = new Array();
 
   var $game = this;
-  // Connect to IndexedDB
-  dbPromise.then(function (db) {
-    // Open connection to list of caught-pokemon
-    var tx = db.transaction('caught-pokemon', 'readonly');
-    var store = tx.objectStore('caught-pokemon');
-    return store.openCursor();
-  }).then(function addPokemon(cursor) {
-    if (!cursor) {
-      return;
-    }
-    //console.log('[Pokemon.js.Game.addPokemon] Cursor @', cursor.key);
-    var obj = JSON.parse(cursor.value);
-    // Add cursored Pokedex Entry to list
-    if (obj.game.toString().toLowerCase() === $game.name) {
-      //console.log("Adding this item:", obj);
-      $game.pokemon.push(new PokedexEntry(obj));
-    }
-    return cursor["continue"]().then(addPokemon);
-  }).then(function () {
-    if (typeof cb !== "undefined" && cb !== null) {
-      cb(this);
-    }
-  });
-  this.Add = (function (nid, cb) {
+  var $cb = cb;
+  this.Add = (function (nid, cb, err) {
     var $this = this;
+    var $cb = cb,
+        $err = err;
     var idx = this.pokemon.map(function (e) {
       return e.nid;
     }).indexOf(nid);
@@ -904,24 +884,50 @@ var Game = function Game(db, cb) {
             store.add(JSON.stringify(pde))["catch"](function (e) {
               console.error("Error: ", e);
               tx.abort();
+              if (typeof $err !== "undefined" && $err !== null) {
+                $err(e);
+              }
             }).then(function () {
               //console.log("Store.then: ", pde);
               // Add User game list
               $this.pokemon.push(pde);
-              if (typeof cb !== "undefined" && cb !== null) {
-                cb($this.pokemon[$this.pokemon.length - 1]);
+              if (typeof $cb !== "undefined" && $cb !== null) {
+                $cb($this.pokemon[$this.pokemon.length - 1]);
               }
             });
             return tx.complete;
           });
         }
       });
-    } else if (typeof cb !== "undefined" && cb !== null) {
+    } else if (typeof $cb !== "undefined" && $cb !== null) {
       //console.log("Pokemon '" + nid + "' already added!");
-      cb($this.pokemon[idx]);
+      $cb($this.pokemon[idx]);
     }
   }).bind(this);
 
+  // Connect to IndexedDB
+  dbPromise.then(function (db) {
+    // Open connection to list of caught-pokemon
+    var tx = db.transaction('caught-pokemon', 'readonly');
+    var store = tx.objectStore('caught-pokemon');
+    return store.openCursor();
+  }).then(function addPokemon(cursor) {
+    if (!cursor) {
+      return;
+    }
+    //console.log('[Pokemon.js.Game.addPokemon] Cursor @', cursor.key);
+    var obj = JSON.parse(cursor.value);
+    // Add cursored Pokedex Entry to list
+    if (obj.game.toString().toLowerCase() === $game.name) {
+      //console.log("Adding this item:", obj);
+      $game.pokemon.push(new PokedexEntry(obj));
+    }
+    return cursor["continue"]().then(addPokemon);
+  }).then(function () {
+    if (typeof $cb !== "undefined" && $cb !== null) {
+      $cb($game);
+    }
+  });
   return this;
 };
 var PokedexEntry = function PokedexEntry(db) {
@@ -983,7 +989,7 @@ var PokedexEntry = function PokedexEntry(db) {
         }
       },
       callback: function callback() {
-        console.log("PokedexEntry.Pokemon.callback");
+        //console.log("PokedexEntry.Pokemon.callback");
         $this.name = this.name;
         for (var len = this.stats.length, n = 0; n < len; n++) {
           var name = this.stats[n].stat.name.replace('_', '').replace('-', '');
@@ -1008,7 +1014,9 @@ var PokedexEntry = function PokedexEntry(db) {
 var UserDex = {
   Games: {
     Items: new Array(),
-    Add: function Add(name, cb) {
+    Add: function Add(name, cb, err) {
+      var $cb = cb,
+          $err = err;
       var idx = UserDex.Games.Items.map(function (e) {
         return e.name;
       }).indexOf(name);
@@ -1024,22 +1032,29 @@ var UserDex = {
             store.add(JSON.stringify(g))["catch"](function (e) {
               console.error("Error: ", e);
               tx.abort();
+              if (typeof $err !== "undefined" && $err !== null) {
+                $err(e);
+              }
             }).then(function () {
               //console.log("Store.then: ", nwGame);
               // Add User game list
               UserDex.Games.Items.push(g);
-              if (typeof cb !== "undefined" && cb !== null) {
-                cb(UserDex.Games.Items[UserDex.Games.Items.length - 1]);
+              if (typeof $cb !== "undefined" && $cb !== null) {
+                $cb(UserDex.Games.Items[UserDex.Games.Items.length - 1]);
               }
             });
             return tx.complete;
           });
         });
-      } else if (typeof cb !== "undefined" && cb !== null) {
-        cb(UserDex.Games.Items[idx]);
+      } else if (typeof $cb !== "undefined" && $cb !== null) {
+        //console.log("[UserDex.Games.Add] Game Added Already!", name);
+        $cb(UserDex.Games.Items[idx]);
+      } else {
+        console.error("[UserDex.Games.Add] Couldn't add '" + name + "' to UserDex.Games:", idx);
       }
     },
     Search: function Search(q, cb) {
+      var $cb = cb;
       $.getJSON('/PokeApi/api/v2/v/index.json', function (d) {
         var res = d.results.map(function (e, i) {
           return e.name;
@@ -1050,7 +1065,7 @@ var UserDex = {
             return e === q;
           });
         }
-        cb(res);
+        $cb(res);
       });
     },
     Initialize: function Initialize() {
