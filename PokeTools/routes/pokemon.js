@@ -253,6 +253,12 @@ router.get('/compare/stats', function (req, res) {
     title: 'Compare Base Stats'
   });
 });
+router.get('/compare/stats-lite/:data', function (req, res) {
+  res.render('pokemon/lite_compare-stats', {
+    title: 'Compare Base Stats',
+    data: req.params['data']
+  });
+});
 
 router.get('/progress', function (req, res) {
   res.render('pokemon/progress', {

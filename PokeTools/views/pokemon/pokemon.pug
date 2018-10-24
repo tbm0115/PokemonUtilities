@@ -227,6 +227,7 @@ block append scripts
                 tr.appendChild(document.createElement("td")).innerText = hoverMove.level;
                 tr.appendChild(document.createElement("td")).innerText = NormalizeText(hoverMove.move);
                 var vtd = tr.appendChild(document.createElement("td"));
+                var cnt = 0;
                 for(var len = hoverMove.versions.length,n=0;n<len;n++){
                     var spanClass = hoverMove.versions[n];
                     var gameTitleClass = GameTitles[spanClass];
@@ -234,9 +235,11 @@ block append scripts
                         for(var glen = gameTitleClass.games.length,g=0;g<glen;g++){
                             spanClass = gameTitleClass.games[g];
                             if (vtd.querySelector(".icon-cart-sm-" + spanClass) === null){
-                                var spn = vtd.appendChild(document.createElement("span"));
-                                spn.setAttribute("title", NormalizeText(spanClass));
-                                spn.setAttribute("class", "icon-cart-sm-" + spanClass);
+                              cnt++;
+                              var spn = vtd.appendChild(document.createElement("span"));
+                              spn.setAttribute("title", NormalizeText(spanClass));
+                              spn.setAttribute("class", "icon-cart-sm-" + spanClass);
+                              spn.setAttribute("style", "--xOffset: " + cnt.toString() + ";");
                             }
                         }
                     }

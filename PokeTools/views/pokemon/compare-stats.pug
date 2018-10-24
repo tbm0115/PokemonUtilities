@@ -26,6 +26,12 @@ block append content
       h1 Compare Base Stats
       p Compare the base stats of multiple Pok&#0232;mon at once. See how each stat stacks up against the collective average of the selected Pok&#0232;mon. Hover over each stat to view the actual value.
       p.alert.alert-info Use the navigation menu to the right to add Pok&#0232;mon to the comparison chart.
+      button.btn.btn-xs.btn-default.pull-right#btnShowEmbed
+        i.fa.fa-code
+      .collapse#divEmbedLink
+        .input-group
+          label Use this code to embed the comparison
+          input.form-control#txtEmbedLink(type='text', placeholder='Add Pokemon to the Chart...')
     div.row(style='margin: 0px;')#workSpace
       div.col-md-6
         canvas#pokeComparison This Browser does not support HTML5 Canvas!
@@ -36,111 +42,43 @@ block append content
 block append scripts
   script(language='javascript', type='text/javascript', src='/Pokemon/js/Pokemon.es5.min.js?v=1.2')
 
-  script(language='javascript', type='text/javascript', src='/Pokemon/js/Comparison.es5.min.js?v=1.2')
-    
-  script(type='text/javascript',language='javascript').
-      $(document).ready(function(){
-        $("#searchResults").on("pokemon.clicked", function(e, result){
-          if (ComparePokemon.length < 20){
-            var id = result.getAttribute("data-id");
-            if (ComparePokemon.filter(function(e, i){return e.id.toString() === id.toString();}).length <= 0){
-              ComparePokemon.push(new Pokemon(id, {
-                includes: {
-                  species: {
-                    includes: {
-                      evolution_chain: {}
-                    }
+  script(language='javascript', type='text/javascript', src='/Pokemon/js/Comparison.es5.min.js?v=1.3')
+  script(type='text/javascript', language='javascript').
+    $(document).ready(function(){
+      $("#searchResults").on("pokemon.clicked", function(e, result){
+        if (ComparePokemon.length < 20){
+          var id = result.getAttribute("data-id");
+          if (ComparePokemon.filter(function(e, i){return e.id.toString() === id.toString();}).length <= 0){
+            ComparePokemon.push(new Pokemon(id, {
+              includes: {
+                species: {
+                  includes: {
+                    evolution_chain: {}
                   }
-                },
-                callback: function () {
-                  BuildComparison();
                 }
-              }));
-            }
-          }else{
-            $("#compareMessage").html("No more than 20 Pokemon can be compared!");
+              },
+              callback: function () {
+                BuildComparison();
+              }
+            }));
           }
-        });
-        $("#pokeComparison").on("message", function(ev, msg){
-          $("#compareMessage").html("<strong>" + msg.pokemon.substr(0,1).toUpperCase() + msg.pokemon.substr(1) + "</strong> " + msg.stat.substr(0,1).toUpperCase() + msg.stat.substr(1) + " = " + msg.val.toString());
-        });
-
-        BuildComparison();
-      });
-  script(type='text/javascript').
-    var Dexs = {};
-    var ComparePokemon = new Array();
-    function BuildComparison(){
-      console.log("Compare Clicked!");
-      var container = $("#pokeContainer")[0];
-      container.innerHTML = ""; // Clear All Pokemon Items in list
-      $("#compareMessage").html("");
-      var pdto = new Array();
-      var data = {
-        items: null,
-        properties: [
-          "speed",
-          "special-defense",
-          "special-attack",
-          "defense",
-          "attack",
-          "hp"
-        ]
-      }
-      for (var len = ComparePokemon.length, n = 0; n < len; n++) {
-        var pokemon = ComparePokemon[n];
-        var li = container.appendChild(document.createElement("li"));
-        li.setAttribute("data-id", pokemon.id.toString());
-        var i = li.appendChild(document.createElement("i"));
-        i.setAttribute("class", "icon-sprite-" + pokemon.id.toString());
-        i.style.display = "inline-block";
-        var spn = li.appendChild(document.createElement("span"));
-        spn.innerText = pokemon.name.substr(0, 1).toUpperCase() + pokemon.name.substr(1);
-        var aView = li.appendChild(document.createElement("a"));
-        aView.setAttribute("href", "/pokemon/" + pokemon.name);
-        aView.setAttribute("target", "_blank");
-        aView.style.marginLeft = "5px";
-        aView.setAttribute("title", "View Entry");
-        aView.setAttribute("role", "link");
-        aView.setAttribute("aria-label", "View Entry");
-        aView.innerHTML = "<i class='fa fa-external-link'></i>";
-        var aClose = li.appendChild(document.createElement("a"));
-        aClose.setAttribute("class", "close");
-        aClose.innerHTML = "&times;";
-        aClose.onclick = function(ev){
-          var id = $(ev.currentTarget).closest("li[data-id]").attr("data-id");
-          ComparePokemon = ComparePokemon.filter(function(e, i){
-            return e.id.toString() !== id.toString();
-          });
-          BuildComparison();
-        };
-        if (typeof (pokemon) !== "undefined" && pokemon !== null) {
-          var stats = {
-            "speed": 0,
-            "special-defense": 0,
-            "special-attack": 0,
-            "defense": 0,
-            "attack": 0,
-            "hp": 0
-          };
-          for (var slen = pokemon.stats.length, s = 0; s < slen; s++) {
-            stats[pokemon.stats[s].stat.name] = pokemon.stats[s].base_stat;
-          }
-          var dto = new ComparisonDTO(pokemon.name, pokemon.id, pokemon.species.color.name, stats, "/PokeApi" + pokemon.sprites.front_default);
-          pdto.push(dto);
+        }else{
+          $("#compareMessage").html("No more than 20 Pokemon can be compared!");
         }
-      }
-      data.items = pdto;
-      //console.log("\tCompare DTO: ", data);
-      $("#pokeComparison").Comparison(data)[0].Draw();
-    }
-    $(document).ready(function () {
-      //drawFavoritePokemonPanel();
-
-      $(window).on("resize", function () {
-        // Re-Draw Canvas
-        document.querySelector("#pokeComparison").Draw();
       });
-
-
+      $("#btnShowEmbed").on("click", function(ev){
+        if (!$("#btnShowEmbed").prop('disabled')){
+          $("#divEmbedLink").toggleClass("show", true );
+        }
+      });
+      $("#pokeComparison").on("compared", function(ev, cp){
+        if (cp.length > 0){
+          $("#btnShowEmbed").prop('disabled', false);
+          $("#txtEmbedLink").val("<iframe width='600' height='600' src='https://utilities.games/pokemon/compare/stats-lite/" + btoa(JSON.stringify(cp.map(function(e){return e.id;}).join(","))) + "' frameborder='0'></iframe>");
+        }else{
+          $("#btnShowEmbed").prop('disabled', true);
+          $("#txtEmbedLink").val("");
+          $("#divEmbedLink").toggleClass("show", false);
+        }
+      });
     });

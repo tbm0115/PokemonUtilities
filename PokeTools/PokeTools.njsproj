@@ -666,6 +666,9 @@
     <Content Include="views\pokemon\liteCard.pug">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="views\pokemon\lite_compare-stats.pug">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="views\pokemon\pokemon-lite.pug" />
     <Content Include="views\pokemon\pokemon.pug">
       <SubType>Code</SubType>

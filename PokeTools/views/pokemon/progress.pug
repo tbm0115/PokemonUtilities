@@ -73,7 +73,7 @@ block append scripts
               a.innerText = pokemon.nid.toString();
               a.setAttribute("href", "/pokemon/" + pokemon.nid.toString());
               tr.appendChild(document.createElement("td")).innerText = pokemon.name.substr(0,1).toUpperCase() + pokemon.name.substr(1);
-              tr.appendChild(document.createElement("td")).innerHTML = pokemon.games.map(function(e, i){return "<i class=\"icon-cart-sm-" + e + "\"></i>";}).join("");
+              tr.appendChild(document.createElement("td")).innerHTML = pokemon.games.map(function(e, i){return "<i class=\"icon-cart-sm-" + e + "\" style=\"--xOffset: " + (i+1).toString() + ";\"></i>";}).join("");
             }
           }
         }

@@ -169,3 +169,79 @@ $.fn.Comparison = function (options) {
   });
 };
 
+// Page handlers
+var ComparePokemon = new Array(); // Global List of Pokemon to compare
+$(document).ready(function () {
+  $("#pokeComparison").on("message", function (ev, msg) {
+    $("#compareMessage").html("<strong>" + msg.pokemon.substr(0, 1).toUpperCase() + msg.pokemon.substr(1) + "</strong> " + msg.stat.substr(0, 1).toUpperCase() + msg.stat.substr(1) + " = " + msg.val.toString());
+  });
+
+  BuildComparison();
+});
+function BuildComparison() {
+  //console.log("Compare Clicked!");
+  var container = $("#pokeContainer")[0];
+  container.innerHTML = ""; // Clear All Pokemon Items in list
+  $("#compareMessage").html("");
+  var pdto = new Array();
+  var data = {
+    items: null,
+    properties: ["speed", "special-defense", "special-attack", "defense", "attack", "hp"]
+  };
+  for (var len = ComparePokemon.length, n = 0; n < len; n++) {
+    var pokemon = ComparePokemon[n];
+    var li = container.appendChild(document.createElement("li"));
+    li.setAttribute("data-id", pokemon.id.toString());
+    var i = li.appendChild(document.createElement("i"));
+    i.setAttribute("class", "icon-sprite-" + pokemon.id.toString());
+    i.style.display = "inline-block";
+    var spn = li.appendChild(document.createElement("span"));
+    spn.innerText = pokemon.name.substr(0, 1).toUpperCase() + pokemon.name.substr(1);
+    var aView = li.appendChild(document.createElement("a"));
+    aView.setAttribute("href", "/pokemon/" + pokemon.name);
+    aView.setAttribute("target", "_blank");
+    aView.style.marginLeft = "5px";
+    aView.setAttribute("title", "View Entry");
+    aView.setAttribute("role", "link");
+    aView.setAttribute("aria-label", "View Entry");
+    aView.innerHTML = "<i class='fa fa-external-link'></i>";
+    var aClose = li.appendChild(document.createElement("a"));
+    aClose.setAttribute("class", "close");
+    aClose.innerHTML = "&times;";
+    aClose.onclick = function (ev) {
+      var id = $(ev.currentTarget).closest("li[data-id]").attr("data-id");
+      ComparePokemon = ComparePokemon.filter(function (e, i) {
+        return e.id.toString() !== id.toString();
+      });
+      BuildComparison();
+    };
+    if (typeof pokemon !== "undefined" && pokemon !== null) {
+      var stats = {
+        "speed": 0,
+        "special-defense": 0,
+        "special-attack": 0,
+        "defense": 0,
+        "attack": 0,
+        "hp": 0
+      };
+      for (var slen = pokemon.stats.length, s = 0; s < slen; s++) {
+        stats[pokemon.stats[s].stat.name] = pokemon.stats[s].base_stat;
+      }
+      var dto = new ComparisonDTO(pokemon.name, pokemon.id, pokemon.species.color.name, stats, "/PokeApi" + pokemon.sprites.front_default);
+      pdto.push(dto);
+    }
+  }
+  data.items = pdto;
+  //console.log("\tCompare DTO: ", data);
+  $("#pokeComparison").Comparison(data)[0].Draw();
+  $("#pokeComparison").trigger("compared", [ComparePokemon]);
+}
+$(document).ready(function () {
+  //drawFavoritePokemonPanel();
+
+  $(window).on("resize", function () {
+    // Re-Draw Canvas
+    document.querySelector("#pokeComparison").Draw();
+  });
+});
+
