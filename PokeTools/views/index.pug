@@ -37,8 +37,9 @@ block append styles
       content: attr(href);
 
     }
-  link(rel='stylesheet', href='/stylesheets/articles.min.css?v=1.0')
-  //<!-- You can use Open Graph tags to customize link previews. Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
+
+  link(rel='stylesheet', href='/stylesheets/Articles.min.css?v=1.1')
+  // You can use Open Graph tags to customize link previews. Learn more: https://developers.facebook.com/docs/sharing/webmasters
   meta(property="og:url",           content="https://utilities.games/")
   meta(property="og:type",          content="website")
   meta(property="og:title",         content=title)
@@ -62,9 +63,12 @@ block append scripts
 
         var $clon = $("#newsContainer").find(".article-card:last-of-type");
 
-        if (typeof(item["image"]) !== "undefined"){
-          $clon.find(".card-image img").attr("src", item.image.url);
-          $clon.find(".card-image img").attr("alt", item.image.title);
+        if (item.content.indexOf("<img") === 0){
+          var src = item.content.substr(item.content.indexOf("src=\"") + 5);
+          src = src.substr(0, src.indexOf('"'));
+          item.content = item.content.substr(item.content.indexOf(">")+1);
+          $clon.find(".card-image img").attr("src", src);
+          $clon.find(".card-image img").attr("alt", item.title);
         }
 
         $clon.find(".card-share-options .fb-share-button").attr("href", "https://www.facebook.com/sharer/sharer.php?app_id=302718756988342&sdk=joey&u=" + item.link + "&display=popup&ref=plugin&src=share_button");
@@ -74,7 +78,7 @@ block append scripts
           for(var c = item.categories.length - 1;c>=0;c--){
             var cat = item.categories[c];
             var a = document.createElement("a");
-            a.setAttribute("href", rssFeed.link + "/tag/" + item.categories[c].replace(/-/g, '_').replace(/ /g, '_').toLowerCase() + "/");
+            a.setAttribute("href", rssFeed.link + "/tag/" + item.categories[c].replace(/ /g, '-').toLowerCase() + "/");
             a.innerText = c > 0 ? ", " + cat.substr(0,1).toUpperCase() + cat.substr(1) : cat;
             $clon.find(".card-header").prepend(a);
           }

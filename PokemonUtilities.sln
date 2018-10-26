@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "-Deprecated-PokemonUtilities", "PokemonUtilities\-Deprecated-PokemonUtilities.njsproj", "{4E6CEA87-77ED-4E4F-A628-EFF9CBD0B0FD}"
-EndProject
 Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "PokeTools", "PokeTools\PokeTools.njsproj", "{F1A1327A-EB6E-4BE5-85FF-C923E39053D4}"
 EndProject
 Global
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4E6CEA87-77ED-4E4F-A628-EFF9CBD0B0FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E6CEA87-77ED-4E4F-A628-EFF9CBD0B0FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E6CEA87-77ED-4E4F-A628-EFF9CBD0B0FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E6CEA87-77ED-4E4F-A628-EFF9CBD0B0FD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F1A1327A-EB6E-4BE5-85FF-C923E39053D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F1A1327A-EB6E-4BE5-85FF-C923E39053D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1A1327A-EB6E-4BE5-85FF-C923E39053D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -26,7 +20,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {40A94DDC-919E-4596-ADEF-5B52D6BE269F}
 		LessCompiler = 4e6cea87-77ed-4e4f-a628-eff9cbd0b0fd
+		SolutionGuid = {40A94DDC-919E-4596-ADEF-5B52D6BE269F}
 	EndGlobalSection
 EndGlobal

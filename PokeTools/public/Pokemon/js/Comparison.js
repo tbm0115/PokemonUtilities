@@ -7,6 +7,30 @@
 
   return this;
 };
+var name2hsl = function (name) {
+  var hsl = function (h, s, l) {
+    l = l + ((100 - l) / 2);// Manipulate HSL Lightness
+    return "hsl(" + h.toString() + ", " + s.toString() + "%, " + l.toFixed(0).toString() + "%)";
+    //return num + ((100 - num) / 2);
+  };
+  var dictionary = {};
+  dictionary["black"] = hsl(0, 0, 0);//"hsl(0, 0%, 0%)",
+  dictionary["blue"] = hsl(240, 100, 50);//"hsl(240, 100%, 50%)",
+  dictionary["brown"] = hsl(0, 59, 41);//"hsl(0, 59%, 41%)",
+  dictionary["gray"] = hsl(0, 0, 50);//"hsl(0, 0%, 50%)",
+  dictionary["green"] = hsl(120, 100, 25);//"hsl(120, 100%, 25%)",
+  dictionary["pink"] = hsl(350, 100, 88);//"hsl(350, 100%, 88%)",
+  dictionary["purple"] = hsl(300, 100, 25);//"hsl(300, 100%, 25%)",
+  dictionary["red"] = hsl(0, 100, 50);//"hsl(0, 100%, 50%)",
+  dictionary["white"] = hsl(0, 0, 100);//"hsl(0, 0%, 100%)",
+  dictionary["yellow"] = hsl(60, 100, 50);//"hsl(60, 100%, 50%)"
+
+  if (name in dictionary) {
+    return dictionary[name];
+  } else {
+    return dictionary["black"];
+  }
+};
 $.fn.Comparison = function (options) {
   return $(this).filter(function (i, e) {
     return e.nodeName === "CANVAS";
@@ -70,8 +94,8 @@ $.fn.Comparison = function (options) {
           ctx.rotate((2 * (p + 1 / plen)) * Math.PI);
 
           for (var slen = stats.length, s = 0; s < slen; s++) {
-            ctx.strokeStyle = "silver";
-            ctx.fillStyle = arr[p].color;
+            ctx.strokeStyle = "black";//"silver";
+            ctx.fillStyle = name2hsl(arr[p].color);// arr[p].color;
             ctx.lineWidth = 1;
             var k = stats[s];
             var statVal = arr[p].stats[k];
@@ -108,10 +132,11 @@ $.fn.Comparison = function (options) {
                 ctx.strokeStyle = "navyblue";
               }
             }
+            ctx.stroke();
             ctx.closePath();
             ctx.fill();
-            ctx.stroke();
           }
+          ctx.strokeStyle = "black";
           var p1 = new polarPoint(md, 0);
           ctx.beginPath();
           ctx.moveTo(0, 0);

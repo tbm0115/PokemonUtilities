@@ -2,10 +2,10 @@
 var express = require('express');
 var router = express.Router();
 
-let RSSParser = require('rss-parser');
 /* GET home page. */
 router.get('/', function (req, res) {
-  let parser = new RSSParser();
+  var RSSParser = require('rss-parser');
+  var parser = new RSSParser();
   parser.parseURL("https://blog.utilities.games/feed/", function (err, feed) {
     res.render('index', {
       title: 'Home',

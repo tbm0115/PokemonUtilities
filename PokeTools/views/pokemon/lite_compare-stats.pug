@@ -21,10 +21,15 @@ html(lang='en')
       body{
         background: none;
       }
+      .row{
+        margin: 0px !important;
+      }
       section{
         position:relative;
         display: block;
-        width: 100vw;
+        width: 95vw;
+        margin-left: auto;
+        margin-right: auto;
         height: 100vh;
       }
       #pokeComparison{
@@ -66,7 +71,7 @@ html(lang='en')
     script(language='javascript', type='text/javascript', src='/bootstrap/dist/js/bootstrap.min.js?v=4.1.3')
     script(language='javascript', type='text/javascript', src='/idb/dist/js/idb.js?v=2.1.3')
     script(language='javascript', type='text/javascript', src='/Pokemon/js/Pokemon.es5.min.js?v=1.2')
-    script(language='javascript', type='text/javascript', src='/Pokemon/js/Comparison.es5.min.js?v=1.3')
+    script(language='javascript', type='text/javascript', src='/Pokemon/js/Comparison.es5.min.js?v=1.8')
     script(type='text/javascript').
       $(document).ready(function(){
         var pids = atob("!{data}").replace(/\"/g, "").split(",");

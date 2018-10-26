@@ -92,6 +92,12 @@
 .article-card .card-content article {
   padding: 1.6rem;
 }
+.article-card .card-content article h2 {
+  overflow: hidden;
+  text-overflow: clip;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .article-card .card-content article h2 a {
   text-decoration: none;
   color: #444;
