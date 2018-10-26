@@ -180,6 +180,7 @@
     <Folder Include="public\images\Game Covers\Pokemon\" />
     <Folder Include="public\fonts\" />
     <Folder Include="public\idb\" />
+    <Folder Include="public\images\external\" />
     <Folder Include="public\Pokemon\images\" />
     <Folder Include="views\pokemon\" />
     <None Include="compilerconfig.json" />
@@ -264,6 +265,20 @@
     <Content Include="public\images\compiling.webp" />
     <Content Include="public\images\compiling_100.png" />
     <Content Include="public\images\compiling_100.webp" />
+    <Content Include="public\images\external\github.png" />
+    <Content Include="public\images\external\github.webp" />
+    <Content Include="public\images\external\node.js.png" />
+    <Content Include="public\images\external\node.js.webp" />
+    <Content Include="public\images\external\paint.net.png" />
+    <Content Include="public\images\external\paint.net.webp" />
+    <Content Include="public\images\external\pokeapi.png" />
+    <Content Include="public\images\external\pokeapi.webp" />
+    <Content Include="public\images\external\pokestadium.png" />
+    <Content Include="public\images\external\pokestadium.webp" />
+    <Content Include="public\images\external\pwabuilder.png" />
+    <Content Include="public\images\external\pwabuilder.webp" />
+    <Content Include="public\images\external\wordpress.png" />
+    <Content Include="public\images\external\wordpress.webp" />
     <Content Include="public\images\Game Covers\Pokemon\alpha-saphire.png" />
     <Content Include="public\images\Game Covers\Pokemon\black-2.png" />
     <Content Include="public\images\Game Covers\Pokemon\black.png" />
@@ -635,6 +650,17 @@
     <Content Include="public\Pokemon\images\PokeTools.png" />
     <Content Include="public\Pokemon\images\PokeTools_100.png" />
     <Content Include="public\Pokemon\images\PokeTools_100.webp" />
+    <Content Include="public\stylesheets\Articles.css">
+      <SubType>Content</SubType>
+      <DependentUpon>public\stylesheets\Articles.less</DependentUpon>
+    </Content>
+    <Content Include="public\stylesheets\Articles.less">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="public\stylesheets\Articles.min.css">
+      <SubType>Content</SubType>
+      <DependentUpon>public\stylesheets\Articles.css</DependentUpon>
+    </Content>
     <Content Include="public\stylesheets\latofonts.css" />
     <Content Include="public\stylesheets\main.css" />
     <Content Include="public\stylesheets\site.css">

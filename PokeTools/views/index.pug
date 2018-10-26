@@ -13,6 +13,7 @@ block append styles
     #quickLink li{
       position: relative;
       display: block;
+      transition: all 0.36s ease;
     }
     #quickLink li:hover{
       border: 1px solid rgba(100, 100, 100);
@@ -36,11 +37,110 @@ block append styles
       content: attr(href);
 
     }
+  link(rel='stylesheet', href='/stylesheets/articles.min.css?v=1.0')
+  //<!-- You can use Open Graph tags to customize link previews. Learn more: https://developers.facebook.com/docs/sharing/webmasters -->
+  meta(property="og:url",           content="https://utilities.games/")
+  meta(property="og:type",          content="website")
+  meta(property="og:title",         content=title)
+  meta(property="og:description"    content="Dedicated to providing tools for gameplay.")
+  meta(property="og:image",         content="https://utilities.games/images/ios/ios-appicon-1024-1024.png")
 
+block append scripts
+  script(type='text/javascript').
+    var rssFeed = !{JSON.stringify(rss)};
+    function processRSS(data){
+      //console.log("RSS Feed: ", data);
+      $("#newsContainer").html("");
+      var nc = $("#newsContainer")[0];
+      for(var len = rssFeed.items.length,n=0;n<len;n++){
+        var item = rssFeed.items[n];
+
+        var temp = $("template#article")[0];
+        var clon = temp.content.cloneNode(true);
+        nc.appendChild(clon);
+        //clon.setAttribute("id", "nc" + n.toString());
+
+        var $clon = $("#newsContainer").find(".article-card:last-of-type");
+
+        if (typeof(item["image"]) !== "undefined"){
+          $clon.find(".card-image img").attr("src", item.image.url);
+          $clon.find(".card-image img").attr("alt", item.image.title);
+        }
+
+        $clon.find(".card-share-options .fb-share-button").attr("href", "https://www.facebook.com/sharer/sharer.php?app_id=302718756988342&sdk=joey&u=" + item.link + "&display=popup&ref=plugin&src=share_button");
+
+        if (item.categories.length > 0){
+          $clon.find(".card-header a").remove();
+          for(var c = item.categories.length - 1;c>=0;c--){
+            var cat = item.categories[c];
+            var a = document.createElement("a");
+            a.setAttribute("href", rssFeed.link + "/tag/" + item.categories[c].replace(/-/g, '_').replace(/ /g, '_').toLowerCase() + "/");
+            a.innerText = c > 0 ? ", " + cat.substr(0,1).toUpperCase() + cat.substr(1) : cat;
+            $clon.find(".card-header").prepend(a);
+          }
+        }else{
+          $clon.find(".card-header a").text(rssFeed.title);
+        }
+
+        $clon.find(".card-header time").text((new Date(item.pubDate)).toDateString());
+
+        $clon.find("article h2 a").attr("href", item.link);
+        $clon.find("article h2 a").text(item.title);
+        $clon.find("article p").html(item.content);
+
+        $clon.find(".card-footer a").attr("href", rssFeed.link + "?s=" + item.creator);
+        $clon.find(".card-footer a").text(item.creator);
+
+      }
+    }
+    $(document).ready(function(){
+      // Get RSS from blog
+      processRSS();
+      $("#newsContainer").on("click", ".card-share > a", function(e){
+        e.preventDefault();
+        $(this).parent().find("div").toggleClass("active");
+        $(this).parent().toggleClass("share-expanded");
+      });
+    });
 block append content
+  // Load Facebook SDK for JavaScript
+  <div id="fb-root"></div>
+  script(type='text/javascript').
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=302718756988342";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+  template#article
+    .article-card
+      .card-image
+        img(alt="Article Image", src="/images/ios/ios-appicon-180-180.png")
+      .card-content
+        .card-share
+          .card-share-options
+            a.share-icon.facebook.fb-share-button(href="javascript:void(0)", data-href="", data-layout="button",onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')")
+              i.fa.fa-facebook
+          a.share-toggle.share-icon(href="javascript:void(0);")
+        .card-header
+          a(href="javascript:void(0);")
+          time
+        article
+          h2
+            a(href="javascript:void(0);")
+          p
+        .card-footer
+          span By 
+            a(href="javascript:void(0);")
+          
   .jumbotron
     h1 Welcome to Utilities.Games!
     p Utilities.Games is a network dedicated to providing gamers with tools to maximize their skills. Check out our existing sites and tools. If you don't see one, please let us know on our <a href='https://www.facebook.com/utilities.games/' target='_blank'>Facebook page</a>.
+    div.fb-share-button(data-href="https://utilities.games", data-layout="button", data-size="small", data-mobile-iframe="false")
+      a.fb-xfbml-parse-ignore(target="_blank",href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Futilities.games%2F&amp;src=sdkpreparse") Share
+
   #divSections
     section
       h2

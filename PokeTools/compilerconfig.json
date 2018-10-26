@@ -26,5 +26,9 @@
   {
     "outputFile": "public/stylesheets/site.css",
     "inputFile": "public/stylesheets/site.less"
+  },
+  {
+    "outputFile": "public/stylesheets/Articles.css",
+    "inputFile": "public/stylesheets/Articles.less"
   }
 ]

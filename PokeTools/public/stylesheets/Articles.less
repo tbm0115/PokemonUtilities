@@ -1,0 +1,144 @@
+﻿.article-card {
+  position: relative;
+  display: inline-block;
+  max-width: 400px;
+  background-color: #fff;
+  margin-bottom: 1.6rem;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0,0,0, 0.12), 0 1px 2px rgba(0,0,0, 0.24);
+
+  .card-image {
+    height: 100px;
+    background-color: #eee;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-top-left-radius: 2px;
+      border-top-right-radius: 2px;
+    }
+  }
+
+  .card-content {
+    position: relative;
+
+    .card-share {
+      float: right;
+      position: relative;
+      margin-top: -25px;
+
+      a.share-icon {
+        display: inline-block;
+        width: 48px;
+        height: 48px;
+        line-height: 48px;
+        text-align: center;
+        border-radius: 50%;
+        background-color: #fff;
+        transition: all 0.3s ease;
+        outline: 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
+        color: #eee;
+
+        &:hover, &:focus {
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12), 0 3px 6px rgba(0, 0, 0, 0.24);
+          -webkit-transform: scale(1.2);
+          -moz-transform: scale(1.2);
+          -ms-transform: scale(1.2);
+          -o-transform: scale(1.2);
+          transform: scale(1.2);
+        }
+      }
+
+      .card-share-options {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        visibility: hidden;
+        transform: translateZ(0) translateX(0px);
+        transition: transform 0.35s ease;
+
+        .facebook {
+          background-color: #3b5998;
+        }
+
+        .twitter {
+          background-color: #00abe3;
+        }
+
+        .googleplus {
+          background-color: #d3492c;
+        }
+
+        &.active {
+          visibility: visible;
+          transform: translateZ(0) translateX(-48px);
+          transition: transform 0.36s ease;
+        }
+      }
+
+      a.share-toggle {
+        z-index: 2;
+
+        &::before {
+          content: "\f1e0";
+          font-family: "FontAwesome";
+          color: #3498db;
+        }
+
+        &.share-expanded::before {
+          content: "\f00d";
+        }
+      }
+    }
+
+    .card-header {
+      a {
+      }
+
+      time {
+        font-size: 0.75em;
+        color: #bbb;
+        margin-left: 0.8rem;
+      }
+    }
+
+    article {
+      padding: 1.6rem;
+
+      h2 {
+        a {
+          text-decoration: none;
+          color: #444;
+          transition: all 0.5s ease;
+
+          &:hover {
+            color: #2980b9;
+          }
+        }
+      }
+
+      p {
+      }
+    }
+
+    .card-footer {
+      overflow: hidden;
+      padding-right: 1.6rem;
+      padding-left: 1.6rem;
+      padding-bottom: 1.6rem;
+
+      span {
+        display: inline-block;
+        vertical-align: middle;
+
+        a {
+        }
+      }
+    }
+  }
+}
