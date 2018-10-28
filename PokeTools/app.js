@@ -6,7 +6,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var map = require('express-sitemap');
+var sitemap = require('express-sitemap');
 var zlib = require('zlib');
 var gzip = zlib.createGzip();
 
@@ -72,8 +72,11 @@ var server = app.listen(app.get('port'), function () {
 /*
  * sitemap
  */
-var sitemap = map({
+var _sitemap = sitemap({
+  http: 'https',
+  url: 'utilities.games',
   sitemap: 'public/sitemap.xml', // path for .XMLtoFile
+  robots: 'public/robots.txt',
   map: {
     '/': ['get'],
     '/pokemon': ['get'],
@@ -83,34 +86,41 @@ var sitemap = map({
     '/pokemon/progress': ['get']
   },
   route: {
-    '/': {
+    'https://utilities.games/': {
       lastmod: '2018-10-28',
       changefreq: 'always',
       priority: 1.0
     },
-    '/pokemon': {
+    'https://utilities.games/pokemon': {
       lastmod: '2018-10-20',
       changefreq: 'irregular'
     },
-    '/pokemon/:entry': {
+    'https://utilities.games/pokemon/:entry': {
       lastmod: '2018-10-20',
       changefreq: 'irregular'
     },
-    '/pokemon/comparison/stats': {
+    'https://utilities.games/pokemon/comparison/stats': {
       lastmod: '2018-10-28',
       changefreq: 'irregular'
     },
-    '/pokemon/comparison/stats-lite/:data': {
+    'https://utilities.games/pokemon/comparison/stats-lite/:data': {
       lastmod: '2018-10-28',
       changefreq: 'always'
     },
-    '/pokemon/progress': {
+    'https://utilities.games/pokemon/progress': {
       lastmod: '2018-10-20',
       changefreq: 'never'
     }
   }
 }).XMLtoFile();
-
+//var map = sitemap({
+//  generate: app
+//});
+//app.get('/sitemap.xml', function (req, res) {
+//  map.XMLtoWeb(res);
+//}).get('/robots.txt', function (req, res) {
+//  map.TXTtoWeb(res);
+//});
 //sitemap.generate(app); // generate sitemap from express route, you can set generate inside sitemap({})
 
 //sitemap.XMLtoFile(); // write this map to file
