@@ -1,11 +1,14 @@
 ﻿.article-card {
   position: relative;
   display: inline-block;
-  max-width: 400px;
+  width: 33%;
+  min-width: 285px;
   background-color: #fff;
+  margin-left: 2%;
   margin-bottom: 1.6rem;
   border-radius: 2px;
   box-shadow: 0 1px 3px rgba(0,0,0, 0.12), 0 1px 2px rgba(0,0,0, 0.24);
+  flex: 0 0 auto;
 
   .card-image {
     height: 100px;
@@ -27,9 +30,11 @@
     position: relative;
 
     .card-share {
+      position: absolute;
       float: right;
-      position: relative;
       margin-top: -25px;
+      right: -10px;
+      z-index: 2;
 
       a.share-icon {
         display: inline-block;
@@ -97,13 +102,24 @@
     }
 
     .card-header {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: clip;
+      text-overflow: ellipsis;
+
       a {
+        position: relative;
+        display: inline-block;
       }
 
       time {
+        position: relative;
+        display: block;
         font-size: 0.75em;
         color: #bbb;
         margin-left: 0.8rem;
+        width: 100%;
+        text-align: right;
       }
     }
 

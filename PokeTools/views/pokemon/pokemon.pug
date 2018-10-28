@@ -5,6 +5,10 @@ block append styles
   meta(name='theme-color', content=pokemon.species.color.name)
   meta(name='description', content=pokemon.species.genera[2].genus)
   meta(name='Keywords', content=[pokemon.nameUpper, '#' + pokemon.id, pokemon.species.genera[2].genus, 'Pokemon'].join(','))
+  meta(name='pkm-title', content=pokemon.nameUpper)
+  meta(name='pkm-category', content='pokedex')
+  meta(name='pkm-image', content='/PokeApi/sprites/pokemon/' + pokemon.id.toString() + '.png')
+  meta(name='pkm-id', content=pokemon.id)
   style(type='text/css').
       #canvLevelTree{
           position: relative;

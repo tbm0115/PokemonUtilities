@@ -1,0 +1,19 @@
+[
+  {
+    "outputFileName": "public/bundles/site.css",
+    "inputFiles": [
+      "public/stylesheets/site.min.css",
+      "public/font-awesome/css/font-awesome.min.css",
+      "public/bootstrap/dist/css/bootstrap.min.css",
+      "public/stylesheets/Articles.min.css"
+    ]
+  },
+  {
+    "outputFileName": "public/bundles/site.js",
+    "inputFiles": [
+      "public/jquery/dist/jquery.min.js",
+      "public/bootstrap/dist/js/bootstrap.min.js",
+      "public/site/prepareSW.js"
+    ]
+  }
+]

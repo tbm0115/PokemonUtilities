@@ -6,8 +6,8 @@ html(lang='en')
     meta(name='author', content='LightWorks')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='theme-color', content='#474544')
-    meta(name='description', content='Dedicated to providing tools for gameplay.')
-    meta(name='Keywords', content='video game, utilities, games, tools, tool, utility, Pokemon')
+    meta(name='description', content=description)
+    meta(name='Keywords', content='video game, utilities, games, tools, tool, utility, Pokemon, ' + pokemon.map(function(e,i){return e.nameUpper;}).join(', '))
     link(rel='icon' href='/images/android/android-launchericon-96-96.png')
     link(rel='manifest', href='/manifest.json')
     title= title + ' - Utilities.Games'
@@ -25,11 +25,9 @@ html(lang='en')
         margin: 0px !important;
       }
       section{
-        position:relative;
+        position: relative;
         display: block;
-        width: 95vw;
-        margin-left: auto;
-        margin-right: auto;
+        width: 100vw;
         height: 100vh;
       }
       #pokeComparison{
@@ -45,7 +43,15 @@ html(lang='en')
       #workSpace{
         background: linear-gradient(rgba(255,255,255, 0.6), transparent);
       }
-
+      [class*='icon-sprite-']{
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 30px;
+      }
+      #tblResults tbody tr td{
+        text-align: center;
+      }
     // Global site tag (gtag.js) - Google Analytics
     script(async='', src="https://www.googletagmanager.com/gtag/js?id=UA-126967798-1")
 
@@ -62,7 +68,30 @@ html(lang='en')
           canvas#pokeComparison This Browser does not support HTML5 Canvas!
           p#compareMessage
         .col-lg-6.col-md-6.col-sm-12.col-sm-12
-          ul#pokeContainer
+          table#tblResults.table.table-striped
+            thead
+              tr
+                th Pokemon
+                th HP
+                th Attack
+                th Defense
+                th Special Attack
+                th Special Defense
+                th Speed
+                th Remove
+            tbody
+              - for(var len = pokemon.length,n=0;n<len;n++)
+                -var stats = pokemon[n].normalizedStats;
+                tr
+                  td
+                    i(class='icon-sprite-' + pokemon[n].id)
+                    a(href='/pokemon/' + pokemon[n].id)= pokemon[n].nameUpper
+                  -for(var s in stats)
+                    td(class='table-' + (stats[s].effort > 0 ? 'success' : 'default'), data-ev=stats[s].effort)= stats[s].base_stat
+                  td
+                    button.btn.btn-xs(onclick='removePokemon(this);',data-id=pokemon[n].id)
+                      i.fa.fa-remove
+          p.alert.alert-warning#msgAlert
       .row
         a.pull-right.text-muted(href='/pokemon/compare/stats',target='parent') Powered by Utilities.Games
 
@@ -71,22 +100,47 @@ html(lang='en')
     script(language='javascript', type='text/javascript', src='/bootstrap/dist/js/bootstrap.min.js?v=4.1.3')
     script(language='javascript', type='text/javascript', src='/idb/dist/js/idb.js?v=2.1.3')
     script(language='javascript', type='text/javascript', src='/Pokemon/js/Pokemon.es5.min.js?v=1.2')
-    script(language='javascript', type='text/javascript', src='/Pokemon/js/Comparison.es5.min.js?v=1.8')
+    script(language='javascript', type='text/javascript', src='/Pokemon/js/Comparison.es5.min.js?v=1.9')
     script(type='text/javascript').
+      ComparePokemon = !{JSON.stringify(pokemon)};
+      function removePokemon(ev){
+        $("#msgAlert").hide();
+        var id = $(ev).attr("data-id");
+        var ol = ComparePokemon.length;
+        if (ol > 1){
+          ComparePokemon = ComparePokemon.filter(function (e, i) {
+            return e.id.toString() !== id.toString();
+          });
+          if (ol !== ComparePokemon.length){
+            var loc = window.location.toString();
+            var strB = btoa(JSON.stringify(ComparePokemon.map(function(e){return e.id;})));
+            window.location = loc.substr(0,loc.lastIndexOf("/") + 1) + strB;
+            //BuildComparison();
+          }else{
+            $("#msgAlert").text("It's not your fault, the developer forgot to properly identify this Pokemon!");
+            $("#msgAlert").show();
+          }
+        }else{
+          $("#msgAlert").text("Cannot remove last Pokemon from the list!");
+          $("#msgAlert").show();
+        }
+      }
       $(document).ready(function(){
-        var pids = atob("!{data}").replace(/\"/g, "").split(",");
-        for(var len = pids.length,n=0;n<len;n++){
-          ComparePokemon.push(new Pokemon(pids[n],{
-              includes: {
-                species: {
-                  includes: {
-                    evolution_chain: {}
+        var pids = null;//JSON.parse(atob("!{data}"));
+        if (pids.length > 0){
+          for(var len = pids.length,n=0;n<len;n++){
+            ComparePokemon.push(new Pokemon(pids[n],{
+                includes: {
+                  species: {
+                    includes: {
+                      evolution_chain: {}
+                    }
                   }
+                },
+                callback: function () {
+                  BuildComparison();
                 }
-              },
-              callback: function () {
-                BuildComparison();
-              }
-            }));
+              }));
+          }
         }
       });

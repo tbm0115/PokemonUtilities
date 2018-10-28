@@ -203,8 +203,8 @@ $(document).ready(function () {
 });
 function BuildComparison() {
   //console.log("Compare Clicked!");
-  var container = $("#pokeContainer")[0];
-  container.innerHTML = ""; // Clear All Pokemon Items in list
+  //var container = $("#pokeContainer")[0];
+  //container.innerHTML = ""; // Clear All Pokemon Items in list
   $("#compareMessage").html("");
   var pdto = new Array();
   var data = {
@@ -220,31 +220,31 @@ function BuildComparison() {
   };
   for (var len = ComparePokemon.length, n = 0; n < len; n++) {
     var pokemon = ComparePokemon[n];
-    var li = container.appendChild(document.createElement("li"));
-    li.setAttribute("data-id", pokemon.id.toString());
-    var i = li.appendChild(document.createElement("i"));
-    i.setAttribute("class", "icon-sprite-" + pokemon.id.toString());
-    i.style.display = "inline-block";
-    var spn = li.appendChild(document.createElement("span"));
-    spn.innerText = pokemon.name.substr(0, 1).toUpperCase() + pokemon.name.substr(1);
-    var aView = li.appendChild(document.createElement("a"));
-    aView.setAttribute("href", "/pokemon/" + pokemon.name);
-    aView.setAttribute("target", "_blank");
-    aView.style.marginLeft = "5px";
-    aView.setAttribute("title", "View Entry");
-    aView.setAttribute("role", "link");
-    aView.setAttribute("aria-label", "View Entry");
-    aView.innerHTML = "<i class='fa fa-external-link'></i>";
-    var aClose = li.appendChild(document.createElement("a"));
-    aClose.setAttribute("class", "close");
-    aClose.innerHTML = "&times;";
-    aClose.onclick = function (ev) {
-      var id = $(ev.currentTarget).closest("li[data-id]").attr("data-id");
-      ComparePokemon = ComparePokemon.filter(function (e, i) {
-        return e.id.toString() !== id.toString();
-      });
-      BuildComparison();
-    };
+    //var li = container.appendChild(document.createElement("li"));
+    //li.setAttribute("data-id", pokemon.id.toString());
+    //var i = li.appendChild(document.createElement("i"));
+    //i.setAttribute("class", "icon-sprite-" + pokemon.id.toString());
+    //i.style.display = "inline-block";
+    //var spn = li.appendChild(document.createElement("span"));
+    //spn.innerText = pokemon.name.substr(0, 1).toUpperCase() + pokemon.name.substr(1);
+    //var aView = li.appendChild(document.createElement("a"));
+    //aView.setAttribute("href", "/pokemon/" + pokemon.name);
+    //aView.setAttribute("target", "_blank");
+    //aView.style.marginLeft = "5px";
+    //aView.setAttribute("title", "View Entry");
+    //aView.setAttribute("role", "link");
+    //aView.setAttribute("aria-label", "View Entry");
+    //aView.innerHTML = "<i class='fa fa-external-link'></i>";
+    //var aClose = li.appendChild(document.createElement("a"));
+    //aClose.setAttribute("class", "close");
+    //aClose.innerHTML = "&times;";
+    //aClose.onclick = function (ev) {
+    //  var id = $(ev.currentTarget).closest("li[data-id]").attr("data-id");
+    //  ComparePokemon = ComparePokemon.filter(function (e, i) {
+    //    return e.id.toString() !== id.toString();
+    //  });
+    //  BuildComparison();
+    //};
     if (typeof (pokemon) !== "undefined" && pokemon !== null) {
       var stats = {
         "speed": 0,

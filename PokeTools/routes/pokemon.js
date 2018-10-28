@@ -238,6 +238,19 @@ class Pokemon {
 
     return rtnMoves;
   }
+  normalizeStats(){
+    var objOut = {};
+    var props = ["hp", "attack", "defense", "special-attack", "special-defense", "speed"];
+    for (var plen = props.length, p = 0; p < plen; p++) {
+      for (var len = this.stats.length, n = 0; n < len; n++) {
+        if (this.stats[n].stat.name === props[p]) {
+          objOut[props[p]] = this.stats[n];
+          break;
+        }
+      }
+    }
+    return objOut;
+  }
 }
 module.exports = Pokemon;
 
@@ -254,10 +267,31 @@ router.get('/compare/stats', function (req, res) {
   });
 });
 router.get('/compare/stats-lite/:data', function (req, res) {
-  res.render('pokemon/lite_compare-stats', {
-    title: 'Compare Base Stats',
-    data: req.params['data']
-  });
+  var str = Buffer.from(req.params['data'], 'base64').toString();
+  var ids = JSON.parse(str);
+  var pokemon = new Array;
+  var strDescr = 'A comparison of the Base Stats between Pokemon: ';
+  if (ids.length > 0) {
+    for (var len = ids.length, n = 0; n < len; n++) {
+      var nwP = new Pokemon(ids[n]);
+      if (nwP.nameUpper !== "") {
+        nwP["normalizedStats"] = nwP.normalizeStats();
+        pokemon.push(nwP);
+        if (n < ids.length - 1) {
+          strDescr += nwP.nameUpper + ", ";
+        } else {
+          strDescr += "and " + nwP.nameUpper;
+        }
+      }
+    }
+    strDescr += ".";
+    res.render('pokemon/lite_compare-stats', {
+      title: 'Compare Base Stats',
+      data: req.params['data'],
+      pokemon: pokemon,
+      description: strDescr
+    });
+  }
 });
 
 router.get('/progress', function (req, res) {
@@ -276,8 +310,11 @@ router.get('/:entry', function (req, res) {
       gameTitles: gameTitles
     });
   } else {
-    res.status(400);
-    res.render('error', { error: new Error("Pokemon '" + req.params["entry"] + "' not found!") });
+    res.render('pokemon/404', {
+      q: req.params['entry']
+    });
+    //res.status(400);
+    //res.render('error', { error: new Error("Pokemon '" + req.params["entry"] + "' not found!") });
   }
 });
 router.get('/lite/:entry', function (req, res) {

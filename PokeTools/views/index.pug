@@ -33,12 +33,26 @@ block append styles
       text-overflow: ellipsis;
       white-space: nowrap;
     }
-    #quickLink li a::before{
+    #quickLink li a::after{
       content: attr(href);
 
     }
-
-  link(rel='stylesheet', href='/stylesheets/Articles.min.css?v=1.1')
+    #newsContainer{
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+      flex-direction: row;
+      overflow: hidden;
+      overflow-x: auto;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    ul.tiles > li > a > picture{
+      filter: sepia(0.8);
+    }
+  //link(rel='stylesheet', href='/stylesheets/Articles.min.css?v=1.1')
   // You can use Open Graph tags to customize link previews. Learn more: https://developers.facebook.com/docs/sharing/webmasters
   meta(property="og:url",           content="https://utilities.games/")
   meta(property="og:type",          content="website")
@@ -63,12 +77,13 @@ block append scripts
 
         var $clon = $("#newsContainer").find(".article-card:last-of-type");
 
-        if (item.content.indexOf("<img") === 0){
+        if (item.content.indexOf("<img") >= 0 && item.content.indexOf("<img") < 10){
+          //Within the first few characters
           var src = item.content.substr(item.content.indexOf("src=\"") + 5);
           src = src.substr(0, src.indexOf('"'));
-          item.content = item.content.substr(item.content.indexOf(">")+1);
           $clon.find(".card-image img").attr("src", src);
           $clon.find(".card-image img").attr("alt", item.title);
+          item.content = item.content.replace(/<img[^>]*>/g, "");
         }
 
         $clon.find(".card-share-options .fb-share-button").attr("href", "https://www.facebook.com/sharer/sharer.php?app_id=302718756988342&sdk=joey&u=" + item.link + "&display=popup&ref=plugin&src=share_button");
@@ -148,6 +163,7 @@ block append content
   #divSections
     section
       h2
+        i.fa.fa-sitemap
         a(name='Sites') Sites
       ul.tiles#subSites
         li
@@ -167,12 +183,7 @@ block append content
     hr
     section
       h2 
-        a(name='News') News
-      #newsContainer
-        .text-muted No new articles
-    hr
-    section
-      h2 
+        i.fa.fa-wrench
         a(name='Latest News') Latest Tools
       #newToolsContainer
         ul.tiles
@@ -180,9 +191,9 @@ block append content
             a(href='/pokemon/progress')
               picture
                 source(data-attribution='http://getdrawings.com/pokemon-ball-drawing#pokemon-ball-drawing-61.png')
-                source(srcset='/Pokemon/images/Pokeball Progression_100.webp', type='image/webp')
-                source(srcset='/Pokemon/images/Pokeball Progression_100.png', type='image/png')
-                img(src='/Pokemon/images/Pokeball Progression_100.png', alt='Compare Stats').img-fluid
+                source(srcset='/Pokemon/images/Pokeball%20Progression_100.webp', type='image/webp')
+                source(srcset='/Pokemon/images/Pokeball%20Progression_100.png', type='image/png')
+                img(src='/Pokemon/images/Pokeball%20Progression_100.png', alt='Compare Stats').img-fluid
               span Pok&#0232;mon Game Progress Tracker
           li
             a(href='/pokemon/compare/stats')
@@ -191,11 +202,21 @@ block append content
                 source(srcset='/Pokemon/images/ComparisonChart_100.png', type='image/png')
                 img(src='/Pokemon/images/ComparisonChart_100.png', alt='Pokemon Comparison Chart').img-fluid
               span Pok&#0232;mon Base Stat Comparison
+    hr
+    section
+      h2 
+        i.fas.fa-newspaper
+        a(name='News') News
+      #newsContainer
+        .text-muted No new articles
 block append subNav
   ul#quickLink
     li
       a(href='#Sites')
-    li
-      a(href='#News')
+        i.fa.fa-sitemap
     li
       a(href='#Latest Tools')
+        i.fa.fa-wrench
+    li
+      a(href='#News')
+        i.fas.fa-newspaper

@@ -6,6 +6,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var map = require('express-sitemap');
+var zlib = require('zlib');
+var gzip = zlib.createGzip();
 
 var routes = require('./routes/index');
 var pokemon = require('./routes/pokemon');
@@ -65,3 +68,49 @@ app.set('port', process.env.PORT || 3000);
 var server = app.listen(app.get('port'), function () {
     debug('Express server listening on port ' + server.address().port);
 });
+
+/*
+ * sitemap
+ */
+var sitemap = map({
+  sitemap: 'public/sitemap.xml', // path for .XMLtoFile
+  map: {
+    '/': ['get'],
+    '/pokemon': ['get'],
+    '/pokemon/:entry': ['get'],
+    '/pokemon/comparison/stats': ['get'],
+    '/pokemon/comparison/stats-lite/:data': ['get'],
+    '/pokemon/progress': ['get']
+  },
+  route: {
+    '/': {
+      lastmod: '2018-10-28',
+      changefreq: 'always',
+      priority: 1.0
+    },
+    '/pokemon': {
+      lastmod: '2018-10-20',
+      changefreq: 'irregular'
+    },
+    '/pokemon/:entry': {
+      lastmod: '2018-10-20',
+      changefreq: 'irregular'
+    },
+    '/pokemon/comparison/stats': {
+      lastmod: '2018-10-28',
+      changefreq: 'irregular'
+    },
+    '/pokemon/comparison/stats-lite/:data': {
+      lastmod: '2018-10-28',
+      changefreq: 'always'
+    },
+    '/pokemon/progress': {
+      lastmod: '2018-10-20',
+      changefreq: 'never'
+    }
+  }
+}).XMLtoFile();
+
+//sitemap.generate(app); // generate sitemap from express route, you can set generate inside sitemap({})
+
+//sitemap.XMLtoFile(); // write this map to file

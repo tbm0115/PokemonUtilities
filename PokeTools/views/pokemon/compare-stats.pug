@@ -1,7 +1,7 @@
 ﻿extends _pokemonlayout
 
 block append styles
-  meta(name='keywords', content'Pokemon comparison chart
+  meta(name='keywords', content'Pokemon comparison chart')
   meta(name='description', content='Compare the base stats of multiple Pokemon at once!')
   style(type='text/css').
     #pokeComparison{
@@ -16,6 +16,12 @@ block append styles
     }
     #workSpace{
       background: linear-gradient(rgba(255,255,255, 0.6), transparent);
+    }
+    #liteFrame{
+      position: relative;
+      display: block;
+      width: 100%;
+      min-height: 400px;
     }
 block append breadcrumb
   li.breadcrumb-item 
@@ -33,7 +39,8 @@ block append content
         .input-group
           label Use this code to embed the comparison
           input.form-control#txtEmbedLink(type='text', placeholder='Add Pokemon to the Chart...')
-    div.row(style='margin: 0px;')#workSpace
+    iframe#liteFrame(width='600', height='600', src='', frameborder='0')
+    //div.row(style='margin: 0px;')#workSpace
       div.col-md-6
         canvas#pokeComparison This Browser does not support HTML5 Canvas!
         p#compareMessage
@@ -43,11 +50,17 @@ block append content
 block append scripts
   script(language='javascript', type='text/javascript', src='/Pokemon/js/Pokemon.es5.min.js?v=1.2')
 
-  script(language='javascript', type='text/javascript', src='/Pokemon/js/Comparison.es5.min.js?v=1.8')
+  script(language='javascript', type='text/javascript', src='/Pokemon/js/Comparison.es5.min.js?v=1.9')
   script(type='text/javascript', language='javascript').
+    var litePokemon = new Array();
     $(document).ready(function(){
       $("#searchResults").on("pokemon.clicked", function(e, result){
-        if (ComparePokemon.length < 20){
+        if (litePokemon.indexOf(result.getAttribute("data-id").toString()) < 0){
+          litePokemon.push(Number(result.getAttribute("data-id")));
+          var strB = btoa(JSON.stringify(litePokemon));
+          $("#liteFrame").attr("src", `/pokemon/compare/stats-lite/${strB}`);
+        }
+        /*if (ComparePokemon.length < 20){
           var id = result.getAttribute("data-id");
           if (ComparePokemon.filter(function(e, i){return e.id.toString() === id.toString();}).length <= 0){
             ComparePokemon.push(new Pokemon(id, {
@@ -65,7 +78,7 @@ block append scripts
           }
         }else{
           $("#compareMessage").html("No more than 20 Pokemon can be compared!");
-        }
+        }*/
       });
       $("#btnShowEmbed").on("click", function(ev){
         if (!$("#btnShowEmbed").prop('disabled')){
@@ -75,7 +88,8 @@ block append scripts
       $("#pokeComparison").on("compared", function(ev, cp){
         if (cp.length > 0){
           $("#btnShowEmbed").prop('disabled', false);
-          $("#txtEmbedLink").val("<iframe width='600' height='600' src='https://utilities.games/pokemon/compare/stats-lite/" + btoa(JSON.stringify(cp.map(function(e){return e.id;}).join(","))) + "' frameborder='0'></iframe>");
+          var strB = btoa(JSON.stringify(cp.map(function(e){return e.id;})));
+          $("#txtEmbedLink").val(`<iframe width='600' height='600' src='https://utilities.games/pokemon/compare/stats-lite/${strB}' frameborder='0'></iframe>`);
         }else{
           $("#btnShowEmbed").prop('disabled', true);
           $("#txtEmbedLink").val("");

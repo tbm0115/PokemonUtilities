@@ -57,6 +57,11 @@
     <Compile Include="public\bootstrap\js\tab.js" />
     <Compile Include="public\bootstrap\js\tooltip.js" />
     <Compile Include="public\bootstrap\js\transition.js" />
+    <Compile Include="public\bundles\site.js" />
+    <Compile Include="public\bundles\site.min.js">
+      <SubType>Code</SubType>
+      <DependentUpon>public\bundles\site.js</DependentUpon>
+    </Compile>
     <Compile Include="public\idb\dist\js\idb.js" />
     <Compile Include="public\idb\dist\js\node.js" />
     <Compile Include="public\Pokemon\js\Comparison.es5.js" />
@@ -68,6 +73,9 @@
     <Compile Include="public\Pokemon\js\Pokemon.es5.js" />
     <Compile Include="public\Pokemon\js\Pokemon.es5.min.js" />
     <Compile Include="public\Pokemon\js\Pokemon.js" />
+    <Compile Include="public\site\prepareSW.js">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="public\sw.js" />
     <Compile Include="public\jquery\dist\jquery.js" />
     <Compile Include="public\jquery\dist\jquery.min.js" />
@@ -181,14 +189,22 @@
     <Folder Include="public\fonts\" />
     <Folder Include="public\idb\" />
     <Folder Include="public\images\external\" />
+    <Folder Include="public\bundles\" />
+    <Folder Include="public\site\" />
     <Folder Include="public\Pokemon\images\" />
     <Folder Include="views\pokemon\" />
     <None Include="compilerconfig.json" />
+    <None Include="bundleconfig.json" />
     <Content Include="compilerconfig.json.defaults">
       <SubType>Content</SubType>
       <DependentUpon>compilerconfig.json</DependentUpon>
     </Content>
     <None Include="Local.pubxml" />
+    <Content Include="public\bundles\site.css" />
+    <Content Include="public\bundles\site.min.css">
+      <SubType>Content</SubType>
+      <DependentUpon>public\bundles\site.css</DependentUpon>
+    </Content>
     <Content Include="public\fonts\Lato-Black.eot" />
     <Content Include="public\fonts\Lato-Black.ttf" />
     <Content Include="public\fonts\Lato-Black.woff" />
@@ -261,6 +277,12 @@
     <Content Include="public\fonts\Lato-ThinItalic.ttf" />
     <Content Include="public\fonts\Lato-ThinItalic.woff" />
     <Content Include="public\fonts\Lato-ThinItalic.woff2" />
+    <Content Include="public\fonts\RobotoCondensed-Bold.ttf" />
+    <Content Include="public\fonts\RobotoCondensed-BoldItalic.ttf" />
+    <Content Include="public\fonts\RobotoCondensed-Italic.ttf" />
+    <Content Include="public\fonts\RobotoCondensed-Light.ttf" />
+    <Content Include="public\fonts\RobotoCondensed-LightItalic.ttf" />
+    <Content Include="public\fonts\RobotoCondensed-Regular.ttf" />
     <Content Include="public\images\compiling.png" />
     <Content Include="public\images\compiling.webp" />
     <Content Include="public\images\compiling_100.png" />
@@ -650,6 +672,9 @@
     <Content Include="public\Pokemon\images\PokeTools.png" />
     <Content Include="public\Pokemon\images\PokeTools_100.png" />
     <Content Include="public\Pokemon\images\PokeTools_100.webp" />
+    <Content Include="views\pokemon\404.pug">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="public\stylesheets\Articles.css">
       <SubType>Content</SubType>
       <DependentUpon>public\stylesheets\Articles.less</DependentUpon>
