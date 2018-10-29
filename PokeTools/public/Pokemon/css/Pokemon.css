@@ -1,32 +1,4 @@
-﻿.poke-loader {
-  position: fixed;
-  display: none;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
-  z-index: 10001;
-  top: 0px;
-  left: 0px;
-}
-.poke-loader::after {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 72px;
-  height: 72px;
-  top: calc(50% - (72px / 2));
-  left: calc(50% - (72px / 2));
-  background-image: url('/PokeApi/sprites/items/poke-ball.png');
-  background-size: 72px 72px;
-  -webkit-animation: poke-ball-shake 1.25s infinite alternate;
-  /* Chrome, Safari, Opera */
-  animation: poke-ball-shake 1.25s infinite alternate;
-  transform-origin: center;
-}
-.poke-loader.show {
-  display: block;
-}
-/*
+﻿/*
   a = (((3*HPmax - 2*HPcurrent)*pokemonRate*bonusBall)/(3*HPmax)) * (bonusStatus)
   {a = (((3*100 - 2*100)*255*255)/(3*100))*1 = 21,675 }
   b = (2^(16) - 1) * (root4(a / (2^(8) - 1)))

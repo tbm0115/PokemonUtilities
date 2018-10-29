@@ -845,10 +845,10 @@ const dbPromise = idb.open('user-dex', 1, upgradeDB => {
     case 0:
       games = upgradeDB.createObjectStore('games', { autoIncrement: true }); // List of games
       pokemon = upgradeDB.createObjectStore('caught-pokemon', { autoIncrement: true }); // National 'Dex of entries
-    case 1:
-      pokemon.createIndex('nid', 'nid');
-      teams = upgradeDB.createObjectStore('pokemon-teams', { autoIncrement: true });
-      teams.createIndex('name', 'name');
+    //case 1:
+    //  pokemon.createIndex('nid', 'nid');
+    //  teams = upgradeDB.createObjectStore('pokemon-teams', { autoIncrement: true });
+    //  teams.createIndex('name', 'name');
   }
 });
 var Game = (function (db,cb) {
@@ -1084,12 +1084,12 @@ var UserDex = {
         for (var len = games.length, n = 0; n < len; n++) {
           UserDex._initialization[n] = false;
           UserDex.Games.Items.push(new Game(JSON.parse(games[n]), (function (g) {
-            UserDex._initialization[this] = true;
+            UserDex._initialization[n] = true;
           }).bind(n)));
         }
         UserDex._initialization["intervalCount"] = 0;
-        UserDex._initialization["interval"] = setInterval(function () {
-          UserDex._initialization.intervalCount ++;
+        UserDex._initialization["fncTimeout"] = function () {
+          UserDex._initialization.intervalCount++;
           var blnAllGood = true;
           var keys = Object.getOwnPropertyNames(UserDex._initialization);
           for (var len = keys.length, n = 0; n < len; n++) {
@@ -1100,13 +1100,16 @@ var UserDex = {
             }
           }
           if (blnAllGood) {
-            clearInterval(UserDex._initialization.interval);
+            //clearInterval(UserDex._initialization.interval);
             $(document).trigger("userdex.initialized", [UserDex.Games.Items]);
           } else if (UserDex._initialization.intervalCount > 20) {
             console.warn("[UserDex.Initialization] Timed out!");
-            clearInterval(UserDex._initialization.interval);
+            //clearInterval(UserDex._initialization.interval);
+          } else {
+            setTimeout(UserDex._initialization.fncTimeout, 100);
           }
-        }, 50);
+        };
+        UserDex._initialization["interval"] = setTimeout(UserDex._initialization.fncTimeout, 100);
       });
     },
     Contains: {

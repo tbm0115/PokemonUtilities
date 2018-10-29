@@ -12,10 +12,6 @@
     "inputFile": "public/Pokemon/js/Comparison.js"
   },
   {
-    "outputFile": "public/stylesheets/Layout.css",
-    "inputFile": "public/stylesheets/Layout.less"
-  },
-  {
     "outputFile": "public/Pokemon/css/PokeCardLight.css",
     "inputFile": "public/Pokemon/css/PokeCardLight.less"
   },

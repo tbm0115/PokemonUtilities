@@ -258,15 +258,23 @@ function BuildComparison() {
   }
   data.items = pdto;
   //console.log("\tCompare DTO: ", data);
-  $("#pokeComparison").Comparison(data)[0].Draw();
-  $("#pokeComparison").trigger("compared", [ComparePokemon]);
+  if ($("#pokeComparison").length > 0) {
+    var $comp = $("#pokeComparison").Comparison(data);
+    if ($comp !== null && $comp.length > 0) {
+      $comp[0].Draw();
+      $("#pokeComparison").trigger("compared", [ComparePokemon]);
+    }
+  }
 }
 $(document).ready(function () {
   //drawFavoritePokemonPanel();
 
   $(window).on("resize", function () {
     // Re-Draw Canvas
-    document.querySelector("#pokeComparison").Draw();
+    var comp = document.querySelector("#pokeComparison");
+    if (typeof comp !== "undefined" && comp !== null) {
+      comp.Draw();
+    }
   });
 });
 

@@ -260,6 +260,9 @@ router.get('/', function (req, res){
     title: 'PokeTools'
   });
 });
+//router.get('/font-awesome/:whatever', function (req, res) {
+//  res.render(req.params['whatever']);
+//});
 
 router.get('/compare/stats', function (req, res) {
   res.render('pokemon/compare-stats', {

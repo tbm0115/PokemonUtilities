@@ -1,5 +1,11 @@
 ﻿@bgShade: rgba(255, 255, 255, 0.85);
-
+html.no-webp {
+  body {
+    background: url('/images/background.png') no-repeat fixed !important;
+    background-position: center top !important;
+    background-size: cover !important;
+  }
+}
 body {
   padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -11,10 +17,11 @@ body {
   grid-template-columns: 300px calc(100vw - (300px * 2)) 300px;
   grid-template-rows: 50px calc(100vh - (50px + 50px)) 50px;
   grid-gap: 0px;
-  background: url('/images/background.png') no-repeat fixed;
+  background: url('/images/background.webp') no-repeat fixed;
   background-position: center top;
   background-size: cover;
   color: initial; /*#e1e1e1;*/
+
 
   > nav:first-of-type:not(:last-of-type) {
     grid-area: siteNav;
@@ -190,7 +197,7 @@ ul.tiles {
       --ohue: @idx;
     }
 
-    .logo-hue-x(@idx - 1);
+    .logo-hue-x(@idx - 5);
   }
 
   .logo-hue-x(255);

@@ -1,12 +1,42 @@
 ﻿extends ../_sitelayout
 
 block append styles
-    link(rel='stylesheet', href='/Pokemon/css/Pokemon.min.css?v=1.8.9')
-    link(rel='preload', href='/PokeApi/api/v2/pd/1/index.json', as='fetch')
-    style(type='text/css').
-        .wash-out{
-            filter: grayscale(100%) opacity(50%);
-        }
+  //link(rel='stylesheet', href='/Pokemon/css/Pokemon.min.css?v=1.8.9')
+  style(type='text/css')
+    include ../../public/Pokemon/css/Pokemon.min.css
+  link(rel='preload', href='/PokeApi/api/v2/pd/1/index.json', as='fetch')
+  style(type='text/css').
+    .wash-out{
+        filter: grayscale(100%) opacity(50%);
+    }
+    div#poke-loader {
+      position: fixed;
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 10001;
+      top: 0px;
+      left: 0px;
+    }
+    div#poke-loader::after {
+      content: "";
+      position: absolute;
+      display: block;
+      width: @loaderSize;
+      height: @loaderSize;
+      top: ~"calc(50% - (@{loaderSize} / 2))";
+      left: ~"calc(50% - (@{loaderSize} / 2))";
+      background-image: ~"url('/PokeApi/sprites/items/poke-ball.png')";
+      background-size: @loaderSize @loaderSize;
+      -webkit-animation: poke-ball-shake 1.25s infinite alternate;
+      /* Chrome, Safari, Opera */
+      animation: poke-ball-shake 1.25s infinite alternate;
+      transform-origin: center;
+    }
+    div#poke-loader.show {
+      display: block;
+    }
         
 block append subNav
     #pnlSearch
@@ -20,7 +50,7 @@ block append content
   nav(aria-label='breadcrumb')
     ol.breadcrumb
       block breadcrumb
-  div.poke-loader
+  div#poke-loader
 
 block append scripts
   script(language='javascript', type='text/javascript', src='/idb/dist/js/idb.js?v=2.1.3')

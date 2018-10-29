@@ -73,6 +73,7 @@
     <Compile Include="public\Pokemon\js\Pokemon.es5.js" />
     <Compile Include="public\Pokemon\js\Pokemon.es5.min.js" />
     <Compile Include="public\Pokemon\js\Pokemon.js" />
+    <Compile Include="public\site\modernizr-custom.js" />
     <Compile Include="public\site\prepareSW.js">
       <SubType>Code</SubType>
     </Compile>
@@ -334,6 +335,7 @@
     <Content Include="public\images\Game Covers\Pokemon\y.png" />
     <Content Include="public\images\Game Covers\Pokemon\yellow.png" />
     <Content Include="public\images\background.png" />
+    <Content Include="public\images\background.webp" />
     <Content Include="public\manifest.json" />
     <Content Include="public\offline.html" />
     <Content Include="package.json" />
@@ -658,10 +660,13 @@
     </Content>
     <Content Include="public\Pokemon\css\Pokemon.css" />
     <Content Include="public\Pokemon\css\Pokemon.less" />
-    <Content Include="public\Pokemon\css\Pokemon.min.css" />
     <Content Include="public\Pokemon\css\Layout.css" />
     <Content Include="public\Pokemon\css\Layout.less" />
     <Content Include="public\Pokemon\css\Layout.min.css" />
+    <Content Include="public\Pokemon\css\Pokemon.min.css">
+      <SubType>Content</SubType>
+      <DependentUpon>public\Pokemon\css\Pokemon.css</DependentUpon>
+    </Content>
     <Content Include="public\Pokemon\images\ComparisonChart.png" />
     <Content Include="public\Pokemon\images\ComparisonChart.webp" />
     <Content Include="public\Pokemon\images\ComparisonChart_100.png" />

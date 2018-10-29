@@ -140,34 +140,34 @@ block append content
       .card-content
         .card-share
           .card-share-options
-            a.share-icon.facebook.fb-share-button(href="javascript:void(0)", data-href="", data-layout="button",onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')")
+            a.share-icon.facebook.fb-share-button(href="javascript:void(0)", aria-label='Share on Facebook', role='link', data-href="", data-layout="button",onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')")
               i.fa.fa-facebook
-          a.share-toggle.share-icon(href="javascript:void(0);")
+          a.share-toggle.share-icon(href="javascript:void(0);", aria-label='Open share options', role='button')
         .card-header
-          a(href="javascript:void(0);")
+          a(href="javascript:void(0);", aria-label='View articles under this tag', role='link')
           time
         article
           h2
-            a(href="javascript:void(0);")
+            a(href="javascript:void(0);", aria-label='View this article', role='link')
           p
         .card-footer
           span By 
-            a(href="javascript:void(0);")
+            a(href="javascript:void(0);", aria-label='View articles by this author', role='link')
           
   .jumbotron
     h1 Welcome to Utilities.Games!
-    p Utilities.Games is a network dedicated to providing gamers with tools to maximize their skills. Check out our existing sites and tools. If you don't see one, please let us know on our <a href='https://www.facebook.com/utilities.games/' target='_blank'>Facebook page</a>.
+    p Utilities.Games is a network dedicated to providing gamers with tools to maximize their skills. Check out our existing sites and tools. If you don't see one, please let us know on our <a rel='noopener' href='https://www.facebook.com/utilities.games/' target='_blank' aria-label='View our Facebook Page' role='link'>Facebook page</a>.
     div.fb-share-button(data-href="https://utilities.games", data-layout="button", data-size="small", data-mobile-iframe="false")
-      a.fb-xfbml-parse-ignore(target="_blank",href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Futilities.games%2F&amp;src=sdkpreparse") Share
+      a.fb-xfbml-parse-ignore(target="_blank", rel='noopener', aria-label='Share on Facebook', role='link', href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Futilities.games%2F&amp;src=sdkpreparse") Share
 
   #divSections
     section
       h2
         i.fa.fa-sitemap
-        a(name='Sites') Sites
+        a(name='Sites', role='navigation') Sites
       ul.tiles#subSites
         li
-          a(href='/pokemon')
+          a(href='/pokemon', aria-label='View Pokemon sub-site', role='link')
             picture
               source(srcset='/Pokemon/images/PokeTools_100.webp', type='image/webp')
               source(srcset='/Pokemon/images/PokeTools_100.png', type='image/png')
@@ -184,11 +184,11 @@ block append content
     section
       h2 
         i.fa.fa-wrench
-        a(name='Latest News') Latest Tools
+        a(name='Latest Tools', role='navigation') Latest Tools
       #newToolsContainer
         ul.tiles
           li
-            a(href='/pokemon/progress')
+            a(href='/pokemon/progress', aria-label='View Pokemon Progress tool', role='link')
               picture
                 source(data-attribution='http://getdrawings.com/pokemon-ball-drawing#pokemon-ball-drawing-61.png')
                 source(srcset='/Pokemon/images/Pokeball%20Progression_100.webp', type='image/webp')
@@ -196,7 +196,7 @@ block append content
                 img(src='/Pokemon/images/Pokeball%20Progression_100.png', alt='Compare Stats').img-fluid
               span Pok&#0232;mon Game Progress Tracker
           li
-            a(href='/pokemon/compare/stats')
+            a(href='/pokemon/compare/stats', aria-label='View Pokemon Comparison tool', role='link')
               picture
                 source(srcset='/Pokemon/images/ComparisonChart_100.webp', type='image/webp')
                 source(srcset='/Pokemon/images/ComparisonChart_100.png', type='image/png')
@@ -206,17 +206,18 @@ block append content
     section
       h2 
         i.fas.fa-newspaper
-        a(name='News') News
+        a(name='News', href='//blog.utilities.games/') News
+          i.fa.fa-open
       #newsContainer
         .text-muted No new articles
 block append subNav
   ul#quickLink
     li
-      a(href='#Sites')
+      a(href='#Sites', aria-label='Jump to Sites section', role='navigation')
         i.fa.fa-sitemap
     li
-      a(href='#Latest Tools')
+      a(href='#Latest Tools', aria-label='Jump to Latest Tools section', role='navigation')
         i.fa.fa-wrench
     li
-      a(href='#News')
+      a(href='#News', aria-label='Jump to News section', role='navigation')
         i.fas.fa-newspaper

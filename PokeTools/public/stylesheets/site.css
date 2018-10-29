@@ -1,4 +1,9 @@
-﻿body {
+﻿html.no-webp body {
+  background: url('/images/background.png') no-repeat fixed !important;
+  background-position: center top !important;
+  background-size: cover !important;
+}
+body {
   padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   font-family: "Roboto Condensed", sans-serif;
@@ -9,7 +14,7 @@
   grid-template-columns: 300px calc(100vw - (300px * 2)) 300px;
   grid-template-rows: 50px calc(100vh - (50px + 50px)) 50px;
   grid-gap: 0px;
-  background: url('/images/background.png') no-repeat fixed;
+  background: url('/images/background.webp') no-repeat fixed;
   background-position: center top;
   background-size: cover;
   color: initial;
@@ -166,1021 +171,205 @@ ul.tiles.sm > li img {
   --hue: 255;
   --ohue: 255;
 }
-.logo.logo-hue-254 {
-  --hue: 254;
-  --ohue: 254;
-}
-.logo.logo-hue-253 {
-  --hue: 253;
-  --ohue: 253;
-}
-.logo.logo-hue-252 {
-  --hue: 252;
-  --ohue: 252;
-}
-.logo.logo-hue-251 {
-  --hue: 251;
-  --ohue: 251;
-}
 .logo.logo-hue-250 {
   --hue: 250;
   --ohue: 250;
-}
-.logo.logo-hue-249 {
-  --hue: 249;
-  --ohue: 249;
-}
-.logo.logo-hue-248 {
-  --hue: 248;
-  --ohue: 248;
-}
-.logo.logo-hue-247 {
-  --hue: 247;
-  --ohue: 247;
-}
-.logo.logo-hue-246 {
-  --hue: 246;
-  --ohue: 246;
 }
 .logo.logo-hue-245 {
   --hue: 245;
   --ohue: 245;
 }
-.logo.logo-hue-244 {
-  --hue: 244;
-  --ohue: 244;
-}
-.logo.logo-hue-243 {
-  --hue: 243;
-  --ohue: 243;
-}
-.logo.logo-hue-242 {
-  --hue: 242;
-  --ohue: 242;
-}
-.logo.logo-hue-241 {
-  --hue: 241;
-  --ohue: 241;
-}
 .logo.logo-hue-240 {
   --hue: 240;
   --ohue: 240;
-}
-.logo.logo-hue-239 {
-  --hue: 239;
-  --ohue: 239;
-}
-.logo.logo-hue-238 {
-  --hue: 238;
-  --ohue: 238;
-}
-.logo.logo-hue-237 {
-  --hue: 237;
-  --ohue: 237;
-}
-.logo.logo-hue-236 {
-  --hue: 236;
-  --ohue: 236;
 }
 .logo.logo-hue-235 {
   --hue: 235;
   --ohue: 235;
 }
-.logo.logo-hue-234 {
-  --hue: 234;
-  --ohue: 234;
-}
-.logo.logo-hue-233 {
-  --hue: 233;
-  --ohue: 233;
-}
-.logo.logo-hue-232 {
-  --hue: 232;
-  --ohue: 232;
-}
-.logo.logo-hue-231 {
-  --hue: 231;
-  --ohue: 231;
-}
 .logo.logo-hue-230 {
   --hue: 230;
   --ohue: 230;
-}
-.logo.logo-hue-229 {
-  --hue: 229;
-  --ohue: 229;
-}
-.logo.logo-hue-228 {
-  --hue: 228;
-  --ohue: 228;
-}
-.logo.logo-hue-227 {
-  --hue: 227;
-  --ohue: 227;
-}
-.logo.logo-hue-226 {
-  --hue: 226;
-  --ohue: 226;
 }
 .logo.logo-hue-225 {
   --hue: 225;
   --ohue: 225;
 }
-.logo.logo-hue-224 {
-  --hue: 224;
-  --ohue: 224;
-}
-.logo.logo-hue-223 {
-  --hue: 223;
-  --ohue: 223;
-}
-.logo.logo-hue-222 {
-  --hue: 222;
-  --ohue: 222;
-}
-.logo.logo-hue-221 {
-  --hue: 221;
-  --ohue: 221;
-}
 .logo.logo-hue-220 {
   --hue: 220;
   --ohue: 220;
-}
-.logo.logo-hue-219 {
-  --hue: 219;
-  --ohue: 219;
-}
-.logo.logo-hue-218 {
-  --hue: 218;
-  --ohue: 218;
-}
-.logo.logo-hue-217 {
-  --hue: 217;
-  --ohue: 217;
-}
-.logo.logo-hue-216 {
-  --hue: 216;
-  --ohue: 216;
 }
 .logo.logo-hue-215 {
   --hue: 215;
   --ohue: 215;
 }
-.logo.logo-hue-214 {
-  --hue: 214;
-  --ohue: 214;
-}
-.logo.logo-hue-213 {
-  --hue: 213;
-  --ohue: 213;
-}
-.logo.logo-hue-212 {
-  --hue: 212;
-  --ohue: 212;
-}
-.logo.logo-hue-211 {
-  --hue: 211;
-  --ohue: 211;
-}
 .logo.logo-hue-210 {
   --hue: 210;
   --ohue: 210;
-}
-.logo.logo-hue-209 {
-  --hue: 209;
-  --ohue: 209;
-}
-.logo.logo-hue-208 {
-  --hue: 208;
-  --ohue: 208;
-}
-.logo.logo-hue-207 {
-  --hue: 207;
-  --ohue: 207;
-}
-.logo.logo-hue-206 {
-  --hue: 206;
-  --ohue: 206;
 }
 .logo.logo-hue-205 {
   --hue: 205;
   --ohue: 205;
 }
-.logo.logo-hue-204 {
-  --hue: 204;
-  --ohue: 204;
-}
-.logo.logo-hue-203 {
-  --hue: 203;
-  --ohue: 203;
-}
-.logo.logo-hue-202 {
-  --hue: 202;
-  --ohue: 202;
-}
-.logo.logo-hue-201 {
-  --hue: 201;
-  --ohue: 201;
-}
 .logo.logo-hue-200 {
   --hue: 200;
   --ohue: 200;
-}
-.logo.logo-hue-199 {
-  --hue: 199;
-  --ohue: 199;
-}
-.logo.logo-hue-198 {
-  --hue: 198;
-  --ohue: 198;
-}
-.logo.logo-hue-197 {
-  --hue: 197;
-  --ohue: 197;
-}
-.logo.logo-hue-196 {
-  --hue: 196;
-  --ohue: 196;
 }
 .logo.logo-hue-195 {
   --hue: 195;
   --ohue: 195;
 }
-.logo.logo-hue-194 {
-  --hue: 194;
-  --ohue: 194;
-}
-.logo.logo-hue-193 {
-  --hue: 193;
-  --ohue: 193;
-}
-.logo.logo-hue-192 {
-  --hue: 192;
-  --ohue: 192;
-}
-.logo.logo-hue-191 {
-  --hue: 191;
-  --ohue: 191;
-}
 .logo.logo-hue-190 {
   --hue: 190;
   --ohue: 190;
-}
-.logo.logo-hue-189 {
-  --hue: 189;
-  --ohue: 189;
-}
-.logo.logo-hue-188 {
-  --hue: 188;
-  --ohue: 188;
-}
-.logo.logo-hue-187 {
-  --hue: 187;
-  --ohue: 187;
-}
-.logo.logo-hue-186 {
-  --hue: 186;
-  --ohue: 186;
 }
 .logo.logo-hue-185 {
   --hue: 185;
   --ohue: 185;
 }
-.logo.logo-hue-184 {
-  --hue: 184;
-  --ohue: 184;
-}
-.logo.logo-hue-183 {
-  --hue: 183;
-  --ohue: 183;
-}
-.logo.logo-hue-182 {
-  --hue: 182;
-  --ohue: 182;
-}
-.logo.logo-hue-181 {
-  --hue: 181;
-  --ohue: 181;
-}
 .logo.logo-hue-180 {
   --hue: 180;
   --ohue: 180;
-}
-.logo.logo-hue-179 {
-  --hue: 179;
-  --ohue: 179;
-}
-.logo.logo-hue-178 {
-  --hue: 178;
-  --ohue: 178;
-}
-.logo.logo-hue-177 {
-  --hue: 177;
-  --ohue: 177;
-}
-.logo.logo-hue-176 {
-  --hue: 176;
-  --ohue: 176;
 }
 .logo.logo-hue-175 {
   --hue: 175;
   --ohue: 175;
 }
-.logo.logo-hue-174 {
-  --hue: 174;
-  --ohue: 174;
-}
-.logo.logo-hue-173 {
-  --hue: 173;
-  --ohue: 173;
-}
-.logo.logo-hue-172 {
-  --hue: 172;
-  --ohue: 172;
-}
-.logo.logo-hue-171 {
-  --hue: 171;
-  --ohue: 171;
-}
 .logo.logo-hue-170 {
   --hue: 170;
   --ohue: 170;
-}
-.logo.logo-hue-169 {
-  --hue: 169;
-  --ohue: 169;
-}
-.logo.logo-hue-168 {
-  --hue: 168;
-  --ohue: 168;
-}
-.logo.logo-hue-167 {
-  --hue: 167;
-  --ohue: 167;
-}
-.logo.logo-hue-166 {
-  --hue: 166;
-  --ohue: 166;
 }
 .logo.logo-hue-165 {
   --hue: 165;
   --ohue: 165;
 }
-.logo.logo-hue-164 {
-  --hue: 164;
-  --ohue: 164;
-}
-.logo.logo-hue-163 {
-  --hue: 163;
-  --ohue: 163;
-}
-.logo.logo-hue-162 {
-  --hue: 162;
-  --ohue: 162;
-}
-.logo.logo-hue-161 {
-  --hue: 161;
-  --ohue: 161;
-}
 .logo.logo-hue-160 {
   --hue: 160;
   --ohue: 160;
-}
-.logo.logo-hue-159 {
-  --hue: 159;
-  --ohue: 159;
-}
-.logo.logo-hue-158 {
-  --hue: 158;
-  --ohue: 158;
-}
-.logo.logo-hue-157 {
-  --hue: 157;
-  --ohue: 157;
-}
-.logo.logo-hue-156 {
-  --hue: 156;
-  --ohue: 156;
 }
 .logo.logo-hue-155 {
   --hue: 155;
   --ohue: 155;
 }
-.logo.logo-hue-154 {
-  --hue: 154;
-  --ohue: 154;
-}
-.logo.logo-hue-153 {
-  --hue: 153;
-  --ohue: 153;
-}
-.logo.logo-hue-152 {
-  --hue: 152;
-  --ohue: 152;
-}
-.logo.logo-hue-151 {
-  --hue: 151;
-  --ohue: 151;
-}
 .logo.logo-hue-150 {
   --hue: 150;
   --ohue: 150;
-}
-.logo.logo-hue-149 {
-  --hue: 149;
-  --ohue: 149;
-}
-.logo.logo-hue-148 {
-  --hue: 148;
-  --ohue: 148;
-}
-.logo.logo-hue-147 {
-  --hue: 147;
-  --ohue: 147;
-}
-.logo.logo-hue-146 {
-  --hue: 146;
-  --ohue: 146;
 }
 .logo.logo-hue-145 {
   --hue: 145;
   --ohue: 145;
 }
-.logo.logo-hue-144 {
-  --hue: 144;
-  --ohue: 144;
-}
-.logo.logo-hue-143 {
-  --hue: 143;
-  --ohue: 143;
-}
-.logo.logo-hue-142 {
-  --hue: 142;
-  --ohue: 142;
-}
-.logo.logo-hue-141 {
-  --hue: 141;
-  --ohue: 141;
-}
 .logo.logo-hue-140 {
   --hue: 140;
   --ohue: 140;
-}
-.logo.logo-hue-139 {
-  --hue: 139;
-  --ohue: 139;
-}
-.logo.logo-hue-138 {
-  --hue: 138;
-  --ohue: 138;
-}
-.logo.logo-hue-137 {
-  --hue: 137;
-  --ohue: 137;
-}
-.logo.logo-hue-136 {
-  --hue: 136;
-  --ohue: 136;
 }
 .logo.logo-hue-135 {
   --hue: 135;
   --ohue: 135;
 }
-.logo.logo-hue-134 {
-  --hue: 134;
-  --ohue: 134;
-}
-.logo.logo-hue-133 {
-  --hue: 133;
-  --ohue: 133;
-}
-.logo.logo-hue-132 {
-  --hue: 132;
-  --ohue: 132;
-}
-.logo.logo-hue-131 {
-  --hue: 131;
-  --ohue: 131;
-}
 .logo.logo-hue-130 {
   --hue: 130;
   --ohue: 130;
-}
-.logo.logo-hue-129 {
-  --hue: 129;
-  --ohue: 129;
-}
-.logo.logo-hue-128 {
-  --hue: 128;
-  --ohue: 128;
-}
-.logo.logo-hue-127 {
-  --hue: 127;
-  --ohue: 127;
-}
-.logo.logo-hue-126 {
-  --hue: 126;
-  --ohue: 126;
 }
 .logo.logo-hue-125 {
   --hue: 125;
   --ohue: 125;
 }
-.logo.logo-hue-124 {
-  --hue: 124;
-  --ohue: 124;
-}
-.logo.logo-hue-123 {
-  --hue: 123;
-  --ohue: 123;
-}
-.logo.logo-hue-122 {
-  --hue: 122;
-  --ohue: 122;
-}
-.logo.logo-hue-121 {
-  --hue: 121;
-  --ohue: 121;
-}
 .logo.logo-hue-120 {
   --hue: 120;
   --ohue: 120;
-}
-.logo.logo-hue-119 {
-  --hue: 119;
-  --ohue: 119;
-}
-.logo.logo-hue-118 {
-  --hue: 118;
-  --ohue: 118;
-}
-.logo.logo-hue-117 {
-  --hue: 117;
-  --ohue: 117;
-}
-.logo.logo-hue-116 {
-  --hue: 116;
-  --ohue: 116;
 }
 .logo.logo-hue-115 {
   --hue: 115;
   --ohue: 115;
 }
-.logo.logo-hue-114 {
-  --hue: 114;
-  --ohue: 114;
-}
-.logo.logo-hue-113 {
-  --hue: 113;
-  --ohue: 113;
-}
-.logo.logo-hue-112 {
-  --hue: 112;
-  --ohue: 112;
-}
-.logo.logo-hue-111 {
-  --hue: 111;
-  --ohue: 111;
-}
 .logo.logo-hue-110 {
   --hue: 110;
   --ohue: 110;
-}
-.logo.logo-hue-109 {
-  --hue: 109;
-  --ohue: 109;
-}
-.logo.logo-hue-108 {
-  --hue: 108;
-  --ohue: 108;
-}
-.logo.logo-hue-107 {
-  --hue: 107;
-  --ohue: 107;
-}
-.logo.logo-hue-106 {
-  --hue: 106;
-  --ohue: 106;
 }
 .logo.logo-hue-105 {
   --hue: 105;
   --ohue: 105;
 }
-.logo.logo-hue-104 {
-  --hue: 104;
-  --ohue: 104;
-}
-.logo.logo-hue-103 {
-  --hue: 103;
-  --ohue: 103;
-}
-.logo.logo-hue-102 {
-  --hue: 102;
-  --ohue: 102;
-}
-.logo.logo-hue-101 {
-  --hue: 101;
-  --ohue: 101;
-}
 .logo.logo-hue-100 {
   --hue: 100;
   --ohue: 100;
-}
-.logo.logo-hue-99 {
-  --hue: 99;
-  --ohue: 99;
-}
-.logo.logo-hue-98 {
-  --hue: 98;
-  --ohue: 98;
-}
-.logo.logo-hue-97 {
-  --hue: 97;
-  --ohue: 97;
-}
-.logo.logo-hue-96 {
-  --hue: 96;
-  --ohue: 96;
 }
 .logo.logo-hue-95 {
   --hue: 95;
   --ohue: 95;
 }
-.logo.logo-hue-94 {
-  --hue: 94;
-  --ohue: 94;
-}
-.logo.logo-hue-93 {
-  --hue: 93;
-  --ohue: 93;
-}
-.logo.logo-hue-92 {
-  --hue: 92;
-  --ohue: 92;
-}
-.logo.logo-hue-91 {
-  --hue: 91;
-  --ohue: 91;
-}
 .logo.logo-hue-90 {
   --hue: 90;
   --ohue: 90;
-}
-.logo.logo-hue-89 {
-  --hue: 89;
-  --ohue: 89;
-}
-.logo.logo-hue-88 {
-  --hue: 88;
-  --ohue: 88;
-}
-.logo.logo-hue-87 {
-  --hue: 87;
-  --ohue: 87;
-}
-.logo.logo-hue-86 {
-  --hue: 86;
-  --ohue: 86;
 }
 .logo.logo-hue-85 {
   --hue: 85;
   --ohue: 85;
 }
-.logo.logo-hue-84 {
-  --hue: 84;
-  --ohue: 84;
-}
-.logo.logo-hue-83 {
-  --hue: 83;
-  --ohue: 83;
-}
-.logo.logo-hue-82 {
-  --hue: 82;
-  --ohue: 82;
-}
-.logo.logo-hue-81 {
-  --hue: 81;
-  --ohue: 81;
-}
 .logo.logo-hue-80 {
   --hue: 80;
   --ohue: 80;
-}
-.logo.logo-hue-79 {
-  --hue: 79;
-  --ohue: 79;
-}
-.logo.logo-hue-78 {
-  --hue: 78;
-  --ohue: 78;
-}
-.logo.logo-hue-77 {
-  --hue: 77;
-  --ohue: 77;
-}
-.logo.logo-hue-76 {
-  --hue: 76;
-  --ohue: 76;
 }
 .logo.logo-hue-75 {
   --hue: 75;
   --ohue: 75;
 }
-.logo.logo-hue-74 {
-  --hue: 74;
-  --ohue: 74;
-}
-.logo.logo-hue-73 {
-  --hue: 73;
-  --ohue: 73;
-}
-.logo.logo-hue-72 {
-  --hue: 72;
-  --ohue: 72;
-}
-.logo.logo-hue-71 {
-  --hue: 71;
-  --ohue: 71;
-}
 .logo.logo-hue-70 {
   --hue: 70;
   --ohue: 70;
-}
-.logo.logo-hue-69 {
-  --hue: 69;
-  --ohue: 69;
-}
-.logo.logo-hue-68 {
-  --hue: 68;
-  --ohue: 68;
-}
-.logo.logo-hue-67 {
-  --hue: 67;
-  --ohue: 67;
-}
-.logo.logo-hue-66 {
-  --hue: 66;
-  --ohue: 66;
 }
 .logo.logo-hue-65 {
   --hue: 65;
   --ohue: 65;
 }
-.logo.logo-hue-64 {
-  --hue: 64;
-  --ohue: 64;
-}
-.logo.logo-hue-63 {
-  --hue: 63;
-  --ohue: 63;
-}
-.logo.logo-hue-62 {
-  --hue: 62;
-  --ohue: 62;
-}
-.logo.logo-hue-61 {
-  --hue: 61;
-  --ohue: 61;
-}
 .logo.logo-hue-60 {
   --hue: 60;
   --ohue: 60;
-}
-.logo.logo-hue-59 {
-  --hue: 59;
-  --ohue: 59;
-}
-.logo.logo-hue-58 {
-  --hue: 58;
-  --ohue: 58;
-}
-.logo.logo-hue-57 {
-  --hue: 57;
-  --ohue: 57;
-}
-.logo.logo-hue-56 {
-  --hue: 56;
-  --ohue: 56;
 }
 .logo.logo-hue-55 {
   --hue: 55;
   --ohue: 55;
 }
-.logo.logo-hue-54 {
-  --hue: 54;
-  --ohue: 54;
-}
-.logo.logo-hue-53 {
-  --hue: 53;
-  --ohue: 53;
-}
-.logo.logo-hue-52 {
-  --hue: 52;
-  --ohue: 52;
-}
-.logo.logo-hue-51 {
-  --hue: 51;
-  --ohue: 51;
-}
 .logo.logo-hue-50 {
   --hue: 50;
   --ohue: 50;
-}
-.logo.logo-hue-49 {
-  --hue: 49;
-  --ohue: 49;
-}
-.logo.logo-hue-48 {
-  --hue: 48;
-  --ohue: 48;
-}
-.logo.logo-hue-47 {
-  --hue: 47;
-  --ohue: 47;
-}
-.logo.logo-hue-46 {
-  --hue: 46;
-  --ohue: 46;
 }
 .logo.logo-hue-45 {
   --hue: 45;
   --ohue: 45;
 }
-.logo.logo-hue-44 {
-  --hue: 44;
-  --ohue: 44;
-}
-.logo.logo-hue-43 {
-  --hue: 43;
-  --ohue: 43;
-}
-.logo.logo-hue-42 {
-  --hue: 42;
-  --ohue: 42;
-}
-.logo.logo-hue-41 {
-  --hue: 41;
-  --ohue: 41;
-}
 .logo.logo-hue-40 {
   --hue: 40;
   --ohue: 40;
-}
-.logo.logo-hue-39 {
-  --hue: 39;
-  --ohue: 39;
-}
-.logo.logo-hue-38 {
-  --hue: 38;
-  --ohue: 38;
-}
-.logo.logo-hue-37 {
-  --hue: 37;
-  --ohue: 37;
-}
-.logo.logo-hue-36 {
-  --hue: 36;
-  --ohue: 36;
 }
 .logo.logo-hue-35 {
   --hue: 35;
   --ohue: 35;
 }
-.logo.logo-hue-34 {
-  --hue: 34;
-  --ohue: 34;
-}
-.logo.logo-hue-33 {
-  --hue: 33;
-  --ohue: 33;
-}
-.logo.logo-hue-32 {
-  --hue: 32;
-  --ohue: 32;
-}
-.logo.logo-hue-31 {
-  --hue: 31;
-  --ohue: 31;
-}
 .logo.logo-hue-30 {
   --hue: 30;
   --ohue: 30;
-}
-.logo.logo-hue-29 {
-  --hue: 29;
-  --ohue: 29;
-}
-.logo.logo-hue-28 {
-  --hue: 28;
-  --ohue: 28;
-}
-.logo.logo-hue-27 {
-  --hue: 27;
-  --ohue: 27;
-}
-.logo.logo-hue-26 {
-  --hue: 26;
-  --ohue: 26;
 }
 .logo.logo-hue-25 {
   --hue: 25;
   --ohue: 25;
 }
-.logo.logo-hue-24 {
-  --hue: 24;
-  --ohue: 24;
-}
-.logo.logo-hue-23 {
-  --hue: 23;
-  --ohue: 23;
-}
-.logo.logo-hue-22 {
-  --hue: 22;
-  --ohue: 22;
-}
-.logo.logo-hue-21 {
-  --hue: 21;
-  --ohue: 21;
-}
 .logo.logo-hue-20 {
   --hue: 20;
   --ohue: 20;
-}
-.logo.logo-hue-19 {
-  --hue: 19;
-  --ohue: 19;
-}
-.logo.logo-hue-18 {
-  --hue: 18;
-  --ohue: 18;
-}
-.logo.logo-hue-17 {
-  --hue: 17;
-  --ohue: 17;
-}
-.logo.logo-hue-16 {
-  --hue: 16;
-  --ohue: 16;
 }
 .logo.logo-hue-15 {
   --hue: 15;
   --ohue: 15;
 }
-.logo.logo-hue-14 {
-  --hue: 14;
-  --ohue: 14;
-}
-.logo.logo-hue-13 {
-  --hue: 13;
-  --ohue: 13;
-}
-.logo.logo-hue-12 {
-  --hue: 12;
-  --ohue: 12;
-}
-.logo.logo-hue-11 {
-  --hue: 11;
-  --ohue: 11;
-}
 .logo.logo-hue-10 {
   --hue: 10;
   --ohue: 10;
 }
-.logo.logo-hue-9 {
-  --hue: 9;
-  --ohue: 9;
-}
-.logo.logo-hue-8 {
-  --hue: 8;
-  --ohue: 8;
-}
-.logo.logo-hue-7 {
-  --hue: 7;
-  --ohue: 7;
-}
-.logo.logo-hue-6 {
-  --hue: 6;
-  --ohue: 6;
-}
 .logo.logo-hue-5 {
   --hue: 5;
   --ohue: 5;
-}
-.logo.logo-hue-4 {
-  --hue: 4;
-  --ohue: 4;
-}
-.logo.logo-hue-3 {
-  --hue: 3;
-  --ohue: 3;
-}
-.logo.logo-hue-2 {
-  --hue: 2;
-  --ohue: 2;
-}
-.logo.logo-hue-1 {
-  --hue: 1;
-  --ohue: 1;
 }
 .logo h1 {
   position: relative;

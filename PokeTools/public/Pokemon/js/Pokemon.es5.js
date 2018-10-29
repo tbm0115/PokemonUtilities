@@ -840,11 +840,15 @@ var Pokemon = function Pokemon(ndid, options) {
   return this;
 };
 var dbPromise = idb.open('user-dex', 1, function (upgradeDB) {
-  var games, pokemon;
+  var games, pokemon, teams;
   switch (upgradeDB.oldVersion) {
     case 0:
       games = upgradeDB.createObjectStore('games', { autoIncrement: true }); // List of games
       pokemon = upgradeDB.createObjectStore('caught-pokemon', { autoIncrement: true }); // National 'Dex of entries
+    //case 1:
+    //  pokemon.createIndex('nid', 'nid');
+    //  teams = upgradeDB.createObjectStore('pokemon-teams', { autoIncrement: true });
+    //  teams.createIndex('name', 'name');
   }
 });
 var Game = function Game(db, cb) {
@@ -881,7 +885,8 @@ var Game = function Game(db, cb) {
           dbPromise.then(function (db) {
             var tx = db.transaction('caught-pokemon', 'readwrite');
             var store = tx.objectStore('caught-pokemon');
-            store.add(JSON.stringify(pde))["catch"](function (e) {
+            //store.add(JSON.stringify(pde)).catch(function (e) {
+            store.add(pde)["catch"](function (e) {
               console.error("Error: ", e);
               tx.abort();
               if (typeof $err !== "undefined" && $err !== null) {
@@ -916,7 +921,7 @@ var Game = function Game(db, cb) {
       return;
     }
     //console.log('[Pokemon.js.Game.addPokemon] Cursor @', cursor.key);
-    var obj = JSON.parse(cursor.value);
+    var obj = cursor.value; //JSON.parse(cursor.value);
     // Add cursored Pokedex Entry to list
     if (obj.game.toString().toLowerCase() === $game.name) {
       //console.log("Adding this item:", obj);
@@ -1011,7 +1016,16 @@ var PokedexEntry = function PokedexEntry(db) {
 
   return this;
 };
+var PokeTeam = function PokeTeam(db) {
+  this.name = db.name;
+
+  return this;
+};
 var UserDex = {
+  Teams: {
+    Items: new Array(),
+    Add: function Add(name, cb, err) {}
+  },
   Games: {
     Items: new Array(),
     Add: function Add(name, cb, err) {
@@ -1029,7 +1043,8 @@ var UserDex = {
           dbPromise.then(function (db) {
             var tx = db.transaction('games', 'readwrite');
             var store = tx.objectStore('games');
-            store.add(JSON.stringify(g))["catch"](function (e) {
+            //store.add(JSON.stringify(g)).catch(function (e) {
+            store.add(g)["catch"](function (e) {
               console.error("Error: ", e);
               tx.abort();
               if (typeof $err !== "undefined" && $err !== null) {
@@ -1078,11 +1093,11 @@ var UserDex = {
         for (var len = games.length, n = 0; n < len; n++) {
           UserDex._initialization[n] = false;
           UserDex.Games.Items.push(new Game(JSON.parse(games[n]), (function (g) {
-            UserDex._initialization[this] = true;
+            UserDex._initialization[n] = true;
           }).bind(n)));
         }
         UserDex._initialization["intervalCount"] = 0;
-        UserDex._initialization["interval"] = setInterval(function () {
+        UserDex._initialization["fncTimeout"] = function () {
           UserDex._initialization.intervalCount++;
           var blnAllGood = true;
           var keys = Object.getOwnPropertyNames(UserDex._initialization);
@@ -1094,13 +1109,16 @@ var UserDex = {
             }
           }
           if (blnAllGood) {
-            clearInterval(UserDex._initialization.interval);
+            //clearInterval(UserDex._initialization.interval);
             $(document).trigger("userdex.initialized", [UserDex.Games.Items]);
           } else if (UserDex._initialization.intervalCount > 20) {
             console.warn("[UserDex.Initialization] Timed out!");
-            clearInterval(UserDex._initialization.interval);
-          }
-        }, 50);
+            //clearInterval(UserDex._initialization.interval);
+          } else {
+              setTimeout(UserDex._initialization.fncTimeout, 100);
+            }
+        };
+        UserDex._initialization["interval"] = setTimeout(UserDex._initialization.fncTimeout, 100);
       });
     },
     Contains: {
