@@ -2,19 +2,19 @@
 html
   head
     meta(name='theme-color', content='#474544')
-    meta(name='description', content=pokemon.species.data.genera.genus)
+    meta(name='Description', content="#" + pokemon.id.toString() + " " + pokemon.nameUpper + ". " + pokemon.species.data.genera.genus + ".")
     meta(name='Keywords', content=[pokemon.nameUpper, '#' + pokemon.id, pokemon.species.data.genera.genus, 'Pokemon'].join(','))
     title= '#' + pokemon.id + ' ' + pokemon.nameUpper
     link(rel='stylesheet', href='/Pokemon/css/Pokemon.min.css?v=1.2')
   body
     div.poke-card(data-species-color=pokemon.species.data.color.name, data-poke-id=pokemon.id)
-        div.chain
-            div.details.biota.zoology
-                span.sprite
-                    img(src='/PokeApi' + pokemon.sprites.front_default, alt=pokemon.nameUpper)
-                button.poke-favorite
-                span.family(lang='en') Pok&#0232;mon
-                span(title='National \'Dex #', aria-label='National \'Dex Number', name='id')= pokemon.id
-                div.binomial
-                    p.common-name.species(title='Pokémon Name', aria-label='Name', name='name')= pokemon.nameUpper
-                    p.genus(title='Genus Name', aria-label='Genus Name', )= pokemon.species.data.genera.genus
+      div.chain
+        div.details.biota.zoology
+          span.sprite
+            img(src='/PokeApi' + pokemon.sprites.front_default, alt=pokemon.nameUpper)
+          button.poke-favorite
+          span.family(lang='en') Pok&#0232;mon
+          span(title='National \'Dex #', aria-label='National \'Dex Number', name='id')= pokemon.id
+          div.binomial
+            p.common-name.species(title='Pokémon Name', aria-label='Name', name='name')= pokemon.nameUpper
+            p.genus(title='Genus Name', aria-label='Genus Name', )= pokemon.species.data.genera.genus

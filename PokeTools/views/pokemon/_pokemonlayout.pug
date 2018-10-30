@@ -1,6 +1,8 @@
 ﻿extends ../_sitelayout
 
 block append styles
+  meta(name='Description', content='Providing tools and reference documents for gameplay of Pokemon titles.')
+  meta(name='Keywords', content='video game, utilities, games, tools, tool, utility, Pokemon, comparison, progress, tracker, manage')
   //link(rel='stylesheet', href='/Pokemon/css/Pokemon.min.css?v=1.8.9')
   style(type='text/css')
     include ../../public/Pokemon/css/Pokemon.min.css
@@ -39,16 +41,20 @@ block append styles
     }
         
 block append subNav
-    #pnlSearch
-        div.form-group
-            input.form-control#txtSearchDex(role='search', placeholder='Search National \'Dex', type='search')
-        div#searchResults.pokedex
-        button(type='button',aria-label='Open Search Panel', data-target='#pnlSearch', onclick='document.querySelector("#pnlSearch").classList.toggle("active");')
-            i.fa.fa-search
+  #pnlSearch
+      div.form-group
+          input.form-control#txtSearchDex(role='search', placeholder='Search National \'Dex', type='search')
+      div#searchResults.pokedex
+      button(type='button',aria-label='Open Search Panel', data-target='#pnlSearch', onclick='document.querySelector("#pnlSearch").classList.toggle("active");')
+          i.fa.fa-search
 
 block append content
   nav(aria-label='breadcrumb')
-    ol.breadcrumb
+    ol.breadcrumb(vocab="//schema.org/", typeof="BreadcrumbList")
+      li.breadcrumb-item(property="itemListElement", typeof="ListItem")
+        a(href='/pokemon', property="item", typeof="WebPage")
+          span(property="name") Pok&#0232;Tools
+        meta(property="position", content="1")
       block breadcrumb
   div#poke-loader
 

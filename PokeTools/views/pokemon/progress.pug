@@ -21,9 +21,9 @@ block append styles
       display: block;
     }
 block append breadcrumb
-  li.breadcrumb-item 
-    a(href='/pokemon') Pok&#0232;Tools
-  li.breadcrumb-item.active(aria-current='page') Game Progression
+  li.breadcrumb-item.active(aria-current='page', property='itemListElement', typeof='ListItem')
+    span(property='name') Game Progression
+    meta(property='position', content='2')
 
 block append content
   .jumbotron

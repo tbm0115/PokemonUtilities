@@ -16,10 +16,13 @@ class Pokedex {
     }
   }
   findByName(name) {
-    name = name.toLowerCase();
-    var entry = this.entries.findIndex(function (entry) {
-      return entry.name.toLowerCase() === name;
-    });
+    var entry = -1;
+    if (typeof (name) !== "undefined" && name !== null) {
+      name = name.toString().toLowerCase();
+      entry = this.entries.findIndex(function (entry) {
+        return entry.name.toLowerCase() === name;
+      });
+    }
     if (entry < 0) {
       return 0;
     } else {
@@ -260,9 +263,6 @@ router.get('/', function (req, res){
     title: 'PokeTools'
   });
 });
-//router.get('/font-awesome/:whatever', function (req, res) {
-//  res.render(req.params['whatever']);
-//});
 
 router.get('/compare/stats', function (req, res) {
   res.render('pokemon/compare-stats', {
@@ -303,39 +303,54 @@ router.get('/progress', function (req, res) {
   });
 });
 
-router.get('/:entry', function (req, res) {
-  var pokemon = new Pokemon(req.params['entry']);
+var fncRoutePokemonEntry = function (req, res) {
+  var pokemon = new Pokemon(this);//req.params['entry']);
   if (typeof (pokemon) !== "undefined" && pokemon !== null && typeof (pokemon.nameUpper) !== "undefined" && pokemon.nameUpper !== null) {
     res.render('pokemon/pokemon', {
       title: '#' + pokemon.id + ' ' + pokemon.nameUpper,
       pokemon: pokemon,
       nationalDex: nationalDex,
-      gameTitles: gameTitles
+      gameTitles: gameTitles,
+      blnCanonical: this === pokemon.id
     });
   } else {
     res.render('pokemon/404', {
-      q: req.params['entry']
+      q: this//req.params['entry']
     });
     //res.status(400);
     //res.render('error', { error: new Error("Pokemon '" + req.params["entry"] + "' not found!") });
   }
+};
+nationalDex.entries.forEach(function (entry) {
+  router.get('/' + entry.id.toString(), fncRoutePokemonEntry.bind(entry.id)).get('/' + entry.name, fncRoutePokemonEntry.bind(entry.name));
 });
-router.get('/lite/:entry', function (req, res) {
-  var pokemon = new Pokemon(req.params['entry']);
-  if (typeof (pokemon) !== "undefined" && pokemon !== null && typeof (pokemon.nameUpper) !== "undefined" && pokemon.nameUpper !== null) {
-    res.render('pokemon/pokemon-lite', {
-      title: '#' + pokemon.id + ' ' + pokemon.nameUpper,
-      pokemon: pokemon,
-      nationalDex: nationalDex,
-      gameTitles: gameTitles
-    });
-  } else {
-    res.status(400);
-    res.render('error', { error: new Error("Pokemon '" + req.params["entry"] + "' not found!") });
-  }
-});
+
+//router.get('/lite/:entry', function (req, res) {
+//  var pokemon = new Pokemon(req.params['entry']);
+//  if (typeof (pokemon) !== "undefined" && pokemon !== null && typeof (pokemon.nameUpper) !== "undefined" && pokemon.nameUpper !== null) {
+//    res.render('pokemon/pokemon-lite', {
+//      title: '#' + pokemon.id + ' ' + pokemon.nameUpper,
+//      pokemon: pokemon,
+//      nationalDex: nationalDex,
+//      gameTitles: gameTitles
+//    });
+//  } else {
+//    res.status(400);
+//    res.render('error', { error: new Error("Pokemon '" + req.params["entry"] + "' not found!") });
+//  }
+//});
 
 module.exports = router;
 
-
-
+/*
+ * sitemap
+ */
+var sitemap = require('express-sitemap');
+var map = sitemap({
+  http: 'https',
+  url: 'utilities.games/pokemon',
+  sitemap: 'public/Pokemon/sitemap.xml', // path for .XMLtoFile
+  robots: 'public/Pokemon/robots.txt'
+});
+map.generate(router);
+map.toFile();

@@ -6,7 +6,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var sitemap = require('express-sitemap');
 var zlib = require('zlib');
 var gzip = zlib.createGzip();
 
@@ -28,9 +27,32 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+/* GET home page. */
+app.get('/', function (req, res) {
+  var RSSParser = require('rss-parser');
+  var parser = new RSSParser();
+  parser.parseURL("https://blog.utilities.games/feed/", function (err, feed) {
+    res.render('index', {
+      title: 'Home',
+      rss: feed
+    });
+  });
+});
+/* GET about page. */
+app.get('/about', function (req, res) {
+  res.render('about', { title: 'About' });
+});
+/* GET privacy policy page. */
+app.get('/privacy', function (req, res) {
+  res.render('privacy', { title: 'Privacy Policy' });
+});
+/* GET contact page. */
+app.get('/contact', function (req, res) {
+  res.render('contact', { title: 'Contact Us' });
+});
+//app.use('/', routes);
 app.use('/pokemon', pokemon);
-app.use('/users', users);
+//app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -69,58 +91,19 @@ var server = app.listen(app.get('port'), function () {
     debug('Express server listening on port ' + server.address().port);
 });
 
+
+
 /*
  * sitemap
  */
-var _sitemap = sitemap({
+var sitemap = require('express-sitemap');
+var map = sitemap({
   http: 'https',
   url: 'utilities.games',
   sitemap: 'public/sitemap.xml', // path for .XMLtoFile
-  robots: 'public/robots.txt',
-  map: {
-    '/': ['get'],
-    '/pokemon': ['get'],
-    '/pokemon/:entry': ['get'],
-    '/pokemon/comparison/stats': ['get'],
-    '/pokemon/comparison/stats-lite/:data': ['get'],
-    '/pokemon/progress': ['get']
-  },
-  route: {
-    'https://utilities.games/': {
-      lastmod: '2018-10-28',
-      changefreq: 'always',
-      priority: 1.0
-    },
-    'https://utilities.games/pokemon': {
-      lastmod: '2018-10-20',
-      changefreq: 'irregular'
-    },
-    'https://utilities.games/pokemon/:entry': {
-      lastmod: '2018-10-20',
-      changefreq: 'irregular'
-    },
-    'https://utilities.games/pokemon/comparison/stats': {
-      lastmod: '2018-10-28',
-      changefreq: 'irregular'
-    },
-    'https://utilities.games/pokemon/comparison/stats-lite/:data': {
-      lastmod: '2018-10-28',
-      changefreq: 'always'
-    },
-    'https://utilities.games/pokemon/progress': {
-      lastmod: '2018-10-20',
-      changefreq: 'never'
-    }
-  }
-}).XMLtoFile();
-//var map = sitemap({
-//  generate: app
-//});
-//app.get('/sitemap.xml', function (req, res) {
-//  map.XMLtoWeb(res);
-//}).get('/robots.txt', function (req, res) {
-//  map.TXTtoWeb(res);
-//});
-//sitemap.generate(app); // generate sitemap from express route, you can set generate inside sitemap({})
-
-//sitemap.XMLtoFile(); // write this map to file
+  robots: 'public/robots.txt'
+});
+map.generate4(app, [ '/pokemon' ]);
+//map.reset();
+//map.generate(pokemon);
+map.toFile();

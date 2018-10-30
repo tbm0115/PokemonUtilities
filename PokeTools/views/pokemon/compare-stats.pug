@@ -1,8 +1,8 @@
 ﻿extends _pokemonlayout
 
 block append styles
-  meta(name='keywords', content'Pokemon comparison chart')
-  meta(name='description', content='Compare the base stats of multiple Pokemon at once!')
+  meta(name='Keywords', content'Pokemon comparison chart')
+  meta(name='Description', content='Compare the base stats of multiple Pokemon at once!')
   style(type='text/css').
     #pokeComparison{
       position: relative;
@@ -24,9 +24,11 @@ block append styles
       min-height: 400px;
     }
 block append breadcrumb
-  li.breadcrumb-item 
-    a(href='/pokemon') Pok&#0232;Tools
-  li.breadcrumb-item.active(aria-current='page') Compare Base Stats
+  li.breadcrumb-item(property='itemListElement', typeof='ListItem')
+    a(href='/pokemon', property='item', typeof='WebPage')
+      span(property='name') Compare Base Stats
+    meta(property='position', content='2')
+
 block append content
   section
     .jumbotron

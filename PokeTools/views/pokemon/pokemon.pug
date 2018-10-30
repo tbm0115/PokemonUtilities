@@ -3,12 +3,14 @@
 block append styles
   link(rel='icon', href='/PokeApi/sprites/pokemon/' + pokemon.id.toString() + '.png')
   meta(name='theme-color', content=pokemon.species.color.name)
-  meta(name='description', content=pokemon.species.genera[2].genus)
+  meta(name='Description', content='#' + pokemon.id.toString() + " " + pokemon.nameUpper + ". " + pokemon.species.genera[2].genus)
   meta(name='Keywords', content=[pokemon.nameUpper, '#' + pokemon.id, pokemon.species.genera[2].genus, 'Pokemon'].join(','))
   meta(name='pkm-title', content=pokemon.nameUpper)
   meta(name='pkm-category', content='pokedex')
   meta(name='pkm-image', content='/PokeApi/sprites/pokemon/' + pokemon.id.toString() + '.png')
   meta(name='pkm-id', content=pokemon.id)
+  if blnCanonical
+    link(rel='canonical', href='/pokemon/' + pokemon.name)
   style(type='text/css').
       #canvLevelTree{
           position: relative;
@@ -23,9 +25,9 @@ block append styles
       }
 
 block append breadcrumb
-  li.breadcrumb-item 
-    a(href='/pokemon') Pok&#0232;Tools
-  li.breadcrumb-item.active(aria-current='page') Pokemon Entry
+  li.breadcrumb-item.active(aria-current='page', property="itemListElement", typeof="ListItem")
+    span(property="name") Pokemon Entry
+    meta(property="position", content="2")
 
 block append content
   .poke-card(data-species-color=pokemon.species.color.name, data-poke-id=pokemon.id)
