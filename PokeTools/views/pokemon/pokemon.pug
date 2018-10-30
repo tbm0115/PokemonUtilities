@@ -39,7 +39,7 @@ block append content
             a.chain-target(href='/pokemon/' + prevEvos.species.name, data-poke-name=prevEvos.species.name, aria-label='Go to ' + prevEvos.species.name)
               div(class='icon-sprite-' + nationalDex.findByName(prevEvos.species.name).id)
             .chain-reason= pokemon.buildEvolutionTerm(pokemon.getCurrentEvolutionChain())
-      .details.biota.zoology(lang='en')
+      .details.biota.zoology(lang='en')&attributes(pokemon.buildTypeAttributes())
         span.sprite
           img(src='/PokeApi' + pokemon.sprites.front_default, alt=pokemon.nameUpper)
         button.poke-favorite(aria-label='Favorite this Pokemon', type='button')
@@ -56,30 +56,66 @@ block append content
               a.chain-target(href='/pokemon/' + nextEvos[x].species.name, data-poke-name=nextEvos[x].species.name, aria-label='Go to ' + nextEvos[x].species.name)
                 div(class='icon-sprite-' + nationalDex.findByName(nextEvos[x].species.name).id)
               .chain-reason= pokemon.buildEvolutionTerm(nextEvos[x])
-  h3 Moves
-  div.input-group
-    label
-      i.fa.fa-window-maximize
-      text &nbsp;Full View&nbsp;
-      input(type='checkbox',title='Maximize Level View',onchange='drawLearnMoves({pokemon: Pokemon})')#chkViewAllLevels
-  a.pull-right(data-toggle='collapse',data-target='#pnlVersionHides') Show/Hide Version Filters
-  div.collapse#pnlVersionHides
-    each val, index in gameTitles
+  div#pnlMoves
+    h3 Moves
+    div.input-group
       label
-        input(type='checkbox',name='chk' + index, data-version=index, checked='checked',style='display: none;')
-        a(onclick="$(this).toggleClass('wash-out');")
-          each game, idx in gameTitles[index].games
-            span(class='icon-cart-sm-' + game)
+        i.fa.fa-window-maximize
+        text &nbsp;Full View&nbsp;
+        input(type='checkbox',title='Maximize Level View',onchange='drawLearnMoves({pokemon: Pokemon})')#chkViewAllLevels
+    a.pull-right(data-toggle='collapse',data-target='#pnlVersionHides') Show/Hide Version Filters
+    div.collapse#pnlVersionHides
+      each val, index in gameTitles
+        label
+          input(type='checkbox',name='chk' + index, data-version=index, checked='checked',style='display: none;')
+          a(onclick="$(this).toggleClass('wash-out');")
+            each game, idx in gameTitles[index].games
+              span(class='icon-cart-sm-' + game)
 
-  canvas#canvLevelTree
+    canvas#canvLevelTree
 
-  table.table.table-hover#tblDetails
-    thead
-      tr
-        th Level
-        th Name
-        th Game Versions
-    tbody
+    table.table.table-hover#tblDetails
+      thead
+        tr
+          th Level
+          th Name
+          th Game Versions
+      tbody
+  div#pnlSpecies
+    h3 Details
+    div#pnlGrowthInfo
+      h4 Growth Info
+      table.table
+        thead
+          tr
+            th Base Happiness
+            th Capture Rate
+            th Growth Rate
+            th Egg Hatch Count
+            th Egg Group
+        tbody
+          tr
+            td
+              meter(min='0',low='100',optimum='255',max='255', value=pokemon.species.base_happiness, style="width: 100%;", title=pokemon.species.base_happiness)= pokemon.species.base_happiness
+            td
+              meter(min='0',low='100', optimum='255',max='255', value=pokemon.species.capture_rate, style="width: 100%;", title=pokemon.species.capture_rate)= pokemon.species.capture_rate
+            td !{pokemon.species.growth_rate != null ? pokemon.species.growth_rate.name.substr(0,1).toUpperCase() + pokemon.species.growth_rate.name.substr(1) : "&mdash;"}
+            td !{pokemon.species.hatch_counter != null ? (pokemon.species.hatch_counter * 256).toString() : "&mdash;"}
+            td !{pokemon.species.egg_groups.length > 0 ? pokemon.species.egg_groups.map(function(e){return e.name.substr(0,1).toUpperCase() + e.name.substr(1);}).join(" &amp; ") : "&mdash;"}
+    div#pnlEncounterInfo
+      h4 Encounter Info
+      table.table
+        thead
+          tr
+            th Habitat
+            th Pal Park
+        tbody
+          tr
+            td !{pokemon.species.habitat != null ? pokemon.species.habitat.name.substr(0,1).toUpperCase() + pokemon.species.habitat.name.substr(1) : "&mdash;"}
+            td
+              if pokemon.species.pal_park_encounters.length > 0
+                ul !{pokemon.species.pal_park_encounters.map(function(e){return "<li><strong>" + e.area.name.substr(0,1).toUpperCase() + e.area.name.substr(1) + "</strong><!-- Base Score: " + e.base_score.toString() + ", Rate: " + e.rate.toString() + " --></li>";}).join("")}
+
 
 block append scripts
   script(type='text/javascript').

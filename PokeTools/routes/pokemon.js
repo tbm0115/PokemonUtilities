@@ -8,8 +8,9 @@ class Pokedex {
     if (typeof (id) === "undefined" || id === null) {
       id = 1;
     }
-    var pdRaw = fs.readFileSync(__dirname + '/../public/PokeApi/api/v2/pd/' + id.toString() + '/index.json');
-    var pd1 = JSON.parse(pdRaw);
+    //var pdRaw = fs.readFileSync(__dirname + '/../public/PokeApi/api/v2/pd/' + id.toString() + '/index.json');
+    //fs.readFile(__dirname + '/../public/PokeApi/api/v2/pd/' + id.toString() + '/index.json', function (err, data) {});
+    var pd1 = require(__dirname + '/../public/PokeApi/api/v2/pd/' + id.toString() + '/index.json');//JSON.parse(data);
     this.entries = new Array();
     for (var len = pd1.pokemon_entries.length, n = 0; n < len; n++) {
       this.entries.push({ id: pd1.pokemon_entries[n].entry_number, name: pd1.pokemon_entries[n].pokemon_species.name });
@@ -253,6 +254,13 @@ class Pokemon {
       }
     }
     return objOut;
+  }
+  buildTypeAttributes() {
+    var rtn = {};
+    for (var len = this.types.length, n = 0; n < len; n++) {
+      rtn["data-type-" + this.types[n].slot.toString()] = this.types[n].type.name;
+    }
+    return rtn;
   }
 }
 module.exports = Pokemon;

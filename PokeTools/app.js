@@ -13,8 +13,11 @@ var routes = require('./routes/index');
 var pokemon = require('./routes/pokemon');
 var users = require('./routes/users');
 
-var app = express();
+const https = require('http-to-https');
 
+
+var app = express();
+app.use(https([/localhost(:\d{1,5})?/], [/\/insecure/], 301));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -78,11 +81,19 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
+  if (err.status === 404) {
+    res.status(404);
+    res.render('error', {
+      message: '404 Not Found',
+      error: {}
+    });
+  } else {
     res.status(err.status || 500);
     res.render('error', {
-        message: err.message,
-        error: {}
+      message: err.message,
+      error: {}
     });
+  }
 });
 
 app.set('port', process.env.PORT || 3000);

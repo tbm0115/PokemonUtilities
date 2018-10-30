@@ -189,6 +189,12 @@
   -o-user-select: none;
   user-select: none;
 }
+.poke-card[data-species-color]:not([data-type-1]) {
+  --typeColor1: var(--speciesColor);
+}
+.poke-card[data-species-color]:not([data-type-2]) {
+  --typeColor2: silver;
+}
 .poke-card .chain {
   position: relative;
   display: grid;
@@ -279,6 +285,36 @@
   border: 3px solid var(--speciesColor);
   border-radius: 5px;
   box-shadow: 3px 2px 2px var(--speciesColor);
+  /*background: linear-gradient(45deg,var(--speciesColor), var(--typeColor1),var(--typeColor2),var(--speciesColor));*/
+}
+.poke-card .chain .details.biota.zoology[data-type-1]::before,
+.poke-card .chain .details.biota.zoology[data-type-2]::after {
+  position: absolute;
+  display: block;
+  width: 45%;
+  height: 14px;
+  bottom: 5px;
+  font-size: 10px;
+  color: white;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 700;
+  line-height: 12px;
+  vertical-align: middle;
+  padding: 0.5px;
+  border: 1px solid silver;
+  border-radius: 3px;
+  text-shadow: 2px 0.75px black;
+}
+.poke-card .chain .details.biota.zoology[data-type-1]::before {
+  content: attr(data-type-1);
+  background: var(--typeColor1);
+  left: 5px;
+}
+.poke-card .chain .details.biota.zoology[data-type-2]::after {
+  content: attr(data-type-2);
+  background: var(--typeColor2);
+  right: 5px;
 }
 .poke-card .chain .details.biota.zoology .icon-caught {
   position: absolute;
@@ -336,7 +372,6 @@
   content: '';
   position: absolute;
   display: block;
-  opacity: 0.25;
   border-radius: 50%;
 }
 .poke-card .chain .details.biota.zoology .sprite::before {
@@ -344,7 +379,10 @@
   height: calc(96px * 0.75);
   left: calc(50% - ((96px * 0.85)/2));
   top: 5px;
+  opacity: 0.45;
   background-color: silver;
+  background: radial-gradient(var(--speciesColor) 10%, var(--typeColor1) 33%, silver);
+  box-shadow: 0px 0px 7px 7px var(--typeColor2);
 }
 .poke-card .chain .details.biota.zoology .sprite::after {
   width: 75%;
@@ -352,6 +390,9 @@
   left: 12.5%;
   top: 12.5%;
   background-color: var(--speciesColor);
+  background: radial-gradient(var(--speciesColor) 10%, var(--typeColor2) 65%, silver);
+  box-shadow: 0px 0px 7px 7px var(--typeColor1);
+  opacity: 0.25;
   transform-origin: center;
   transform: rotateX(85deg);
 }
