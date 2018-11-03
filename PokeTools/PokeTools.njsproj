@@ -6,7 +6,7 @@
     <Name>PokeTools</Name>
     <RootNamespace>PokeTools</RootNamespace>
     <LastActiveSolutionConfig>Release|Any CPU</LastActiveSolutionConfig>
-    <NameOfLastUsedPublishProfile>Local</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>Remote</NameOfLastUsedPublishProfile>
     <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
     <EnableTypeScript>true</EnableTypeScript>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
@@ -201,6 +201,7 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </Content>
     <None Include="Local.pubxml" />
+    <Content Include="public\BingSiteAuth.xml" />
     <Content Include="public\bundles\site.css" />
     <Content Include="public\bundles\site.min.css">
       <SubType>Content</SubType>
