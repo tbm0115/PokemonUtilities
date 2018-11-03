@@ -69,7 +69,11 @@ html(lang="en")
               a.nav-link(href='/contact') Contact
             li#liA2HS.nav-item
               a#btnA2HS(href='javascript:showAddToHomeScreen();', style='color: #9fd49e;', title='Add to Homescreen')
-                i.fa.fa-download Download
+                picture
+                  source(srcset='/images/PWA%20Launch_108x32.webp',type='image/webp')
+                  source(srcset='/images/PWA%20Launch_108x32.png',type='image/png')
+                  img.img-fluid(src='/images/PWA%20Launch_108x32.png',alt='PWA')
+                //i.fa.fa-download Download
                             
     aside
         block ads

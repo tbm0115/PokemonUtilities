@@ -337,6 +337,12 @@
     <Content Include="public\images\Game Covers\Pokemon\yellow.png" />
     <Content Include="public\images\background.png" />
     <Content Include="public\images\background.webp" />
+    <Content Include="public\images\PWA Icon.png" />
+    <Content Include="public\images\PWA Icon_85x32.png" />
+    <Content Include="public\images\PWA Icon_85x32.webp" />
+    <Content Include="public\images\PWA Launch.png" />
+    <Content Include="public\images\PWA Launch_108x32.png" />
+    <Content Include="public\images\PWA Launch_108x32.webp" />
     <Content Include="public\manifest.json" />
     <Content Include="public\offline.html" />
     <Content Include="package.json" />
