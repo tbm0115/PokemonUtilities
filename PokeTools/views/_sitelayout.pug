@@ -22,6 +22,9 @@ html(lang="en")
     style(type='text/css').
     block styles
 
+    // PropellerAds
+    meta(name='propeller', content='329f1f1d065aef920049525d7138546b')
+
     // Global site tag (gtag.js) - Google Analytics
     script(async='', src="https://www.googletagmanager.com/gtag/js?id=UA-126967798-1")
 
@@ -38,6 +41,8 @@ html(lang="en")
         enable_page_level_ads: true
       });
   body
+    if (ENV !== 'development')
+      script(async="async", data-cfasync="false", src="//tharbadir.com/2?z=2135639")
     nav.navbar.navbar-dark.bg-dark.fixed-top.navbar-expand-lg
       .container
         a.navbar-brand(href='/')
@@ -77,7 +82,6 @@ html(lang="en")
                             
     aside
         block ads
-
     main
         block content
     
