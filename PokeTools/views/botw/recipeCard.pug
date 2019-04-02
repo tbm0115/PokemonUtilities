@@ -1,0 +1,18 @@
+﻿doctype html
+html
+  head
+    title=title
+    script(type='application/ld+json').
+      !{JSON.stringify(recipe).replace(/<\//g, "<\\/")}
+  body
+    img(src='/BOTW/images/Recipes/' + recipe.name + '.png')
+    h1= recipe.name
+    p= recipe.description
+    table
+      tbody
+        tr
+          td= recipe.recipeYield
+          td= recipe.estimatedCost
+    ul
+      -for (var x = 0;x < recipe.recipeIngredients.length; x++)
+        li= recipe.recipeIngredients[x]

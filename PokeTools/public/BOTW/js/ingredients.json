@@ -1,0 +1,1999 @@
+
+[
+  {
+    "name": "Acorn",
+    "category": "Food",
+    "type": "Seasoning",
+    "hearts": 0.25,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 50
+    },
+    "resale": 2
+  },
+  {
+    "name": "Apple",
+    "category": "Food",
+    "type": "Fruit",
+    "hearts": 0.5,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 30
+    },
+    "resale": 3
+  },
+  {
+    "name": "Armoranth",
+    "category": "Food",
+    "type": "Green",
+    "hearts": 0,
+    "effect": "Tough",
+    "potency": [ "1", "1", "1", "1", "2" ],
+    "duration": {
+      "minutes": 0,
+      "seconds": 50
+    },
+    "resale": 5
+  },
+  {
+    "name": "Armored Carp",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 1,
+    "effect": "Tough",
+    "potency": [ "1", "1", "2", "3", "3" ],
+    "duration": {
+      "minutes": 0,
+      "seconds": 50
+    },
+    "resale": 10
+  },
+  {
+    "name": "Armored Porgy",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 1,
+    "effect": "Tough",
+    "potency": [ "1", "2", "3", "3", "3" ],
+    "duration": {
+      "minutes": 0,
+      "seconds": 50
+    },
+    "resale": 10
+  },
+  {
+    "name": "Big Hearty Radish",
+    "category": "Food",
+    "type": "Green",
+    "hearts": 4,
+    "effect": "Hearty",
+    "potency": [ "5" ],
+    "duration": null,
+    "resale": 15
+  },
+  {
+    "name": "Big Hearty Truffle",
+    "category": "Food",
+    "type": "Mushroom",
+    "hearts": 3,
+    "effect": "Hearty",
+    "potency": [ "4" ],
+    "duration": null,
+    "resale": 15
+  },
+  {
+    "name": "Bird Egg",
+    "category": "Food",
+    "type": "Filler",
+    "hearts": 1,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 1,
+      "seconds": 30
+    },
+    "resale": 3
+  },
+  {
+    "name": "Blue Nightshade",
+    "category": "Food",
+    "type": "Green",
+    "hearts": 0,
+    "effect": "Sneaky",
+    "potency": [ "1", "1", "1", "1", "1" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 0
+    },
+    "resale": 4
+  },
+  {
+    "name": "Bright-eyed Crab",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 1,
+    "effect": "Energizing",
+    "potency": [ "2", "5", "8", "11", "14" ],
+    "duration": null,
+    "resale": 10
+  },
+  {
+    "name": "Cane Sugar",
+    "category": "Food",
+    "type": "Seasoning",
+    "hearts": 0,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 1,
+      "seconds": 20
+    },
+    "resale": 3
+  },
+  {
+    "name": "Chickaloo Tree Nut",
+    "category": "Food",
+    "type": "Seasoning",
+    "hearts": 0.25,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 40
+    },
+    "resale": 3
+  },
+  {
+    "name": "Chillfin Trout",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 1,
+    "effect": "Chilly",
+    "potency": [ "1", "2", "2", "2", "2" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 6
+  },
+  {
+    "name": "Chillshroom",
+    "category": "Food",
+    "type": "Mushroom",
+    "hearts": 0.5,
+    "effect": "Chilly",
+    "potency": [ "1", "1", "2", "2", "2" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 4
+  },
+  {
+    "name": "Cool Saffina",
+    "category": "Food",
+    "type": "Green",
+    "hearts": 0,
+    "effect": "Chilly",
+    "potency": [ "1", "1", "1", "1", "1" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 3
+  },
+  {
+    "name": "Courser Bee Honey",
+    "category": "Food",
+    "type": "Seasoning",
+    "hearts": 2,
+    "effect": "Energizing",
+    "potency": [ "2", "5", "8", "11", "14" ],
+    "duration": null,
+    "resale": 10
+  },
+  {
+    "name": "Electric Saffina",
+    "category": "Food",
+    "type": "Green",
+    "hearts": 0,
+    "effect": "Electro",
+    "potency": [ "1", "1", "1", "2", "2" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 3
+  },
+  {
+    "name": "Endura Carrot",
+    "category": "Food",
+    "type": "Green",
+    "hearts": 2,
+    "effect": "Enduring",
+    "potency": [ "2", "4", "6", "8", "10" ],
+    "duration": null,
+    "resale": 30
+  },
+  {
+    "name": "Endura Shroom",
+    "category": "Food",
+    "type": "Mushroom",
+    "hearts": 1,
+    "effect": "Enduring",
+    "potency": [ "1", "1", "1", "2", "2" ],
+    "duration": null,
+    "resale": 6
+  },
+  {
+    "name": "Fairy",
+    "category": "Food",
+    "type": "Filler",
+    "hearts": 5,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 30
+    },
+    "resale": 2
+  },
+  {
+    "name": "Fleet-Lotus Seeds",
+    "category": "Food",
+    "type": "Fruit",
+    "hearts": 0.5,
+    "effect": "Hasty",
+    "potency": [ "1", "1", "2", "3", "3" ],
+    "duration": {
+      "minutes": 1,
+      "seconds": 0
+    },
+    "resale": 5
+  },
+  {
+    "name": "Fortified Pumpkin",
+    "category": "Food",
+    "type": "Green",
+    "hearts": 0.5,
+    "effect": "Tough",
+    "potency": [ "1", "1", "2", "3", "3" ],
+    "duration": {
+      "minutes": 0,
+      "seconds": 50
+    },
+    "resale": 5
+  },
+  {
+    "name": "Fresh Milk",
+    "category": "Food",
+    "type": "Filler",
+    "hearts": 0.5,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 1,
+      "seconds": 20
+    },
+    "resale": 3
+  },
+  {
+    "name": "Goat Butter",
+    "category": "Food",
+    "type": "Seasoning",
+    "hearts": 0,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 1,
+      "seconds": 20
+    },
+    "resale": 3
+  },
+  {
+    "name": "Goron Spice",
+    "category": "Food",
+    "type": "Seasoning",
+    "hearts": 0,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 1,
+      "seconds": 30
+    },
+    "resale": 4
+  },
+  {
+    "name": "Hearty Bass",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 2,
+    "effect": "Hearty",
+    "potency": [ "2" ],
+    "duration": null,
+    "resale": 18
+  },
+  {
+    "name": "Hearty Blueshell Snail",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 3,
+    "effect": "Hearty",
+    "potency": [ "3" ],
+    "duration": null,
+    "resale": 15
+  },
+  {
+    "name": "Hearty Durian",
+    "category": "Food",
+    "type": "Fruit",
+    "hearts": 3,
+    "effect": "Hearty",
+    "potency": [ "4" ],
+    "duration": null,
+    "resale": 15
+  },
+  {
+    "name": "Hearty Radish",
+    "category": "Food",
+    "type": "Green",
+    "hearts": 2.5,
+    "effect": "Hearty",
+    "potency": [ "3" ],
+    "duration": null,
+    "resale": 8
+  },
+  {
+    "name": "Hearty Salmon",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 4,
+    "effect": "Hearty",
+    "potency": [ "4" ],
+    "duration": null,
+    "resale": 10
+  },
+  {
+    "name": "Hearty Truffle",
+    "category": "Food",
+    "type": "Mushroom",
+    "hearts": 2,
+    "effect": "Hearty",
+    "potency": [ "1" ],
+    "duration": null,
+    "resale": 6
+  },
+  {
+    "name": "Hydromelon",
+    "category": "Food",
+    "type": "Fruit",
+    "hearts": 0.5,
+    "effect": "Chilly",
+    "potency": [ "1", "1", "1", "1", "1" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 4
+  },
+  {
+    "name": "Hylian Rice",
+    "category": "Food",
+    "type": "Seasoning",
+    "hearts": 1,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 1,
+      "seconds": 0
+    },
+    "resale": 3
+  },
+  {
+    "name": "Hylian Shroom",
+    "category": "Food",
+    "type": "Mushroom",
+    "hearts": 0.5,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 30
+    },
+    "resale": 3
+  },
+  {
+    "name": "Hyrule Bass",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 1,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 30
+    },
+    "resale": 6
+  },
+  {
+    "name": "Hyrule Herb",
+    "category": "Food",
+    "type": "Green",
+    "hearts": 1,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 30
+    },
+    "resale": 3
+  },
+  {
+    "name": "Ironshell Crab",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 1,
+    "effect": "Tough",
+    "potency": [ "1", "1", "2", "3", "3" ],
+    "duration": {
+      "minutes": 0,
+      "seconds": 50
+    },
+    "resale": 8
+  },
+  {
+    "name": "Ironshroom",
+    "category": "Food",
+    "type": "Mushroom",
+    "hearts": 0.5,
+    "effect": "Tough",
+    "potency": [ "1", "1", "2", "3", "3" ],
+    "duration": {
+      "minutes": 0,
+      "seconds": 50
+    },
+    "resale": 5
+  },
+  {
+    "name": "Mighty Bananas",
+    "category": "Food",
+    "type": "Fruit",
+    "hearts": 0.5,
+    "effect": "Mighty",
+    "potency": [ "1", "1", "2", "3", "3" ],
+    "duration": {
+      "minutes": 0,
+      "seconds": 50
+    },
+    "resale": 5
+  },
+  {
+    "name": "Mighty Carp",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 1,
+    "effect": "Mighty",
+    "potency": [ "1", "1", "2", "3", "3" ],
+    "duration": {
+      "minutes": 0,
+      "seconds": 50
+    },
+    "resale": 10
+  },
+  {
+    "name": "Mighty Porgy",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 1,
+    "effect": "Mighty",
+    "potency": [ "1", "2", "3", "3", "3" ],
+    "duration": {
+      "minutes": 0,
+      "seconds": 50
+    },
+    "resale": 10
+  },
+  {
+    "name": "Mighty Thistle",
+    "category": "Food",
+    "type": "Green",
+    "hearts": 0,
+    "effect": "Mighty",
+    "potency": [ "1", "1", "1", "1", "2" ],
+    "duration": {
+      "minutes": 0,
+      "seconds": 50
+    },
+    "resale": 5
+  },
+  {
+    "name": "Monster Extract",
+    "category": "Food",
+    "type": "Other",
+    "hearts": null,
+    "effect": "",
+    "potency": [],
+    "duration": {
+      "minutes": 1,
+      "seconds": 0
+    },
+    "resale": 3
+  },
+  {
+    "name": "Palm Fruit",
+    "category": "Food",
+    "type": "Fruit",
+    "hearts": 1,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 30
+    },
+    "resale": 4
+  },
+  {
+    "name": "Raw Bird Drumstick",
+    "category": "Food",
+    "type": "Meat",
+    "hearts": 1,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 30
+    },
+    "resale": 8
+  },
+  {
+    "name": "Raw Bird Thigh",
+    "category": "Food",
+    "type": "Meat",
+    "hearts": 1.5,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 30
+    },
+    "resale": 15
+  },
+  {
+    "name": "Raw Gourmet Meat",
+    "category": "Food",
+    "type": "Meat",
+    "hearts": 3,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 30
+    },
+    "resale": 35
+  },
+  {
+    "name": "Raw Meat",
+    "category": "Food",
+    "type": "Meat",
+    "hearts": 1,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 30
+    },
+    "resale": 8
+  },
+  {
+    "name": "Raw Prime Meat",
+    "category": "Food",
+    "type": "Meat",
+    "hearts": 1.5,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 30
+    },
+    "resale": 15
+  },
+  {
+    "name": "Raw Whole Bird",
+    "category": "Food",
+    "type": "Meat",
+    "hearts": 3,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 30
+    },
+    "resale": 35
+  },
+  {
+    "name": "Razorclaw Crab",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 1,
+    "effect": "Mighty",
+    "potency": [ "1", "1", "2", "3", "3" ],
+    "duration": {
+      "minutes": 0,
+      "seconds": 50
+    },
+    "resale": 8
+  },
+  {
+    "name": "Razorshroom",
+    "category": "Food",
+    "type": "Mushroom",
+    "hearts": 0.5,
+    "effect": "Mighty",
+    "potency": [ "1", "1", "2", "3", "3" ],
+    "duration": {
+      "minutes": 0,
+      "seconds": 50
+    },
+    "resale": 5
+  },
+  {
+    "name": "Rock Salt",
+    "category": "Food",
+    "type": "Seasoning",
+    "hearts": 0,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 1,
+      "seconds": 0
+    },
+    "resale": 2
+  },
+  {
+    "name": "Rushroom",
+    "category": "Food",
+    "type": "Mushroom",
+    "hearts": 0.5,
+    "effect": "Hasty",
+    "potency": [ "1", "1", "1", "1", "2" ],
+    "duration": {
+      "minutes": 1,
+      "seconds": 0
+    },
+    "resale": 3
+  },
+  {
+    "name": "Silent Princess",
+    "category": "Food",
+    "type": "Green",
+    "hearts": 1,
+    "effect": "Sneaky",
+    "potency": [ "1", "2", "3", "3", "3" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 0
+    },
+    "resale": 10
+  },
+  {
+    "name": "Silent Shroom",
+    "category": "Food",
+    "type": "Mushroom",
+    "hearts": 0.5,
+    "effect": "Sneaky",
+    "potency": [ "1", "1", "2", "2", "3" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 0
+    },
+    "resale": 3
+  },
+  {
+    "name": "Sizzlefin Trout",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 1,
+    "effect": "Spicy",
+    "potency": [ "1", "2", "2", "2", "2" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 6
+  },
+  {
+    "name": "Sanke Carp",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 1,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 30
+    },
+    "resale": 20
+  },
+  {
+    "name": "Sneaky River Snail",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 1,
+    "effect": "Sneaky",
+    "potency": [ "1", "1", "1", "1", "1" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 0
+    },
+    "resale": 6
+  },
+  {
+    "name": "Spicy Pepper",
+    "category": "Food",
+    "type": "Fruit",
+    "hearts": 0.5,
+    "effect": "Spicy",
+    "potency": [ "1", "1", "1", "1", "1" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 3
+  },
+  {
+    "name": "Stamella Shroom",
+    "category": "Food",
+    "type": "Mushroom",
+    "hearts": 0.5,
+    "effect": "Energizing",
+    "potency": [ "1", "2", "4", "5", "7" ],
+    "duration": null,
+    "resale": 5
+  },
+  {
+    "name": "Staminoka Bass",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 1,
+    "effect": "Energizing",
+    "potency": [ "5", "11", "15" ],
+    "duration": null,
+    "resale": 18
+  },
+  {
+    "name": "Star Fragment",
+    "category": "Food",
+    "type": "Other",
+    "hearts": null,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 30
+    },
+    "resale": 300
+  },
+  {
+    "name": "Stealthfin Trout",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 1,
+    "effect": "Sneaky",
+    "potency": [ "1", "1", "2", "2", "3" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 0
+    },
+    "resale": 10
+  },
+  {
+    "name": "Sunshroom",
+    "category": "Food",
+    "type": "Mushroom",
+    "hearts": 0.5,
+    "effect": "Spicy",
+    "potency": [ "1", "1", "2", "2", "2" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 4
+  },
+  {
+    "name": "Swift Carrot",
+    "category": "Food",
+    "type": "Green",
+    "hearts": 0.5,
+    "effect": "Hasty",
+    "potency": [ "1", "1", "1", "1", "2" ],
+    "duration": {
+      "minutes": 1,
+      "seconds": 0
+    },
+    "resale": 4
+  },
+  {
+    "name": "Swift Violet",
+    "category": "Food",
+    "type": "Green",
+    "hearts": 0,
+    "effect": "Hasty",
+    "potency": [ "1", "1", "2", "3", "3" ],
+    "duration": {
+      "minutes": 1,
+      "seconds": 0
+    },
+    "resale": 10
+  },
+  {
+    "name": "Tabantha Wheat",
+    "category": "Food",
+    "type": "Seasoning",
+    "hearts": 1,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 1,
+      "seconds": 0
+    },
+    "resale": 3
+  },
+  {
+    "name": "Voltfin Trout",
+    "category": "Food",
+    "type": "Seafood",
+    "hearts": 1,
+    "effect": "Electro",
+    "potency": [ "1", "3", "3", "3", "3" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 6
+  },
+  {
+    "name": "Voltfruit",
+    "category": "Food",
+    "type": "Fruit",
+    "hearts": 0.5,
+    "effect": "Electro",
+    "potency": [ "1", "1", "1", "2", "2" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 4
+  },
+  {
+    "name": "Warm Saffina",
+    "category": "Food",
+    "type": "Green",
+    "hearts": 0,
+    "effect": "Spicy",
+    "potency": [ "1", "1", "1", "1", "1" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 3
+  },
+  {
+    "name": "Wildberry",
+    "category": "Food",
+    "type": "Fruit",
+    "hearts": 0.5,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 0,
+      "seconds": 30
+    },
+    "resale": 3
+  },
+  {
+    "name": "Zapshroom",
+    "category": "Food",
+    "type": "Mushroom",
+    "hearts": 0.5,
+    "effect": "Electro",
+    "potency": [ "1", "2", "3", "3", "3" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 4
+  },
+  {
+    "name": "Dinraal’s Scale",
+    "category": "Food",
+    "type": "Filler",
+    "hearts": 0.625,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 2,
+      "seconds": 0
+    },
+    "resale": 1
+  },
+  {
+    "name": "Dinraal’s Claw",
+    "category": "Food",
+    "type": "Filler",
+    "hearts": 1,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 4,
+      "seconds": 0
+    },
+    "resale": 1
+  },
+  {
+    "name": "Shard of Dinraal’s Fang",
+    "category": "Food",
+    "type": "Filler",
+    "hearts": 1.25,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 11,
+      "seconds": 0
+    },
+    "resale": 1
+  },
+  {
+    "name": "Shard of Dinraal’s Horn",
+    "category": "Food",
+    "type": "Filler",
+    "hearts": 1.875,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 30,
+      "seconds": 0
+    },
+    "resale": 1
+  },
+  {
+    "name": "Naydra’s Scale",
+    "category": "Food",
+    "type": "Filler",
+    "hearts": 0.625,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 2,
+      "seconds": 0
+    },
+    "resale": 1
+  },
+  {
+    "name": "Naydra’s Claw",
+    "category": "Food",
+    "type": "Filler",
+    "hearts": 1,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 4,
+      "seconds": 0
+    },
+    "resale": 1
+  },
+  {
+    "name": "Shard of Naydra’s Fang",
+    "category": "Food",
+    "type": "Filler",
+    "hearts": 1.25,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 11,
+      "seconds": 0
+    },
+    "resale": 1
+  },
+  {
+    "name": "Shard of Naydra’s Horn",
+    "category": "Food",
+    "type": "Filler",
+    "hearts": 1.875,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 30,
+      "seconds": 0
+    },
+    "resale": 1
+  },
+  {
+    "name": "Farosh’s Scale",
+    "category": "Food",
+    "type": "Filler",
+    "hearts": 0.625,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 2,
+      "seconds": 0
+    },
+    "resale": 150
+  },
+  {
+    "name": "Farosh’s Claw",
+    "category": "Food",
+    "type": "Filler",
+    "hearts": 1,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 4,
+      "seconds": 0
+    },
+    "resale": 1
+  },
+  {
+    "name": "Shard of Farosh’s Fang",
+    "category": "Food",
+    "type": "Filler",
+    "hearts": 1.25,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 11,
+      "seconds": 0
+    },
+    "resale": 250
+  },
+  {
+    "name": "Shard of Farosh’s Horn",
+    "category": "Food",
+    "type": "Filler",
+    "hearts": 1.875,
+    "effect": null,
+    "potency": [],
+    "duration": {
+      "minutes": 30,
+      "seconds": 0
+    },
+    "resale": 300
+  },
+  {
+    "name": "Winterwing Butterfly",
+    "category": "Critters",
+    "type": null,
+    "hearts": null,
+    "effect": "Chilly",
+    "potency": [ "1", "1", "1", "1" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 2
+  },
+  {
+    "name": "Summerwing Butterfly",
+    "category": "Critters",
+    "type": null,
+    "hearts": null,
+    "effect": "Spicy",
+    "potency": [ "1", "1", "1", "1" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 2
+  },
+  {
+    "name": "Thunderwing Butterfly",
+    "category": "Critters",
+    "type": null,
+    "hearts": null,
+    "effect": "Electro",
+    "potency": [ "1", "1", "1", "2" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 2
+  },
+  {
+    "name": "Smotherwing Butterfly",
+    "category": "Critters",
+    "type": null,
+    "hearts": null,
+    "effect": "Fireproof",
+    "potency": [ "2", "2", "2", "2" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 2
+  },
+  {
+    "name": "Cold Darner",
+    "category": "Critters",
+    "type": null,
+    "hearts": null,
+    "effect": "Chilly",
+    "potency": [ "1", "1", "3", "3" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 2
+  },
+  {
+    "name": "Warm Darner",
+    "category": "Critters",
+    "type": null,
+    "hearts": null,
+    "effect": "Spicy",
+    "potency": [ "1", "1", "3", "3" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 2
+  },
+  {
+    "name": "Electric Darner",
+    "category": "Critters",
+    "type": null,
+    "hearts": null,
+    "effect": "Electro",
+    "potency": [ "1", "2", "3", "3" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 2
+  },
+  {
+    "name": "Restless Cricket",
+    "category": "Critters",
+    "type": null,
+    "hearts": null,
+    "effect": "Energizing",
+    "potency": [ "1", "2", "4", "5" ],
+    "duration": null,
+    "resale": 2
+  },
+  {
+    "name": "Bladed Rhino Beetle",
+    "category": "Critters",
+    "type": null,
+    "hearts": null,
+    "effect": "Mighty",
+    "potency": [ "1", "1", "1", "1" ],
+    "duration": {
+      "minutes": 0,
+      "seconds": 50
+    },
+    "resale": 4
+  },
+  {
+    "name": "Rugged Rhino Beetle",
+    "category": "Critters",
+    "type": null,
+    "hearts": null,
+    "effect": "Tough",
+    "potency": [ "1", "1", "1", "1" ],
+    "duration": {
+      "minutes": 0,
+      "seconds": 50
+    },
+    "resale": 4
+  },
+  {
+    "name": "Energetic Rhino Beetle",
+    "category": "Critters",
+    "type": null,
+    "hearts": null,
+    "effect": "Energizing",
+    "potency": [ "8", "15", "15", "15" ],
+    "duration": null,
+    "resale": 2
+  },
+  {
+    "name": "Sunset Firefly",
+    "category": "Critters",
+    "type": null,
+    "hearts": null,
+    "effect": "Sneaky",
+    "potency": [ "1", "1", "1", "1" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 0
+    },
+    "resale": 2
+  },
+  {
+    "name": "Hot-footed Frog",
+    "category": "Critters",
+    "type": null,
+    "hearts": null,
+    "effect": "Hasty",
+    "potency": [ "1", "1", "2", "3" ],
+    "duration": {
+      "minutes": 1,
+      "seconds": 0
+    },
+    "resale": 2
+  },
+  {
+    "name": "Tireless Frog",
+    "category": "Critters",
+    "type": null,
+    "hearts": 2,
+    "effect": "Enduring",
+    "potency": [ "1", "2", "3", "4" ],
+    "duration": null,
+    "resale": 20
+  },
+  {
+    "name": "Hightail Lizard",
+    "category": "Critters",
+    "type": null,
+    "hearts": null,
+    "effect": "Hasty",
+    "potency": [ "1", "1", "1", "1" ],
+    "duration": {
+      "minutes": 1,
+      "seconds": 0
+    },
+    "resale": 2
+  },
+  {
+    "name": "Hearty Lizard",
+    "category": "Critters",
+    "type": null,
+    "hearts": null,
+    "effect": "Hearty",
+    "potency": [ "4", "8", "12", "16" ],
+    "duration": null,
+    "resale": 20
+  },
+  {
+    "name": "Fireproof Lizard",
+    "category": "Critters",
+    "type": null,
+    "hearts": null,
+    "effect": "Fireproof",
+    "potency": [ "1", "1", "1", "1" ],
+    "duration": {
+      "minutes": 2,
+      "seconds": 30
+    },
+    "resale": 5
+  },
+  {
+    "name": "Bokoblin Horn",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 10
+    },
+    "resale": 3
+  },
+  {
+    "name": "Bokoblin Fang",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 50
+    },
+    "resale": 8
+  },
+  {
+    "name": "Bokoblin Guts",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 3,
+      "seconds": 10
+    },
+    "resale": 20
+  },
+  {
+    "name": "Moblin Horn",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 10
+    },
+    "resale": 5
+  },
+  {
+    "name": "Moblin Fang",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 50
+    },
+    "resale": 12
+  },
+  {
+    "name": "Moblin Guts",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 3,
+      "seconds": 10
+    },
+    "resale": 25
+  },
+  {
+    "name": "Lizalfos Horn",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 10
+    },
+    "resale": 10
+  },
+  {
+    "name": "Lizalfos Talon",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 50
+    },
+    "resale": 15
+  },
+  {
+    "name": "Lizalfos Tail",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 3,
+      "seconds": 10
+    },
+    "resale": 28
+  },
+  {
+    "name": "Icy Lizalfos Tail",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 3,
+      "seconds": 10
+    },
+    "resale": 35
+  },
+  {
+    "name": "Red Lizalfos Tail",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 3,
+      "seconds": 10
+    },
+    "resale": 35
+  },
+  {
+    "name": "Yellow Lizalfos Tail",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 3,
+      "seconds": 10
+    },
+    "resale": 35
+  },
+  {
+    "name": "Lynel Horn",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 10
+    },
+    "resale": 40
+  },
+  {
+    "name": "Lynel Hoof",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 50
+    },
+    "resale": 50
+  },
+  {
+    "name": "Lynel Guts",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 3,
+      "seconds": 10
+    },
+    "resale": 200
+  },
+  {
+    "name": "Chuchu Jelly",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 10
+    },
+    "resale": 5
+  },
+  {
+    "name": "White Chuchu Jelly",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 50
+    },
+    "resale": 10
+  },
+  {
+    "name": "Red Chuchu Jelly",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 50
+    },
+    "resale": 10
+  },
+  {
+    "name": "Yellow Chuchu Jelly",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 50
+    },
+    "resale": 10
+  },
+  {
+    "name": "Keese Wing",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 10
+    },
+    "resale": 2
+  },
+  {
+    "name": "Ice Keese Wing",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 50
+    },
+    "resale": 6
+  },
+  {
+    "name": "Fire Keese Wing",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 50
+    },
+    "resale": 6
+  },
+  {
+    "name": "Electric Keese Wing",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 50
+    },
+    "resale": 6
+  },
+  {
+    "name": "Keese Eyeball",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 3,
+      "seconds": 10
+    },
+    "resale": 20
+  },
+  {
+    "name": "Octorok Tentacle",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 50
+    },
+    "resale": 10
+  },
+  {
+    "name": "Octorok Eyeball",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 10
+    },
+    "resale": 25
+  },
+  {
+    "name": "Octo Balloon",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 10
+    },
+    "resale": 5
+  },
+  {
+    "name": "Hinox Toenail",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 10
+    },
+    "resale": 20
+  },
+  {
+    "name": "Hinox Tooth",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 50
+    },
+    "resale": 35
+  },
+  {
+    "name": "Hinox Guts",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 3,
+      "seconds": 10
+    },
+    "resale": 80
+  },
+  {
+    "name": "Molduga Fin",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 50
+    },
+    "resale": 30
+  },
+  {
+    "name": "Molduga Guts",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 3,
+      "seconds": 10
+    },
+    "resale": 110
+  },
+  {
+    "name": "Ancient Screw",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 10
+    },
+    "resale": 12
+  },
+  {
+    "name": "Ancient Spring",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 10
+    },
+    "resale": 15
+  },
+  {
+    "name": "Ancient Gear",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 50
+    },
+    "resale": 30
+  },
+  {
+    "name": "Ancient Shaft",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 1,
+      "seconds": 50
+    },
+    "resale": 40
+  },
+  {
+    "name": "Ancient Core",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 3,
+      "seconds": 10
+    },
+    "resale": 80
+  },
+  {
+    "name": "Giant Ancient Core",
+    "category": "Monster Parts",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": {
+      "minutes": 3,
+      "seconds": 10
+    },
+    "resale": 200
+  },
+  {
+    "name": "Bird Egg",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 1,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 5
+  },
+  {
+    "name": "Fresh Milk",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 0.5,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 5
+  },
+  {
+    "name": "Acorn",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 0.25,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 5
+  },
+  {
+    "name": "Cane Sugar",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 0,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 5
+  },
+  {
+    "name": "Chickaloo Tree Nut",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 0.25,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 5
+  },
+  {
+    "name": "Goat Butter",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 0,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 5
+  },
+  {
+    "name": "Hylian Rice",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 1,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 5
+  },
+  {
+    "name": "Tabantha Wheat",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 1,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 5
+  },
+  {
+    "name": "Rock Salt",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 0,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 5
+  },
+  {
+    "name": "Goron Spice",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 0,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 5
+  },
+  {
+    "name": "Monster Extract",
+    "category": "Fillers",
+    "type": null,
+    "hearts": null,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": null
+  },
+  {
+    "name": "Dinraal’s Scale",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 0.625,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 0
+  },
+  {
+    "name": "Dinraal’s Claw",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 1,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 0
+  },
+  {
+    "name": "Shard of Dinraal’s Fang",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 1.25,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 0
+  },
+  {
+    "name": "Shard of Dinraal’s Horn",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 1.875,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 0
+  },
+  {
+    "name": "Naydra’s Scale",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 0.625,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 0
+  },
+  {
+    "name": "Naydra’s Claw",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 1,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 0
+  },
+  {
+    "name": "Shard of Naydra’s Fang",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 1.25,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 0
+  },
+  {
+    "name": "Shard of Naydra’s Horn",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 1.875,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 0
+  },
+  {
+    "name": "Farosh’s Scale",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 0.625,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 150
+  },
+  {
+    "name": "Farosh’s Claw",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 1,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 0
+  },
+  {
+    "name": "Shard of Farosh’s Fang",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 1.25,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 250
+  },
+  {
+    "name": "Shard of Farosh’s Horn",
+    "category": "Fillers",
+    "type": null,
+    "hearts": 1.875,
+    "effect": null,
+    "potency": null,
+    "duration": null,
+    "resale": 300
+  }
+]

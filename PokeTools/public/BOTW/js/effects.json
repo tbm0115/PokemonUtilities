@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Chilly",
+    "effect": "Resistance to heat",
+    "maxPotency": 2,
+    "duration": true
+  },
+  {
+    "name": "Energizing",
+    "effect": "Restores 1/5 stamina wheel",
+    "maxPotency": 15,
+    "duration": false
+  },
+  {
+    "name": "Enduring",
+    "effect": "Restores all stamina, adds 1/5 backup wheel",
+    "maxPotency": 10,
+    "duration": false
+  },
+  {
+    "name": "Electro",
+    "effect": "Resistance to shock",
+    "maxPotency": 3,
+    "duration": true
+  },
+  {
+    "name": "Fireproof",
+    "effect": "Prevents catching fire",
+    "maxPotency": 2,
+    "duration": true
+  },
+  {
+    "name": "Hasty",
+    "effect": "Increases running, climbing, and swimming speed by 1/3",
+    "maxPotency": 3,
+    "duration": true
+  },
+  {
+    "name": "Hearty",
+    "effect": "Restores all hearts, adds 1 extra heart",
+    "maxPotency": 25,
+    "duration": false
+  },
+  {
+    "name": "Mighty",
+    "effect": "Increases attack power by 20%/30%/50%",
+    "maxPotency": 3,
+    "duration": true
+  },
+  {
+    "name": "Sneaky",
+    "effect": "Improves stealth",
+    "maxPotency": 3,
+    "duration": true
+  },
+  {
+    "name": "Spicy",
+    "effect": "Resistance to cold",
+    "maxPotency": 2,
+    "duration": true
+  },
+  {
+    "name": "Tough",
+    "effect": "Increases defense by 4/12/24",
+    "maxPotency": 3,
+    "duration": true
+  }
+]

@@ -24,8 +24,8 @@ block append styles
       min-height: 400px;
     }
 block append breadcrumb
-  li.breadcrumb-item(property='itemListElement', typeof='ListItem')
-    a(href='/pokemon', property='item', typeof='WebPage')
+  li.breadcrumb-item.active(aria-current='page', property='itemListElement', typeof='ListItem')
+    a(property='item', typeof='WebPage')
       span(property='name') Compare Base Stats
     meta(property='position', content='2')
 
