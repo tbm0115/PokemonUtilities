@@ -683,7 +683,7 @@
 .icon-caught {
   width: 15px;
   height: 15px;
-  background: url('/PokeApi/sprites/items/poke-ball.png') no-repeat center;
+  background: url('/PokeAPI/sprites/items/poke-ball.png') no-repeat center;
   background-size: cover;
 }
 /* Sprite Sheet Source: https://www.deviantart.com/wesleyfg/art/Pokemon-Sun-and-Moon-All-Icon-644722700 ../../../images/icon_spritesheet.png*/

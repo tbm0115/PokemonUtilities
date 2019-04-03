@@ -36,7 +36,7 @@ html(lang="en")
                         .chain-reason= pokemon.buildEvolutionTerm(pokemon.getCurrentEvolutionChain())
             .details.biota.zoology(lang='en')
                 span.sprite
-                    img(src='/PokeApi' + pokemon.sprites.front_default, alt=pokemon.nameUpper)
+                    img(src='/PokeAPI' + pokemon.sprites.front_default, alt=pokemon.nameUpper)
                 button.poke-favorite(aria-label='Favorite this Pokemon', type='button')
                 span.family(lang='en') Pok&#0232;mon
                 span(title='National \'Dex #', aria-label='National \'Dex Number', name='id')= pokemon.id

@@ -1,13 +1,13 @@
 ﻿extends _pokemonlayout
 
 block append styles
-  link(rel='icon', href='/PokeApi/sprites/pokemon/' + pokemon.id.toString() + '.png')
+  link(rel='icon', href='/PokeAPI/sprites/pokemon/' + pokemon.id.toString() + '.png')
   meta(name='theme-color', content=pokemon.species.color.name)
   meta(name='Description', content='#' + pokemon.id.toString() + " " + pokemon.nameUpper + ". " + pokemon.species.genera[2].genus)
   meta(name='Keywords', content=[pokemon.nameUpper, '#' + pokemon.id, pokemon.species.genera[2].genus, 'Pokemon'].join(','))
   meta(name='pkm-title', content=pokemon.nameUpper)
   meta(name='pkm-category', content='pokedex')
-  meta(name='pkm-image', content='/PokeApi/sprites/pokemon/' + pokemon.id.toString() + '.png')
+  meta(name='pkm-image', content='/PokeAPI/sprites/pokemon/' + pokemon.id.toString() + '.png')
   meta(name='pkm-id', content=pokemon.id)
   if blnCanonical
     link(rel='canonical', href='/pokemon/' + pokemon.name)
@@ -41,7 +41,7 @@ block append content
             .chain-reason= pokemon.buildEvolutionTerm(pokemon.getCurrentEvolutionChain())
       .details.biota.zoology(lang='en')&attributes(pokemon.buildTypeAttributes())
         span.sprite
-          img(src='/PokeApi' + pokemon.sprites.front_default, alt=pokemon.nameUpper)
+          img(src='/PokeAPI' + pokemon.sprites.front_default, alt=pokemon.nameUpper)
         button.poke-favorite(aria-label='Favorite this Pokemon', type='button')
         span.family(lang='en') Pok&#0232;mon
         span(title='National \'Dex #', aria-label='National \'Dex Number', name='id')= pokemon.id

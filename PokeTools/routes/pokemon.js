@@ -8,9 +8,9 @@ class Pokedex {
     if (typeof (id) === "undefined" || id === null) {
       id = 1;
     }
-    //var pdRaw = fs.readFileSync(__dirname + '/../public/PokeApi/api/v2/pd/' + id.toString() + '/index.json');
-    //fs.readFile(__dirname + '/../public/PokeApi/api/v2/pd/' + id.toString() + '/index.json', function (err, data) {});
-    var pd1 = require(__dirname + '/../public/PokeApi/api/v2/pd/' + id.toString() + '/index.json');//JSON.parse(data);
+    //var pdRaw = fs.readFileSync(__dirname + '/../public/PokeAPI/api/v2/pd/' + id.toString() + '/index.json');
+    //fs.readFile(__dirname + '/../public/PokeAPI/api/v2/pd/' + id.toString() + '/index.json', function (err, data) {});
+    var pd1 = require(__dirname + '/../public/PokeAPI/api/v2/pd/' + id.toString() + '/index.json');//JSON.parse(data);
     this.entries = new Array();
     for (var len = pd1.pokemon_entries.length, n = 0; n < len; n++) {
       this.entries.push({ id: pd1.pokemon_entries[n].entry_number, name: pd1.pokemon_entries[n].pokemon_species.name });
@@ -46,16 +46,16 @@ class Pokemon {
         }
         return this;
       });
-      var pRaw = fs.readFileSync(__dirname + '/../public/PokeApi/api/v2/p/' + id + '/index.json');
+      var pRaw = fs.readFileSync(__dirname + '/../public/PokeAPI/api/v2/p/' + id + '/index.json');
       fncFillBaseProperties.apply(this, [JSON.parse(pRaw)]);
       //this.data = JSON.parse(pRaw);
       this['nameUpper'] = this['name'].substr(0, 1).toUpperCase() + this['name'].substr(1);
 
-      var pspRaw = fs.readFileSync(__dirname + '/../public/PokeApi/api/v2' + this.species.url + 'index.json');
+      var pspRaw = fs.readFileSync(__dirname + '/../public/PokeAPI/api/v2' + this.species.url + 'index.json');
       fncFillBaseProperties.apply(this.species, [JSON.parse(pspRaw)]);
       //this.data.species['data'] = JSON.parse(pspRaw);
 
-      var evcRaw = fs.readFileSync(__dirname + '/../public/PokeApi/api/v2' + this.species.evolution_chain.url + 'index.json');
+      var evcRaw = fs.readFileSync(__dirname + '/../public/PokeAPI/api/v2' + this.species.evolution_chain.url + 'index.json');
       fncFillBaseProperties.apply(this.species.evolution_chain, [JSON.parse(evcRaw)]);
     //this.data.species.data.evolution_chain['data'] = JSON.parse(evcRaw);
 

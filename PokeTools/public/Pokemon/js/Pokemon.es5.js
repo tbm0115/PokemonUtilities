@@ -234,7 +234,7 @@ $.fn.pokeCard = function (data) {
         var ap = this["ActivePokemon"];
         if (typeof ap !== "undefined" && ap !== null) {
           // Set Sprite
-          this.elBasicDetails.querySelector("picture img").src = "/PokeApi" + ap.sprites.front_default;
+          this.elBasicDetails.querySelector("picture img").src = "/PokeAPI" + ap.sprites.front_default;
           // Update image alt
           this.elBasicDetails.querySelector("picture img").setAttribute("alt", ap.name);
           // Set 'Dex Number
@@ -656,7 +656,7 @@ var Pokemon = function Pokemon(ndid, options) {
   this._includes = {};
 
   // Perform initial retrieval of core Pokemon information.
-  $.getCachedJSON("/PokeApi/api/v2/p/" + ndid + "/index.json", (function (d) {
+  $.getCachedJSON("/PokeAPI/api/v2/p/" + ndid + "/index.json", (function (d) {
     /** @description - Fills the applied object with the provided data. Basically the same as a clone.
      * @param {object} data - An object to clone to the applied object.
      * @returns {object} - The applied object.
@@ -700,7 +700,7 @@ var Pokemon = function Pokemon(ndid, options) {
         this.that.origin._includes[this.prop] = "done";
       };
       // Logic tree to determine exactly if and how recursive data is retrieved.
-      var strPrefix = "/PokeApi/api/v2"; // "/lib/PokeAPI" in the ASP.NET Core app
+      var strPrefix = "/PokeAPI/api/v2"; // "/lib/PokeAPI" in the ASP.NET Core app
       if (prop in this.item) {
         if ("length" in this.item[prop] && !("url" in this.item[prop])) {
           for (var len = this.item[prop].length, n = 0; n < len; n++) {
@@ -1070,7 +1070,7 @@ var UserDex = {
     },
     Search: function Search(q, cb) {
       var $cb = cb;
-      $.getJSON('/PokeApi/api/v2/v/index.json', function (d) {
+      $.getJSON('/PokeAPI/api/v2/v/index.json', function (d) {
         var res = d.results.map(function (e, i) {
           return e.name;
         });
@@ -1183,7 +1183,7 @@ UserDex.Games.Initialize();
 //          d.setAttribute("data-poke-id", cp.id);
 //          d.setAttribute("data-poke-name", cp.name);
 //          var img = d.appendChild(document.createElement("img"));
-//          img.src = "/PokeApi" + cp.sprites.front_default;
+//          img.src = "/PokeAPI" + cp.sprites.front_default;
 //          img.style = "width: 40px; height: 30px;object-fit: contain;";
 //          img.setAttribute("alt", cp.name);
 //          var spn = d.appendChild(document.createElement("span"));
