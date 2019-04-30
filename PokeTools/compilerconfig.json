@@ -26,5 +26,9 @@
   {
     "outputFile": "public/stylesheets/Articles.css",
     "inputFile": "public/stylesheets/Articles.less"
+  },
+  {
+    "outputFile": "public/BOTW/css/botw.css",
+    "inputFile": "public/BOTW/css/botw.less"
   }
 ]

@@ -1,0 +1,340 @@
+﻿html .botw-hearts {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/Effects/Hearts_100.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+html .botw-hearts.botw-hearts-25 {
+  background-image: url('../images/Effects/Hearts_25.png');
+}
+html .botw-hearts.botw-hearts-50 {
+  background-image: url('../images/Effects/Hearts_50.png');
+}
+html .botw-hearts.botw-hearts-75 {
+  background-image: url('../images/Effects/Hearts_75.png');
+}
+html .botw-hearts.botw-hearts-100 {
+  background-image: url('../images/Effects/Hearts_100.png');
+}
+html .botw-stamina {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/Effects/Stamina_100.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+html .botw-stamina.botw-stamina-20 {
+  background-image: url('../images/Effects/Stamina_20.png');
+}
+html .botw-stamina.botw-stamina-40 {
+  background-image: url('../images/Effects/Stamina_40.png');
+}
+html .botw-stamina.botw-stamina-60 {
+  background-image: url('../images/Effects/Stamina_60.png');
+}
+html .botw-stamina.botw-stamina-80 {
+  background-image: url('../images/Effects/Stamina_80.png');
+}
+html .botw-stamina.botw-stamina-100 {
+  background-image: url('../images/Effects/Stamina_100.png');
+}
+html .botw-endurance {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/Effects/Endurance_100.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+html .botw-endurance.botw-endurance-20 {
+  background-image: url('../images/Effects/Endurance_20.png');
+}
+html .botw-endurance.botw-endurance-40 {
+  background-image: url('../images/Effects/Endurance_40.png');
+}
+html .botw-endurance.botw-endurance-60 {
+  background-image: url('../images/Effects/Endurance_60.png');
+}
+html .botw-endurance.botw-endurance-80 {
+  background-image: url('../images/Effects/Endurance_80.png');
+}
+html .botw-endurance.botw-endurance-100 {
+  background-image: url('../images/Effects/Endurance_100.png');
+}
+html .botw-effect-chilly {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/Effects/Chilly.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+html .botw-effect-tough {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/Effects/Tough.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+html .botw-effect-spicy {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/Effects/Spicy.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+html .botw-effect-sneaky {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/Effects/Sneaky.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+html .botw-rupee {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/Effects/Rupee.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+html .botw-effect-mighty {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/Effects/Mighty.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+html .botw-item {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/Effects/Item.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+html .botw-effect-hearty {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/Effects/Hearty.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+html .botw-effect-hasty {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/Effects/Hasty.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+html .botw-effect-fireproof {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/Effects/Fireproof.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+html .botw-effect-energizing {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/Effects/Energizing.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+html .botw-effect-enduring {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/Effects/Enduring.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+html .botw-effect-electro {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('../images/Effects/Electro.png');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: transparent;
+}
+.botw-card {
+  position: relative;
+  display: inline-block;
+  width: 120px;
+  height: 120px;
+  padding: 12px;
+  background-color: #646463;
+  border: 2px solid #A59A0F;
+  border-radius: 3px;
+  box-shadow: 0 0 0 3px #646463;
+}
+.botw-card .botw-hearts {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.botw-card .botw-hearts[data-value]::after {
+  content: attr(data-value);
+  font-size: 16px;
+  color: #A59A0F;
+  font-weight: 600;
+  position: absolute;
+  display: block;
+  bottom: -16px;
+  left: calc(50% - 10px);
+  left: 0px;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+}
+.botw-card [class*='botw-effect-'] {
+  position: absolute;
+  top: -3px;
+  left: calc(50% - 6px);
+  /* Center Icon */
+}
+.botw-card .botw-rupee {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.botw-card .botw-rupee[data-value]::after {
+  content: attr(data-value);
+  font-size: 16px;
+  color: #A59A0F;
+  text-shadow: 1px 1px 1px black;
+  font-weight: 600;
+  position: absolute;
+  display: block;
+  bottom: -16px;
+  left: calc(50% - 10px);
+  width: 16px;
+  height: 16px;
+  text-align: center;
+}
+.botw-card .botw-qty {
+  position: absolute;
+  bottom: 16px;
+  left: 2px;
+}
+.botw-card .botw-qty[data-value]::after {
+  content: 'x' attr(data-value);
+  font-size: 16px;
+  color: #A59A0F;
+  text-shadow: 1px 1px 1px black;
+  font-weight: 600;
+  position: relative;
+  display: block;
+  text-align: center;
+}
+.botw-card .botw-icon {
+  position: relative;
+  display: block;
+  width: 96px;
+  height: 96px;
+}
+.botw-card .botw-label {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 1.25em;
+  bottom: -16px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+.botw-card .botw-label::after {
+  position: absolute;
+  display: block;
+  content: attr(data-value);
+  color: #A59A0F;
+  text-shadow: 1px 1px 1px black;
+  font-weight: 600;
+  text-align: center;
+  font-size: 16px;
+  white-space: nowrap;
+  -webkit-transform: translateX(100%);
+  -moz-transform: translateX(100%);
+  -o-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  transform: translateX(100%);
+  -webkit-animation: marqueeText 10s linear infinite;
+  -moz-animation: marqueeText 10s linear infinite;
+  -o-animation: marqueeText 10s linear infinite;
+  animation: marqueeText 10s linear infinite;
+}
+@keyframes marqueeText {
+  0% {
+    -webkit-transform: translateX(100%);
+    -moz-transform: translateX(100%);
+    -o-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+}

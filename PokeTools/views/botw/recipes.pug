@@ -1,0 +1,286 @@
+﻿extends _botwlayout
+
+block append styles
+  meta(name='Keywords', content='Breath of the Wild, BotW, Legend of Zelda, Zelda, Link, Recipes, Cookbook, Recipe, Cooking')
+  meta(name='Description', content='Fully searchable list of Recipes for cooking and concocting elixers in Legend of Zelda: Breath of the Wild!')
+  style(type='text/css').
+    div#inventory{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    div#inventory div[data-name]{
+      position: relative;
+      display: flex;
+    }
+    div#inventory div[data-name] a{
+      position: absolute;
+      display: block;
+      color: grey;
+      width: 10px;
+      height: 10px;
+      font-size: 10px;
+      top: 0px;
+      left: 160px;
+      cursor: pointer;
+    }
+    div#inventory div[data-name] a:hover{
+      color: black;
+      font-weight: 800;
+    }
+    div#inventory div[data-name] iframe{
+      width: 150px;
+      height: 150px;
+      overflow: hidden;
+      border: none;
+      position: relative;
+      display: inline-block;
+      margin: auto;
+    }
+block append breadcrumb
+  li.breadcrumb-item.active(aria-current='page', property='itemListElement', typeof='ListItem')
+    a(property='item', typeof='WebPage')
+      span(property='name') Recipes
+    meta(property='position', content='2')
+
+block append content
+  section
+    .jumbotron
+      h1 Recipes
+      p Maintain the inventory from your game here and see which recipes you can make.
+    div
+      input#txtSearchIngredients.form-control(type='text', placeholder='Search Ingredients')
+      button#btnSearchIngredients.btn.btn-xs.btn-primary(type='button', onclick='searchIngredient()')
+        i.fa.fa-search
+      button#btnActivateMic.btn.btn-xs.btn-default(type='button', onclick='activateMic()')
+        i.fa.fa-microphone
+      p#txtVoiceInput(style='display: none;')
+    div#inventory
+            
+block append scripts
+  script(type='text/javascript').
+    var cookbook = !{JSON.stringify(cookbook)};
+
+    function buildIngredientFrame(name, qty){
+      var container = document.getElementById("inventory");
+      var invItem = $(container).find("[data-name='" + name + "']");
+      var ifr = null;
+      if (invItem.length > 0){
+        invItem = invItem[0];
+        ifr = $(invItem).find("iframe")[0];
+      }else{
+        invItem = container.appendChild(document.createElement("div"));
+        invItem.setAttribute("data-name", name);
+        ifr = invItem.appendChild(document.createElement("iframe"));
+        ifr.setAttribute("scrolling", "no");
+        var aDel = invItem.appendChild(document.createElement("a"));
+        aDel.innerHTML = "&times;";
+        aDel.onclick = (function(){
+          var div = $(this).closest("div[data-name]");
+          var name = div.attr("data-name");
+          var qty = parseInt(div.attr("data-qty"));
+          div.remove();
+        }).bind(aDel);
+      }
+
+      ifr.src = "/botw/ingredients/" + name + "?qty=" + qty.toString();
+      $(document).trigger("botw.ingredients.changed");
+    }
+    function searchIngredient(){
+      var inpt = document.getElementById("txtSearchIngredients");
+      var val = inpt.value;
+      inpt.value = "";
+      var ingredients = search(val);
+      if (ingredients != null && ingredients.length > 0){
+        
+      }
+    }
+  script(type='text/javascript').
+    function search(str){
+      var m = str.match(/(([0-9]+)\s(\w+))/g);
+      var searchItems = new Array();
+      var fncProcessString = function(str, idx){
+        var sout = str.substr(0, idx).trim();
+        //txt.innerHTML += "<br/>" + sout.trim();
+
+        var num = sout.match(/[0-9]+/)[0].trim();
+        var item = sout.replace(num, "").trim();
+        // Check clear plurals
+        if (item.indexOf("ies") == item.length - 3){
+          item = item.substr(0, item.indexOf("ies")) + "y";
+        }else if (item.indexOf("s") == item.length - 1){
+          item = item.substr(0, item.indexOf("s"));
+        }
+        searchItems.push({
+          "item": item,
+          "qty": num
+        });
+        return sout;
+      }
+      for(var len = m.length - 1, n=0; n < len; n++){
+        var sout = fncProcessString(str, str.indexOf(m[n+1]));
+        str = str.replace(sout,"").trim();
+      }
+      fncProcessString(str, str.length);
+
+      //txt.innerHTML += "<br/><br/>Looking up items";
+      // Try to lookup items
+      for(var slen = searchItems.length, s = 0; s < slen; s++){
+        var sterm = searchItems[s].item;
+        searchItems[s]["results"] = cookbook.ingredients.filter(function(e,i){
+          var sname = e.name.toLowerCase();
+
+          if (sname == sterm){
+            return true;
+          } else if (sname.replace(/-/g, " ") == sterm){
+            return true;
+          } else if (sname.replace(/-/g, "") == sterm){
+            return true;
+          } else if (sname.replace(" ", "") == sterm){
+            return true;
+          } else if (sname == sterm.replace(" ", "")){
+            return true;
+          } else if (sname.replace(" ", "") == sterm.replace(" ", "")){
+            return true;
+          }
+          return false;
+        });
+        if (searchItems[s]["results"].length > 0){
+          //txt.innerHTML += searchItems[s].results[0].name;
+          buildIngredientFrame(searchItems[s].results[0].name, searchItems[s].qty);
+        } else {
+          //txt.innerHTML += searchItems[s].item + ": No Results";
+        }
+      }
+      console.log("Search Items: ", searchItems);
+      return searchItems;
+    }
+    function updateText(blnProcess){
+      //var txt = document.getElementById("txtVoiceInput")
+      //txt.innerHTML = SR.script;
+      if (typeof(blnProcess) === "undefined" || blnProcess === null){
+        blnProcess = false;
+      }
+      if (blnProcess){
+        //var inv = document.getElementById("inventory");
+        //inv.innerHTML = "";
+        var str = SR.script.toLowerCase();
+        var dicSyns = [
+          ["to","2"],
+          ["for","4"],
+          ["fore", "4"],
+          ["one","1"],
+          ["two","2"],
+          ["three", "3"],
+          ["four", "4"],
+          ["five", "5"],
+          ["six", "6"],
+          ["seven", "7"],
+          ["eight", "8"],
+          ["nine", "9"]
+        ];
+        for(var dlen = dicSyns.length, d = 0; d < dlen; d++){
+          str = str.replace(new RegExp(dicSyns[d][0], 'g'), dicSyns[d][1]);
+        }
+        search(str);
+      }
+    }
+    var SR = {
+      active: false,
+      script: '',
+      recon: null,
+      vocabs: {
+        ingredients: new Array(),
+        numbers: new Array()
+      }
+    };
+    window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+    window.SpeechGrammarList = window.webkitSpeechGrammarList || window.SpeechGrammarList;
+
+    function activateMic(){
+      if (!SR.active){
+        SR.recon.start(); // Begin listening
+      }
+    }
+
+    function updateMicUI(){
+      if (SR.active){
+        $("#btnActivateMic").removeClass("btn-default");
+        $("#btnActivateMic").addClass("btn-danger");
+        $("#btnSearchIngredients").attr("disable", true);
+        $("#txtSearchIngredients").attr("disable", true);
+      }else{
+        $("#btnActivateMic").removeClass("btn-danger");
+        $("#btnActivateMic").addClass("btn-default");
+        $("#btnSearchIngredients").removeAttr("disable");
+        $("#txtSearchIngredients").removeAttr("disable");
+      }
+    }
+
+    if ('SpeechRecognition' in window){
+      console.log("Speech recognition detected");
+      SR.recon = new window.SpeechRecognition();
+      SR.recon.continuous = true;
+      SR.recon.interimResults = true;
+
+      for(var len = cookbook.ingredients.length, n = 0; n < len; n++){
+        var strName = cookbook.ingredients[n].name.toLowerCase();
+        SR.vocabs.ingredients.push(strName);
+        if (strName.endsWith("y")){
+          strName = strName.substr(0, strName.lastIndexOf("y")) + "ies";
+          SR.vocabs.ingredients.push(strName);
+        } else {
+          strName = strName + "s";
+          SR.vocabs.ingredients.push(strName);
+        }
+
+      }
+      var grammar = "#JSGF V1.0; grammar ingredients; public <ingredients> = " + SR.vocabs.ingredients.join("|") + " ;";
+      var speechRecognitionList = new window.SpeechGrammarList();
+      speechRecognitionList.addFromString(grammar, 1);
+      SR.recon.grammars = speechRecognitionList;
+      
+      SR.recon.onstart = function(ev){
+        SR.active = true;
+        // Indicate that Mic is active
+        updateMicUI();
+      }
+      SR.recon.onerror = function(ev){
+        SR.active = false;
+        updateMicUI();
+        if (ev.error == "no-speech"){
+          console.log("[SR.error] No-speech", ev);
+        }else if (ev.error == "audio-capture"){
+          console.log("[SR.error] Audio-capture", ev);
+        } else if (ev.error == "not-allowed"){
+          console.log("[SR.error] Not-allowed", ev);
+        }
+      }
+      SR.recon.onend = function(ev){
+        SR.active = false;
+        updateMicUI();
+        document.getElementById("txtVoiceInput").style.backgroundColor = "white";
+        // Utilize SR.script for captured text
+        updateText(true);
+        SR.script = "";
+
+      }
+      SR.recon.onresult = function(ev){
+        var interimTranscript = '';
+        for(var i = ev.resultIndex, len = ev.results.length; i < len; i++){
+          var transcript = ev.results[i][0].transcript;
+          if (ev.results[i].isFinal){
+            SR.script += transcript;
+          } else {
+            interimTranscript += transcript;
+          }
+        }
+        $("#txtSearchIngredients").val(SR.script);
+        // Utilize SR.script for captured text
+        updateText();
+      }
+      //SR.recon.start(); // Don't automatically start listening
+    } else {
+      console.log("Speech recognition not supported");
+    }

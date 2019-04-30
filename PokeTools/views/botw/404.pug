@@ -1,0 +1,13 @@
+﻿extends _botwlayout.pug
+
+block append styles
+  meta(name='robots',content='noindex')
+block append content
+  h1= "Ran out of stamina trying to find what you were looking for!"
+  a(href='/botw')
+    i.fa.fa-chevron-left
+    span Go Back
+    picture
+      source(srcset='/BOTW/images/empty_stamina.webp', type='image/webp')
+      source(srcset='/BOTW/images/empty_stamina.png', type='image/png')
+      img(src='/BOTW/images/empty_stamina.png', alt='Out of Stamina').img-fluid

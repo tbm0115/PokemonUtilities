@@ -1,0 +1,59 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='theme-color', content='#474544')
+    meta(name='Description', content='Details for The Legend of Zelda: Breath of the Wild ingredient ' + ingredient.name + '.')
+    meta(name='Keywords', content='video game, utilities, games, tools, tool, utility, The Legend of Zelda, Breath of the Wild, BotW, Cookbook, Recipe, Recipes, ' + ingredient.name)
+    link(rel='icon' href='/BOTW/images/Ingredients/' + ingredient.name + '.png')
+    link(rel='manifest', href='/manifest.json')
+    title= title + ' - Utilities.Games'
+    style(type='text/css')
+      include ../../public/bootstrap/dist/css/bootstrap.min.css
+      include ../../public/stylesheets/site.min.css
+    //link(rel='stylesheet', href='/bootstrap/dist/css/bootstrap.min.css?v=4.1.3')
+    link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/BOTW/css/botw.min.css')
+    //link(rel='stylesheet', href='/stylesheets/site.min.css')
+    title=ingredient.name + ' - Ingredients - The Legend of Zelda: Breath of the Wild - Utilities.Games'
+    // Global site tag (gtag.js) - Google Analytics
+    script(async='', src="https://www.googletagmanager.com/gtag/js?id=UA-126967798-1")
+
+    script(type='text/javascript', language='javascript').
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-126967798-1');
+    style(type='text/css').
+      body{
+        background: none;
+      }
+  body(style='padding:2px')
+    div.botw-card(title=ingredient.name,data-name=ingredient.name, data-category=ingredient.category, data-type=ingredient.type != null ? ingredient.type : "", data-potency=ingredient.potency != null ? ingredient.potency.join('|') : "")
+      if ingredient.hearts != null && ingredient.hearts > 0
+        if ingredient.hearts == 0.25
+          span.botw-hearts.botw-hearts-25(title="Restore 1/4 Heart")
+        if ingredient.hearts == 0.5
+          span.botw-hearts.botw-hearts-50(title="Restore 1/2 Heart")
+        if ingredient.hearts == 0.75
+          span.botw-hearts.botw-hearts-75(title="Restore 3/4 Heart")
+        if ingredient.hearts == 1
+          span.botw-hearts.botw-hearts-100(title="Restore 1 Heart")
+        if ingredient.hearts > 1
+          span.botw-hearts(title="Restore " + ingredient.hearts.toString() + " Hearts", data-value=ingredient.hearts.toString())
+      if ingredient.effect != null && ingredient.effect != ""
+        if ingredient.duration != null
+          span(title=ingredient.effect, class='botw-effect-' + ingredient.effect.toLowerCase(), data-value=ingredient.effect, data-duration=(ingredient.duration.minutes != null ? ingredient.duration.minutes.toString() : "0") + ":" + (ingredient.duration.seconds != null ? ingredient.duration.seconds.toString() : "00"))
+        if ingredient.duration == null
+          span(class='botw-effect-' + ingredient.effect.toLowerCase(), data-value=ingredient.effect)
+      if ingredient.resale !=  null && ingredient.resale > 0
+        span.botw-rupee(data-value=ingredient.resale.toString(), title="Re-sell for " + ingredient.resale.toString() + " rupees")
+      if typeof(qty) != "undefined" && qty != null && qty > 0
+        span.botw-qty(data-value=qty.toString())
+      picture.botw-icon
+        source(srcset='/BOTW/images/Ingredients/' + ingredient.name + '.webp', type='image/webp')
+        source(srcset='/BOTW/images/Ingredients/' + ingredient.name + '.png', type='image/png')
+        img(src='/BOTW/images/Ingredients/' + ingredient.name + '.webp', alt=ingredient.name).img-fluid
+      p.botw-label(data-value=ingredient.name)

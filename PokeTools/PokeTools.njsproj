@@ -178,11 +178,15 @@
     <Compile Include="public\jquery\src\var\support.js" />
     <Compile Include="public\jquery\src\var\toString.js" />
     <Compile Include="public\jquery\src\wrap.js" />
+    <Compile Include="routes\botw.js" />
     <Compile Include="routes\index.js" />
     <Compile Include="routes\pokemon.js">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="routes\users.js" />
+    <Folder Include="public\BOTW\images\" />
+    <Folder Include="public\BOTW\js\" />
+    <Folder Include="public\BOTW\css\" />
     <Folder Include="public\idb\dist\" />
     <Folder Include="public\idb\dist\js\" />
     <Folder Include="public\images\Game Covers\" />
@@ -191,8 +195,11 @@
     <Folder Include="public\idb\" />
     <Folder Include="public\images\external\" />
     <Folder Include="public\bundles\" />
+    <Folder Include="public\BOTW\" />
+    <Folder Include="public\GameCooking\" />
     <Folder Include="public\site\" />
     <Folder Include="public\Pokemon\images\" />
+    <Folder Include="views\botw\" />
     <Folder Include="views\pokemon\" />
     <None Include="compilerconfig.json" />
     <None Include="bundleconfig.json" />
@@ -201,6 +208,25 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </Content>
     <None Include="Local.pubxml" />
+    <Content Include="public\BingSiteAuth.xml" />
+    <Content Include="public\BOTW\css\botw.css" />
+    <Content Include="public\BOTW\css\botw.less">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="public\BOTW\css\botw.min.css">
+      <SubType>Content</SubType>
+      <DependentUpon>public\BOTW\css\botw.css</DependentUpon>
+    </Content>
+    <Content Include="public\BOTW\images\background.png" />
+    <Content Include="public\BOTW\images\background.webp" />
+    <Content Include="public\BOTW\images\empty_stamina.png" />
+    <Content Include="public\BOTW\images\empty_stamina.webp" />
+    <Content Include="public\BOTW\images\Recipes_100.png" />
+    <Content Include="public\BOTW\images\Recipes_100.webp" />
+    <Content Include="public\BOTW\js\effects.json" />
+    <Content Include="public\BOTW\js\ingredients.json" />
+    <Content Include="public\BOTW\js\recipes.json" />
+    <Content Include="public\BOTW\js\recipes_structured.json" />
     <Content Include="public\bundles\site.css" />
     <Content Include="public\bundles\site.min.css">
       <SubType>Content</SubType>
@@ -284,6 +310,7 @@
     <Content Include="public\fonts\RobotoCondensed-Light.ttf" />
     <Content Include="public\fonts\RobotoCondensed-LightItalic.ttf" />
     <Content Include="public\fonts\RobotoCondensed-Regular.ttf" />
+    <Content Include="public\GameCooking\Recipe_Structured Data.json" />
     <Content Include="public\images\compiling.png" />
     <Content Include="public\images\compiling.webp" />
     <Content Include="public\images\compiling_100.png" />
@@ -336,6 +363,12 @@
     <Content Include="public\images\Game Covers\Pokemon\yellow.png" />
     <Content Include="public\images\background.png" />
     <Content Include="public\images\background.webp" />
+    <Content Include="public\images\PWA Icon.png" />
+    <Content Include="public\images\PWA Icon_85x32.png" />
+    <Content Include="public\images\PWA Icon_85x32.webp" />
+    <Content Include="public\images\PWA Launch.png" />
+    <Content Include="public\images\PWA Launch_108x32.png" />
+    <Content Include="public\images\PWA Launch_108x32.webp" />
     <Content Include="public\manifest.json" />
     <Content Include="public\offline.html" />
     <Content Include="package.json" />
@@ -677,6 +710,21 @@
     <Content Include="public\Pokemon\images\PokeTools.png" />
     <Content Include="public\Pokemon\images\PokeTools_100.png" />
     <Content Include="public\Pokemon\images\PokeTools_100.webp" />
+    <Content Include="views\botw\404.pug" />
+    <Content Include="views\botw\index.pug">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="views\botw\ingredientCard.pug" />
+    <Content Include="views\botw\ingredients.pug" />
+    <Content Include="views\botw\recipeCard.pug">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="views\botw\recipes.pug">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="views\botw\_botwlayout.pug">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="views\pokemon\404.pug">
       <SubType>Code</SubType>
     </Content>

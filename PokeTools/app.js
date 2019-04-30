@@ -11,6 +11,7 @@ var gzip = zlib.createGzip();
 
 var routes = require('./routes/index');
 var pokemon = require('./routes/pokemon');
+var botw = require('./routes/botw');
 var users = require('./routes/users');
 
 const https = require('http-to-https');
@@ -55,6 +56,7 @@ app.get('/contact', function (req, res) {
 });
 //app.use('/', routes);
 app.use('/pokemon', pokemon);
+app.use('/botw', botw);
 //app.use('/users', users);
 
 // catch 404 and forward to error handler

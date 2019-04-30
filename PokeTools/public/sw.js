@@ -10,8 +10,8 @@ var precacheFiles = [
   "./Pokemon/js/Comparison.es5.min.js",
   "./Pokemon/css/Pokemon.min.css",
   "./Pokemon/css/Layout.min.css",
-  "./PokeApi/api/v2/pd/1/index.json",
-  "./PokeApi/sprites/items/poke-ball.png",
+  "./PokeAPI/api/v2/pd/1/index.json",
+  "./PokeAPI/sprites/items/poke-ball.png",
   "./images/404-pokemon.png",
   "./images/icon_spritesheet.png"
 ];

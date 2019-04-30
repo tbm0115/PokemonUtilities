@@ -1,0 +1,23 @@
+﻿extends _botwlayout
+
+block append styles
+  style(type='text/css').
+    #tools{
+      background: linear-gradient(rgba(255,255,255, 0.6), transparent);
+    }
+block append breadcrumb
+  // It's already been added
+
+block append content
+  .jumbotron
+    h1 Welcome to Breath of the Wild Tools!
+    p The Legend of Zelda: Breath of the Wild gameplay utility site.
+    p.alert.alert-info Choose from the tools below or search to the right for resources.
+  ul.tiles#tools
+    li
+      a(href='/botw/recipes')
+        picture
+          source(srcset='/BOTW/images/Recipes_100.webp', type='image/webp')
+          source(srcset='/BOTW/images/Recipes_100.png', type='image/png')
+          img(src='/BOTW/images/Recipes_100.png', alt='Compare Stats').img-fluid
+        span Recipes

@@ -257,7 +257,7 @@ function BuildComparison() {
       for (var slen = pokemon.stats.length, s = 0; s < slen; s++) {
         stats[pokemon.stats[s].stat.name] = pokemon.stats[s].base_stat;
       }
-      var dto = new ComparisonDTO(pokemon.name, pokemon.id, pokemon.species.color.name, stats, "/PokeApi" + pokemon.sprites.front_default);
+      var dto = new ComparisonDTO(pokemon.name, pokemon.id, pokemon.species.color.name, stats, "/PokeAPI" + pokemon.sprites.front_default);
       pdto.push(dto);
     }
   }

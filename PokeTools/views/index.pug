@@ -86,7 +86,9 @@ block append scripts
           item.content = item.content.replace(/<img[^>]*>/g, "");
         }
 
-        $clon.find(".card-share-options .fb-share-button").attr("href", "https://www.facebook.com/sharer/sharer.php?app_id=302718756988342&sdk=joey&u=" + item.link + "&display=popup&ref=plugin&src=share_button");
+        $clon.find(".card-share-options .facebook").attr("href", "https://www.facebook.com/sharer/sharer.php?app_id=302718756988342&sdk=joey&u=" + item.link + "&display=popup&ref=plugin&src=share_button");
+        //https://twitter.com/intent/tweet?original_referer=https%3A%2F%2Fpublish.twitter.com%2F%3FbuttonText%3DCheck%2520out%2520this%2520blog%2520from%2520Utilities.Games%2521%26buttonType%3DTweetButton%26buttonUrl%3Dhttps%253A%252F%252Fblog.utilities.games%252F2018%252F10%252F27%252Fperformance-snapshot%252F%26buttonVia%3DUtilitesG%26widget%3DButton&ref_src=twsrc%5Etfw&text=Check%20out%20this%20blog%20from%20Utilities.Games!&tw_p=tweetbutton&url=https%3A%2F%2Fblog.utilities.games%2F2018%2F10%2F27%2Fperformance-snapshot%2F&via=UtilitesG
+        $clon.find(".card-share-options .twitter").attr("href", "//twitter.com/intent/tweet?original_referer=" + encodeURIComponent(window.location.toString()) + "&url=" + encodeURIComponent(item.link) + "&via=UtilitesG&text=" + encodeURIComponent("Check out his blog from Utilities.Games!") + "&buttonType=TweetButton");
 
         if (item.categories.length > 0){
           $clon.find(".card-header a").remove();
@@ -142,7 +144,11 @@ block append content
           .card-share-options
             a.share-icon.facebook.fb-share-button(href="javascript:void(0)", aria-label='Share on Facebook', role='link', data-href="", data-layout="button",onclick="return !window.open(this.href, 'Facebook', 'width=640,height=580')")
               i.fa.fa-facebook
+            a.share-icon.twitter(href="https://twitter.com/share?ref_src=twsrc%5Etfw", data-text="Check out this blog from Utilities.Games!", data-via="UtilitesG", data-url="", data-show-count="false")
+              i.fa.fa-twitter
+            script(async, src="https://platform.twitter.com/widgets.js", charset="utf-8")
           a.share-toggle.share-icon(href="javascript:void(0);", aria-label='Open share options', role='button')
+          //<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Check out this blog from Utilities.Games!" data-url="https://blog.utilities.games/2018/10/27/performance-snapshot/" data-via="UtilitesG" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         .card-header
           a(href="javascript:void(0);", aria-label='View articles under this tag', role='link')
           time
@@ -159,6 +165,9 @@ block append content
     p Utilities.Games is a network dedicated to providing gamers with tools to maximize their skills. Check out our existing sites and tools. If you don't see one, please let us know on our <a rel='noopener' href='https://www.facebook.com/utilities.games/' target='_blank' aria-label='View our Facebook Page' role='link'>Facebook page</a>.
     div.fb-share-button(data-href="https://utilities.games", data-layout="button", data-size="small", data-mobile-iframe="false")
       a.fb-xfbml-parse-ignore(target="_blank", rel='noopener', aria-label='Share on Facebook', role='link', href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Futilities.games%2F&amp;src=sdkpreparse") Share
+    div
+      a(href="https://twitter.com/UtilitesG?ref_src=twsrc%5Etfw", class="twitter-follow-button", data-show-count="false") Follow @UtilitesG
+      script(async, src="https://platform.twitter.com/widgets.js", charset="utf-8")
 
   #divSections
     section
@@ -173,6 +182,13 @@ block append content
               source(srcset='/Pokemon/images/PokeTools_100.png', type='image/png')
               img(src='/Pokemon/images/PokeTools_100.png', alt='PokeTools').img-fluid
             span Pok&#0232;Tools
+        li
+          a(href='/botw', aria-label='View Breath of the Wild sub-site', role='link')
+            picture
+              source(srcset='/BOTW/images/Recipes_100.webp', type='image/webp')
+              source(srcset='/BOTW/images/Recipes_100.png', type='image/png')
+              img(src='/BOTW/images/Recipes_100.png', alt='BotW').img-fluid
+            span Breath of the Wild Tools
         li
           a(href='#')
             picture

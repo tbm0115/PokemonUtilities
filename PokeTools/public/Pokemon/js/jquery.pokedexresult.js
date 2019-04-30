@@ -51,7 +51,7 @@
       if (!('pokedex' in options)) {
         options['pokedex'] = "/pd/1/";
       }
-      $.getJSON("/PokeApi/api/v2" + options.pokedex + "index.json", (function (d) {
+      $.getJSON("/PokeAPI/api/v2" + options.pokedex + "index.json", (function (d) {
         if (typeof (this["options"]) !== "undefined" || this.options !== null) {
           this.options = {};
         }

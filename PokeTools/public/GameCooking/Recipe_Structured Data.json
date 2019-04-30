@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org/",
+  "@type": "Recipe",
+  "name": "{Name}(-{Iteration(###)})",
+  "image": [],
+  "author": {
+    "@type": "Person",
+    "name": "Utilities.Games"
+  },
+  "datePublished": "2019-04-01",
+  "description": "{Description}",
+  "estimatedCost": "${min}-${max}",
+  "prepTime": "PT1S",
+  "cookTime": "PT6S",
+  "totalTime": "PT7S",
+  "keywords": "{Name of Dish in game}",
+  "recipeYield": "{'ex. 3 Health', '50% Stamina', 'Warmth for 3:20'}",
+  "recipeCategory": "{'Health','Stamina','Status Removal','Status Augment'}",
+  "recipeCuisine": "Video Game",
+  "recipeIngredients": [
+    "x{Qty} {Ingredient Name}"
+  ],
+  "recipeInstructions": [
+    {
+      "@type": "HowToStep",
+      "text": "Open Inventory",
+      "thumbnailUrl": ""
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Select each ingredient and 'Hold'",
+      "thumbnailUrl": ""
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Close Inventory",
+      "thumbnailUrl": ""
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Walk up to cooking pot",
+      "thumbnailUrl": ""
+    },
+    {
+      "@type": "HowToStep",
+      "text": "Press 'A' to drop ingredients in pot",
+      "thumbnailUrl": ""
+    }
+  ]
+}

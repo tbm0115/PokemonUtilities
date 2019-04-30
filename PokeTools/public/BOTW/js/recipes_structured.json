@@ -1,0 +1,31 @@
+[
+  {
+    "@context": "https://schema.org/",
+    "@type": "Recipe",
+    "name": "",
+    "image": [],
+    "author": {
+      "@type": "Person",
+      "name": "Utilities.Games"
+    },
+    "datePublished": "2019-04-01",
+    "description": "",
+    "prepTime": "",
+    "cookTime": "",
+    "totalTime": "",
+    "keywords": "",
+    "recipeYield": "",
+    "recipeCategory": "",
+    "recipeCuisine": "",
+    "nutrition": {},
+    "recipeIngredients": [
+      ""
+    ],
+    "recipeInstructions": [
+      {
+        "@type": "HowToStep",
+        "text": ""
+      }
+    ]
+  }
+]

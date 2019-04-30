@@ -1,1 +1,0 @@
-{"id":2,"name":"time","names":[{"language":{"name":"fr","url":"/lang/5/"},"name":"Période horaire"},{"language":{"name":"de","url":"/lang/6/"},"name":"Tageszeit"},{"language":{"name":"en","url":"/lang/9/"},"name":"Time of day"}],"values":[{"name":"time-morning","url":"/ecv/3/"},{"name":"time-day","url":"/ecv/4/"},{"name":"time-night","url":"/ecv/5/"}]}

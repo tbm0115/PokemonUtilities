@@ -8,9 +8,9 @@ class Pokedex {
     if (typeof (id) === "undefined" || id === null) {
       id = 1;
     }
-    //var pdRaw = fs.readFileSync(__dirname + '/../public/PokeApi/api/v2/pd/' + id.toString() + '/index.json');
-    //fs.readFile(__dirname + '/../public/PokeApi/api/v2/pd/' + id.toString() + '/index.json', function (err, data) {});
-    var pd1 = require(__dirname + '/../public/PokeApi/api/v2/pd/' + id.toString() + '/index.json');//JSON.parse(data);
+    //var pdRaw = fs.readFileSync(__dirname + '/../public/PokeAPI/api/v2/pd/' + id.toString() + '/index.json');
+    //fs.readFile(__dirname + '/../public/PokeAPI/api/v2/pd/' + id.toString() + '/index.json', function (err, data) {});
+    var pd1 = require(__dirname + '/../public/PokeAPI/api/v2/pd/' + id.toString() + '/index.json');//JSON.parse(data);
     this.entries = new Array();
     for (var len = pd1.pokemon_entries.length, n = 0; n < len; n++) {
       this.entries.push({ id: pd1.pokemon_entries[n].entry_number, name: pd1.pokemon_entries[n].pokemon_species.name });
@@ -46,16 +46,16 @@ class Pokemon {
         }
         return this;
       });
-      var pRaw = fs.readFileSync(__dirname + '/../public/PokeApi/api/v2/p/' + id + '/index.json');
+      var pRaw = fs.readFileSync(__dirname + '/../public/PokeAPI/api/v2/p/' + id + '/index.json');
       fncFillBaseProperties.apply(this, [JSON.parse(pRaw)]);
       //this.data = JSON.parse(pRaw);
       this['nameUpper'] = this['name'].substr(0, 1).toUpperCase() + this['name'].substr(1);
 
-      var pspRaw = fs.readFileSync(__dirname + '/../public/PokeApi/api/v2' + this.species.url + 'index.json');
+      var pspRaw = fs.readFileSync(__dirname + '/../public/PokeAPI/api/v2' + this.species.url + 'index.json');
       fncFillBaseProperties.apply(this.species, [JSON.parse(pspRaw)]);
       //this.data.species['data'] = JSON.parse(pspRaw);
 
-      var evcRaw = fs.readFileSync(__dirname + '/../public/PokeApi/api/v2' + this.species.evolution_chain.url + 'index.json');
+      var evcRaw = fs.readFileSync(__dirname + '/../public/PokeAPI/api/v2' + this.species.evolution_chain.url + 'index.json');
       fncFillBaseProperties.apply(this.species.evolution_chain, [JSON.parse(evcRaw)]);
     //this.data.species.data.evolution_chain['data'] = JSON.parse(evcRaw);
 
@@ -67,6 +67,9 @@ class Pokemon {
       overrideName = this.name;
     }
     var fncRecFind = function (obj, name) {
+      if (typeof (obj.species) === "undefined" || obj.species === null) {
+        return null;
+      }
       if (obj.species.name.toLowerCase() === name.toLowerCase()) {
         return obj;
       } else if (obj["evolves_to"].length > 0) {
@@ -98,107 +101,111 @@ class Pokemon {
     }
   }
   buildEvolutionTerm(evolution) {
-    var strOut = evolution.species.name.substr(0, 1).toUpperCase() + evolution.species.name.substr(1);
-    //strOut += " by ";
-    strOut = "By ";
-    if ('trigger' in evolution.evolution_details) {
-      switch (evolution.evolution_details.trigger.name) {
-        case "level-up":
-          strOut += " leveling ";
-          break;
-        case "trade":
-          strOut += " trading ";
-          break;
-        case "use-item":
-          strOut += " using ";
-          break;
-        case "shed":
-          strOut += " shedding ";
-          break;
-        default:
-          strOut += " doing something ";
-          break;
-      }
+    if (typeof (evolution) === "undefined" || evolution === null) {
+      return "";
     } else {
-      strOut += " leveling ";
-    }
-    var conditions = {
-      "gender": {
-        "label": " as a "
-      },
-      "held_item": {
-        "label": " while holding a(n) "
-      },
-      "item": {
-        "label": " a(n) "
-      },
-      "known_move": {
-        "label": " and knowing the move "
-      },
-      "known_move_type": {
-        "label": " and knowing a move type of "
-      },
-      "location": {
-        "label": " while at "
-      },
-      "min_affection": {
-        "label": " with an affection rating greater than "
-      },
-      "min_beauty": {
-        "label": " with a beauty greater than "
-      },
-      "min_happiness": {
-        "label": " with a happiness greater than "
-      },
-      "min_level": {
-        "label": " to at least "
-      },
-      "needs_overworld_rain": {
-        "label": " while it is raining"
-      },
-      "party_species": {
-        "label": " while accompanied by "
-      },
-      "party_type": {
-        "label": " while accompanied by Pokemon type of "
-      },
-      "relative_physical_stats": {
-        "label": " with a stat of "
-      },
-      "time_of_day": {
-        "label": " at "
-      },
-      "trade_species": {
-        "label": " with "
-      },
-      "turn_upside_down": {
-        "label": " when turned upside down"
+      var strOut = evolution.species.name.substr(0, 1).toUpperCase() + evolution.species.name.substr(1);
+      //strOut += " by ";
+      strOut = "By ";
+      if ('trigger' in evolution.evolution_details) {
+        switch (evolution.evolution_details.trigger.name) {
+          case "level-up":
+            strOut += " leveling ";
+            break;
+          case "trade":
+            strOut += " trading ";
+            break;
+          case "use-item":
+            strOut += " using ";
+            break;
+          case "shed":
+            strOut += " shedding ";
+            break;
+          default:
+            strOut += " doing something ";
+            break;
+        }
+      } else {
+        strOut += " leveling ";
       }
-    };
-    var ok = Object.getOwnPropertyNames(conditions);
+      var conditions = {
+        "gender": {
+          "label": " as a "
+        },
+        "held_item": {
+          "label": " while holding a(n) "
+        },
+        "item": {
+          "label": " a(n) "
+        },
+        "known_move": {
+          "label": " and knowing the move "
+        },
+        "known_move_type": {
+          "label": " and knowing a move type of "
+        },
+        "location": {
+          "label": " while at "
+        },
+        "min_affection": {
+          "label": " with an affection rating greater than "
+        },
+        "min_beauty": {
+          "label": " with a beauty greater than "
+        },
+        "min_happiness": {
+          "label": " with a happiness greater than "
+        },
+        "min_level": {
+          "label": " to at least "
+        },
+        "needs_overworld_rain": {
+          "label": " while it is raining"
+        },
+        "party_species": {
+          "label": " while accompanied by "
+        },
+        "party_type": {
+          "label": " while accompanied by Pokemon type of "
+        },
+        "relative_physical_stats": {
+          "label": " with a stat of "
+        },
+        "time_of_day": {
+          "label": " at "
+        },
+        "trade_species": {
+          "label": " with "
+        },
+        "turn_upside_down": {
+          "label": " when turned upside down"
+        }
+      };
+      var ok = Object.getOwnPropertyNames(conditions);
 
-    var arrTriggers = new Array();
-    for (var elen = evolution.evolution_details.length, e = 0; e < elen; e++) {
-      for (var tlen = ok.length, t = 0; t < tlen; t++) {
-        var tks = ok[t];
-        var trigger = evolution.evolution_details[e][tks];
-        if (trigger !== null && trigger !== false) {
-          if (typeof (trigger) === "object") {
-            var triggerName = trigger.name;
-            var triggerNameSplit = triggerName.split("-");
-            triggerName = "";
-            for (var tnslen = triggerNameSplit.length, tns = 0; tns < tnslen; tns++) {
-              triggerName += triggerNameSplit[tns].substr(0, 1).toUpperCase() + triggerNameSplit[tns].substr(1) + " ";
+      var arrTriggers = new Array();
+      for (var elen = evolution.evolution_details.length, e = 0; e < elen; e++) {
+        for (var tlen = ok.length, t = 0; t < tlen; t++) {
+          var tks = ok[t];
+          var trigger = evolution.evolution_details[e][tks];
+          if (trigger !== null && trigger !== false) {
+            if (typeof (trigger) === "object") {
+              var triggerName = trigger.name;
+              var triggerNameSplit = triggerName.split("-");
+              triggerName = "";
+              for (var tnslen = triggerNameSplit.length, tns = 0; tns < tnslen; tns++) {
+                triggerName += triggerNameSplit[tns].substr(0, 1).toUpperCase() + triggerNameSplit[tns].substr(1) + " ";
+              }
+              triggerName = triggerName.trim();
+              arrTriggers.push(conditions[ok[t]].label + " " + triggerName.toString());
+            } else if ((typeof (trigger) === "string" && trigger !== "") || typeof (trigger) === "number") {
+              arrTriggers.push(conditions[ok[t]].label + " " + trigger.toString().substr(0, 1).toUpperCase() + trigger.toString().substr(1));
             }
-            triggerName = triggerName.trim();
-            arrTriggers.push(conditions[ok[t]].label + " " + triggerName.toString());
-          } else if ((typeof (trigger) === "string" && trigger !== "") || typeof (trigger) === "number") {
-            arrTriggers.push(conditions[ok[t]].label + " " + trigger.toString().substr(0, 1).toUpperCase() + trigger.toString().substr(1));
           }
         }
       }
+      strOut += arrTriggers.join(" and ");
     }
-    strOut += arrTriggers.join(" and ");
     return strOut;
   }
   getLevelMoveSet() {

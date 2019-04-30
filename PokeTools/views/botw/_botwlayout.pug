@@ -1,0 +1,43 @@
+﻿extends ../_sitelayout
+
+block append styles
+  meta(name='Description', content='Providing tools and reference documents for gameplay of Breath of the Wild.')
+  meta(name='Keywords', content='video game, utilities, games, tools, tool, utility, botw, Breath of the Wild, Zelda, Link, Legend of Zelda, comparison, progress, tracker, manage')
+  //link(rel='stylesheet', href='/Pokemon/css/Pokemon.min.css?v=1.8.9')
+  style(type='text/css').
+    body{
+      background: url('/BOTW/images/background.webp') no-repeat fixed;
+    }
+    html.no-webp body {
+      background: url('/BOTW/images/background.png') no-repeat fixed !important;
+    }
+  style(type='text/css').
+    .wash-out{
+        filter: grayscale(100%) opacity(50%);
+    }
+        
+block append subNav
+  #pnlSearch
+      div.form-group
+          input.form-control#txtSearchDex(role='search', placeholder='Search BotW', type='search')
+      div#searchResults
+      button(type='button',aria-label='Open Search Panel', data-target='#pnlSearch', onclick='document.querySelector("#pnlSearch").classList.toggle("active");')
+          i.fa.fa-search
+
+block append content
+  nav(aria-label='breadcrumb')
+    ol.breadcrumb(vocab="//schema.org/", typeof="BreadcrumbList")
+      li.breadcrumb-item(property="itemListElement", typeof="ListItem")
+        a(href='/botw', property="item", typeof="WebPage")
+          span(property="name") 
+            abbr(title="Breath of the Wild Tools") BotW Tools
+        meta(property="position", content="1")
+      block breadcrumb
+  div#poke-loader
+
+block append scripts
+  script(language='javascript', type='text/javascript', src='/idb/dist/js/idb.js?v=2.1.3')
+  script(type='text/javascript',language='javascript').
+    $(document).ready(function(){
+      console.log("Nothing done here");
+    });

@@ -1,0 +1,21 @@
+extends _botwlayout
+
+block append styles
+  meta(name='Keywords', content='Breath of the Wild, BotW, Legend of Zelda, Zelda, Link, Ingredients, Cookbook, Ingredient, Cooking')
+  meta(name='Description', content='Fully searchable list of Ingredients for cooking and concocting elixers in Legend of Zelda: Breath of the Wild!')
+  style(type='text/css').
+
+block append breadcrumb
+  li.breadcrumb-item.active(aria-current='page', property='itemListElement', typeof='ListItem')
+    a(property='item', typeof='WebPage')
+      span(property='name') Recipes
+    meta(property='position', content='2')
+
+block append content
+  section
+    .jumbotron
+      h1 Ingredients
+      p Search for ingredients for Legend of Zelda: Breath of the Wild.
+    iframe#liteFrame(width='600', height='600', src='', frameborder='0')
+            
+block append scripts
